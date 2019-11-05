@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+
+//Auntenticacion con redes
+Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+Route::get('/callback/{provider}', 'SocialController@callback');
