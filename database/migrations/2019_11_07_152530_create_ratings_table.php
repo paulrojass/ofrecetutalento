@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDealingsTable extends Migration
+class CreateRatingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,17 @@ class CreateDealingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('dealings', function (Blueprint $table) {
+        Schema::create('ratings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('payment', 45)->nullable();
-            $table->boolean('approved')->default(0);
             $table->timestamps();
+
+            $table->foreign('evaluated_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
+
+            $table->foreing('evaluator_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
         });
     }
 
@@ -28,6 +34,6 @@ class CreateDealingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dealings');
+        Schema::dropIfExists('ratings');
     }
 }
