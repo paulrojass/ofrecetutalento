@@ -15,15 +15,15 @@ class CreateRatingsTable extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('evaluated_id');
+            $table->unsignedBigInteger('evaluator_id');
             $table->timestamps();
 
-            $table->foreign('evaluated_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
+            $table->foreign('evaluated_id')->references('id')->on('users')
+            ->onDelete('cascade');
 
-            $table->foreing('evaluator_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
+            $table->foreign('evaluator_id')->references('id')->on('users')
+            ->onDelete('cascade');
         });
     }
 

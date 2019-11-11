@@ -14,8 +14,8 @@ class AddExchangeIdToDealings extends Migration
     public function up()
     {
         Schema::table('dealings', function (Blueprint $table) {
-            $table->unsignedBigInteger('accept_id');
-            $table->foreign('accept_id')->references('id')->on('users');
+            $table->unsignedBigInteger('exchange_id');
+            $table->foreign('exchange_id')->references('id')->on('users');
         });
     }
 
@@ -27,8 +27,8 @@ class AddExchangeIdToDealings extends Migration
     public function down()
     {
         Schema::table('dealings', function (Blueprint $table) {
-            $table->dropForeign(['accept_id']);
-            $table->dropColumn('accept_id');
+            $table->dropForeign(['exchange_id']);
+            $table->dropColumn('exchange_id');
         });
     }
 }

@@ -24,15 +24,16 @@ class CreateExperiencesTable extends Migration
             $table->string('position2', 50)->nullable();
             $table->date('start_date2')->nullable();
             $table->date('due_date2')->nullable();
-            $table->text('achievements1')->nullable();
+            $table->text('achievements2')->nullable();
             $table->string('company3', 50)->nullable();
             $table->string('position3', 50)->nullable();
             $table->date('start_date3')->nullable();
             $table->date('due_date3')->nullable();
             $table->text('achievements3')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-            $table->foreing('user_id')
+            $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
 
