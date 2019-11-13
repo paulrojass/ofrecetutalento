@@ -12,8 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('principal');
 });
+
+route::get('suscripcion', 'SiteController@suscripcion');
 
 Auth::routes(['verify' => true]);
 
