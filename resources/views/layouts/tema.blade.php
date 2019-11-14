@@ -27,10 +27,9 @@
 </div>
 
 <div class="theme-layout" id="scrollup">
-	
 	<div class="responsive-header">
 		<div class="responsive-menubar">
-			<div class="res-logo"><a href="{{URL::asset('tema/index.html')}}" title=""><img src="http://placehold.it/178x40" alt="" /></a></div>
+			<div class="res-logo"><a href="{{url('/')}}" title=""><img src="http://placehold.it/178x40" alt="" /></a></div>
 			<div class="menu-resaction">
 				<div class="res-openmenu">
 					<img src="{{URL::asset('tema/images/icon.png')}}" alt="" /> Menu
@@ -44,8 +43,8 @@
 			<div class="btn-extars">
 				<a href="#" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
 				<ul class="account-btns">
-					<li class="signup-popup"><a title=""><i class="la la-key"></i> Sign Up</a></li>
-					<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Login</a></li>
+					<li class="signup-popup"><a title=""><i class="la la-key"></i> Registrate</a></li>
+					<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Accede</a></li>
 				</ul>
 			</div><!-- Btn Extras -->
 			<form class="res-search">
@@ -54,197 +53,31 @@
 			</form>
 			<div class="responsivemenu">
 				<ul>
-						<li class="menu-item">
-							<a href="#" title="">Suscribete</a>
-						</li>
-						<li class="menu-item-has-children">
-							<a href="#" title="">Employers</a>
-							<ul>
-								<li><a href="{{URL::asset('tema/employer_list1.html')}}" title=""> Employer List 1</a></li>
-								<li><a href="{{URL::asset('tema/employer_list2.html')}}" title="">Employer List 2</a></li>
-								<li><a href="{{URL::asset('tema/employer_list3.html')}}" title="">Employer List 3</a></li>
-								<li><a href="{{URL::asset('tema/employer_list4.html')}}" title="">Employer List 4</a></li>
-								<li><a href="{{URL::asset('tema/employer_single1.html')}}" title="">Employer Single 1</a></li>
-								<li><a href="{{URL::asset('tema/employer_single2.html')}}" title="">Employer Single 2</a></li>
-								<li class="menu-item-has-children">
-									<a href="#" title="">Employer Dashboard</a>
-									<ul>
-										<li><a href="{{URL::asset('tema/employer_manage_jobs.html')}}" title="">Employer Job Manager</a></li>
-										<li><a href="{{URL::asset('tema/employer_packages.html')}}" title="">Employer Packages</a></li>
-										<li><a href="{{URL::asset('tema/employer_post_new.html')}}" title="">Employer Post New</a></li>
-										<li><a href="{{URL::asset('tema/employer_profile.html')}}" title="">Employer Profile</a></li>
-										<li><a href="{{URL::asset('tema/employer_resume.html')}}" title="">Employer Resume</a></li>
-										<li><a href="{{URL::asset('tema/employer_transactions.html')}}" title="">Employer Transaction</a></li>
-										<li><a href="{{URL::asset('tema/employer_job_alert.html')}}" title="">Employer Job Alert</a></li>
-										<li><a href="{{URL::asset('tema/employer_change_password.html')}}" title="">Employer Change Password</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-						<li class="menu-item-has-children">
-							<a href="#" title="">Candidates</a>
-							<ul>
-								<li><a href="{{URL::asset('tema/candidates_list.html')}}" title="">Candidates List 1</a></li>
-								<li><a href="{{URL::asset('tema/candidates_list2.html')}}" title="">Candidates List 2</a></li>
-								<li><a href="{{URL::asset('tema/candidates_list3.html')}}" title="">Candidates List 3</a></li>
-								<li><a href="{{URL::asset('tema/candidates_single.html')}}" title="">Candidates Single 1</a></li>
-								<li><a href="{{URL::asset('tema/candidates_single2.html')}}" title="">Candidates Single 2</a></li>
-								<li class="menu-item-has-children">
-									<a href="#" title="">Candidates Dashboard</a>
-									<ul>
-										<li><a href="{{URL::asset('tema/candidates_my_resume.html')}}" title="">Candidates Resume</a></li>
-										<li><a href="{{URL::asset('tema/candidates_my_resume_add_new.html')}}" title="">Candidates Resume new</a></li>
-										<li><a href="{{URL::asset('tema/candidates_profile.html')}}" title="">Candidates Profile</a></li>
-										<li><a href="{{URL::asset('tema/candidates_shortlist.html')}}" title="">Candidates Shortlist</a></li>
-										<li><a href="{{URL::asset('tema/candidates_job_alert.html')}}" title="">Candidates Job Alert</a></li>
-										<li><a href="{{URL::asset('tema/candidates_dashboard.html')}}" title="">Candidates Dashboard</a></li>
-										<li><a href="{{URL::asset('tema/candidates_cv_cover_letter.html')}}" title="">CV Cover Letter</a></li>
-										<li><a href="{{URL::asset('tema/candidates_change_password.html')}}" title="">Change Password</a></li>
-										<li><a href="{{URL::asset('tema/candidates_applied_jobs.html')}}" title="">Candidates Applied Jobs</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-						<li class="menu-item-has-children">
-							<a href="#" title="">Blog</a>
-							<ul>
-								<li><a href="{{URL::asset('tema/blog_list.html')}}"> Blog List 1</a></li>
-								<li><a href="{{URL::asset('tema/blog_list2.html')}}">Blog List 2</a></li>
-								<li><a href="{{URL::asset('tema/blog_list3.html')}}">Blog List 3</a></li>
-								<li><a href="{{URL::asset('tema/blog_single.html')}}">Blog Single</a></li>
-							</ul>
-						</li>
-						<li class="menu-item-has-children">
-							<a href="#" title="">Job</a>
-							<ul>
-								<li><a href="{{URL::asset('tema/job_list_classic.html')}}">Job List Classic</a></li>
-								<li><a href="{{URL::asset('tema/job_list_grid.html')}}">Job List Grid</a></li>
-								<li><a href="{{URL::asset('tema/job_list_modern.html')}}">Job List Modern</a></li>
-								<li><a href="{{URL::asset('tema/job_single1.html')}}">Job Single 1</a></li>
-								<li><a href="{{URL::asset('tema/job_single2.html')}}">Job Single 2</a></li>
-								<li><a href="{{URL::asset('tema/ob-single3.html')}}">Job Single 3</a></li>
-							</ul>
-						</li>
-						<li class="menu-item-has-children">
-							<a href="#" title="">Pages</a>
-							<ul>
-								<li><a href="{{URL::asset('tema/about.html')}}" title="">About Us</a></li>
-								<li><a href="{{URL::asset('tema/404.html')}}" title="">404 Error</a></li>
-								<li><a href="{{URL::asset('tema/contact.html')}}" title="">Contact Us 1</a></li>
-								<li><a href="{{URL::asset('tema/contact2.html')}}" title="">Contact Us 2</a></li>
-								<li><a href="{{URL::asset('tema/faq.html')}}" title="">FAQ's</a></li>
-								<li><a href="{{URL::asset('tema/how_it_works.html')}}" title="">How it works</a></li>
-								<li><a href="{{URL::asset('tema/login.html')}}" title="">Login</a></li>
-								<li><a href="{{URL::asset('tema/pricing.html')}}" title="">Pricing Plans</a></li>
-								<li><a href="{{URL::asset('tema/register.html')}}" title="">Register</a></li>
-								<li><a href="{{URL::asset('tema/terms_and_condition.html')}}" title="">Terms & Condition</a></li>
-							</ul>
-						</li>
-					</ul>
+					<li class="menu-item">
+						<a href="#" title="">Suscribete</a>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
 	
-	<header class="stick-top forsticky">
+	<header class="@yield('header_type')">
 		<div class="menu-sec">
 			<div class="container">
 				<div class="logo">
-					<a href="index.html" title=""><img class="hidesticky" src="http://placehold.it/178x40" alt="" /><img class="showsticky" src="http://placehold.it/178x40" alt="" /></a>
+					<a href="{{url('/')}}" title=""><img class="hidesticky" src="http://placehold.it/178x40" alt="" /><img class="showsticky" src="http://placehold.it/178x40" alt="" /></a>
 				</div><!-- Logo -->
 				<div class="btn-extars">
 					<a href="#" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
 					<ul class="account-btns">
-						<li class="signup-popup"><a title=""><i class="la la-key"></i> Sign Up</a></li>
-						<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Login</a></li>
+						<li class="signup-popup"><a title=""><i class="la la-key"></i> Registrate</a></li>
+						<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Accede</a></li>
 					</ul>
 				</div><!-- Btn Extras -->
 				<nav>
 					<ul>
 						<li class="menu-item">
 							<a href="{{url('suscripcion')}}" title="">Suscribete</a>
-						</li>
-						<li class="menu-item-has-children">
-							<a href="#" title="">Employers</a>
-							<ul>
-								<li><a href="{{URL::asset('tema/employer_list1.html')}}" title=""> Employer List 1</a></li>
-								<li><a href="{{URL::asset('tema/employer_list2.html')}}" title="">Employer List 2</a></li>
-								<li><a href="{{URL::asset('tema/employer_list3.html')}}" title="">Employer List 3</a></li>
-								<li><a href="{{URL::asset('tema/employer_list4.html')}}" title="">Employer List 4</a></li>
-								<li><a href="{{URL::asset('tema/employer_single1.htm')}}" title="">Employer Single 1</a></li>
-								<li><a href="{{URL::asset('tema/employer_single2.html')}}" title="">Employer Single 2</a></li>
-								<li class="menu-item-has-children">
-									<a href="#" title="">Employer Dashboard</a>
-									<ul>
-										<li><a href="{{URL::asset('tema/employer_manage_jobs.html')}}" title="">Employer Job Manager</a></li>
-										<li><a href="{{URL::asset('tema/employer_packages.html')}}" title="">Employer Packages</a></li>
-										<li><a href="{{URL::asset('tema/employer_post_new.html')}}" title="">Employer Post New</a></li>
-										<li><a href="{{URL::asset('tema/employer_profile.html')}}" title="">Employer Profile</a></li>
-										<li><a href="{{URL::asset('tema/employer_resume.html')}}" title="">Employer Resume</a></li>
-										<li><a href="{{URL::asset('tema/employer_transactions.html')}}" title="">Employer Transaction</a></li>
-										<li><a href="{{URL::asset('tema/employer_job_alert.html')}}" title="">Employer Job Alert</a></li>
-										<li><a href="{{URL::asset('tema/employer_change_password.html')}}" title="">Employer Change Password</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-						<li class="menu-item-has-children">
-							<a href="#" title="">Candidates</a>
-							<ul>
-								<li><a href="{{URL::asset('tema/candidates_list.html')}}" title="">Candidates List 1</a></li>
-								<li><a href="{{URL::asset('tema/candidates_list2.html')}}" title="">Candidates List 2</a></li>
-								<li><a href="{{URL::asset('tema/candidates_list3.html')}}" title="">Candidates List 3</a></li>
-								<li><a href="{{URL::asset('tema/candidates_single.html')}}" title="">Candidates Single 1</a></li>
-								<li><a href="{{URL::asset('tema/candidates_single2.html')}}" title="">Candidates Single 2</a></li>
-								<li class="menu-item-has-children">
-									<a href="#" title="">Candidates Dashboard</a>
-									<ul>
-										<li><a href="{{URL::asset('tema/candidates_my_resume.html')}}" title="">Candidates Resume</a></li>
-										<li><a href="{{URL::asset('tema/candidates_my_resume_add_new.html')}}" title="">Candidates Resume new</a></li>
-										<li><a href="{{URL::asset('tema/candidates_profile.html')}}" title="">Candidates Profile</a></li>
-										<li><a href="{{URL::asset('tema/candidates_shortlist.html')}}" title="">Candidates Shortlist</a></li>
-										<li><a href="{{URL::asset('tema/candidates_job_alert.html')}}" title="">Candidates Job Alert</a></li>
-										<li><a href="{{URL::asset('tema/candidates_dashboard.html')}}" title="">Candidates Dashboard</a></li>
-										<li><a href="{{URL::asset('tema/candidates_cv_cover_letter.html')}}" title="">CV Cover Letter</a></li>
-										<li><a href="{{URL::asset('tema/candidates_change_password.html')}}" title="">Change Password</a></li>
-										<li><a href="{{URL::asset('tema/candidates_applied_jobs.html')}}" title="">Candidates Applied Jobs</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-						<li class="menu-item-has-children">
-							<a href="#" title="">Blog</a>
-							<ul>
-								<li><a href="{{URL::asset('tema/blog_list.html')}}"> Blog List 1</a></li>
-								<li><a href="{{URL::asset('tema/blog_list2.html')}}">Blog List 2</a></li>
-								<li><a href="{{URL::asset('tema/blog_list3.html')}}">Blog List 3</a></li>
-								<li><a href="{{URL::asset('tema/blog_single.html')}}">Blog Single</a></li>
-							</ul>
-						</li>
-						<li class="menu-item-has-children">
-							<a href="#" title="">Job</a>
-							<ul>
-								<li><a href="{{URL::asset('tema/job_list_classic.html')}}">Job List Classic</a></li>
-								<li><a href="{{URL::asset('tema/job_list_grid.html')}}">Job List Grid</a></li>
-								<li><a href="{{URL::asset('tema/job_list_modern.html')}}">Job List Modern</a></li>
-								<li><a href="{{URL::asset('tema/job_single1.html')}}">Job Single 1</a></li>
-								<li><a href="{{URL::asset('tema/job_single2.html')}}">Job Single 2</a></li>
-								<li><a href="{{URL::asset('tema/job-single3.html')}}">Job Single 3</a></li>
-							</ul>
-						</li>
-						<li class="menu-item-has-children">
-							<a href="#" title="">Pages</a>
-							<ul>
-								<li><a href="{{URL::asset('tema/about.html')}}" title="">About Us</a></li>
-								<li><a href="{{URL::asset('tema/404.html')}}" title="">404 Error</a></li>
-								<li><a href="{{URL::asset('tema/contact.html')}}" title="">Contact Us 1</a></li>
-								<li><a href="{{URL::asset('tema/contact2.html')}}" title="">Contact Us 2</a></li>
-								<li><a href="{{URL::asset('tema/faq.html')}}" title="">FAQ's</a></li>
-								<li><a href="{{URL::asset('tema/how_it_works.html')}}" title="">How it works</a></li>
-								<li><a href="{{URL::asset('tema/login.html')}}" title="">Login</a></li>
-								<li><a href="{{URL::asset('tema/pricing.html')}}" title="">Pricing Plans</a></li>
-								<li><a href="{{URL::asset('tema/register.html')}}" title="">Register</a></li>
-								<li><a href="{{URL::asset('tema/terms_and_condition.html')}}" title="">Terms & Condition</a></li>
-							</ul>
 						</li>
 					</ul>
 				</nav><!-- Menus -->
@@ -340,17 +173,22 @@
 <div class="account-popup-area signin-popup-box">
 	<div class="account-popup">
 		<span class="close-popup"><i class="la la-close"></i></span>
-		<h3>User Login</h3>
+		<h3>Inicio de Sesión</h3>
 		<span>Click To Login With Demo User</span>
-		<div class="select-user">
-			<span>Candidate</span>
-			<span>Employer</span>
-		</div>
-		<form>
+		<form method="POST" action="{{ route('login') }}">
+            @csrf
 			<div class="cfield">
-				<input type="text" placeholder="Username" />
+				<input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('E-Mail Address') }}" value="{{ old('email') }}" />
 				<i class="la la-user"></i>
 			</div>
+			@error('email')
+				<span class="invalid-feedback" role="alert">
+					<strong>{{ $message }}</strong>
+				</span>
+			@enderror
+
+
+
 			<div class="cfield">
 				<input type="password" placeholder="********" />
 				<i class="la la-key"></i>
