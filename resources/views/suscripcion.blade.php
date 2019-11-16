@@ -101,37 +101,158 @@
 								<h3>Sign Up</h3>
 								<span>Lorem ipsum dolor sit amet consectetur adipiscing elit odio duis risus at lobortis ullamcorper</span>
 
-                                {!! Form::open(['route'=>'postres.store', 'method'=>'STORE', 'files' => true, 'role' => 'form']) !!}
-                                    {!! Form::label('nombre', 'Nombre:', array('class' => 'negrita')) !!}
-                                    {!! Form::text('nombre',null,['class'=>'form-control', 'placeholder'=>'Torta de Chocolate', 'required' => 'required']) !!}
-                                
-                                    {!! Form::label('precio', 'Precio:', array('class' => 'subrayado')) !!} 
-                                    {!! Form::text('precio',null,['class'=>'form-control', 'placeholder'=>'4.50', 'required' => 'required']) !!}
-                                
-                                    <br>
-                                    {!! Form::label('path', 'Selecciona una imagen:', array('class' => 'negrita')) !!}                          
-                                    {!! Form::file('imagen',null, array('required' => 'true')) !!}
-                                    <br>
-                                    {!! Form::label('descripcion', 'Descripción:', array('class' => 'negrita')) !!}
-                                    <br>
-                                    {{ Form::textarea('descripcion', null, ['placeholder'=>'Ingresa una descripción acá...', 'required' => 'required']) }}
-                                {!! Form::close() !!}
-
-
-
-
-
-								<form>
-                                @csrf
+                                {!! Form::open(['method'=>'STORE', 'files' => true, 'role' => 'form']) !!}
                                     <div class="cfield">
-                                        <input id="name" type="text" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Nombres" />
-                                            <i class="la la-user"></i>
+                                        {!! Form::text('name',null,
+                                        [
+                                        'placeholder'=>'Nombres',
+                                        'required' => 'required',
+                                        'value' => 'old("name")'
+                                        ]) !!}<i class="la la-user"></i>
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
+
+
+                                    <div class="cfield">
+                                        {!! Form::text('lastname',null,
+                                        [
+                                        'placeholder'=>'Apellidos',
+                                        'required' => 'required',
+                                        'value' => 'old("lastname")',
+
+                                        ]) !!}<i class="la la-user"></i>
+                                        @error('lastname')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="cfield">
+                                        {!! Form::text('nationality',null,
+                                        [
+                                        'placeholder'=>'Nacionalidad',
+                                        'required' => 'required',
+                                        'value' => 'old("nationality")',
+
+                                        ]) !!}<i class="la la-globe"></i>
+                                        @error('nationality')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="cfield">
+                                        {!! Form::text('address',null,
+                                        [
+                                        'placeholder'=>'Dirección',
+                                        'required' => 'required',
+                                        'value' => 'old("address")'
+                                        ]) !!}<i class="la la-map-marker"></i>
+                                        @error('address')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="cfield">
+                                        {!! Form::text('city',null,
+                                        [
+                                        'placeholder'=>'Ciudad',
+                                        'required' => 'required',
+                                        'value' => 'old("city")'
+                                        ]) !!}<i class="la la-map-marker"></i>
+                                        @error('city')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="cfield">
+                                        {!! Form::text('country',null,
+                                        [
+                                        'placeholder'=>'País',
+                                        'required' => 'required',
+                                        'value' => 'old("country")'
+                                        ]) !!}<i class="la la-map-marker"></i>
+                                        @error('country')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="cfield">
+                                        {!! Form::text('document',null,
+                                        [
+                                        'placeholder'=>'Documento',
+                                        'required' => 'required',
+                                        'value' => 'old("document")'
+                                        ]) !!}<i class="la la-map-marker"></i>
+                                        @error('document')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="cfield">
+                                        {!! Form::text('email',null,
+                                        [
+                                        'placeholder'=>'Correo electrónico',
+                                        'required' => 'required',
+                                        'value' => 'old("email")'
+                                        ]) !!}<i class="la la-map-marker"></i>
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="cfield">
+                                        {!! Form::text('phone',null,
+                                        [
+                                        'placeholder'=> 'Teléfono',
+                                        'required' => 'required',
+                                        'value' => 'old("phone")'
+                                        ]) !!}<i class="la la-map-marker"></i>
+                                        @error('phone')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    
+                                    <div class="cfield">
+                                        {!! Form::text('abilities',null,
+                                        [
+                                        'placeholder'=>'Habilidades',
+                                        'required' => 'required',
+                                        'value' => 'old("abilities")'
+                                        ]) !!}<i class="la la-map-marker"></i>
+                                        @error('abilities')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                {!! Form::close() !!}
+								<form>
+                                @csrf
+                                   
+                                        <input id="name" type="text" name="name" value="" required autocomplete="name" placeholder="Nombres" />
+                                            
+
+
                                     <div class="cfield">
                                         <input id="lastname" type="text" name="lastname" value="{{ old('lastname') }}" required autocomplete="lastname" placeholder="Apellidos">
                                             <i class="la la-user"></i>
