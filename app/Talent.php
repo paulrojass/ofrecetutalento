@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\User;
 use App\Exchanges;
+use App\Category;
 
 class Talent extends Model
 {
@@ -17,5 +18,10 @@ class Talent extends Model
     public function exchanges()
     {
         return $this->belongsTo(Exchange::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

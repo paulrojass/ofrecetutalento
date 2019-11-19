@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTalentsTable extends Migration
+class CreateIndustriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateTalentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('talents', function (Blueprint $table) {
+        Schema::create('industries', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title', 100)->nullable();
-            $table->text('description')->nullable();
-            $table->integer('level')->nullable();
+            $table->string('name', 200)->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateTalentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('talents');
+        Schema::dropIfExists('industries');
     }
 }

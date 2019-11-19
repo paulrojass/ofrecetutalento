@@ -1,307 +1,233 @@
-@extends('layouts.tema')
+@extends('layouts.app')
 
 @section('title', 'Suscripción')
 
 @section('header_type', 'gradient')
 
 @section('content')
-<section>
-    <div class="block no-padding  gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="inner2">
-                        <div class="inner-title2">
-                            <h3>Pricing</h3>
-                            <span>Keep up to date with the latest news</span>
-                        </div>
-                        <div class="page-breacrumbs">
-                            <ul class="breadcrumbs">
-                                <li><a href="#" title="">Home</a></li>
-                                <li><a href="#" title="">Pages</a></li>
-                                <li><a href="#" title="">Pricing</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<section>
-		<div class="block">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="heading">
-							<h2>Buy Our Plans And Packeges</h2>
-							<span>One of our jobs has some kind of flexibility option - such as telecommuting, a part-time schedule or a flexible or flextime schedule.</span>
-						</div><!-- Heading -->
-						<div class="plans-sec">
-							<div class="row">
-                                @foreach($plans as $plan)
-                                    @if($plan->id > 0)
-                                    <div class="col-lg-3">
-                                        <div class="pricetable">
-                                            <div class="pricetable-head">
-                                                <h3>{{$plan->name}}</h3>
-                                                <h2>
-                                                    @if($plan->monthly_price)
-                                                        <i>$</i>{{$plan->monthly_price}}
-                                                    @else
-                                                        Gratis
-                                                    @endif
-                                                </h2>
-                                                <span>1 mes</span>
-                                            </div>
-                                            <ul>
-                                                <li>
-                                                    @if($plan->talents != 0) {{$plan->talents}} Talentos
-                                                    @else Talentos ilimitados
-                                                    @endif
-                                                </li>
-                                                <li>
-                                                    @if($plan->photos != 0) {{$plan->photos}} Fotos
-                                                    @else Fotos ilimitadas
-                                                    @endif
-                                                </li>
-                                                <li>
-                                                    @if($plan->videos != 0) {{$plan->videos}} Videos
-                                                    @else Videos ilimitados
-                                                    @endif
-                                                </li>
-                                                <li>
-                                                    @if($plan->videos != 0) {{$plan->pdfs}} Pdf ({{$plan->pdf_size}} Mb)
-                                                    @else Pdfs ilimitados ({{$plan->pdf_size}} Mb)
-                                                    @endif
-                                                </li>
-                                            </ul>
-                                            <a href="#" title="">OBTENLO</a>
-                                        </div>
-                                    </div>
-                                    @endif
-                                @endforeach
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+{!! Form::open(['method' =>'post', 'route'=> 'register', 'role' => 'form']) !!}
 
-<!--Registro de Usuario-->
-    <section>
-		<div class="block remove-bottom">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="account-popup-area signup-popup-box static">
-							<div class="account-popup">
-								<h3>Sign Up</h3>
-								<span>Lorem ipsum dolor sit amet consectetur adipiscing elit odio duis risus at lobortis ullamcorper</span>
+<div id="registro">
 
-                                {!! Form::open(['method'=>'STORE', 'files' => true, 'role' => 'form']) !!}
-                                    <div class="cfield">
-                                        {!! Form::text('name',null,
-                                        [
-                                        'placeholder'=>'Nombres',
-                                        'required' => 'required',
-                                        'value' => 'old("name")'
-                                        ]) !!}<i class="la la-user"></i>
-                                        @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Selecciona tu Plan</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos de Registro</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    @csrf
+
+    @foreach($plans as $plan)
+        <label for="{{$plan->id}}">{{$plan->name}}</label>
+        {{Form::radio('plan', $plan->id)}}
+
+        <br>
+    @endforeach
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+  
+    {!! Form::email('email',null,
+    [
+    'placeholder'=>'Correo electrónico',
+    'required' => 'required',
+    'value' => 'old("email")'
+    ]) !!}<br>
+
+    {!! Form::password('password',
+    [
+    'placeholder' => 'Contraseña',
+    'required' => 'required',
+    'value' => old("password")
+    ]) !!}<br>
+
+    {!! Form::password('password_confirmation',
+    [
+    'placeholder' => 'Confirmar Contraseña',
+    'required' => 'required',
+    'value' => old("password_confirmation")
+    ]) !!}<br>
+
+    {!! Form::text('name',null,
+    [
+    'placeholder'=>'Nombres',
+    'required' => 'required',
+    'value' => 'old("name")'
+    ]) !!}<br>
+
+    {!! Form::text('lastname',null,
+    [
+    'placeholder'=>'Apellidos',
+    'required' => 'required',
+    'value' => 'old("lastname")'
+    ]) !!}<br>
+
+    {!! Form::text('nationality',null,
+    [
+    'placeholder'=>'Nacionalidad',
+    'required' => 'required',
+    'value' => 'old("nationality")'
+    ]) !!}<br>
+
+    {!! Form::text('address',null,
+    [
+    'placeholder'=>'Dirección',
+    'required' => 'required',
+    'value' => 'old("address")'
+    ]) !!}<br>
+
+    {!! Form::text('city',null,
+    [
+    'placeholder'=>'Ciudad',
+    'required' => 'required',
+    'value' => 'old("city")'
+    ]) !!}<br>
+
+    {!! Form::text('country',null,
+    [
+    'placeholder'=>'País',
+    'required' => 'required',
+    'value' => 'old("country")'
+    ]) !!}<br>
+
+    {!! Form::text('document',null,
+    [
+    'placeholder'=>'Documento',
+    'required' => 'required',
+    'value' => 'old("document")'
+    ]) !!}<br>
+
+    {!! Form::text('phone',null,
+    [
+    'placeholder'=> 'Teléfono',
+    'required' => 'required',
+    'value' => 'old("phone")'
+    ]) !!}<br>
 
 
-                                    <div class="cfield">
-                                        {!! Form::text('lastname',null,
-                                        [
-                                        'placeholder'=>'Apellidos',
-                                        'required' => 'required',
-                                        'value' => 'old("lastname")',
+    {!! Form::text('abilities',null,
+    [
+    'placeholder'=>'Habilidades',
+    'required' => 'required',
+    'value' => 'old("abilities")'
+    ]) !!}<br>
 
-                                        ]) !!}<i class="la la-user"></i>
-                                        @error('lastname')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+    {!! Form::button('Registrar',['class'=>'btn-submit','type'=>'button']) !!}
+  </div>
+</div>
 
-                                    <div class="cfield">
-                                        {!! Form::text('nationality',null,
-                                        [
-                                        'placeholder'=>'Nacionalidad',
-                                        'required' => 'required',
-                                        'value' => 'old("nationality")',
+{!! Form::close() !!}
 
-                                        ]) !!}<i class="la la-globe"></i>
-                                        @error('nationality')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+</div>
 
-                                    <div class="cfield">
-                                        {!! Form::text('address',null,
-                                        [
-                                        'placeholder'=>'Dirección',
-                                        'required' => 'required',
-                                        'value' => 'old("address")'
-                                        ]) !!}<i class="la la-map-marker"></i>
-                                        @error('address')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+<div id="talentos" hidden>
+    <h1> Elige tus talentos </h1>
+    
+    {!! Form::open(['method' =>'post', 'route'=> 'register', 'role' => 'form']) !!}
 
-                                    <div class="cfield">
-                                        {!! Form::text('city',null,
-                                        [
-                                        'placeholder'=>'Ciudad',
-                                        'required' => 'required',
-                                        'value' => 'old("city")'
-                                        ]) !!}<i class="la la-map-marker"></i>
-                                        @error('city')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+    {!! Form::text('title',null,
+    [
+    'placeholder'=>'Talento',
+    'required' => 'required',
+    'value' => 'old("title")'
+    ]) !!}<br>
 
-                                    <div class="cfield">
-                                        {!! Form::text('country',null,
-                                        [
-                                        'placeholder'=>'País',
-                                        'required' => 'required',
-                                        'value' => 'old("country")'
-                                        ]) !!}<i class="la la-map-marker"></i>
-                                        @error('country')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+    {!! Form::text('industry',null,
+    [
+    'placeholder'=>'Industria',
+    'required' => 'required',
+    'value' => 'old("industry")'
+    ]) !!}<br>
 
-                                    <div class="cfield">
-                                        {!! Form::text('document',null,
-                                        [
-                                        'placeholder'=>'Documento',
-                                        'required' => 'required',
-                                        'value' => 'old("document")'
-                                        ]) !!}<i class="la la-map-marker"></i>
-                                        @error('document')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+    {!! Form::text('subcategory',null,
+    [
+    'placeholder'=>'Subcategoria',
+    'required' => 'required',
+    'value' => 'old("subcategory")'
+    ]) !!}<br>
 
-                                    <div class="cfield">
-                                        {!! Form::text('email',null,
-                                        [
-                                        'placeholder'=>'Correo electrónico',
-                                        'required' => 'required',
-                                        'value' => 'old("email")'
-                                        ]) !!}<i class="la la-map-marker"></i>
-                                        @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="cfield">
-                                        {!! Form::text('phone',null,
-                                        [
-                                        'placeholder'=> 'Teléfono',
-                                        'required' => 'required',
-                                        'value' => 'old("phone")'
-                                        ]) !!}<i class="la la-map-marker"></i>
-                                        @error('phone')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    
-                                    <div class="cfield">
-                                        {!! Form::text('abilities',null,
-                                        [
-                                        'placeholder'=>'Habilidades',
-                                        'required' => 'required',
-                                        'value' => 'old("abilities")'
-                                        ]) !!}<i class="la la-map-marker"></i>
-                                        @error('abilities')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                {!! Form::close() !!}
-								<form>
-                                @csrf
-                                   
-                                        <input id="name" type="text" name="name" value="" required autocomplete="name" placeholder="Nombres" />
-                                            
+    {!! Form::text('level',null,
+    [
+    'placeholder'=>'Nivel',
+    'required' => 'required',
+    'value' => 'old("level")'
+    ]) !!}<br>
 
 
-                                    <div class="cfield">
-                                        <input id="lastname" type="text" name="lastname" value="{{ old('lastname') }}" required autocomplete="lastname" placeholder="Apellidos">
-                                            <i class="la la-user"></i>
-                                        @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+    {!! Form::text('description',null,
+    [
+    'placeholder'=>'Descripción',
+    'required' => 'required',
+    'value' => 'old("description")'
+    ]) !!}<br>
 
-									<div class="cfield">
-										<input type="text" placeholder="Username" />
-										<i class="la la-user"></i>
-									</div>
-									<div class="cfield">
-										<input type="password" placeholder="********" />
-										<i class="la la-key"></i>
-									</div>
-									<div class="cfield">
-										<input type="text" placeholder="Email" />
-										<i class="la la-envelope-o"></i>
-									</div>
-									<div class="dropdown-field">
-										<select data-placeholder="Please Select Specialism" class="chosen">
-											<option>Web Development</option>
-											<option>Web Designing</option>
-											<option>Art & Culture</option>
-											<option>Reading & Writing</option>
-										</select>
-									</div>
-									<div class="cfield">
-										<input type="text" placeholder="Phone Number" />
-										<i class="la la-phone"></i>
-									</div>
-									<button type="submit">Signup</button>
-								</form>
-								<div class="extra-login">
-									<span>Or</span>
-									<div class="login-social">
-										<a class="fb-login" href="#" title=""><i class="fa fa-facebook"></i></a>
-										<a class="tw-login" href="#" title=""><i class="fa fa-twitter"></i></a>
-									</div>
-								</div>
-							</div>
-						</div><!-- SIGNUP POPUP -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-<!--Fin del registro de usuario -->
+    {!! Form::button('Agregar',['class'=>'btn-submit-talent','type'=>'button']) !!}
+
+
+    {!! Form::close() !!}
+</div>
+
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $(function() {
+        $('.btn-submit').click(function(e){
+
+        e.preventDefault();
+
+        var _token = $("input[name='_token']").val();
+        var name = $("input[name='name']").val();
+        var lastname = $("input[name='lastname']").val();
+        var email = $("input[name='email']").val();
+        var nationality = $("input[name='nationality']").val();
+        var address = $("input[name='address']").val();
+        var city = $("input[name='city']").val();
+        var country = $("input[name='country']").val();
+        var documento = $("input[name='document']").val();
+        var password = $("input[name='password']").val();
+        var phone = $("input[name='phone']").val();
+        var abilities = $("input[name='abilities']").val();
+        var password_confirmation = $("input[name='password_confirmation']").val();
+        var plan = $("input[name='plan']").val();
+
+
+        $.ajax({
+           type:'POST',
+           url:'register',
+           data:{
+            name:name,
+            lastname:lastname,
+            email:email,
+            nationality:nationality,
+            password:password,
+            password_confirmation:password_confirmation,
+            address:address,
+            city:city,
+            country:country,
+            document:documento,
+            phone:phone, abilities:abilities,
+            _token:_token,
+            plan:plan },
+           success:function(data){
+              alert(data.success);
+              $('#registro').hide();
+              $('#talentos').removeAttr('hidden');
+
+           }
+        });
+        });
+    });
+</script>
+
 @endsection

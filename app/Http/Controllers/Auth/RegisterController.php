@@ -4,10 +4,16 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Role;
+use App\Plan;
+use App\Suscription;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -68,10 +74,54 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+
+            'lastname' => $data['lastname'],
+            'nationality' => $data['nationality'],
+            'address' => $data['address'],
+            'city' => $data['city'],
+            'country' => $data['country'],
+            'document' => $data['document'],
+            'phone' => $data['phone'],
+            'abilities' => $data['abilities'],
+
+            'plan' => $data['plan']
         ]);
 
-        $user->roles()->attach(Role::where('name', 'user')->first());
-        
-        return $user;        
+/*        $user->roles()->attach(Role::where('name', 'admin')->first());
+        return $user;  */      
     }
+
+    public function newSuscription($user_id, $plan_id){
+        $suscripcion = new Suscription();
+        $suscripcion->user_id = $user_id;
+        $suscripcion->plan_id = $plan_id;
+
+        $suscripcion->save();
+    }
+
+
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+        
+
+        //Agregando suscripcion
+        $this->newSuscription($user->id, $request->plan);
+
+        //Agregando Rol
+        $user->roles()->attach(Role::where('name', 'admin')->first());
+
+        $this->guard()->login($user);
+
+        //return $this->registered($request, $user)
+        //               ?: redirect($this->redirectPath());
+        
+        return response()->json(['success'=>'usuario registrado.']);
+    }
+
+
+
 }

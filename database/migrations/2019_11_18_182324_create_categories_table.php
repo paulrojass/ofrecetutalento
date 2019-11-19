@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTalentsTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateTalentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('talents', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title', 100)->nullable();
-            $table->text('description')->nullable();
-            $table->integer('level')->nullable();
+            $table->string('name', 200)->nullable();
+            $table->unsignedBigInteger('industry_id');
             $table->timestamps();
+
+            $table->foreign('industry_id')->references('id')->on('industries')
+            ->onDelete('cascade');
+
         });
     }
 
@@ -29,6 +32,6 @@ class CreateTalentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('talents');
+        Schema::dropIfExists('categories');
     }
 }
