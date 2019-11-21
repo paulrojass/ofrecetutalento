@@ -119,7 +119,7 @@ class RegisterController extends Controller
         //return $this->registered($request, $user)
         //               ?: redirect($this->redirectPath());
         
-        return response()->json(['success'=>'usuario registrado.']);
+        return response()->json(['success'=>'usuario registrado.', 'id_user' => $user->id]);
     }
 
 

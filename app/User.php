@@ -4,6 +4,7 @@ namespace App;
 
 use App\Role;
 use App\Talent;
+use App\Suscription;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -81,5 +82,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Talent::class);
     }
+
+    public function suscription()
+    {
+        return $this->hasOne(Suscription::class);
+    }
+
 
 }

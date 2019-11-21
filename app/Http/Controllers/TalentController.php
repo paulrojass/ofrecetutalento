@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Talent;
+use App\User;
+use App\Suscription;
+use App\plan;
 use Illuminate\Http\Request;
 
 class TalentController extends Controller
@@ -35,7 +38,16 @@ class TalentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $talento = new Talent();
+        $talento->title = $request->title;
+        $talento->category_id = $request->category;
+        $talento->level = $request->level;
+        $talento->description = $request->description;
+        $talento->user_id = $request->id_user;
+        $talento->save();
+        return response()->json([
+            'success'=> 'Talento Registrado'
+        ]);
     }
 
     /**
@@ -47,6 +59,30 @@ class TalentController extends Controller
     public function show(Talent $talent)
     {
         //
+    }
+
+    public function showTalentsUser(Request $request)
+    {
+        $talentos = Talent::where('user_id', $request->user_id);
+
+        $agregados = $talentos->count();
+
+        $suscripcion = Suscription::find($request->user_id);
+
+        $plan_id = $suscripcion->plan_id;
+
+        $plan = Plan::find($plan_id);
+
+        $maximo = $plan->talents;
+
+        $disponibles = $maximo - $agregados;
+        
+        return response()->json([
+            'success'=> 'Nuevo talento',
+            'talentos' => $talentos,
+            'agregados' => $agregados,
+            'disponibles' => $disponibles
+        ]);
     }
 
     /**

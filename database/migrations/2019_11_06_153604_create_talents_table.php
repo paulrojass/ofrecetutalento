@@ -18,7 +18,13 @@ class CreateTalentsTable extends Migration
             $table->string('title', 100)->nullable();
             $table->text('description')->nullable();
             $table->integer('level')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
+
         });
     }
 

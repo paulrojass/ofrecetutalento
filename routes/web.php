@@ -24,3 +24,9 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 //Auntenticacion con redes
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
 Route::get('/callback/{provider}', 'SocialController@callback');
+
+
+//Verificar talentos
+Route::post('verificar_talentos', 'TalentController@showTalentsUser');
+//Guardar talento
+Route::post('guardar_talento', 'TalentController@store');
