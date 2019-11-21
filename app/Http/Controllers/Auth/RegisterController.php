@@ -99,8 +99,6 @@ class RegisterController extends Controller
         $suscripcion->save();
     }
 
-
-
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();

@@ -115,7 +115,19 @@
 			'value' => 'old("abilities")'
 			]) !!}<br>
 
-			{!! Form::button('Registrar',['class'=>'btn-submit','type'=>'button']) !!}
+			{!! Form::button('Registrar', ['class'=>'btn-submit','type'=>'button']) !!}
+
+			{!! Form::button('Facebook', ['class'=>'btn-facebook','type'=>'button']) !!}
+			
+			{!! Form::button('Google', ['class'=>'btn-google','type'=>'button']) !!}
+
+            <div class="form-group row mb-0">
+                <div class="col-md-4 offset-md-4">
+                    <a href="{{ url('/auth/redirect/facebook') }}">Facebook</a>
+                </div>
+            </div>
+
+
 		</div>
 	</div>
 
@@ -138,19 +150,21 @@
 			'value' => 'old("title")'
 			]) !!}<br>
 
-			{!! Form::text('industry',null,
-			[
-			'placeholder'=>'Industria',
-			'required' => 'required',
-			'value' => 'old("industry")'
-			]) !!}<br>
+			<select name="industries">
+				@foreach($industries as $industry)
+					<option value = {{ $industry->id }}>
+						{{ $industry->name }}						
+					</option>
+				@endforeach
+			</select><br>
 
-			{!! Form::text('category',null,
-			[
-			'placeholder'=>'Categoria',
-			'required' => 'required',
-			'value' => 'old("category")'
-			]) !!}<br>
+			<select name="categories">
+				@foreach($categories as $category)
+					<option value = {{ $category->id }}>
+						{{ $category->name }}						
+					</option>
+				@endforeach
+			</select><br>
 
 			{!! Form::text('level',null,
 			[
@@ -184,13 +198,40 @@
 	});
 
 	$(function() {
-
 		$('.btn-submit-plan').click(function(){
 			plan = $(this).val();
 			plan_name = $(this).text();
 			$('#perfil-tab').removeClass('disabled')
 			$('#mensaje_plan').html('Has seleccionado el plan '+plan_name);	
 			$('.nav-tabs a[href="#perfil"]').tab('show');
+		});
+
+		$('.btn-facebook').click(function(){
+			$.ajax({
+				type:'GET',
+				url:'/auth/redirect/facebook/'+plan,
+				success:function(data){
+					alert('Mensaje: '+data.success+' Usuario:'+data.id_user);
+					id_user = data.id_user;
+					verificarTalentos(id_user);
+					$('#registro').hide();
+					$('#talentos').removeAttr('hidden');
+				}
+			});
+		});
+
+		$('.btn-twitter').click(function(){
+			$.ajax({
+				type:'GET',
+				url:'/auth/redirect/facebook/'+plan,
+				success:function(data){
+					alert('Mensaje: '+data.success+' Usuario:'+data.id_user);
+					id_user = data.id_user;
+					verificarTalentos(id_user);
+					$('#registro').hide();
+					$('#talentos').removeAttr('hidden');
+				}
+			});
 		});
 
 		$('.btn-submit').click(function(e){

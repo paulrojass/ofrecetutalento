@@ -22,8 +22,8 @@ Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
 //Auntenticacion con redes
-Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
-Route::get('/callback/{provider}', 'SocialController@callback');
+Route::get('/auth/redirect/{provider}/{plan}', 'SocialController@redirect');
+Route::get('/callback/{provider}/{plan}', 'SocialController@callback');
 
 
 //Verificar talentos
