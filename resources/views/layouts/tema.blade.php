@@ -18,6 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/colors/colors.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/bootstrap.css')}}" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')}}" />
+	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
 	
 </head>
 <body>
@@ -27,24 +28,24 @@
 </div>
 
 <div class="theme-layout" id="scrollup">
-	<div class="responsive-header">
+	<div class="responsive-header three">
 		<div class="responsive-menubar">
-			<div class="res-logo"><a href="{{url('/')}}" title=""><img src="http://placehold.it/178x40" alt="" /></a></div>
+			<div class="res-logo"><a href="{{url('/')}}" title=""><img src="{{URL::asset('tema/images/logo.png')}}" alt="" /></a></div>
 			<div class="menu-resaction">
 				<div class="res-openmenu">
-					<img src="{{URL::asset('tema/images/icon.png')}}" alt="" /> Menu
+					<img src="{{URL::asset('tema/images/icon5.png')}}" alt="" /> Menu
 				</div>
 				<div class="res-closemenu">
-					<img src="{{URL::asset('tema/images/icon2.png')}}" alt="" /> Close
+					<img src="{{URL::asset('tema/images/icon6.png')}}" alt="" /> Close
 				</div>
 			</div>
 		</div>
 		<div class="responsive-opensec">
 			<div class="btn-extars">
-				<a href="#" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
+				<a href="#" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a>
 				<ul class="account-btns">
-					<li class="signup-popup"><a title=""><i class="la la-key"></i> Registrate</a></li>
-					<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Accede</a></li>
+					<li><a href="{{url('suscripcion')}}" title=""><i class="la la-key"></i> Registrar</a></li>
+					<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Iniciar Seccion</a></li>
 				</ul>
 			</div><!-- Btn Extras -->
 			<form class="res-search">
@@ -53,32 +54,61 @@
 			</form>
 			<div class="responsivemenu">
 				<ul>
-					<li class="menu-item">
-						<a href="#" title="">Suscribete</a>
+					<li class="menu-item-has-children">
+						<a href="#" title="">Home</a>
+
+					</li>
+					<li class="menu-item-has-children">
+						<a href="#" title="">Como funciona</a>
+
+					</li>
+					<li class="menu-item-has-children">
+						<a href="#" title="">¿Quienes somos?</a>
+
+					</li>
+					<li class="menu-item-has-children">
+						<a href="#" title="">Planes</a>
+
 					</li>
 				</ul>
 			</div>
 		</div>
+
 	</div>
 	
 	<header class="@yield('header_type')">
 		<div class="menu-sec">
 			<div class="container">
 				<div class="logo">
-					<a href="{{url('/')}}" title=""><img class="hidesticky" src="http://placehold.it/178x40" alt="" /><img class="showsticky" src="http://placehold.it/178x40" alt="" /></a>
+					<a href="{{url('/')}}" title=""><img src="{{URL::asset('tema/images/logo.png')}}" alt="" /></a>
 				</div><!-- Logo -->
 				<div class="btn-extars">
-					<a href="#" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
+					<a href="#" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a>
 					<ul class="account-btns">
-						<li class="signup-popup"><a title=""><i class="la la-key"></i> Registrate</a></li>
-						<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Accede</a></li>
+						<li class="signup-popup"><a href="{{url('suscripcion')}}" title=""><i class="la la-key"></i> Registrar</a></li>
+						<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Iniciar Sección</a></li>
 					</ul>
 				</div><!-- Btn Extras -->
 				<nav>
 					<ul>
-						<li class="menu-item">
-							<a href="{{url('suscripcion')}}" title="">Suscribete</a>
+						<li class="menu-item-has-children">
+							<a href="{{url('/')}}" title="">Home</a>
+							
 						</li>
+						<li class="menu-item-has-children">
+							<a href="#" title="">Como funciona</a>
+							
+						</li>
+						<li class="menu-item-has-children">
+							<a href="#" title="">¿Quienes somos?</a>
+							
+						</li>
+						<li class="menu-item-has-children">
+							<a href="#" title="">Planes</a>
+							
+						</li>
+						
+						
 					</ul>
 				</nav><!-- Menus -->
 			</div>
@@ -209,51 +239,6 @@
 	</div>
 </div><!-- LOGIN POPUP -->
 
-<div class="account-popup-area signup-popup-box">
-	<div class="account-popup">
-		<span class="close-popup"><i class="la la-close"></i></span>
-		<h3>Sign Up</h3>
-		<div class="select-user">
-			<span>Candidate</span>
-			<span>Employer</span>
-		</div>
-		<form>
-			<div class="cfield">
-				<input type="text" placeholder="Username" />
-				<i class="la la-user"></i>
-			</div>
-			<div class="cfield">
-				<input type="password" placeholder="********" />
-				<i class="la la-key"></i>
-			</div>
-			<div class="cfield">
-				<input type="text" placeholder="Email" />
-				<i class="la la-envelope-o"></i>
-			</div>
-			<div class="dropdown-field">
-				<select data-placeholder="Please Select Specialism" class="chosen">
-					<option>Web Development</option>
-					<option>Web Designing</option>
-					<option>Art & Culture</option>
-					<option>Reading & Writing</option>
-				</select>
-			</div>
-			<div class="cfield">
-				<input type="text" placeholder="Phone Number" />
-				<i class="la la-phone"></i>
-			</div>
-			<button type="submit">Signup</button>
-		</form>
-		<div class="extra-login">
-			<span>Or</span>
-			<div class="login-social">
-				<a class="fb-login" href="#" title=""><i class="fa fa-facebook"></i></a>
-				<a class="tw-login" href="#" title=""><i class="fa fa-twitter"></i></a>
-			</div>
-		</div>
-	</div>
-</div><!-- SIGNUP POPUP -->
-
 <script src="{{URL::asset('tema/js/jquery.min.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/modernizr.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/script.js')}}" type="text/javascript"></script>
@@ -262,6 +247,8 @@
 <script src="{{URL::asset('tema/js/slick.min.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/parallax.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/select-chosen.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('tema/js/counter.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('tema/js/mouse.js')}}" type="text/javascript"></script>
 
 </body>
 </html>

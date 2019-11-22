@@ -61,7 +61,15 @@ Author:         Creative Layer
 -------------------------------------------------------------------*/
 
 /*=============== Fonts ===================*/
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300i,400,400i,600,600i,700,700i,800,800i|Quicksand:300,400,500,700');
+/*@font-face{
+    font-family:'';
+    src: url('fonts/VivaBeautifulB-Regular') format('ttf');
+    
+}*/
+
+@import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
+
+/*@import url('https://fonts.googleapis.com/css?family=Open+Sans:300i,400,400i,600,600i,700,700i,800,800i|Quicksand:300,400,500,700');*/
 /*=============== General Styling ===================*/
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -105,7 +113,7 @@ html{overflow-x:hidden}
 body{
     color:#555555;
     letter-spacing:0;
-    font-family:'Open Sans', sans-serif;;
+    font-family: 'Questrial' !important;
     overflow-x:hidden;
     position:relative;
     
@@ -116,7 +124,7 @@ button,a,input[type="submit"], input[type="button"]{
 *{outline:none!important}
 h1, h2, h3, h4, h5, h6{
     margin-bottom:20px;
-    font-family:'Quicksand', serif !important;
+    font-family: 'Questrial' !important;
 }
 h1{font-size:36px}
 h2{font-size:32px}
@@ -633,7 +641,7 @@ label::after {
 }
 .post-job-btn {
     float: left;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #ffffff;
     padding: 10px 27px;
@@ -666,7 +674,7 @@ label::after {
     margin-left: 20px;
 }
 .account-btns > li a {
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #ffffff;
     float: left;
@@ -705,13 +713,13 @@ label::after {
 }
 .menu-sec nav > ul > li > a {
     float: left;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #ffffff;
     position: relative;
     padding: 14px 20px;
 }
-.menu-sec nav > ul > li.menu-item-has-children > a::before {
+/*.menu-sec nav > ul > li.menu-item-has-children > a::before {
     position: absolute;
     right: 0px;
     width: 10px;
@@ -721,7 +729,7 @@ label::after {
     font-size: 9px;
     top: 50%;
     margin-top: -4px;
-}
+}*/
 .menu-sec nav > ul > li > ul {
     opacity: 0;
     visibility: hidden;
@@ -759,7 +767,7 @@ label::after {
 .menu-sec nav > ul > li > ul li a {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #202020;
     padding: 9px 25px;
@@ -851,7 +859,7 @@ label::after {
 .account-popup > h3 {
     float: left;
     width: 100%;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     color: #222222;
     font-weight: bold;
     margin: 0;
@@ -863,7 +871,7 @@ label::after {
     float: left;
     width: 100%;
     font-size: 13px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     margin-top: 20px;
@@ -877,7 +885,7 @@ label::after {
 .select-user > span {
     float: none;
     display: inline-block;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #202020;
     border: 2px solid;
@@ -918,7 +926,7 @@ label::after {
     width: 100%;
     background: no-repeat;
     margin: 0;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #474747;
     padding: 16px 45px 16px 15px;
@@ -933,13 +941,13 @@ label::after {
 .remember-label {
     float: left;
     margin: 0;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #202020;
 }
 .account-popup > form > a {
     float: right;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     text-decoration: underline;
     line-height: 30px;
@@ -984,7 +992,7 @@ label::after {
     padding: 1px 20px;
     z-index: 1;
     position: relative;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #afafaf;
     text-transform: capitalize;
@@ -1085,7 +1093,7 @@ label::after {
 .job-search > h3 {
     float: left;
     width: 100%;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 40px;
     font-weight: normal;
     color: #ffffff;
@@ -1097,7 +1105,7 @@ label::after {
 .job-search > span {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     font-weight: 400;
     color: #d5d8f3;
@@ -1235,14 +1243,14 @@ label::after {
 }
 .or-browser > span {
     float: left;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #ffffff;
     line-height: 33px;
 }
 .or-browser > a {
     float: left;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #ffffff;
     margin-left: 15px; margin-right: 15px;
@@ -1278,7 +1286,7 @@ label::after {
 .scroll-to a {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 87%;
     width: 60px;
     height: 60px;
     margin-left: -30px;
@@ -1314,13 +1322,13 @@ label::after {
     margin: 0;
     font-weight: bold;
     font-size: 30px;
-    color: #202020;
+    color: #252d5f;
     line-height: 23px;
 }
 .heading span {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #888888;
     margin-top: 8px;
@@ -1354,7 +1362,7 @@ label::after {
 .p-category > a span {
     float: left;
     width: 100%;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 18px;
     font-weight: 500;
     color: #232323;
@@ -1417,7 +1425,7 @@ label::after {
     border-radius: 8px;
 
     padding: 13px 30px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
 }
 
@@ -1430,7 +1438,7 @@ label::after {
 .simple-text-block > h3 {
     float: left;
     width: 100%;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 40px;
     color: #ffffff;
     font-weight: bold;
@@ -1440,7 +1448,7 @@ label::after {
 .simple-text-block span {
     float: left;
     width: 100%;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 18px;
     color: #ffffff;
 }
@@ -1456,7 +1464,7 @@ label::after {
     border-radius: 8px;
 
     padding: 13px 30px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     margin-top: 40px;
     color: #ffffff;
@@ -1503,14 +1511,14 @@ label::after {
 }
 .job-title-sec span {
     float: left;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     margin-top: 1px;
 }
 .job-lctn {
     display: table-cell;
     vertical-align: middle;
-    font-family: open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     line-height: 23px;
@@ -1533,7 +1541,7 @@ label::after {
 .job-is {
     display: table-cell;
     vertical-align: middle;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 12px;
     border: 1px solid;
     float: right;
@@ -1553,7 +1561,7 @@ label::after {
     background: #8b91dd;
 }
 .fill.pt {
-    background: #7dc246;
+    background: #ff9200;
 }
 .fill.fl {
     background: #fb236a;
@@ -1568,8 +1576,8 @@ label::after {
 }
 .job-is.pt,
 .job-list-modern .job-is.pt{
-    color: #7dc246;
-    border-color: #7dc246;
+    color: #ff9200;
+    border-color: #ff9200;
 }
 .job-is.fl,
 .job-list-modern .job-is.fl{
@@ -1635,7 +1643,7 @@ label::after {
 .reviews h3 {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 18px;
     color: #202020;
     margin: 0;
@@ -1645,7 +1653,7 @@ label::after {
     margin-bottom: 20px;
 }
 .reviews h3 span {
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #888888;
     margin-left: 10px;
@@ -1655,7 +1663,7 @@ label::after {
     width: 100%;
     margin: 0;
     margin-bottom: 0px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     letter-spacing: 0px;
@@ -1667,7 +1675,7 @@ label::after {
     right: 40px;
     top: 20px;
     content: '“';
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 100px;
     font-weight: bolder;
     
@@ -1761,7 +1769,7 @@ label::after {
 .blog-metas a {
     float: none;
     display: inline-block;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     padding: 0 10px;
     position: relative;
@@ -1805,7 +1813,7 @@ label::after {
 .blog-details p {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     line-height: 24px;
@@ -1816,7 +1824,7 @@ label::after {
     width: 100%;
     text-align: center;
     border-top: 1px solid #e8ecec;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     padding: 17px 0;
 }
@@ -1882,7 +1890,7 @@ footer {
 .about_widget > span {
     width: 100%;
     float: left;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #8a99b3;
     line-height: 30px;
@@ -1911,7 +1919,7 @@ footer {
     float: left;
     width: 100%;
     position: relative;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #8a99b3;
     margin-bottom: 12px;
@@ -1945,7 +1953,7 @@ footer {
     float: left;
     width: 100%;
     position: relative;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #8a99b3;
     margin-bottom: 12px;
@@ -1979,7 +1987,7 @@ footer {
     padding-left: 36px !important;
 }
 .link_widgets1 a:hover::before {
-    background: #7dc246;
+    background: #ff9200;
     width: 27px;
 }
 
@@ -1992,7 +2000,7 @@ footer {
     float: left;
     width: 100%;
     position: relative;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #8a99b3;
     margin-bottom: 12px;
@@ -2040,7 +2048,7 @@ footer {
     float: left;
     width: 100%;
     position: relative;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #7a8493;
     margin-bottom: 12px;
@@ -2085,7 +2093,7 @@ footer {
     padding: 24px 0;
 }
 .bottom-line span {
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #6a7d9b;
     line-height: 24px;
@@ -2153,7 +2161,7 @@ header.style2 nav {
     background: #d42525;
     padding: 20px 0px;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
 }
 .search-job2 .job-field::before {
     position: absolute;
@@ -2213,7 +2221,7 @@ header.style2 nav {
     font-size: 18px;
     font-weight: 500;
     margin-top: 24px;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
 }
 .quick-select p {
     float: left;
@@ -2294,7 +2302,7 @@ header.style2 nav {
 }
 .job-grid > a {
     float: right;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #fb236a;
     border: 1px solid #fb236a;
@@ -2361,7 +2369,7 @@ header.style2 nav {
 .how-to h3 {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 18px;
     color: #121212;
     margin: 0;
@@ -2371,7 +2379,7 @@ header.style2 nav {
     float: left;
     width: 100%;
     margin: 0;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     line-height: 24px;
@@ -2443,7 +2451,7 @@ header.style2 nav {
 .top-compnay h3 {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #111111;
     margin-top: 10px;
@@ -2452,13 +2460,13 @@ header.style2 nav {
 .top-compnay span {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #fb236a;
 }
 .top-compnay > a {
     float: none;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #fb236a;
     border: 1px solid #fb236a;
@@ -2516,7 +2524,7 @@ header.style2 nav {
 .stats span {
     float: left;
     width: 100%;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 60px;
     font-weight: bold;
     color: #ffffff;
@@ -2528,7 +2536,7 @@ header.style2 nav {
     width: 100%;
     margin: 0;
         margin-top: 0px;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 18px;
     color: #ffffff;
     margin-top: 10px;
@@ -2577,7 +2585,7 @@ header.style2 nav {
     top: 30px;
     content: '“';
     bottom: 110px;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-weight: bold;
     left: 0;
     right: auto;
@@ -2608,7 +2616,7 @@ header.style2 nav {
 .blog-date a {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 18px;
     color: #202020;
     font-weight: bold;
@@ -2674,7 +2682,7 @@ header.style2 nav {
 .pricetable-head h3 {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 20px;
     color: #202020;
     margin: 0;
@@ -2682,7 +2690,7 @@ header.style2 nav {
 .pricetable-head h2 {
     float: left;
     width: 100%;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 60px;
     font-weight: bold;
     margin: 0;
@@ -2702,7 +2710,7 @@ header.style2 nav {
 .pricetable-head span {
     float: left;
     width: 100%;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #888888;
     margin-top: 2px;
@@ -2716,7 +2724,7 @@ header.style2 nav {
 .pricetable ul li {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     line-height: 40px;
@@ -2724,7 +2732,7 @@ header.style2 nav {
 .pricetable > a {
     float: none;
     display: inline-block;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #ffffff;
     padding: 15px 55px;
@@ -2765,7 +2773,7 @@ header.style2 nav {
 .subscription-sec h3 {
     float: left;
     width: 100%;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-weight: bold;
     font-size: 30px;
     color: #202020;
@@ -2775,7 +2783,7 @@ header.style2 nav {
 .subscription-sec span {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     margin: 0;
@@ -2807,7 +2815,7 @@ header.style2 nav {
     background: no-repeat;
     margin: 0;
     font-size: 13px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     padding: 0px 50px;
     height: 50px;
 }
@@ -2893,7 +2901,7 @@ header.style2 nav {
 }
 .links a {
     display: inline-block;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     margin: 6px 17px;
@@ -2901,7 +2909,7 @@ header.style2 nav {
 .mega-widget span {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     margin-top: 15px;
@@ -2918,13 +2926,13 @@ header.style3 nav > ul > li > a {
     float: left;
     width: 100%;
     position: relative;
-    padding-top: 300px;
-    padding-bottom: 190px;
+    padding-top: 225px;
+    padding-bottom: 9px;
 }
 .mockup-top {
     position: absolute;
     right: -9%;
-    top: 0;
+    top: -60px;
 }
 .mockup-top img {
     position: relative;
@@ -2939,10 +2947,10 @@ header.style3 .menu-sec nav {
 .find-cand h3 {
     float: left;
     width: 100%;
-    font-family: Quicksand;
+    font-family: 'proxima' !important;
     font-size: 50px;
     font-weight: bold;
-    color: #7dc246;
+    color: #ff9200;
     letter-spacing: -1px;
 }
 .find-cand > span {
@@ -3040,15 +3048,18 @@ header.style3 .menu-sec nav {
     width: 50px;
     height: 50px;
     font-size: 23px;
-    background-color: #7dc246;
+    background-color: #ff9200;
 }
 .mockup-bottom {
     position: absolute;
     left: 0;
-    bottom: -3px;
+    bottom: -200px;
     left: 50%;
     margin-left: -220px;
 }
+
+
+
 .scroll-to.style2 {
     border: none;
 }
@@ -3061,7 +3072,7 @@ header.style3 .menu-sec nav {
 
 }
 .layer.color.green::before {
-    background: #7dc246;
+    background: #ff9200;
     opacity: 0.9;
 }
 .job-listing.rounded {
@@ -3086,13 +3097,13 @@ header.style3 .menu-sec nav {
     margin-top: -1px;
 }
 .how-to-sec.style2 .how-to::before {
-    background-image: url('../images/line3.png');
+    background-image: url('../images/line1.png');
 }
 .how-to-sec.style2 .how-to:nth-child(n+2)::before {
-    background-image: url(../images/line4.png);
+    background-image: url(../images/line2.png);
 }
 .how-to-sec.style2 .how-icon {
-    background: #7dc246;
+    background: #252d5f;
     border: none;
     color: #ffffff;
 }
@@ -3134,7 +3145,7 @@ header.style3 .menu-sec nav {
     float: left;
     width: 100%;
     color: #ffffff;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 40px;
     font-weight: bold;
     margin: 0;
@@ -3275,14 +3286,14 @@ header.style3 .menu-sec nav {
     float: left;
     width: 100%;
     margin: 0;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #202020;
 }
 .team-detail > span {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     margin-top: 11px;
@@ -3330,7 +3341,7 @@ header.style3 .menu-sec nav {
     background: #647585;
 }
 .pricetable.style2 .pricetable-head h2 {
-    color: #7dc246;
+    color: #ff9200;
 }
 .pricetable.style2 .pricetable-head h2 i {
     color: #A3A3A3;
@@ -3341,7 +3352,7 @@ header.style3 .menu-sec nav {
 }
 
 .pricetable.style2 > a:hover {
-    background: #7dc246;
+    background: #ff9200;
     color: #ffffff;
 }
 
@@ -3350,7 +3361,7 @@ header.style3 .menu-sec nav {
     background: #647585;
 }
 .pricetable.active.style2 > a {
-    background: #7dc246;
+    background: #ff9200;
     color: #FFF;
 }
 .pricetable.style2.active .pricetable-head h2 {
@@ -3365,7 +3376,7 @@ header.style3 .menu-sec nav {
     color: #333333;
 }
 .ft .link_widgets a:hover {
-    color: #7dc246;
+    color: #ff9200;
 }
 .ft .bottom-line {
     background: #ffffff;
@@ -3504,7 +3515,7 @@ header.style4 .menu-sec nav > ul > li.menu-item-has-children > a::before {
     display: none;
 }
 .search-job2.style2 form .job-field label {
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #202020;
     margin: 0;
@@ -3545,7 +3556,7 @@ header.style4 .menu-sec nav > ul > li.menu-item-has-children > a::before {
     border-radius: 6px !important;
 
     background: #1e83f0;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     padding: 16px 10px;
     margin: 21px 0;
 }
@@ -3649,7 +3660,7 @@ header.style4 .menu-sec nav > ul > li.menu-item-has-children > a::before {
 }
 .nav.nav-tabs > li a {
     float: left;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 18px;
     font-weight: bold;
     letter-spacing: 0px;
@@ -3781,7 +3792,7 @@ footer.style2 span {
 .subscribe_widget > p {
     width: 100%;
     float: left;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #7a8493;
     line-height: 20px;
@@ -3802,7 +3813,7 @@ footer.style2 span {
 
     background: none;
     margin: 0;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #dae4f3;
     padding: 15px 30px;
@@ -3836,7 +3847,7 @@ footer.style2 {
 }
 .back-top {
     float: right;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #7a8493;
     line-height: 33px;
@@ -3990,7 +4001,7 @@ header.style5 .logo {
     position: relative;
     top: 10px;
     font-size: 13px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
 }
 .form-location-sec form a {
     text-align: right;
@@ -3998,7 +4009,7 @@ header.style5 .logo {
     color: #B3B3B3;
     position: relative;
     font-size: 13px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     height: 20px;
     position: absolute;
     width: auto;
@@ -4170,14 +4181,14 @@ header.style5 .logo {
     float: left;
     width: 100%;
     color: #ffffff;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 40px;
     margin: 0;
 }
 .who-am p {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     line-height: 26px;
     color: #ffffff;
@@ -4186,7 +4197,7 @@ header.style5 .logo {
 .who-am a {
     float: left;
     border: 2px solid #ffffff;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #ffffff;
     padding: 13px 50px;
@@ -4240,7 +4251,7 @@ header.style5 .logo {
     color: #222222;
     background: #f4f5fa;
     padding: 21px 40px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     cursor: pointer;
     margin-bottom: 1px;
     position: relative;
@@ -4311,7 +4322,7 @@ header.style5 .logo {
     width: 100%;
     float: left;
     color: #ffffff;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 30px;
     font-weight: bold;
 }
@@ -4437,7 +4448,7 @@ section.overlape {
 }
 .filterbar > h5 {
     float: left;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 20px;
     color: #222222;
     font-weight: bold;
@@ -4514,7 +4525,7 @@ section.overlape {
 }
 .pagination li {
     display: inline-block;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 12px;
     margin: 0 10px 0 0;
 }
@@ -4548,7 +4559,7 @@ section.overlape {
     box-shadow: none;
 
     float: left;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     padding: 3px 13px;
     text-decoration: none;
     border: 3px solid #edeff7;
@@ -4634,7 +4645,7 @@ aside .widget:first-child {
 .sb-title {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #111111;
     margin: 0;
@@ -4749,7 +4760,7 @@ aside .widget:first-child {
     width: 100%;
     margin: 0;
         margin-bottom: 0px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     margin-bottom: 4px;
 }
@@ -4779,7 +4790,7 @@ aside .widget > div {
 .subscribe_widget > h3 {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #111111;
     margin: 0;
@@ -4829,7 +4840,7 @@ aside .subscribe_widget form button {
     -o-border-radius: 8px;
     border-radius: 8px;
 
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     padding: 7px 17px;
     margin-right: 15px;
@@ -4854,7 +4865,7 @@ aside .subscribe_widget form button {
     text-align: center;
     line-height: 13px;
     font-size: 10px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     cursor: pointer;
 }
 .action-tags {
@@ -5001,7 +5012,7 @@ aside .subscribe_widget form button {
     border: 2px solid #e8ecec;
     padding: 9px 25px;
     font-size: 13px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -5338,7 +5349,7 @@ aside .widget.border:first-child {
 
     padding: 20px 20px;
     font-size: 15px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-weight: bold;
 }
 .apply-thisjob i {
@@ -5457,7 +5468,7 @@ aside .widget.border:first-child {
     float: left;
     width: 100%;
     font-size: 13px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     margin: 0;
 }
 .job-overview ul > li span {
@@ -5515,7 +5526,7 @@ aside .widget.border:first-child {
 
     padding: 17px 20px;
     margin-bottom: 20px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
 }
@@ -5527,7 +5538,7 @@ aside .widget.border:first-child {
     margin-right: 12px;
 }
 .extra-job-info > span strong {
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     font-weight: normal;
     color: #202020;
@@ -5575,7 +5586,7 @@ aside .widget.border:first-child {
     float: left;
     margin: 0;
         margin-right: 0px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     margin-right: 30px;
@@ -5680,7 +5691,7 @@ aside .widget.border:first-child {
 }
 .apply-job-btn {
     background: #fb236a;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     font-weight: bold;
     color: #ffffff;
@@ -5722,7 +5733,7 @@ aside .widget.border:first-child {
     -o-border-radius: 40px;
     border-radius: 40px;
 
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #fb236a;
     width: 250px;
@@ -5743,7 +5754,7 @@ aside .widget.border:first-child {
     height: 60px;
     line-height: 60px;
     color: #ffffff;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     
     -webkit-border-radius: 40px;
@@ -5938,7 +5949,7 @@ aside .widget.border:first-child {
     font-size: 13px;
     color: #888888;
     padding: 15px 25px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     margin-bottom: 15px;
 }
 .quick-form-job form button {
@@ -5953,7 +5964,7 @@ aside .widget.border:first-child {
 
     background: #424f95;
     font-size: 18px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     padding: 16px 10px;
     margin-bottom: 15px;
     border: 2px solid #424f95;
@@ -5961,7 +5972,7 @@ aside .widget.border:first-child {
 .quick-form-job form > span {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     text-align: center;
@@ -6038,13 +6049,13 @@ aside .widget.border:first-child {
     margin: 0;
         margin-top: 0px;
     font-size: 13px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     margin-top: 13px;
 }
 .emply-list-info > p {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     line-height: 24px;
@@ -6079,7 +6090,7 @@ aside .widget.border:first-child {
 .filterbar > p {
     float: left;
     margin: 0;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     line-height: 36px;
@@ -6206,7 +6217,7 @@ aside .widget.border:first-child {
     width: 100%;
 }
 .range_slider .leftLabel, .range_slider .rightLabel {
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     margin-top: 9px;
@@ -6344,7 +6355,7 @@ aside .widget.border:first-child {
     margin: 5px 0;
     padding-left: 34px;
     position: relative;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
 }
 .emply-text > ul > li::before {
@@ -6364,7 +6375,7 @@ aside .widget.border:first-child {
     float: left;
     width: 100%;
     background: #fb236a;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #ffffff;
     text-align: center;
@@ -6479,7 +6490,7 @@ aside .widget.border:first-child {
 .tree_widget-sec > ul > li > a {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     line-height: 41px;
@@ -6528,7 +6539,7 @@ aside .widget.border:first-child {
 .tree_widget-sec > ul > li > ul > li a {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     padding: 3px 0;
@@ -6575,7 +6586,7 @@ aside .widget.border:first-child {
 .tree_widget-sec > ul > li > ul > ol a {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     padding: 3px 0;
@@ -6695,7 +6706,7 @@ aside .widget.border:first-child {
 }
 .upload-info > a {
     float: left;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #8b91dd;
     border: 2px solid #8b91dd;
@@ -6711,7 +6722,7 @@ aside .widget.border:first-child {
 .upload-info > span {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     margin-top: 20px;
@@ -6729,7 +6740,7 @@ aside .widget.border:first-child {
     float: left;
     width: 100%;
     margin-top: 30px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #202020;
     margin-bottom: 13px;
@@ -6757,7 +6768,7 @@ aside .widget.border:first-child {
 
     padding: 14px 45px 14px 15px;
     background: #ffffff;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #101010;
     line-height: 24px;
@@ -6771,7 +6782,7 @@ aside .widget.border:first-child {
     background: #ffffff;
     border: 2px solid #fb236a;
     color: #202020;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     padding: 11px 40px;
     
@@ -6843,7 +6854,7 @@ aside .widget.border:first-child {
 }
 .contact-edit .srch-lctn {
     float: left;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #8b91dd;
     border: 2px solid #8b91dd;
@@ -6879,7 +6890,7 @@ aside .widget.border:first-child {
     background: #ffffff;
     border: 2px solid #fb236a;
     color: #202020;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     padding: 11px 40px;
     
@@ -7071,7 +7082,7 @@ aside .widget.border:first-child {
 .btns-profiles-sec > span {
     float: right;
     color: #ffffff;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     line-height: 50px;
     cursor: pointer;
@@ -7079,7 +7090,7 @@ aside .widget.border:first-child {
 .btns-profiles-sec > span {
     float: right;
     color: #ffffff;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     line-height: 50px;
 }
@@ -7134,7 +7145,7 @@ aside .widget.border:first-child {
 .btns-profiles-sec > ul > li > a {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #202020;
     line-height: 30px;
@@ -7258,7 +7269,7 @@ aside .widget.border:first-child {
         margin-top: 0px;
     margin-top: 0px;
     font-size: 13px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     margin-top: 0;
     line-height: 28px;
 }
@@ -7277,7 +7288,7 @@ aside .widget.border:first-child {
 }
 .action-center > span {
     float: left;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #8b91dd;
     border: 2px solid #8b91dd;
@@ -7356,7 +7367,7 @@ aside .widget.border:first-child {
 }
 .action-center > ul > li a {
     float: left;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     padding: 5px 20px;
@@ -7497,7 +7508,7 @@ aside .widget.border:first-child {
     float: left;
     background: no-repeat;
     padding: 16px 15px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     margin: 0;
 
@@ -7512,7 +7523,7 @@ aside .widget.border:first-child {
 }
 .contact-popup form > .popup-field textarea {
     background: none;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     min-height: 135px;
 }
@@ -7557,7 +7568,7 @@ aside .widget.border:first-child {
     padding: 19px 24px !important;
         padding-right: 24px;
     color: #ffffff !important;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     font-weight: normal !important;
     padding-right: 14px !important;
@@ -7604,7 +7615,7 @@ aside .widget.border:first-child {
     font-size: 16px;
     color: #888888;
     margin-top: 9px;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-weight: 500;
 }
 .step::before {
@@ -7678,7 +7689,7 @@ table.alrt-table tbody td > span {
     background: #ffffff;
     border: 2px solid #fb236a;
     color: #202020;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     padding: 11px 40px;
     
@@ -7705,7 +7716,7 @@ table.alrt-table tbody td > span {
 }
 .shortlists > a {
     float: left;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #8b91dd;
     border: 2px solid #8b91dd;
@@ -7943,7 +7954,7 @@ header.gradient{
 }
 .skills-btn a {
     float: left;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #ffffff;
     border: 2px solid #ffffff;
@@ -7964,7 +7975,7 @@ header.gradient{
 }
 .action-inner a {
     float: right;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #ffffff;
     margin-left: 30px;
@@ -8038,7 +8049,7 @@ header.gradient{
 .can-detail-s > h3 {
     float: left;
     width: 100%;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 22px;
     color: #202020;
     font-weight: bold;
@@ -8047,7 +8058,7 @@ header.gradient{
 .can-detail-s span {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #202020;
     margin-top: 14px;
@@ -8078,7 +8089,7 @@ header.gradient{
     background: #ffffff;
     border: 2px solid #8b91dd;
     color: #8b91dd;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     padding: 14px 30px;
     
@@ -8122,7 +8133,7 @@ header.gradient{
 }
 .cand-extralink > li a {
     float: left;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #888888;
     padding: 20px 10px;
@@ -8144,7 +8155,7 @@ header.gradient{
 .cand-details h2 {
     float: left;
     width: 100%;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 20px;
     font-weight: bold;
     color: #202020;
@@ -8208,7 +8219,7 @@ header.gradient{
 .edu-hisinfo > span {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #202020;
     margin-top: 8px;
@@ -8354,7 +8365,7 @@ header.gradient{
 .progress-sec > span {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #202020;
     margin-bottom: 9px;
@@ -8477,7 +8488,7 @@ header.gradient{
     margin: 0;
     background: #edeff7;
     color: #888888;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     margin: 0 6px;
         margin-top: 0px;
@@ -8641,7 +8652,7 @@ header.gradient{
 .skill-perc > h3 {
     float: left;
     width: 100%;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 20px;
     color: #202020;
     font-weight: bold;
@@ -8681,7 +8692,7 @@ header.gradient{
     right: 28px;
     top: 53px;
     font-size: 17px;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 20px;
     font-weight: bold;
     letter-spacing: -1px;
@@ -8699,7 +8710,7 @@ header.gradient{
     float: left;
     font-size: 13px;
     color: #ffffff;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     line-height: 50px;
     cursor: pointer;
 }
@@ -9079,7 +9090,7 @@ header.gradient{
 .follow-companies > ul li .job-listing.wtabs .go-unfollow {
     float: right;
     background: #ffffff;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #8b91dd;
     border: 2px solid #8b91dd;
@@ -9138,7 +9149,7 @@ header.gradient{
 }
 .border-title > h3 {
     float: left;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 20px;
     font-weight: bold;
     color: #202020;
@@ -9148,7 +9159,7 @@ header.gradient{
 .border-title > a {
     float: right;
     line-height: 27px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #fb236a;
 }
@@ -9218,7 +9229,7 @@ header.gradient{
     float: right;
     border: 2px solid #fb236a;
     color: #ffffff;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     padding: 12px 41px;
     
@@ -9290,7 +9301,7 @@ input[type="file"] {
 .custom-file-upload span {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #8b91dd;
     line-height: 25px;
@@ -9331,7 +9342,7 @@ input[type="file"] {
     background: #f8f9fc;
 }
 .table-list-title > i {
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #8b91dd;
     font-style: normal;
@@ -9352,7 +9363,7 @@ input[type="file"] {
     background: #ffffff;
     border: 2px solid #fb236a;
     color: #202020;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     padding: 11px 40px;
     
@@ -9433,7 +9444,7 @@ input[type="file"] {
 }
 .post-metas > li a {
     float: left;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #a7a7a7;
 }
@@ -9453,7 +9464,7 @@ input[type="file"] {
     float: left;
     width: 100%;
     margin: 0;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 20px;
     color: #202020;
     margin: 0;
@@ -9473,7 +9484,7 @@ input[type="file"] {
 }
 .bbutton {
     float: left;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #fb236a;
     border: 2px solid #fb236a;
@@ -9555,7 +9566,7 @@ input[type="file"] {
 .mb-info > h3 {
     float: left;
     width: 100%;
-    font-family: Open sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #202020;
     line-height: 20px;
@@ -9574,7 +9585,7 @@ input[type="file"] {
 }
 .tags_widget > a {
     float: left;
-    font-family: Open sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     border: 1px solid #e8ecec;
@@ -9664,7 +9675,7 @@ footer .footer-title {
 .blog-single > h2 {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 20px;
     margin: 20px 0;
     color: #202020;
@@ -9680,7 +9691,7 @@ footer .footer-title {
 .blog-single > h3 {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #202020;
 }
@@ -9695,7 +9706,7 @@ blockquote > p {
     float: left;
     width: 100%;
     margin: 0;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     font-style: italic;
     color: #888888;
@@ -9812,7 +9823,7 @@ blockquote > strong {
     display: table-cell;
     vertical-align: middle;
     padding-left: 20px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #202020;
 }
@@ -9841,7 +9852,7 @@ blockquote > strong {
     float: left;
     width: 100%;
     font-size: 20px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     color: #202020;
 }
 .comment-sec > ul {
@@ -9886,7 +9897,7 @@ blockquote > strong {
 .comment-detail > h3 {
     float: left;
     width: 50%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #202020;
     margin: 0;
@@ -9949,7 +9960,7 @@ blockquote > strong {
     float: left;
     width: 100%;
     font-size: 20px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     color: #202020;  
 }
 .commentform-sec > form {
@@ -10029,7 +10040,7 @@ header.white .menu-sec nav > ul > li > ul {
 .inner-title2 > h3 {
     float: left;
     width: 100%;
-    font-family: Quicksand;
+    font-family: 'Questrial' !important;
     font-size: 30px;
     color: #202020;
     font-weight: bold;
@@ -10098,14 +10109,14 @@ header.white {
 .about-us  h3 {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 20px;
     color: #202020;
 }
 .about-us p {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     line-height: 24px;
@@ -10163,7 +10174,7 @@ header.white {
     float: left;
     width: 100%;
     font-size: 15px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     margin: 0;
 }
 .service-info > p {
@@ -10178,7 +10189,7 @@ header.white {
 .our-services h2 {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 20px;
     color: #202020;
     margin-bottom: 40px;
@@ -10188,7 +10199,7 @@ header.white {
     width: 100%;
     font-size: 20px;
     color: #202020;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
 }
 .contact-form > form {
     float: left;
@@ -10204,7 +10215,7 @@ header.white {
 .contact-form > form button {
     float: left;
     margin-top: 5px;
-    font-family: open sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #ffffff;
     background: #fb236a;
@@ -10228,7 +10239,7 @@ header.white {
     width: 100%;
     font-size: 20px;
     color: #202020;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
 }
 .contact-textinfo > ul {
     float: left;
@@ -10255,7 +10266,7 @@ header.white {
 .contact-textinfo > ul > li > span {
     display: table-cell;
     vertical-align: middle;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     line-height: 24px;
@@ -10263,7 +10274,7 @@ header.white {
 .contact-textinfo > a {
     float: left;
     margin-top: 5px;
-    font-family: open sans;
+    font-family: 'Questrial' !important;
     font-size: 15px;
     color: #0f36a5;
     padding: 15px 40px;
@@ -10350,7 +10361,7 @@ header.white {
     width: 100%;
     position: relative;
     cursor: pointer;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 20px;
 }
 .faq-box > h2 > i {
@@ -10396,7 +10407,7 @@ terms {
 .terms > h2 {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 20px;
     color: #202020;
     margin-bottom: 15px;
@@ -10404,7 +10415,7 @@ terms {
 .terms > p {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     line-height: 24px;
@@ -10530,12 +10541,12 @@ terms {
     width: 100%;
     font-size: 22px;
     color: #202020;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
 }
 .how-work-box > p {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     color: #888888;
     line-height: 30px;
@@ -10639,7 +10650,7 @@ terms {
 .error-sec h6 a {
     float: none;
     display: inline-block;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     background: #0f36a5;
     color: #ffffff;
@@ -10759,8 +10770,8 @@ header.style3 .post-job-btn:hover {
     background: #fb236a;
 }
 .download-text ul li a:hover {
-    background: #7dc246;
-    border-color: #7dc246;
+    background: #ff9200;
+    border-color: #ff9200;
 }
 .team-detail > a:hover {
     color: #000000;
@@ -11084,8 +11095,8 @@ footer.ft .scrollup:hover{border-color: #647585; color: #647585;}
     bottom: 8px;
 }
 footer.ft .scrollup {
-    border-color: #7dc246;
-    color: #7dc246;
+    border-color: #ff9200;
+    color: #ff9200;
     bottom: 190px;
     z-index: 6;
 }
@@ -11159,13 +11170,13 @@ footer.ft .scrollup {
     color: #647585;
 }
 .p-category.green:hover a i {
-    color: #7dc246;
+    color: #ff9200;
 }
 .browse-all-cat.green a {
-    border-color: #7dc246;
+    border-color: #ff9200;
 }
 .browse-all-cat.green a:hover {
-    background: #7dc246;
+    background: #ff9200;
 }
 .job-field.with-icon.nolbel input {
     margin: 41px 0;
@@ -11232,7 +11243,7 @@ footer.ft .scrollup {
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
     border-radius: 8px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 13px;
     padding: 7px 17px;
     margin-right: 10px;
@@ -11255,7 +11266,7 @@ footer.ft .scrollup {
     text-align: center;
     line-height: 13px;
     font-size: 10px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     cursor: pointer;
 }
 .tagAdd.taglist input {
@@ -11360,11 +11371,11 @@ footer.ft .scrollup {
 }
 
 
-.responsive-header.three .res-openmenu{color: #7dc246;}
-.responsive-header.three .res-closemenu{color: #7dc246;}
+.responsive-header.three .res-openmenu{color: #ff9200;}
+.responsive-header.three .res-closemenu{color: #ff9200;}
 
-.responsive-header.four .res-openmenu{color: #7dc246;}
-.responsive-header.four .res-closemenu{color: #7dc246;}
+.responsive-header.four .res-openmenu{color: #ff9200;}
+.responsive-header.four .res-closemenu{color: #ff9200;}
 
 .responsive-menubar {
     float: left;
@@ -11388,7 +11399,7 @@ footer.ft .scrollup {
     float: left;
     color: #fff;
     font-size: 15px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     padding: 12px 27px;
     
     -webkit-border-radius: 26px;
@@ -11409,7 +11420,7 @@ footer.ft .scrollup {
     top: 0;
     color: #fff;
     font-size: 15px;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     padding: 13px 27px;
     
     -webkit-border-radius: 26px;
@@ -11488,7 +11499,7 @@ footer.ft .scrollup {
 .responsivemenu > ul > li > a {
     float: left;
     width: 100%;
-    font-family: Open Sans;
+    font-family: 'Questrial' !important;
     font-size: 22px;
     color: #96a0bd;
     padding-right: 30px;
@@ -11825,4 +11836,75 @@ header.style4 .account-btns > li a,
     -ms-transition: all 0.4s ease 0s;
     -o-transition: all 0.4s ease 0s;
     transition: all 0.4s ease 0s;
+}
+
+
+/* Custom ccs */
+
+div#enlaces .row {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+div#enlaces img {
+    width: 20%;
+}
+
+#enlaces span {
+    float: right;
+    color: #fff;
+    width: 67%;
+}
+
+div#enlaces p {
+    margin-bottom: 0px;
+    color: #fff;
+    line-height: 24px;
+}
+
+.col-lg-4.amarillo {
+    background: #ffca45db;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+}
+
+.col-lg-4.naranja {
+    background: #ff9200db;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+}
+
+.col-lg-4.azul {
+    background: #252d5fdb;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+}
+
+.col-lg-4.amarillo:hover {
+    background: #ffca45;
+}
+
+.col-lg-4.naranja:hover {
+    background: #ff9200;
+    
+}
+
+.col-lg-4.azul:hover {
+    background: #252d5f;
+    
+}
+
+section#pasos {
+    margin-top: 60px;
+}
+
+.col-lg-4.azul img {
+    padding-top: 13px;
+}
+
+i.la {
+    vertical-align: middle;
 }

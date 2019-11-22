@@ -14,7 +14,7 @@ class SocialController extends Controller
         return Socialite::driver($provider)->redirect();
     }
      
-    public function callback($provider, $plan)
+    public function callback($provider)
     {
                
         $getInfo = Socialite::driver($provider)->user();

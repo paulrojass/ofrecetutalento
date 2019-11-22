@@ -151,19 +151,16 @@
 			]) !!}<br>
 
 			<select name="industries" id="industries">
+				<option value = "">Selecciona una industria</option>
 				@foreach($industries as $industry)
 					<option value = "{{$industry->id}}">
 						{{ $industry->name }}						
 					</option>
 				@endforeach
-			</select><br>
-
+			</select>
+			<br>
 			<select name="categories" id="categories">
-				@foreach($categories as $category)
-					<option value = "{{$category->id}}">
-						{{ $category->name }}						
-					</option>
-				@endforeach
+					<option value = "">Primero selecciona una Industria</option>
 			</select><br>
 
 			{!! Form::text('level',null,
@@ -208,8 +205,9 @@
 
 		$('.btn-facebook').click(function(){
 			$.ajax({
-				type:'GET',
-				url:'/auth/redirect/facebook/'+plan,
+				type: 'GET',
+				data: {plan : plan},
+				url:'/auth/redirect/facebook',
 				success:function(data){
 					alert('Mensaje: '+data.success+' Usuario:'+data.id_user);
 					id_user = data.id_user;
@@ -220,10 +218,10 @@
 			});
 		});
 
-		$('.btn-twitter').click(function(){
+		$('.btn-google').click(function(){
 			$.ajax({
 				type:'GET',
-				url:'/auth/redirect/facebook/'+plan,
+				url:'/auth/redirect/google/'+plan,
 				success:function(data){
 					alert('Mensaje: '+data.success+' Usuario:'+data.id_user);
 					id_user = data.id_user;
@@ -306,10 +304,16 @@
 			});
 		});
 
-		$('#industries').on('change', function(event) {
+		$('#industries').on('change', function() {
 			var industry_id = $(this).val();
 			if ($.trim(industry_id) != ''){
-				
+				$.get('select-categorias', {industry_id : industry_id}, function(categories){
+					$('#categories').empty();
+					$('#categories').append("<option value = ''>Selecciona una categoria</option>");
+					$.each(categories, function(index, value){
+						$('#categories').append("<option value = '"+index+"'>"+value+"</option>");
+					})
+				});
 			}
 		});
 

@@ -29,11 +29,11 @@ COLOR SCHEME 2
 -------------------------------------------------------------------*/
 
 .forsticky.sticky .post-job-btn{
-	border: 2px solid #fb236a;
-	background: transparent; color: #fb236a;
+	border: 2px solid #ff9200;
+	background: transparent; color: #ff9200;
 }
 .post-job-btn{
-    background-color: #fb236a ; border: 2px solid #fb236a;
+    background-color: #ff9200 ; border: 2px solid #ff9200;
 }
 
 
@@ -41,7 +41,7 @@ COLOR SCHEME 2
 .post-job-btn,
 .account-popup .close-popup,
 .blog-metas a::before{
-    background-color: #fb236a ;
+    background-color: #ff9200 ;
 }
 
 /*------------------------------------------------------------------
@@ -61,7 +61,7 @@ Text Color
 .job-title-sec span,
 .blog-metas a,
 .blog-details > a{
-    color: #fb236a ;
+    color: #ff9200 ;
 }
 
 /*------------------------------------------------------------------
@@ -70,6 +70,6 @@ Border Color
 .border-color,
 .select-user > span.active,
 .browse-all-cat a{
-    border-color: #fb236a ;
+    border-color: #ff9200 ;
 }
 

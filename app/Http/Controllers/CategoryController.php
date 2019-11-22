@@ -49,6 +49,17 @@ class CategoryController extends Controller
         //
     }
 
+    public function showCategoriesSelect(Request $request){
+        if ($request->ajax()){
+            $categories = Category::where('industry_id', $request->industry_id)->get();
+            foreach ($categories as $category) {
+                $categoriesArray[$category->id] = $category->name;
+            }
+
+            return response()->json($categoriesArray);
+        }
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
