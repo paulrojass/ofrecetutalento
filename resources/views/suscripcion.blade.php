@@ -150,17 +150,17 @@
 			'value' => 'old("title")'
 			]) !!}<br>
 
-			<select name="industries">
+			<select name="industries" id="industries">
 				@foreach($industries as $industry)
-					<option value = {{ $industry->id }}>
+					<option value = "{{$industry->id}}">
 						{{ $industry->name }}						
 					</option>
 				@endforeach
 			</select><br>
 
-			<select name="categories">
+			<select name="categories" id="categories">
 				@foreach($categories as $category)
-					<option value = {{ $category->id }}>
+					<option value = "{{$category->id}}">
 						{{ $category->name }}						
 					</option>
 				@endforeach
@@ -305,6 +305,16 @@
 				}
 			});
 		});
+
+		$('#industries').on('change', function(event) {
+			var industry_id = $(this).val();
+			if ($.trim(industry_id) != ''){
+				
+			}
+		});
+
+
+
 	});
 
 	function verificarTalentos(id_user){

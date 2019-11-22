@@ -13,8 +13,8 @@ class SiteController extends Controller
     public function suscripcion(Request $request)
     {
         $plans = Plan::all();
-        $industries = Industry::all()->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE)->pluck('name', 'id');
-        $categories = Category::all()->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE)->pluck('name', 'id');
+        $industries = Industry::all();
+        $categories = Category::all();
         return view('suscripcion', compact('plans', 'industries', 'categories'));
     }
 }
