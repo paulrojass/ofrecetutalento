@@ -31,92 +31,58 @@
 				 		<div class="widget">
 				 			<div class="search_widget_job">
 				 				<div class="field_w_search">
-				 					<input type="text" placeholder="Search Keywords" />
+				 					<input type="text" placeholder="Buscar" />
 				 					<i class="la la-search"></i>
 				 				</div><!-- Search Widget -->
 				 				<div class="field_w_search">
-				 					<input type="text" placeholder="All Locations" />
+				 					<input type="text" placeholder="Ubicacion" />
 				 					<i class="la la-map-marker"></i>
 				 				</div><!-- Search Widget -->
 				 			</div>
 				 		</div>
 				 		<div class="widget">
-				 			<h3 class="sb-title open">Last Activity</h3>
+				 			<h3 class="sb-title open">Industria</h3>
 				 			<div class="specialism_widget">
-				 				<div class="simple-checkbox">
-									<p><input type="checkbox" name="smplechk" id="22"><label for="22">Last Hour</label></p>
-									<p><input type="checkbox" name="smplechk" id="23"><label for="23">Last 24 hours</label></p>
-									<p><input type="checkbox" name="smplechk" id="24"><label for="24">Last 7 days</label></p>
-									<p><input type="checkbox" name="smplechk" id="25"><label for="25">Last 14 days</label></p>
-									<p><input type="checkbox" name="smplechk" id="26"><label for="26">Last 30 days</label></p>
-									<p><input type="checkbox" name="smplechk" id="27"><label for="27">All</label></p>
-				 				</div>
+								@foreach($industries as $industry)
+				 					<div class="simple-checkbox">
+										<p>
+											<input type="checkbox" name="smplechk" id="{{ $industry->id }}">
+											<label for="{{ $industry->id }}">{{ $industry->name }}</label>
+										</p>
+				 					</div>
+								@endforeach
 				 			</div>
 				 		</div>
-				 		<div class="widget">
-				 			<h3 class="sb-title open">Specialism</h3>
-				 			<div class="specialism_widget">
-				 				<div class="simple-checkbox scrollbar">
-									<p><input type="checkbox" name="spealism" id="as"><label for="as">Accountancy (2)</label></p>
-									<p><input type="checkbox" name="spealism" id="asd"><label for="asd">Banking (2)</label></p>
-									<p><input type="checkbox" name="spealism" id="errwe"><label for="errwe">Charity & Voluntary (3)</label></p>
-									<p><input type="checkbox" name="spealism" id="fdg"><label for="fdg">Digital & Creative (4)</label></p>
-									<p><input type="checkbox" name="spealism" id="sc"><label for="sc">Estate Agency (3)</label></p>
-									<p><input type="checkbox" name="spealism" id="aw"><label for="aw">Graduate (2)</label></p>
-									<p><input type="checkbox" name="spealism" id="ui"><label for="ui">IT Contractor (7)</label></p>
-									<p><input type="checkbox" name="spealism" id="saas"><label for="saas">Charity & Voluntary (3)</label></p>
-									<p><input type="checkbox" name="spealism" id="rrrt"><label for="rrrt">Digital & Creative (4)</label></p>
-									<p><input type="checkbox" name="spealism" id="eweew"><label for="eweew">Estate Agency (3)</label></p>
-									<p><input type="checkbox" name="spealism" id="bnbn"><label for="bnbn">Graduate (2)</label></p>
-									<p><input type="checkbox" name="spealism" id="ffd"><label for="ffd">IT Contractor (7)</label></p>
-				 				</div>
-				 			</div>
-				 		</div>
-				 		<div class="widget">
-				 			<h3 class="sb-title open">Offerd Salary</h3>
-				 			<div class="specialism_widget">
-				 				<div class="simple-checkbox">
-									<p><input type="checkbox" name="smplechk" id="1"><label for="1">10k - 20k</label></p>
-									<p><input type="checkbox" name="smplechk" id="2"><label for="2">20k - 30k</label></p>
-									<p><input type="checkbox" name="smplechk" id="3"><label for="3">30k - 40k</label></p>
-									<p><input type="checkbox" name="smplechk" id="4"><label for="4">40k - 50k</label></p>
-									<p><input type="checkbox" name="smplechk" id="28"><label for="28">50k - 60k</label></p>
-									<p><input type="checkbox" name="smplechk" id="29"><label for="29">60k - 70k</label></p>
-				 				</div>
-				 			</div>
-				 		</div>
-				 		<div class="widget">
-				 			<h3 class="sb-title closed">Career Level</h3>
-				 			<div class="specialism_widget">
-				 				<div class="simple-checkbox">
-									<p><input type="checkbox" name="smplechk" id="5"><label for="5">Intermediate</label></p>
-									<p><input type="checkbox" name="smplechk" id="6"><label for="6">Normal</label></p>
-									<p><input type="checkbox" name="smplechk" id="7"><label for="7">Special</label></p>
-									<p><input type="checkbox" name="smplechk" id="8"><label for="8">Experienced</label></p>
-				 				</div>
-				 			</div>
-				 		</div>
-				 		<div class="widget">
-				 			<h3 class="sb-title closed">Experince</h3>
-				 			<div class="specialism_widget">
-				 				<div class="simple-checkbox">
-									<p><input type="checkbox" name="smplechk" id="9"><label for="9">1Year to 2Year</label></p>
-									<p><input type="checkbox" name="smplechk" id="10"><label for="10">2Year to 3Year</label></p>
-									<p><input type="checkbox" name="smplechk" id="11"><label for="11">3Year to 4Year</label></p>
-									<p><input type="checkbox" name="smplechk" id="12"><label for="12">4Year to 5Year</label></p>
-				 				</div>
-				 			</div>
-				 		</div>
-				 		<div class="widget">
-				 			<h3 class="sb-title closed">Gender</h3>
-				 			<div class="specialism_widget">
-				 				<div class="simple-checkbox">
-									<p><input type="checkbox" name="smplechk" id="13"><label for="13">Male</label></p>
-									<p><input type="checkbox" name="smplechk" id="14"><label for="14">Female</label></p>
-									<p><input type="checkbox" name="smplechk" id="15"><label for="15">Others</label></p>
-				 				</div>
-				 			</div>
-				 		</div>
+						{!! $industry_id = 0 !!}
+				 		@foreach($categories as $category)
+							@if($industry_id != $category->industry_id)
+								{!! $industry_id = $category->industry_id !!}
+								@if($industry_id != 0)</div>@endif
+						 		<div class="widget">
+							 		<h3 class="sb-title open">{{ $category->industry_id }}</h3>
+						 			<div class="specialism_widget">
+						 				<div class="simple-checkbox">
+							 				<p>
+												<input type="checkbox" name="smplechk" id="{{ $category->id }}">
+												<label for="{{ $category->id }}">{{ $category->name }}</label>
+											</p>
+						 				</div>
+						 			</div>
+							@else
+					 			<div class="specialism_widget">
+					 				<div class="simple-checkbox">
+						 				<p>
+											<input type="checkbox" name="smplechk" id="{{ $category->id }}">
+											<label for="{{ $category->id }}">{{ $category->name }}</label>
+										</p>
+					 				</div>
+					 			</div>
+							@endif
+
+				 		@endforeach
+
+
+
 				 	</aside>
 				 	<div class="col-lg-9 column">
 				 		<div class="emply-resume-sec">
@@ -124,11 +90,17 @@
 							@foreach($users as $user)
 					 			<div class="emply-resume-list square">
 					 				<div class="emply-resume-thumb">
-					 					<img src="http://placehold.it/90x90" alt="" />
+					 					<!-- <img src="http://placehold.it/90x90" alt="" /> -->
+					 					<img src="{{URL::asset($user->avatar)}}" alt="" />
 					 				</div>
 					 				<div class="emply-resume-info">
 					 					<h3><a href="#" title="">{{ $user->name}} {{ $user->lastname }}</a></h3>
-					 					<span><i>UX / UI Designer</i> at Atract Solutions</span>
+										<span>
+										@foreach($user->talents  as $talents)
+					 						<i>{{$talents->title}}</i>, 
+										@endforeach
+										</span>
+
 					 					<p><i class="la la-map-marker"></i>{{ $user->city }} / {{ $user->country }}</p>
 					 				</div>
 					 				<div class="shortlists">
@@ -137,7 +109,7 @@
 					 			</div><!-- Emply List -->
 							@endforeach
 
-
+							{{ $users->links() }}
 
 				 			<div class="pagination">
 								<ul>

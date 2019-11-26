@@ -18,17 +18,17 @@ use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'lastname' => $faker->name,
-        'nationality' => $faker->nationality,
-        'nationality' => $faker->nationality,
-        'address' => $faker->realText(50,5),
+        'name' => $faker->firstNameMale,
+        'lastname' => $faker->lastname,
+        'nationality' => $faker->country,
+        'address' => $faker->address,
         'city' => $faker->city,
         'country' => $faker->country,
         'document' => '123456789',
-        'phone' => '04247672189',
+        'phone' => $faker->phoneNumber,
 		'abilities' => $faker->realText(50,5),
         'email' => $faker->unique()->safeEmail,
+        'avatar' => 'images/users/default.png',
 
         'email_verified_at' => now(),
         'password' => bcrypt('123456789'), // password

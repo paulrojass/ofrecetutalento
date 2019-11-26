@@ -22,7 +22,9 @@ class SiteController extends Controller
 
     public function talentos(Request $request)
     {
-    	$users = User::all();
-    	return view('talentos', compact('users'));
+        $industries = Industry::all();
+        $categories = Category::all();
+    	$users = User::paginate(10);
+    	return view('talentos', compact('users', 'industries', 'categories'));
     }
 }
