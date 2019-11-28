@@ -11,14 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('principal');
-});
-
-
 //Accesos en principal
+Route::get('/', 'SiteController@principal');
 Route::get('talentos', 'SiteController@talentos');
+Route::get('canjes', 'SiteController@canjes');
 route::get('suscripcion', 'SiteController@suscripcion');
+
+
+Route::post('talentos-filtro','SearchController@talentsFilter')->name('talentos-filtro');
 
 Auth::routes(['verify' => true]);
 

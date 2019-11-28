@@ -21,16 +21,17 @@
 									<div class="find-cand">
 										<h3>La forma mas facil<br> de ofrecer tus talentos</h3>
 										<span>We have 2.567 resumes in our database</span>
-										<form>
+										<form method="POST" action="{{ route('talentos-filtro') }}">
+											@csrf
 											<div class="job-field">
-												<input type="text" placeholder="Search freelancer services (e.g. logo design)" />
+												<input type="text" name="search" placeholder="Search freelancer services (e.g. logo design)" />
 											</div>
 											<div class="job-field">
 												<select data-placeholder="City, province or region" class="chosen-city">
-													<option>Mechanic</option>
-													<option>Web Development</option>
-													<option>Car Install</option>
-													<option>Shoes Slippers</option>
+													<option>Selecciona industria</option>
+													@foreach($industries as $industry)
+														<option id="{{$industry->id}}">{{$industry->name}}</option>
+													@endforeach
 												</select>
 											</div>
 											<button type="submit"><i class="la la-search"></i></button>
@@ -48,7 +49,7 @@
 			<div id="enlaces">
 				<div class="row">
 					<div class="col-lg-4 amarillo">
-						<a href="#">
+						<a href="{{ url('suscripcion') }}">
 							<div class="mask">
 								<span><h2>Publica tu talento</h2>
 									<p>Crea tu perfil y cuentale al mundo tus habilidades</p></span>
@@ -68,7 +69,7 @@
 							</div>
 
 							<div class="col-lg-4 azul">
-								<a href="#">
+								<a href="{{ url('canjes') }}">
 									<div class="mask">
 										<span><h2>Canjea tu talento</h2>
 											<p>Intercambia tu talento y apoya a otros</p></span>
@@ -95,61 +96,19 @@
 								</div><!-- Heading -->
 								<div class="team-sec">
 									<div class="row" id="team-carousel">
+										@foreach($tops as $top)
 										<div class="col-lg-3">
 											<div class="team">
-												<div class="team-img"><img src="http://placehold.it/121x121" alt="" /></div>
+												<div class="team-img"><img src="{{URL::asset($top->avatar)}}" alt="" style="max-width: 101px" /></div>
 												<div class="team-detail">
-													<h3><a href="#" title="">Amanda Cook</a></h3>
+													<h3><a href="#" title="">{{$top->name}} {{$top->lastname}}</a></h3>
 													<span>I Knew You Were Trouble</span>
-													<p>The Random Name Generator is a simple fiction writing tool…</p>
-													<a href="#" title="">View Resume <i class="la la-long-arrow-right"></i></a>
+													<p>{{$top->abilities}}</p>
+													<a href="#" title="">Ver Perfil <i class="la la-long-arrow-right"></i></a>
 												</div>
 											</div><!-- Team -->
 										</div>
-										<div class="col-lg-3">
-											<div class="team">
-												<div class="team-img"><img src="http://placehold.it/121x121" alt="" /></div>
-												<div class="team-detail">
-													<h3><a href="#" title="">İbrahim Agay</a></h3>
-													<span>Developer</span>
-													<p>The Random Name Generator is a simple fiction writing tool…</p>
-													<a href="#" title="">View Resume <i class="la la-long-arrow-right"></i></a>
-												</div>
-											</div><!-- Team -->
-										</div>
-										<div class="col-lg-3">
-											<div class="team">
-												<div class="team-img"><img src="http://placehold.it/121x121" alt="" /></div>
-												<div class="team-detail">
-													<h3><a href="#" title="">Ali Tufan</a></h3>
-													<span>Senior UI / UX Designer</span>
-													<p>The Random Name Generator is a simple fiction writing tool…</p>
-													<a href="#" title="">View Resume <i class="la la-long-arrow-right"></i></a>
-												</div>
-											</div><!-- Team -->
-										</div>
-										<div class="col-lg-3">
-											<div class="team">
-												<div class="team-img"><img src="http://placehold.it/121x121" alt="" /></div>
-												<div class="team-detail">
-													<h3><a href="#" title="">Juan Suso</a></h3>
-													<span>IT Outsource Company</span>
-													<p>The Random Name Generator is a simple fiction writing tool…</p>
-													<a href="#" title="">View Resume <i class="la la-long-arrow-right"></i></a>
-												</div>
-											</div><!-- Team -->
-										</div>
-										<div class="col-lg-3">
-											<div class="team">
-												<div class="team-img"><img src="http://placehold.it/121x121" alt="" /></div>
-												<div class="team-detail">
-													<h3><a href="#" title="">Senimae Zuis</a></h3>
-													<span>Web Designer</span>
-													<p>The Random Name Generator is a simple fiction writing tool…</p>
-													<a href="#" title="">View Resume <i class="la la-long-arrow-right"></i></a>
-												</div>
-											</div><!-- Team -->
-										</div>
+										@endforeach
 									</div>
 								</div>
 							</div>
@@ -169,7 +128,7 @@
 								<div class="simple-text-block">
 									<h3>¡Haz la diferencia con tus talentos en linea!</h3>
 									<span>¡Muestra tus talentos en linea en cuestion de minutos!</span>
-									<a href="#" title="" class="rounded">Crear Cuenta</a>
+									<a href="{{url('suscripcion')}}" title="" class="rounded">Crear Cuenta</a>
 								</div>
 							</div>
 						</div>

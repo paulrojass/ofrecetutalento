@@ -24,4 +24,13 @@ class Talent extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+//Query Scopes
+
+    public function scopeLocation($query, $ubicacion)
+    {
+        if($ubicacion){
+            return User::where('city', 'LIKE', "%$city%")->orWhere('country', 'LIKE', "%$country%")->get();
+        }
+    }
 }

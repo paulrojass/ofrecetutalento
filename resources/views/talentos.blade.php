@@ -28,90 +28,100 @@
 			<div class="container">
 				 <div class="row no-gape">
 				 	<aside class="col-lg-3 column">
-				 		<div class="widget">
-				 			<div class="search_widget_job">
-				 				<div class="field_w_search">
-				 					<input type="text" placeholder="Buscar" />
-				 					<i class="la la-search"></i>
-				 				</div><!-- Search Widget -->
-				 				<div class="field_w_search">
-				 					<input type="text" placeholder="Ubicacion" />
-				 					<i class="la la-map-marker"></i>
-				 				</div><!-- Search Widget -->
-				 			</div>
-				 		</div>
-				 		<div class="widget">
-				 			<h3 class="sb-title open">Industria</h3>
-				 			<div class="specialism_widget">
-								@foreach($industries as $industry)
-				 					<div class="simple-checkbox">
-										<p>
-											<input type="checkbox" name="smplechk" id="{{ $industry->id }}">
-											<label for="{{ $industry->id }}">{{ $industry->name }}</label>
-										</p>
-				 					</div>
-								@endforeach
-				 			</div>
-				 		</div>
-						{!! $industry_id = 0 !!}
-				 		@foreach($categories as $category)
-							@if($industry_id != $category->industry_id)
-								{!! $industry_id = $category->industry_id !!}
-								@if($industry_id != 0)</div>@endif
-						 		<div class="widget">
-							 		<h3 class="sb-title open">{{ $category->industry_id }}</h3>
+                    	<form method="POST" action="{{ route('talentos-filtro') }}">
+                    		@csrf
+					 		<div class="widget">
+					 			<div class="search_widget_job">
+					 				<div class="field_w_search">
+					 					<input type="text" name="search" placeholder="Buscar" />
+					 					<i class="la la-search"></i>
+					 				</div><!-- Search Widget -->
+					 				<div class="field_w_search">
+					 					<input type="text" name="location" placeholder="Ubicacion" />
+					 					<i class="la la-map-marker"></i>
+					 				</div><!-- Search Widget -->
+					 			</div>
+					 		</div>
+					 		<div class="widget">
+					 			<h3 class="sb-title open">Industria</h3>
+					 			<div class="specialism_widget">
+									@foreach($industries as $industry)
+					 					<div class="simple-checkbox">
+											<p>
+												<input type="checkbox" name="smplechk" id="{{ $industry->id }}">
+												<label for="{{ $industry->id }}">{{ $industry->name }}</label>
+											</p>
+					 					</div>
+									@endforeach
+					 			</div>
+					 		</div>
+					 		<button type="submit">Filtrar</button>
+	<!-- 						@php($industry_id = 0)
+	@foreach($categories as $category)
+		@if($industry_id != $category->industry_id)
+			{!! $industry_id = $category->industry_id !!}
+			@if($industry_id != 0)</div>@endif
+	 		<div class="widget">
+		 		<h3 class="sb-title open">{{ $category->industry_id }}</h3>
+	 			<div class="specialism_widget">
+	 				<div class="simple-checkbox">
+		 				<p>
+							<input type="checkbox" name="smplechk" id="{{ $category->id }}">
+							<label for="{{ $category->id }}">{{ $category->name }}</label>
+						</p>
+	 				</div>
+	 			</div>
+		@else
 						 			<div class="specialism_widget">
 						 				<div class="simple-checkbox">
-							 				<p>
-												<input type="checkbox" name="smplechk" id="{{ $category->id }}">
-												<label for="{{ $category->id }}">{{ $category->name }}</label>
-											</p>
+	 				<p>
+						<input type="checkbox" name="smplechk" id="{{ $category->id }}">
+						<label for="{{ $category->id }}">{{ $category->name }}</label>
+					</p>
 						 				</div>
 						 			</div>
-							@else
-					 			<div class="specialism_widget">
-					 				<div class="simple-checkbox">
-						 				<p>
-											<input type="checkbox" name="smplechk" id="{{ $category->id }}">
-											<label for="{{ $category->id }}">{{ $category->name }}</label>
-										</p>
-					 				</div>
-					 			</div>
-							@endif
+		@endif
 
-				 		@endforeach
+					 		@endforeach -->
 
 
 
-				 	</aside>
+					</form>
+
+					 	</aside>
+						
+
 				 	<div class="col-lg-9 column">
 				 		<div class="emply-resume-sec">
+				 			@if($users->count() == 0)
+								<p> La busqueda no arrojó resultados </p>
+							@else
+								@foreach($users as $user)
+						 			<div class="emply-resume-list square">
+						 				<div class="emply-resume-thumb">
+						 					<!-- <img src="http://placehold.it/90x90" alt="" /> -->
+						 					<img src="{{URL::asset($user->avatar)}}" alt="" />
+						 				</div>
+						 				<div class="emply-resume-info">
+						 					<h3><a href="#" title="">{{ $user->name}} {{ $user->lastname }}</a></h3>
+											<span>
+											@foreach($user->talents  as $talents)
+						 						<i>{{$talents->title}}</i>, 
+											@endforeach
+											</span>
 
-							@foreach($users as $user)
-					 			<div class="emply-resume-list square">
-					 				<div class="emply-resume-thumb">
-					 					<!-- <img src="http://placehold.it/90x90" alt="" /> -->
-					 					<img src="{{URL::asset($user->avatar)}}" alt="" />
-					 				</div>
-					 				<div class="emply-resume-info">
-					 					<h3><a href="#" title="">{{ $user->name}} {{ $user->lastname }}</a></h3>
-										<span>
-										@foreach($user->talents  as $talents)
-					 						<i>{{$talents->title}}</i>, 
-										@endforeach
-										</span>
+						 					<p><i class="la la-map-marker"></i>{{ $user->city }} / {{ $user->country }}</p>
+						 				</div>
+						 				<div class="shortlists">
+						 					<a href="#" title="">Shortlist <i class="la la-plus"></i></a>
+						 				</div>
+						 			</div><!-- Emply List -->
+								@endforeach
+								{{ $users->links() }}
+							@endif
 
-					 					<p><i class="la la-map-marker"></i>{{ $user->city }} / {{ $user->country }}</p>
-					 				</div>
-					 				<div class="shortlists">
-					 					<a href="#" title="">Shortlist <i class="la la-plus"></i></a>
-					 				</div>
-					 			</div><!-- Emply List -->
-							@endforeach
 
-							{{ $users->links() }}
-
-				 			<div class="pagination">
+				 			<!-- <div class="pagination">
 								<ul>
 									<li class="prev"><a href=""><i class="la la-long-arrow-left"></i> Prev</a></li>
 									<li><a href="">1</a></li>
@@ -121,7 +131,7 @@
 									<li><a href="">14</a></li>
 									<li class="next"><a href="">Next <i class="la la-long-arrow-right"></i></a></li>
 								</ul>
-							</div><!-- Pagination -->
+							</div>Pagination -->
 				 		</div>
 					</div>
 				 </div>
