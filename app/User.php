@@ -80,7 +80,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /* Talentos */
     public function talents()
     {
-        return $this->hasMany('App\Talent');
+        return $this->hasMany(Talent::class);
     }
 
     public function suscription()
@@ -96,5 +96,15 @@ class User extends Authenticatable implements MustVerifyEmail
             return $query->where('city', 'LIKE', "%$ubicacion%")
             ->orWhere('country', 'LIKE', "%$ubicacion%")->paginate(10);
         }
+    }
+
+    public function scopeTalentTitle($query, $title){
+        if($title)
+            return $query->where('talents.title','LIKE',"%$title%");
+    }
+
+    public function scopeTalentDescription($query, $description){
+        if($description)
+            return $query->where('talents.description','LIKE',"%$description%");
     }
 }

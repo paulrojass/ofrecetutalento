@@ -1,3 +1,10 @@
 .nav-tabs li.disabled a {
     pointer-events: none;
 }
+
+
+.c-logo > img{
+	width: 98px;
+	height: 51px;
+	object-fit: none;	
+}

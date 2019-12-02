@@ -18,6 +18,7 @@ class CreateExchangesTable extends Migration
             $table->string('title', 100)->nullable();
             $table->text('description')->nullable();
             $table->integer('price')->nullable();
+            $table->string('image',100)->nullable();
             $table->timestamps();
         });
     }

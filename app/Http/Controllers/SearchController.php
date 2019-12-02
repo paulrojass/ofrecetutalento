@@ -18,16 +18,22 @@ class SearchController extends Controller
 			$busqueda = $request->search;
 			$ubicacion = $request->location;
 
-			$users = User::where('name','LIKE',$busqueda)
-				->orWhere('lastname','LIKE',$busqueda)
-				->location($ubicacion);
+			$users = User::where('talentos.title','LIKE',$busqueda)
+				->orWhere('talentos.description','LIKE',$busqueda)
+				->location($ubicacion)->paginate(10);
 		}
 		else
 		{
 			if($request->search){
 				$busqueda = $request->search;
-				$users = User::where('name','LIKE',$busqueda)
-				->orWhere('lastname','LIKE',$busqueda)->paginate(10);
+/*				$users = User::where('talentos.title','LIKE',$busqueda)
+				->orWhere('talentos.description','LIKE',$busqueda)->paginate(10);*/
+/*				$users = User::whereHas('talents', function ($query) use ($busqueda){
+                	$query->where('title','LIKE',"%$busqueda%")->where('description','LIKE',"%$busqueda%")->paginate(10);
+                });*/
+                $users = User::with(['talents' => function ($query) use ($busqueda) {
+				    $query->where('title', 'LIKE', '%$busqueda%');
+				}])->paginate(10);
 			}else
 			{
 				if($request->location){
@@ -46,3 +52,4 @@ class SearchController extends Controller
 
 	}
 }
+
