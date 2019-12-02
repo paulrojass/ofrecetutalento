@@ -13,7 +13,6 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -94,7 +93,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         if($ubicacion){
             return $query->where('city', 'LIKE', "%$ubicacion%")
-            ->orWhere('country', 'LIKE', "%$ubicacion%")->paginate(10);
+            ->orWhere('country', 'LIKE', "%$ubicacion%");
         }
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 use App\Talent;
 use App\User;
@@ -13,43 +14,34 @@ class SearchController extends Controller
 {
 	public function talentsFilter(Request $request){
 
-		if($request->search && $request->location)
-		{
+		if($request->search && $request->location){
 			$busqueda = $request->search;
 			$ubicacion = $request->location;
 
-			$users = User::where('talentos.title','LIKE',$busqueda)
-				->orWhere('talentos.description','LIKE',$busqueda)
-				->location($ubicacion)->paginate(10);
-		}
-		else
-		{
-			if($request->search){
+			$users = User::whereHas('talents', function (Builder $query) use($busqueda){
+				$query->where('title', 'LIKE' , '%' . $busqueda . '%')->orWhere('description', 'LIKE' , '%' . $busqueda . '%');
+			})->location($ubicacion)->paginate(10);
+		}	elseif($request->search){
 				$busqueda = $request->search;
-/*				$users = User::where('talentos.title','LIKE',$busqueda)
-				->orWhere('talentos.description','LIKE',$busqueda)->paginate(10);*/
-/*				$users = User::whereHas('talents', function ($query) use ($busqueda){
-                	$query->where('title','LIKE',"%$busqueda%")->where('description','LIKE',"%$busqueda%")->paginate(10);
-                });*/
-                $users = User::with(['talents' => function ($query) use ($busqueda) {
-				    $query->where('title', 'LIKE', '%$busqueda%');
-				}])->paginate(10);
-			}else
-			{
-				if($request->location){
+
+				$users = User::whereHas('talents', function (Builder $query) use($busqueda){
+					$query->where('title', 'LIKE' , '%' . $busqueda . '%')->orWhere('description', 'LIKE' , '%' . $busqueda . '%');
+				})->paginate(10);
+
+			}	elseif($request->location){
 					$ubicacion = $request->location;
-					$users = User::location($ubicacion);
-				}
-				else return back()->withInput();
-			}
-		}
+					$users = User::location($ubicacion)->paginate(10);
+				}	else return back()->withInput();
 
+/*		foreach ($user->talents-> as $key => $value) {
+			# code...
+		}*/
 
+		
 		$industries = Industry::all();
-        $categories = Category::all();
-    	return view('talentos', compact('users', 'industries', 'categories'));
+		$categories = Category::all();
+		return view('talentos', compact('users', 'industries', 'categories'));
 
 
 	}
 }
-

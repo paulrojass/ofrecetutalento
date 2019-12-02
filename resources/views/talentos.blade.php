@@ -15,7 +15,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="inner-header">
-							<h3>Welcome Tera Planer</h3>
+							<h3>Encuentra el talento que solicitas</h3>
 						</div>
 					</div>
 				</div>
@@ -48,14 +48,16 @@
 									@foreach($industries as $industry)
 					 					<div class="simple-checkbox">
 											<p>
-												<input type="checkbox" name="smplechk" id="{{ $industry->id }}">
-												<label for="{{ $industry->id }}">{{ $industry->name }}</label>
+												<input type="checkbox" name="industry[{{ $industry->id }}]"  id="industry[{{ $industry->id }}]" value="{{ $industry->id }}">
+												<label for="industry[{{ $industry->id }}]">{{ $industry->name }}</label>
 											</p>
 					 					</div>
 									@endforeach
 					 			</div>
 					 		</div>
-					 		<button type="submit">Filtrar</button>
+					 		<div class="pull-right">
+						 		<button type="submit" class="post-job-btn btn-filtrar"><i class="la la-filter"></i>Filtrar</button>
+					 		</div>
 	<!-- 						@php($industry_id = 0)
 	@foreach($categories as $category)
 		@if($industry_id != $category->industry_id)

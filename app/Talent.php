@@ -10,6 +10,11 @@ use App\Category;
 
 class Talent extends Model
 {
+    protected $fillable = [
+        'title', 'description', 'level'
+    ];
+
+
     public function user()
     {
         return $this->belongsTo(User::class);
