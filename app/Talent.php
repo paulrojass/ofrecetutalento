@@ -35,7 +35,7 @@ class Talent extends Model
     public function scopeLocation($query, $ubicacion)
     {
         if($ubicacion){
-            return User::where('city', 'LIKE', "%$city%")->orWhere('country', 'LIKE', "%$country%")->get();
+            return User::where('city', 'LIKE', '%'.$city.'%')->orWhere('country', 'LIKE', '%'.$country.'%')->get();
         }
     }
 }

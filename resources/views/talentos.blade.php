@@ -43,15 +43,32 @@
 					 			</div>
 					 		</div>
 					 		<div class="widget">
-					 			<h3 class="sb-title open">Industria</h3>
+					 			<h3 class="sb-title open">Categorias</h3>
 					 			<div class="specialism_widget">
-									@foreach($industries as $industry)
-					 					<div class="simple-checkbox">
-											<p>
-												<input type="checkbox" name="industry[{{ $industry->id }}]"  id="industry[{{ $industry->id }}]" value="{{ $industry->id }}">
-												<label for="industry[{{ $industry->id }}]">{{ $industry->name }}</label>
-											</p>
-					 					</div>
+					 				@php($industry = 0)
+									@foreach($categories as $category)
+										@if($category->industry_id > $industry)
+											@php($industry = $category->industry_id)
+											<h6>{{$category->industry->name}}</h6>
+						 					<div class="simple-checkbox">
+												<p>
+													<input type="checkbox" name="category[{{ $category->id }}]"  id="category[{{ $category->id }}]" value="{{ $category->id }}">
+													<label for="category[{{ $category->id }}]">{{ $category->name }}</label>
+												</p>
+						 					</div>										
+										@else
+						 					<div class="simple-checkbox">
+												<p>
+													<input type="checkbox" name="category[{{ $category->id }}]"  id="category[{{ $category->id }}]" value="{{ $category->id }}">
+													<label for="category[{{ $category->id }}]">{{ $category->name }}</label>
+												</p>
+						 					</div>
+										@endif
+
+
+
+
+
 									@endforeach
 					 			</div>
 					 		</div>
