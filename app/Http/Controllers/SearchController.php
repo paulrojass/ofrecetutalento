@@ -14,30 +14,29 @@ class SearchController extends Controller
 {
 	public function talentsFilter(Request $request){
 
-		if($request->search && $request->location){
-			$busqueda = $request->search;
-			$ubicacion = $request->location;
+		if($request->search) $busqueda = $request->search;
+		if($request->location) $ubicacion = $request->location;
 
-			$users = User::whereHas('talents', function (Builder $query) use($busqueda){
-				$query->where('title', 'LIKE' , '%' . $busqueda . '%')->orWhere('description', 'LIKE' , '%' . $busqueda . '%');
-			})->location($ubicacion)->paginate(10);
-		}	elseif($request->search){
-				$busqueda = $request->search;
-
+	/*		if($request->search && $request->location && $request->category){
 				$users = User::whereHas('talents', function (Builder $query) use($busqueda){
-					$query->where('title', 'LIKE' , '%' . $busqueda . '%')->orWhere('description', 'LIKE' , '%' . $busqueda . '%');
-				})->paginate(10);
+					$query->talent($busqueda);
+				})->location($ubicacion)->paginate(10);
+			}	elseif($request->search){
+					$users = User::whereHas('talents', function (Builder $query) use($busqueda){
+						$query->talent($busqueda);
+					})->paginate(10);
 
-			}	elseif($request->location){
-					$ubicacion = $request->location;
-					$users = User::location($ubicacion)->paginate(10);
-				}	else return back()->withInput();
+				}	elseif($request->location){
+						$users = User::location($ubicacion)->paginate(10);
+					}	else return back()->withInput();
+	*/
 
-/*		foreach ($user->talents-> as $key => $value) {
-			# code...
-		}*/
 
-		
+
+		if( $request->search || $request->location || $request->category ){
+
+		}else return back()->withInput();
+
 		$industries = Industry::all();
 		$categories = Category::all();
 		return view('talentos', compact('users', 'industries', 'categories'));

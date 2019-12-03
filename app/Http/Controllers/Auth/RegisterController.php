@@ -110,7 +110,7 @@ class RegisterController extends Controller
         $this->newSuscription($user->id, $request->plan);
 
         //Agregando Rol
-        $user->roles()->attach(Role::where('name', 'admin')->first());
+        $user->roles()->attach(Role::where('name', 'user')->first());
 
         $this->guard()->login($user);
 

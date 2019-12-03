@@ -9,28 +9,18 @@ class RoleTableSeeder extends Seeder
     public function run()
     {
         $role = new Role();
-        $role->name = 'admin';
-        $role->description = 'Maestro de talentos - Administrator';
+        $role->name = 'root';
+        $role->description = 'Administrator root de la plataforma';
         $role->save();        
         
         $role = new Role();
-        $role->name = 'cazatalentos';
-        $role->description = 'Usuarios o Empresas interesados en buscar talentos';
+        $role->name = 'admin';
+        $role->description = 'Administradores creados por el usuario root';
         $role->save();
 
         $role = new Role();
-        $role->name = 'novato';
-        $role->description = 'Usuario Novato';
-        $role->save();
-
-        $role = new Role();
-        $role->name = 'pro';
-        $role->description = 'Usuario Pro';
-        $role->save();
-
-        $role = new Role();
-        $role->name = 'oro';
-        $role->description = 'Usuario Oro';
+        $role->name = 'user';
+        $role->description = 'Usuarios de la plataforma';
         $role->save();
     }
 }
