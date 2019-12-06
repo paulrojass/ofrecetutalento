@@ -92,31 +92,33 @@ class User extends Authenticatable implements MustVerifyEmail
 	public function scopeTalent($query, $busqueda)
 	{
 		if($busqueda){
-			return User::orWhereHas('talents', function (Builder $query) use($busqueda){
-				$query->where('title', 'LIKE' , '%' . $busqueda . '%')->orWhere('description', 'LIKE' , '%' . $busqueda . '%');
-			})->get();
+			return $query->WhereHas('talents', function (Builder $query) use($busqueda)
+			{
+				$query->where('title', 'LIKE' , '%' . $busqueda . '%')
+					->orWhere('description', 'LIKE' , '%' . $busqueda . '%');
+			});
 		}
 	}
 
 	public function scopeLocation($query, $ubicacion)
 	{
 		if($ubicacion){
-			return $query->where('city', 'LIKE', "%$ubicacion%")
-			->orWhere('country', 'LIKE', "%$ubicacion%");
+			return $query->where('city', 'LIKE', '%'.$ubicacion.'%')
+			->orWhere('country', 'LIKE', '%'.$ubicacion.'%');
 		}
 	}
 
-	public function scopeCategories($query, $categoria)
+	public function scopeCategories($query, $categorias)
 	{
-		if($categoria){
+		if($categorias != NULL){
 
-			foreach ($request->category as $valor) {
-				$users = $users->filter()->categories($valor);
+			foreach ($categorias as $categoria) {
+				$query->whereHas('talents', function (Builder $query) use($categoria){
+					$query->orWhere('category_id', $categoria);
+				});
 			}
-			
-			return User::orWhereHas('talents', function (Builder $query) use($categoria){
-				$query->where('category_id', $categoria);
-			})->get();
+
+			return $query;
 		}
 	}
 

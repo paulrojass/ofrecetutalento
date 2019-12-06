@@ -27,131 +27,89 @@
 		<div class="block remove-bottom">
 			<div class="container">
 				 <div class="row no-gape">
-				 	<aside class="col-lg-3 column">
-                    	<form method="POST" action="{{ route('talentos-filtro') }}">
-                    		@csrf
-					 		<div class="widget">
-					 			<div class="search_widget_job">
-					 				<div class="field_w_search">
-					 					<input type="text" name="search" placeholder="Buscar" />
-					 					<i class="la la-search"></i>
-					 				</div><!-- Search Widget -->
-					 				<div class="field_w_search">
-					 					<input type="text" name="location" placeholder="Ubicacion" />
-					 					<i class="la la-map-marker"></i>
-					 				</div><!-- Search Widget -->
-					 			</div>
-					 		</div>
-					 		<div class="widget">
-					 			<h3 class="sb-title open">Categorias</h3>
-					 			<div class="specialism_widget">
-					 				@php($industry = 0)
+					<aside class="col-lg-3 column">
+<!-- 						<form method="POST" action="{{ route('talentos') }}"> -->
+						<form>
+							@csrf
+							<div class="widget">
+								<div class="search_widget_job">
+									<div class="field_w_search">
+										<input type="text" id="search" name="search" placeholder="Buscar" />
+										<i class="la la-search"></i>
+									</div><!-- Search Widget -->
+									<div class="field_w_search">
+										<input type="text" id="location" name="location" placeholder="Ubicacion" />
+										<i class="la la-map-marker"></i>
+									</div><!-- location Widget -->
+								</div>
+							</div>
+							<div class="widget">
+								<h3 class="sb-title open">Categorias</h3>
+								<div class="specialism_widget">
+<!-- 									<div class="simple-checkbox">
+	<p>
+		<input type="checkbox" name="all"  id="all" checked>
+		<label for="all">Todas</label>
+	</p>
+</div>	 -->
+									@php($industry = 0)
 									@foreach($categories as $category)
 										@if($category->industry_id > $industry)
 											@php($industry = $category->industry_id)
 											<h6>{{$category->industry->name}}</h6>
-						 					<div class="simple-checkbox">
+											<div class="simple-checkbox">
 												<p>
-													<input type="checkbox" name="category[{{ $category->id }}]"  id="category[{{ $category->id }}]" value="{{ $category->id }}">
+													<input type="checkbox" name="category"  id="category[{{ $category->id }}]" value="{{ $category->id }}" checked>
 													<label for="category[{{ $category->id }}]">{{ $category->name }}</label>
 												</p>
-						 					</div>										
+											</div>										
 										@else
-						 					<div class="simple-checkbox">
+											<div class="simple-checkbox">
 												<p>
-													<input type="checkbox" name="category[{{ $category->id }}]"  id="category[{{ $category->id }}]" value="{{ $category->id }}">
+													<input type="checkbox" name="category"  id="category[{{ $category->id }}]" value="{{ $category->id }}" checked>
 													<label for="category[{{ $category->id }}]">{{ $category->name }}</label>
 												</p>
-						 					</div>
+											</div>
 										@endif
-
-
-
-
-
 									@endforeach
-					 			</div>
-					 		</div>
-					 		<div class="pull-right">
-						 		<button type="submit" class="post-job-btn btn-filtrar"><i class="la la-filter"></i>Filtrar</button>
-					 		</div>
-	<!-- 						@php($industry_id = 0)
-	@foreach($categories as $category)
-		@if($industry_id != $category->industry_id)
-			{!! $industry_id = $category->industry_id !!}
-			@if($industry_id != 0)</div>@endif
-	 		<div class="widget">
-		 		<h3 class="sb-title open">{{ $category->industry_id }}</h3>
-	 			<div class="specialism_widget">
-	 				<div class="simple-checkbox">
-		 				<p>
-							<input type="checkbox" name="smplechk" id="{{ $category->id }}">
-							<label for="{{ $category->id }}">{{ $category->name }}</label>
-						</p>
-	 				</div>
-	 			</div>
-		@else
-						 			<div class="specialism_widget">
-						 				<div class="simple-checkbox">
-	 				<p>
-						<input type="checkbox" name="smplechk" id="{{ $category->id }}">
-						<label for="{{ $category->id }}">{{ $category->name }}</label>
-					</p>
-						 				</div>
-						 			</div>
-		@endif
+								</div>
+							</div>
+<!-- 							<div class="pull-right">
+	<button type="submit" class="post-job-btn btn-filtrar"><i class="la la-filter"></i>Filtrar</button>
+</div> -->
+						</form>
+					</aside>
+					
+					<div id="lista-talentos" class="col-lg-9 column">
+						@include('filtros.talentos')
 
-					 		@endforeach -->
+<!-- 						<div class="emply-resume-sec">
+	@if($users->count() == 0)
+		<p> La busqueda no arrojó resultados </p>
+	@else
+		@foreach($users as $user)
+			<div class="emply-resume-list square">
+				<div class="emply-resume-thumb">
+					<img src="{{URL::asset($user->avatar)}}" alt="" />
+				</div>
+				<div class="emply-resume-info">
+					<h3><a href="#" title="">{{ $user->name}} {{ $user->lastname }}</a></h3>
+					<span>
+					@foreach($user->talents  as $talents)
+						<i>{{$talents->title}}</i>, 
+					@endforeach
+					</span>
 
-
-
-					</form>
-
-					 	</aside>
-						
-
-				 	<div class="col-lg-9 column">
-				 		<div class="emply-resume-sec">
-				 			@if($users->count() == 0)
-								<p> La busqueda no arrojó resultados </p>
-							@else
-								@foreach($users as $user)
-						 			<div class="emply-resume-list square">
-						 				<div class="emply-resume-thumb">
-						 					<!-- <img src="http://placehold.it/90x90" alt="" /> -->
-						 					<img src="{{URL::asset($user->avatar)}}" alt="" />
-						 				</div>
-						 				<div class="emply-resume-info">
-						 					<h3><a href="#" title="">{{ $user->name}} {{ $user->lastname }}</a></h3>
-											<span>
-											@foreach($user->talents  as $talents)
-						 						<i>{{$talents->title}}</i>, 
-											@endforeach
-											</span>
-
-						 					<p><i class="la la-map-marker"></i>{{ $user->city }} / {{ $user->country }}</p>
-						 				</div>
-						 				<div class="shortlists">
-						 					<a href="#" title="">Shortlist <i class="la la-plus"></i></a>
-						 				</div>
-						 			</div><!-- Emply List -->
-								@endforeach
-								{{ $users->links() }}
-							@endif
-
-
-				 			<!-- <div class="pagination">
-								<ul>
-									<li class="prev"><a href=""><i class="la la-long-arrow-left"></i> Prev</a></li>
-									<li><a href="">1</a></li>
-									<li class="active"><a href="">2</a></li>
-									<li><a href="">3</a></li>
-									<li><span class="delimeter">...</span></li>
-									<li><a href="">14</a></li>
-									<li class="next"><a href="">Next <i class="la la-long-arrow-right"></i></a></li>
-								</ul>
-							</div>Pagination -->
-				 		</div>
+					<p><i class="la la-map-marker"></i>{{ $user->city }} / {{ $user->country }}</p>
+				</div>
+				<div class="shortlists">
+					<a href="#" title="">Shortlist <i class="la la-plus"></i></a>
+				</div>
+			</div>
+		@endforeach
+		{{ $users->links() }}
+	@endif
+</div> -->
 					</div>
 				 </div>
 			</div>
@@ -160,5 +118,92 @@
 
 
 
+
+@endsection
+
+@section('scripts')
+<script>
+	$(function(){
+
+		$('#search').on('focusout', function() {
+			filtrado();
+		});
+
+		$('#location').on('focusout', function() {
+			filtrado();
+		});
+
+		$('input:checkbox').on('click', function() {
+			filtrado();
+		});
+
+		$(document).on('click','.page-link', function(event){
+			event.prevenDefault();
+			var page = $(this).attr('href').split('page=')[1];
+			fetch_data(page);
+		});
+
+		function fetch_data(page){
+			$.ajax({
+				url:'/pagination/fetch_data_talents?page='+page,
+				success:function(data){
+					$('#lista-talentos').html(response);
+				}
+			});
+
+		}
+
+		$('#all').change(function(){
+			if(this.checked) {
+				$(':checkbox').each(function(){
+					this.checked = true;                        
+				});
+			} 
+			else {
+				$(':checkbox').each(function() {
+					this.checked = false;                       
+				});
+			}
+		});
+	});
+
+	function filtrado(){
+
+/*		var checkboxes = document.getElementById("form-filtro").checkbox;
+
+		var cont = 0; 
+
+		for (var x=0; x < checkboxes.length; x++) {
+			if (checkboxes[x].checked) {
+				cont = cont + 1;
+			}
+		}*/
+		var category = [];
+
+		$("input[name='category']:checked").each(function() {
+             //category.push([$(this).val(), $(this).val()]);
+             category.push($(this).val());
+        });
+
+		var search = $('#search').val();
+		var location = $('#location').val();
+
+		var token = '{{csrf_token()}}';// ó $("#token").val() si lo tienes en una etiqueta html.
+		//we will send data and recive data fom our AjaxController
+		$.ajax({
+			type:'post',
+			url:'{{route("talentos")}}',
+			data:{ search:search, location:location, _token:token, category:category },
+			success: function (response) {
+				$('#lista-talentos').html(response);
+			},
+			error:function(x,xs,xt){
+			//nos dara el error si es que hay alguno
+			window.open(JSON.stringify(x));
+			//alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
+			}
+		});
+	}
+</script>
 
 @endsection

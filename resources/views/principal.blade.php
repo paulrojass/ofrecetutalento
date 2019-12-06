@@ -21,7 +21,7 @@
 									<div class="find-cand">
 										<h3>La forma mas facil<br> de ofrecer tus talentos</h3>
 										<span>We have 2.567 resumes in our database</span>
-										<form method="POST" action="{{ route('talentos-filtro') }}">
+										<form method="POST" action="{{ route('talentos') }}">
 											@csrf
 											<div class="job-field">
 												<input type="text" name="search" placeholder="Search freelancer services (e.g. logo design)" />

@@ -251,6 +251,8 @@
 <script src="{{URL::asset('tema/js/counter.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/mouse.js')}}" type="text/javascript"></script>
 
-</body>
-</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+@yield('scripts')
+
+</html></body>
 
