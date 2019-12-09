@@ -20,7 +20,7 @@
 						<p><i class="la la-map-marker"></i>{{ $user->city }} / {{ $user->country }}</p>
 					</div>
 					<div class="shortlists">
-						<a href="#" title="">Shortlist <i class="la la-plus"></i></a>
+						<a href="{{ url('perfil/'.$user->id) }}" title="">Shortlist <i class="la la-plus"></i></a>
 					</div>
 				</div><!-- Emply List -->
 			@endforeach
