@@ -114,7 +114,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
 			foreach ($categorias as $categoria) {
 				$query->whereHas('talents', function (Builder $query) use($categoria){
-					$query->orWhere('category_id', $categoria);
+					$query->where('category_id', $categoria);
 				});
 			}
 

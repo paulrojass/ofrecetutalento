@@ -14,26 +14,7 @@
 						<div class="inner-header wform">
 							<div class="job-search-sec">
 								<div class="job-search">
-									<h4>Explora todos lo canjes disponibles con una simple búsqueda...</h4>
-									<form>
-										<div class="row">
-											<div class="col-lg-7">
-												<div class="job-field">
-													<input type="text" placeholder="" />
-													<i class="la la-keyboard-o"></i>
-												</div>
-											</div>
-											<div class="col-lg-4">
-												<div class="job-field">
-													<input type="text" placeholder="Ubicación" />
-													<i class="la la-map-marker"></i>
-												</div>
-											</div>
-											<div class="col-lg-1">
-												<button type="submit"><i class="la la-search"></i></button>
-											</div>
-										</div>
-									</form>
+									<h4>Explora todos lo canjes disponibles</h4>
 								</div>
 							</div>
 						</div>
@@ -48,87 +29,162 @@
 			<div class="container">
 				 <div class="row no-gape">
 				 	<aside class="col-lg-3 column">
-				 		<div class="widget border">
-				 			<h3 class="sb-title open">Fecha de publicación</h3>
-				 			<div class="posted_widget">
-								<input type="radio" name="choose" id="hora"><label for="hora">Última hora</label><br />
-								<input type="radio" name="choose" id="dia"><label for="dia">Últimas 24 horas</label><br />
-								<input type="radio" name="choose" id="semana"><label for="semana">Últimos 7 días</label><br />
-								<input type="radio" name="choose" id="quincena"><label for="quincena">Últimos 14 días</label><br />
-								<input type="radio" name="choose" id="mes"><label for="mes">Últimos 30 días</label><br />
-								<input type="radio" name="choose" id="todos"><label class="nm" for="todos">Todos</label><br />
-				 			</div>
-				 		</div>
-				 		<div class="widget border">
-				 			<h3 class="sb-title open">Industria</h3>
-				 			<div class="posted_widget">
-								@foreach($industries as $industry)
-				 					<div class="simple-checkbox">
-										<p>
-											<input type="checkbox" name="smplechk" id="{{ $industry->id }}">
-											<label for="{{ $industry->id }}">{{ $industry->name }}</label>
-										</p>
-				 					</div>
-								@endforeach
-				 			</div>
-				 		</div>
-				 		<div class="widget border">
-					 		<h3 class="sb-title open">Precio</h3>
-					 		<div class="type_widget">
-					 			<div class="row">				 			
-				 					<div class="col-lg-6">
-				 						<span class="pf-title">min.</span>
-				 						<div class="pf-field">
-				 							<input type="text" name="min" id="min"/>
-				 						</div>
-				 					</div>
-				 					<div class="col-lg-6">
-				 						<span class="pf-title">max.</span>
-				 						<div class="pf-field">
-				 							<input type="text" name="max" id="max" />
-				 						</div>
-				 					</div>
-				 				</div>
-					 		</div>
-				 		</div>
-				 		<div class="pull-right">
-					 		<button type="submit" class="post-job-btn btn-filtrar"><i class="la la-filter"></i>Filtrar</button>
-				 		</div>
-				 	</aside>
-				 	<div class="col-lg-9 column">
-				 		<div class="modrn-joblist np">
-					 		<div class="filterbar">
-					 			<h5>{{$exchanges->total()}} Canjes disponibles</h5>
-					 		</div>
-						 </div><!-- MOdern Job LIst -->
-						 <div class="job-list-modern">
-						 	<div class="job-listings-sec no-border">
-								@foreach($exchanges as $exchange)
-								<div class="job-listing wtabs">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="{{URL::asset($exchange->image)}}" alt="" /> </div>
-										<h3><a href="#" title="">{{$exchange->title}}</a></h3>
-										<span><i class="la la-user"></i>{{$exchange->talent->user->name}} {{$exchange->talent->user->lastname}}</span>
-										<div class="job-lctn"><i class="la la-map-marker"></i>{{$exchange->talent->user->city}}, {{$exchange->talent->user->country}}</div>
-									</div>
-									<div class="job-style-bx">
-								 		<a href="#" title="">
-										<span class="job-is ft">Ver detalles</span>
-										</a>
-
-										<span class="fav-job"><i class="la la-heart-o"></i></span>
-										<i>
-											publicado el: <strong>{{$exchange->created_at->format('d/m/Y')}}</strong>
-										</i>
-									</div>
+					 		<form>
+					 			
+							@csrf
+							<div class="widget">
+								<div class="search_widget_job">
+									<div class="field_w_search">
+										<input type="text" id="search" name="search" placeholder="Buscar" />
+										<i class="la la-search"></i>
+									</div><!-- Search Widget -->
+<!-- 									<div class="field_w_search">
+	<input type="text" id="location" name="location" placeholder="Ubicacion" />
+	<i class="la la-map-marker"></i>
+</div> --><!-- location Widget -->
 								</div>
-								@endforeach
-								{{ $exchanges->links() }}
 							</div>
-						 </div>
-					 </div>
+
+					 		<div class="widget border">
+					 			<h3 class="sb-title open">Fecha de publicación</h3>
+					 			<div class="posted_widget">
+									<input type="radio" class="input-date" value="{{$dia}}" name="date" id="dia"><label for="dia">Últimas 24 horas</label><br />
+									<input type="radio" class="input-date" value="{{$semana}}" name="date" id="semana"><label for="semana">Últimos 7 días</label><br />
+									<input type="radio" class="input-date" value="{{$quincena}}" name="date" id="quincena"><label for="quincena">Últimos 14 días</label><br />
+									<input type="radio" class="input-date" value="{{$mes}}" name="date" id="mes"><label for="mes">Últimos 30 días</label><br />
+									<input type="radio" class="input-date" value="todos" name="date" id="todos" checked><label class="nm" for="todos">Todos</label><br />
+					 			</div>
+					 		</div>
+<!-- 					 		<div class="widget border">
+	<h3 class="sb-title closed">Industria</h3>
+	<div class="posted_widget">
+									@php($industry = 0)
+									@foreach($categories as $category)
+										@if($category->industry_id > $industry)
+											@php($industry = $category->industry_id)
+											<h6>{{$category->industry->name}}</h6>
+											<div class="simple-checkbox">
+												<p>
+													<input type="checkbox" name="category"  id="category[{{ $category->id }}]" value="{{ $category->id }}">
+													<label for="category[{{ $category->id }}]">{{ $category->name }}</label>
+												</p>
+											</div>										
+										@else
+											<div class="simple-checkbox">
+												<p>
+													<input type="checkbox" name="category"  id="category[{{ $category->id }}]" value="{{ $category->id }}">
+													<label for="category[{{ $category->id }}]">{{ $category->name }}</label>
+												</p>
+											</div>
+										@endif
+									@endforeach
+	</div>
+</div> -->
+					 		<div class="widget border">
+						 		<h3 class="sb-title closed">Precio</h3>
+						 		<div class="type_widget">
+						 			<div class="row">				 			
+					 					<div class="col-lg-6">
+					 						<span class="pf-title">min.</span>
+					 						<div class="pf-field">
+					 							<input type="text" name="min" id="min"/>
+					 						</div>
+					 					</div>
+					 					<div class="col-lg-6">
+					 						<span class="pf-title">max.</span>
+					 						<div class="pf-field">
+					 							<input type="text" name="max" id="max" />
+					 						</div>
+					 					</div>
+					 				</div>
+						 		</div>
+					 		</div>
+				 		</form>
+				 	</aside>
+					<div id="lista-canjes" class="col-lg-9 column">
+						@include('filtros.canjes')
+					</div>
 				 </div>
 			</div>
 		</div>
 	</section>
+@endsection
+
+@section('scripts')
+<script>
+	$(function(){
+
+		$('#search').on('focusout', function() {
+			filtrado();
+		});
+
+		$('input:radio[name=date]').on('click', function() {
+			filtrado();
+		});
+
+/*		$('#location').on('focusout', function() {
+			filtrado();
+		});
+
+		$('input:checkbox').on('click', function() {
+			filtrado();
+		});*/
+
+		$('#min').on('focusout', function() {
+			filtrado();
+		});
+
+		$('#max').on('focusout', function() {
+			filtrado();
+		});
+
+		$(document).on('click','.page-link', function(event){
+			event.prevenDefault();
+			var page = $(this).attr('href').split('page=')[1];
+			fetch_data(page);
+		});
+
+		function fetch_data(page){
+			$.ajax({
+				url:'/pagination/fetch_data_talents?page='+page,
+				success:function(data){
+					$('#lista-canjes').html(response);
+				}
+			});
+
+		}
+	});
+
+
+	function filtrado(){
+		var category = [];
+
+		$("input[name='category']:checked").each(function() {
+             category.push($(this).val());
+        });
+
+		var search = $('#search').val();
+/*		var location = $('#location').val();*/
+		var min = $('#min').val();
+		var max = $('#max').val();
+		var date = $('input:radio[name=date]:checked').val();
+
+		var token = '{{csrf_token()}}';// ó $("#token").val() si lo tienes en una etiqueta html.
+		//we will send data and recive data fom our AjaxController
+		$.ajax({
+			type:'post',
+			url:'{{route("canjes")}}',
+			//data:{ search:search, location:location, _token:token, category:category, min:min, max:max, date:date},
+			data:{ search:search,  _token:token, min:min, max:max, date:date},
+			success: function (response) {
+				$('#lista-canjes').html(response);
+			},
+			error:function(x,xs,xt){
+			//nos dara el error si es que hay alguno
+			window.open(JSON.stringify(x));
+			//alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
+			}
+		});
+	}
+</script>
 @endsection

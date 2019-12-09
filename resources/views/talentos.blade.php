@@ -59,14 +59,14 @@
 											<h6>{{$category->industry->name}}</h6>
 											<div class="simple-checkbox">
 												<p>
-													<input type="checkbox" name="category"  id="category[{{ $category->id }}]" value="{{ $category->id }}" checked>
+													<input type="checkbox" name="category"  id="category[{{ $category->id }}]" value="{{ $category->id }}">
 													<label for="category[{{ $category->id }}]">{{ $category->name }}</label>
 												</p>
 											</div>										
 										@else
 											<div class="simple-checkbox">
 												<p>
-													<input type="checkbox" name="category"  id="category[{{ $category->id }}]" value="{{ $category->id }}" checked>
+													<input type="checkbox" name="category"  id="category[{{ $category->id }}]" value="{{ $category->id }}">
 													<label for="category[{{ $category->id }}]">{{ $category->name }}</label>
 												</p>
 											</div>
@@ -82,43 +82,11 @@
 					
 					<div id="lista-talentos" class="col-lg-9 column">
 						@include('filtros.talentos')
-
-<!-- 						<div class="emply-resume-sec">
-	@if($users->count() == 0)
-		<p> La busqueda no arrojó resultados </p>
-	@else
-		@foreach($users as $user)
-			<div class="emply-resume-list square">
-				<div class="emply-resume-thumb">
-					<img src="{{URL::asset($user->avatar)}}" alt="" />
-				</div>
-				<div class="emply-resume-info">
-					<h3><a href="#" title="">{{ $user->name}} {{ $user->lastname }}</a></h3>
-					<span>
-					@foreach($user->talents  as $talents)
-						<i>{{$talents->title}}</i>, 
-					@endforeach
-					</span>
-
-					<p><i class="la la-map-marker"></i>{{ $user->city }} / {{ $user->country }}</p>
-				</div>
-				<div class="shortlists">
-					<a href="#" title="">Shortlist <i class="la la-plus"></i></a>
-				</div>
-			</div>
-		@endforeach
-		{{ $users->links() }}
-	@endif
-</div> -->
 					</div>
 				 </div>
 			</div>
 		</div>
 	</section>
-
-
-
-
 @endsection
 
 @section('scripts')
@@ -169,15 +137,6 @@
 
 	function filtrado(){
 
-/*		var checkboxes = document.getElementById("form-filtro").checkbox;
-
-		var cont = 0; 
-
-		for (var x=0; x < checkboxes.length; x++) {
-			if (checkboxes[x].checked) {
-				cont = cont + 1;
-			}
-		}*/
 		var category = [];
 
 		$("input[name='category']:checked").each(function() {
@@ -204,6 +163,7 @@
 			}
 		});
 	}
+
 </script>
 
 @endsection

@@ -13,7 +13,7 @@
 						<h3><a href="#" title="">{{ $user->name}} {{ $user->lastname }}</a></h3>
 						<span>
 						@foreach($user->talents  as $talents)
-							<i>{{$talents->title}}</i>, 
+							<i>{{$talents->title}}</i> ({{$talents->category->name}}), 
 						@endforeach
 						</span>
 

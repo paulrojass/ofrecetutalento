@@ -13,7 +13,9 @@ use App\Category;
 use App\User;
 use App\Talent;
 use App\Exchange;
-
+    
+use Carbon\Carbon;
+ 
 class SiteController extends Controller
 {
     public function principal(Request $request)
@@ -39,10 +41,15 @@ class SiteController extends Controller
 
     public function canjes(Request $request)
     {
-        $industries = Industry::all();
         $categories = Category::all();
         $exchanges = Exchange::paginate(10);
-        return view('canjes', compact('exchanges', 'industries', 'categories'));
+
+        $dia = Carbon::now()->subDay();
+        $semana = Carbon::now()->subWeek();
+        $quincena = Carbon::now()->subWeeks(2);
+        $mes = Carbon::now()->subMonths();
+
+        return view('canjes', compact('exchanges', 'categories', 'dia', 'semana', 'quincena', 'mes'));
     }
 
     public function paginationTalents()

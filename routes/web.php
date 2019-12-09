@@ -17,11 +17,16 @@ Route::get('talentos', 'SiteController@talentos');
 Route::get('canjes', 'SiteController@canjes');
 route::get('suscripcion', 'SiteController@suscripcion');
 
-
+//Filtrado de Telentos
 Route::post('talentos','SearchController@talentsFilter')->name('talentos');
 //paginacion de talentos
 Route::get('/pagination', 'SiteController@paginationTalents');
 Route::get('pagination/fetch_data_talents', 'SiteController@fetch_data_talents');
+//Filtrado de Telentos
+Route::post('canjes','SearchController@exchangesFilter')->name('canjes');
+//paginacion de talentos
+/*Route::get('/pagination', 'SiteController@paginationTalents');
+Route::get('pagination/fetch_data_talents', 'SiteController@fetch_data_talents');*/
 
 Auth::routes(['verify' => true]);
 
