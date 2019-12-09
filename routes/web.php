@@ -46,3 +46,8 @@ Route::post('guardar_talento', 'TalentController@store');
 
 //Mostrar select de categorias en suscripcion
 Route::get('select-categorias', 'CategoryController@showCategoriesSelect');
+
+
+
+//Perfil de usuario:
+Route::get('perfil/{id}', 'UserController@profile');
