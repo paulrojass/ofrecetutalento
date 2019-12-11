@@ -218,16 +218,34 @@
 				</span>
 			@enderror
 
-
-
 			<div class="cfield">
-				<input type="password" placeholder="********" />
+                <input id="password" placeholder="********" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+
 				<i class="la la-key"></i>
 			</div>
+			@error('password')
+			    <span class="invalid-feedback" role="alert">
+			        <strong>{{ $message }}</strong>
+			    </span>
+			@enderror
+
+
+
+
+
+
+
 			<p class="remember-label">
-				<input type="checkbox" name="cb" id="cb1"><label for="cb1">Remember me</label>
+				<input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+				<label for="remember">{{ __('Remember Me') }}</label>
 			</p>
-			<a href="#" title="">Forgot Password?</a>
+
+            @if (Route::has('password.request'))
+                <a href="{{ route('password.request') }}">
+                    {{ __('Forgot Your Password?') }}
+                </a>
+            @endif
 			<button type="submit">Login</button>
 		</form>
 		<div class="extra-login">
@@ -250,8 +268,6 @@
 <script src="{{URL::asset('tema/js/select-chosen.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/counter.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/mouse.js')}}" type="text/javascript"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 @yield('scripts')
 
 </html></body>

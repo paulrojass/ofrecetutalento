@@ -1,6 +1,6 @@
 @extends('layouts.tema')
 
-@section('title', 'Peril de usuario')
+@section('title', 'Perfil de usuario')
 
 @section('header_type', 'stick-top style3')
 
@@ -44,7 +44,7 @@
 				 			<div class="can-detail-s">
 				 				<div class="cst"><img src="{{URL::asset($user->avatar)}}" alt="" /></div>
 				 				<h3>{{ $user->name }} {{ $user->lastname }}</h3>
-				 				<span><i>UX / UI Designer</i> at Atract Solutions</span>
+				 				<span><i>Usuario {{$user->suscription->plan->name}}</i> at Atract Solutions</span>
 				 				<p>{{ $user->email }}</p>
 				 				<p>Miembro desde, {{ \Carbon\Carbon::parse($user->created_at)->format('Y')}} </p>
 				 				<p><i class="la la-map-marker"></i>{{ $user->city }}, {{ $user->country }}</p>
@@ -73,7 +73,8 @@
 			 								<i></i>
 			 								<div class="edu-hisinfo">
 			 									<h3>{{ $user->experiences->position1 }} <span>{{ $user->experiences->company1 }}</span></h3>
-			 									<i>{{ $user->experiences->start_date1 }} - {{ $user->experiences->due_date1 }} </i>
+			 									<i>{{ \Carbon\Carbon::parse($user->experiences->start_date1)->format('Y')}} - 
+			 										{{ \Carbon\Carbon::parse($user->experiences->due_date1)->format('Y')}} </i>
 			 									<p>{{ $user->experiences->achievements1 }} </p>
 			 								</div>
 			 							</div>
@@ -82,7 +83,8 @@
 			 								<i></i>
 			 								<div class="edu-hisinfo">
 			 									<h3>{{ $user->experiences->position2 }} <span>{{ $user->experiences->company2 }}</span></h3>
-			 									<i>{{ $user->experiences->start_date2 }} - {{ $user->experiences->due_date2 }} </i>
+			 									<i>{{ \Carbon\Carbon::parse($user->experiences->start_date2)->format('Y')}} - 
+			 										{{ \Carbon\Carbon::parse($user->experiences->due_date2)->format('Y')}} </i>
 			 									<p>{{ $user->experiences->achievements2 }} </p>
 			 								</div>
 			 							</div>
@@ -91,7 +93,8 @@
 			 								<i></i>
 			 								<div class="edu-hisinfo">
 			 									<h3>{{ $user->experiences->position3 }} <span>{{ $user->experiences->company3 }}</span></h3>
-			 									<i>{{ $user->experiences->start_date3 }} - {{ $user->experiences->due_date3 }} </i>
+			 									<i>{{ \Carbon\Carbon::parse($user->experiences->start_date3)->format('Y')}} - 
+			 										{{ \Carbon\Carbon::parse($user->experiences->due_date3)->format('Y')}} </i>
 			 									<p>{{ $user->experiences->achievements3 }} </p>
 			 								</div>
 			 							</div>
