@@ -15,18 +15,18 @@ class CreateExperiencesTable extends Migration
     {
         Schema::create('experiences', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('company1', 50)->nullable();
-            $table->string('position1', 50)->nullable();
+            $table->string('company1', 100)->nullable();
+            $table->string('position1', 100)->nullable();
             $table->date('start_date1')->nullable();
             $table->date('due_date1')->nullable();
             $table->text('achievements1')->nullable();
-            $table->string('company2', 50)->nullable();
-            $table->string('position2', 50)->nullable();
+            $table->string('company2', 100)->nullable();
+            $table->string('position2', 100)->nullable();
             $table->date('start_date2')->nullable();
             $table->date('due_date2')->nullable();
             $table->text('achievements2')->nullable();
-            $table->string('company3', 50)->nullable();
-            $table->string('position3', 50)->nullable();
+            $table->string('company3', 100)->nullable();
+            $table->string('position3', 100)->nullable();
             $table->date('start_date3')->nullable();
             $table->date('due_date3')->nullable();
             $table->text('achievements3')->nullable();

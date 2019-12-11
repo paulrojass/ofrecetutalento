@@ -17,10 +17,10 @@
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/chosen.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/colors/colors.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/bootstrap.css')}}" />
-	<link rel="stylesheet" type="text/css" href="{{URL::asset('css/estilos.css')}}" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')}}" />
-	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+<!-- 	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css"> -->
 	
+	<link rel="stylesheet" type="text/css" href="{{URL::asset('css/estilos.css')}}" />
 </head>
 <body>
 

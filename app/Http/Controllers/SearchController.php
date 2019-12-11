@@ -18,7 +18,7 @@ class SearchController extends Controller
 		$categoria = $request->category;
 
 		if(empty($busqueda) && empty($ubicacion) && $categoria == null){
-			$exchanges = User::paginate(10);
+			$users = User::paginate(10);
 		}
 		else{
 			$query = User::query();
@@ -91,8 +91,4 @@ class SearchController extends Controller
 		$categories = Category::all();
 		return view('filtros.canjes', compact('exchanges', 'categories'));
 	}
-
-	
-
-
 }

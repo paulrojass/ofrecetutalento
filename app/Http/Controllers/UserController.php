@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\language;
 
 class UserController extends Controller
 {
@@ -90,7 +91,9 @@ class UserController extends Controller
     {
         $user = User::where('id',$id)->first();
 
-        return view('perfil', compact('user'));
+        $languages = Language::where('user_id', $user->id);
+
+        return view('perfil', compact('user', 'languages'));
     }
 
 }

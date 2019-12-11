@@ -15,15 +15,9 @@
 							<div class="container">
 								<div class="row">
 									<div class="col-lg-6">
-										<div class="skills-btn">
-											<a href="#" title="">Photoshop</a>
-											<a href="#" title="">Designers</a>
-											<a href="#" title="">Illustrator</a>
-										</div>
 									</div>
 									<div class="col-lg-6">
 										<div class="action-inner">
-											<a href="#" title=""><i class="la la-paper-plane"></i>Save Resume</a>
 											<a href="#" title=""><i class="la la-envelope-o"></i>Contact David</a>
 										</div>
 									</div>
@@ -43,7 +37,9 @@
 					<div class="col-lg-12">
 						<div class="cand-single-user">
 							<div class="share-bar circle">
-				 				<a href="#" title="" class="share-google"><i class="la la-google"></i></a><a href="#" title="" class="share-fb"><i class="fa fa-facebook"></i></a><a href="#" title="" class="share-twitter"><i class="fa fa-twitter"></i></a>
+				 				<a href="#" title="" class="share-google"><i class="la la-google"></i></a>
+				 				<a href="#" title="" class="share-fb"><i class="fa fa-facebook"></i></a>
+				 				<a href="#" title="" class="share-twitter"><i class="fa fa-twitter"></i></a>
 				 			</div>
 				 			<div class="can-detail-s">
 				 				<div class="cst"><img src="{{URL::asset($user->avatar)}}" alt="" /></div>
@@ -59,11 +55,9 @@
 				 		</div>
 				 		<ul class="cand-extralink">
 				 			<li><a href="#abilities" title="">habilidades</a></li>
+				 			<li><a href="#experience" title="">Experiencia</a></li>
+				 			<li><a href="#basic" title="">Información Basica</a></li>
 				 			<li><a href="#talentos" title="">Talentos</a></li>
-				 			<li><a href="#experience" title="">Work Experience</a></li>
-				 			<li><a href="#portfolio" title="">Portfolio</a></li>
-				 			<li><a href="#skills" title="">Professional Skills</a></li>
-				 			<li><a href="#awards" title="">Awards</a></li>
 				 		</ul>
 				 		<div class="cand-details-sec">
 				 			<div class="row">
@@ -71,186 +65,109 @@
 				 					<div class="cand-details" id="abilities">
 				 						<h2>Descripción de habilidades</h2>
 				 						<p>{{ $user->abilities }}</p>
-				 						<div class="edu-history-sec" id="talentos">
-				 							<h2>Talentos</h2>
-<!-- 				 							<div class="edu-history">
-	<i class="la la-graduation-cap"></i>
-	<div class="edu-hisinfo">
-		<h3>University</h3>
-		<i>2008 - 2012</i>
-		<span>Middle East Technical University <i>Computer Science</i></span>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-	</div>
-</div>
-<div class="edu-history">
-	<i class="la la-graduation-cap"></i>
-	<div class="edu-hisinfo">
-		<h3>High School</h3>
-		<i>2008 - 2012</i>
-		<span>Tomms College <i>Bachlors in Fine Arts</i></span>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-	</div>
-</div> -->
-
-					 		<div class="manage-jobs-sec">
-					 			<h3>Manage Jobs</h3>
-					 			<div class="extra-job-info">
-						 			<span><i class="la la-clock-o"></i><strong>9</strong> Job Posted</span>
-						 			<span><i class="la la-file-text"></i><strong>20</strong> Application</span>
-						 			<span><i class="la la-users"></i><strong>18</strong> Active Jobs</span>
-						 		</div>
-						 		<table>
-						 			<thead>
-						 				<tr>
-						 					<td>Descripción</td>
-						 					<td>Industria</td>
-						 					<td>Categoria</td>
-						 					<td>Experiencia</td>
-						 					<td>Action</td>
-						 				</tr>
-						 			</thead>
-						 			<tbody>
-						 				@foreach($user->talents as $talent)
-							 				<tr>
-							 					<td>
-							 						<div class="table-list-title">
-							 							<h3>{{ $user->talent->title }}</h3>
-							 							<span>{{ $user->talent->description }}</span>
-							 						</div>
-							 					</td>
-							 					<td>
-							 						<span class="applied-field">3+ Applied</span>
-							 					</td>
-							 					<td>
-							 						<span>October 27, 2017</span><br />
-							 						<span>April 25, 2011</span>
-							 					</td>
-							 					<td>
-							 						<span class="status active">Active</span>
-							 					</td>
-							 					<td>
-							 						<ul class="action_job">
-							 							<li><span>View Job</span><a href="#" title=""><i class="la la-eye"></i></a></li>
-							 							<li><span>Edit</span><a href="#" title=""><i class="la la-pencil"></i></a></li>
-							 							<li><span>Delete</span><a href="#" title=""><i class="la la-trash-o"></i></a></li>
-							 						</ul>
-							 					</td>
-							 				</tr>
-						 				@endforeach
-						 			</tbody>
-						 		</table>
-					 		</div>
-
-
-
-
-
-				 						</div>
-				 						<div class="edu-history-sec" id="experience">
-				 							<h2>Work & Experience</h2>
-				 							<div class="edu-history style2">
-				 								<i></i>
-				 								<div class="edu-hisinfo">
-				 									<h3>Web Designer <span>Inwave Studio</span></h3>
-				 									<i>2008 - 2012</i>
-				 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-				 								</div>
-				 							</div>
-				 							<div class="edu-history style2">
-				 								<i></i>
-				 								<div class="edu-hisinfo">
-				 									<h3>CEO Founder <span>Inwave Studio</span></h3>
-				 									<i>2008 - 2012</i>
-				 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-				 								</div>
-				 							</div>
-				 						</div>
-				 						<div class="mini-portfolio" id="portfolio">
-				 							<h2>Portfolio</h2>
-				 							<div class="mp-row">
-				 								<div class="mp-col">
-				 									<div class="mportolio"><img src="http://placehold.it/165x115" alt="" /><a href="#" title=""><i class="la la-search"></i></a></div>
-				 								</div>
-				 								<div class="mp-col">
-				 									<div class="mportolio"><img src="http://placehold.it/165x115" alt="" /><a href="#" title=""><i class="la la-search"></i></a></div>
-				 								</div>
-				 								<div class="mp-col">
-				 									<div class="mportolio"><img src="http://placehold.it/165x115" alt="" /><a href="#" title=""><i class="la la-search"></i></a></div>
-				 								</div>
-				 								<div class="mp-col">
-				 									<div class="mportolio"><img src="http://placehold.it/165x115" alt="" /><a href="#" title=""><i class="la la-search"></i></a></div>
-				 								</div>
-				 							</div>
-				 						</div>
-				 						<div class="progress-sec" id="skills">
-				 							<h2>Professional Skills</h2>
-				 							<div class="progress-sec">
-				 								<span>Adobe Photoshop</span>
-				 								<div class="progressbar"> <div class="progress" style="width: 80%;"><span>80%</span></div> </div>
-				 							</div>
-				 							<div class="progress-sec">
-				 								<span>Production In Html</span>
-				 								<div class="progressbar"> <div class="progress" style="width: 60%;"><span>60%</span></div> </div>
-				 							</div>
-				 							<div class="progress-sec">
-				 								<span>Graphic Design</span>
-				 								<div class="progressbar"> <div class="progress" style="width: 75%;"><span>75%</span></div> </div>
-				 							</div>
-				 						</div>
-				 						<div class="edu-history-sec" id="awards">
-				 							<h2>Awards</h2>
-				 							<div class="edu-history style2">
-				 								<i></i>
-				 								<div class="edu-hisinfo">
-				 									<h3>Perfect Attendance Programs</h3>
-				 									<i>2008 - 2012</i>
-				 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-				 								</div>
-				 							</div>
-				 							<div class="edu-history style2">
-				 								<i></i>
-				 								<div class="edu-hisinfo">
-				 									<h3>Top Performer Recognition</h3>
-				 									<i>2008 - 2012</i>
-				 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-				 								</div>
-				 							</div>
-				 							<div class="edu-history style2">
-				 								<i></i>
-				 								<div class="edu-hisinfo">
-				 									<h3>King LLC</h3>
-				 									<i>2008 - 2012</i>
-				 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-				 								</div>
-				 							</div>
-				 						</div>
-				 						<div class="companyies-fol-sec">
-				 							<h2>Companies Followed By</h2>
-				 							<div class="cmp-follow">
-				 								<div class="row">
-				 									<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
-				 										<a href="#" title=""><img src="http://placehold.it/80x80" alt="" /><span>King LLC</span></a>
-				 									</div>
-				 									<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
-				 										<a href="#" title=""><img src="http://placehold.it/80x80" alt="" /><span>Telimed</span></a>
-				 									</div>
-				 									<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
-				 										<a href="#" title=""><img src="http://placehold.it/80x80" alt="" /><span>Ucesas</span></a>
-				 									</div>
-				 									<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
-				 										<a href="#" title=""><img src="http://placehold.it/80x80" alt="" /><span>TeraPlaner</span></a>
-				 									</div>
-				 									<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
-				 										<a href="#" title=""><img src="http://placehold.it/80x80" alt="" /><span>Cubico</span></a>
-				 									</div>
-				 									<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
-				 										<a href="#" title=""><img src="http://placehold.it/80x80" alt="" /><span>Airbnb</span></a>
-				 									</div>
-				 								</div>
-				 							</div>
-				 						</div>
 				 					</div>
-				 				</div>
+
+			 						<div class="cand-details" id="experience">
+			 							<h2>Experiencia en trabajos</h2>
+			 							<div class="edu-history style2">
+			 								<i></i>
+			 								<div class="edu-hisinfo">
+			 									<h3>{{ $user->experiences->position1 }} <span>{{ $user->experiences->company1 }}</span></h3>
+			 									<i>{{ $user->experiences->start_date1 }} - {{ $user->experiences->due_date1 }} </i>
+			 									<p>{{ $user->experiences->achievements1 }} </p>
+			 								</div>
+			 							</div>
+
+			 							<div class="edu-history style2">
+			 								<i></i>
+			 								<div class="edu-hisinfo">
+			 									<h3>{{ $user->experiences->position2 }} <span>{{ $user->experiences->company2 }}</span></h3>
+			 									<i>{{ $user->experiences->start_date2 }} - {{ $user->experiences->due_date2 }} </i>
+			 									<p>{{ $user->experiences->achievements2 }} </p>
+			 								</div>
+			 							</div>
+
+			 							<div class="edu-history style2">
+			 								<i></i>
+			 								<div class="edu-hisinfo">
+			 									<h3>{{ $user->experiences->position3 }} <span>{{ $user->experiences->company3 }}</span></h3>
+			 									<i>{{ $user->experiences->start_date3 }} - {{ $user->experiences->due_date3 }} </i>
+			 									<p>{{ $user->experiences->achievements3 }} </p>
+			 								</div>
+			 							</div>
+			 						</div>	
+			 						<div class="cand-details" id="basic">
+				 						<div class="progress-sec">
+				 							<h2>Nivel de lenguajes</h2>
+				 							@foreach($user->languages as $language)
+				 							<div class="progress-sec style2">
+				 								<span>{{ $language->language }}</span>
+				 								<div class="progressbar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i> 
+				 								<div class="progress">
+				 									@for($i = 0; $i < $language->level; $i++)
+				 										<i></i>
+				 									@endfor
+				 								</div> 
+				 								</div>
+				 								<p>{{ $language->level }}</p>
+				 							</div>
+				 							@endforeach
+				 						</div>
+			 						</div>
+
+			 						<div class="cand-details" id="talentos">
+			 							<h2>Talentos</h2>
+								 		<div class="manage-jobs-sec">
+								 			<div class="extra-job-info">
+									 			<span><i class="la la-clock-o"></i><strong>9</strong> Job Posted</span>
+									 			<span><i class="la la-file-text"></i><strong>20</strong> Application</span>
+									 			<span><i class="la la-users"></i><strong>18</strong> Active Jobs</span>
+									 		</div>
+									 		<table>
+									 			<thead>
+									 				<tr>
+									 					<td>Descripción</td>
+									 					<td>Industria</td>
+									 					<td>Categoria</td>
+									 					<td>Experiencia</td>
+									 				</tr>
+									 			</thead>
+									 			<tbody>
+									 				@foreach($user->talents as $talent)
+										 				<tr>
+										 					<td>
+										 						<div class="table-list-title">
+										 							<h3>{{ $talent->title }}</h3>
+										 							<span>{{ $talent->description }}</span>
+										 						</div>
+										 					</td>
+										 					<td>
+										 						<span class="applied-field">{{ $talent->category->industry->name }}</span>
+										 					</td>
+										 					<td>
+																<span class="applied-field">{{ $talent->category->name }}</span>
+										 					</td>
+										 					<td>
+									 							<!-- <div class="progress-sec with-edit"> -->
+									 								@php($nivel = $talent->level*100/10)
+									 								<div class="progressbar"> 
+									 									<div class="progress" style="width: {{$nivel}}%;">
+										 									<span>
+												 								{{ $talent->level }}
+												 							</span>
+												 						</div>
+												 					</div>
+									 							<!-- </div> -->
+										 					</td>
+										 				</tr>
+									 				@endforeach
+									 			</tbody>
+									 		</table>
+								 		</div>
+			 						</div>
+
+			 					</div>
+
 				 				<div class="col-lg-4 column">
 						 			<div class="job-overview">
 							 			<h3>Job Overview</h3>
@@ -275,6 +192,7 @@
 							 			</form>
 							 		</div>
 						 		</div>
+
 				 			</div>
 				 		</div>
 					</div>
@@ -282,6 +200,4 @@
 			</div>
 		</div>
 	</section>
-
-
 @endsection

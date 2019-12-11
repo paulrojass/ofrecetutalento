@@ -5,6 +5,8 @@ namespace App;
 use App\Role;
 use App\Talent;
 use App\Suscription;
+use App\Language;
+use App\Experience;
 
 use Illuminate\Database\Eloquent\Builder;
 
@@ -86,6 +88,14 @@ class User extends Authenticatable implements MustVerifyEmail
 	public function suscription()
 	{
 		return $this->hasOne(Suscription::class);
+	}
+
+	public function languages(){
+		return $this->hasMany(Language::class);
+	}
+
+	public function experiences(){
+		return $this->hasOne(Experience::class);
 	}
 
 //Query Scopes
