@@ -995,7 +995,7 @@ label::after {
     font-family: 'Questrial' !important;
     font-size: 13px;
     color: #afafaf;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
 }
 .login-social {
     float: left;

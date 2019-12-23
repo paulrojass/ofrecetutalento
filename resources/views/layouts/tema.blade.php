@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>@yield('section')</title>
+	<title>@yield('title')</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="keywords" content="">
@@ -42,6 +42,66 @@
 			</div>
 		</div>
 		<div class="responsive-opensec">
+			@if(Auth::User())
+				<div class="my-profiles-sec">
+					<span><img src="http://placehold.it/50x50" alt="" /> Ali TUFAN <i class="la la-bars"></i></span>
+				</div>
+				<div class="wishlist-dropsec">
+					<span><i class="la la-heart"></i><strong>3</strong></span>
+					<div class="wishlist-dropdown">
+						<ul class="scrollbar">
+							<li>
+								<div class="job-listing">
+									<div class="job-title-sec">
+										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
+										<h3><a href="#" title="">Web Designer / Developer</a></h3>
+										<span>Massimo Artemisis</span>
+									</div>
+								</div><!-- Job -->
+							</li>
+							<li>
+								<div class="job-listing">
+									<div class="job-title-sec">
+										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
+										<h3><a href="#" title="">C Developer (Senior) C .Net</a></h3>
+										<span>StarHealth</span>
+									</div>
+								</div><!-- Job -->
+							</li>
+							<li>
+								<div class="job-listing">
+									<div class="job-title-sec">
+										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
+										<h3><a href="#" title="">Marketing Director</a></h3>
+										<span>Tix Dog</span>
+									</div>
+								</div><!-- Job -->
+							</li>
+							<li>
+								<div class="job-listing">
+									<div class="job-title-sec">
+										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
+										<h3><a href="#" title="">Web Designer / Developer</a></h3>
+										<span>Massimo Artemisis</span>
+									</div>
+								</div><!-- Job -->
+							</li>
+							<li>
+								<div class="job-listing">
+									<div class="job-title-sec">
+										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
+										<h3><a href="#" title="">Web Designer / Developer</a></h3>
+										<span>Massimo Artemisis</span>
+									</div>
+								</div><!-- Job -->
+							</li>
+						</ul>
+					</div>
+				</div>
+
+
+
+			@else
 			<div class="btn-extars">
 				<a href="#" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a>
 				<ul class="account-btns">
@@ -49,6 +109,7 @@
 					<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Iniciar Seccion</a></li>
 				</ul>
 			</div><!-- Btn Extras -->
+			@endif
 			<form class="res-search">
 				<input type="text" placeholder="Job title, keywords or company name" />
 				<button type="submit"><i class="la la-search"></i></button>
@@ -83,6 +144,78 @@
 				<div class="logo">
 					<a href="{{url('/')}}" title=""><img src="{{URL::asset('tema/images/logo.png')}}" alt="" /></a>
 				</div><!-- Logo -->
+				@if(Auth::User())
+
+				<div class="my-profiles-sec">
+					<span><img src="{{URL::asset(Auth::User()->avatar)}}" alt="" style="max-width: 50px; max-height: 50px;" /> {{Auth::User()->name}} {{Auth::User()->lastname}}<i class="la la-bars"></i></span>
+				</div>
+				<div class="wishlist-dropsec">
+					<span><i class="la la-comment"></i><strong>3</strong></span>
+					<div class="wishlist-dropdown">
+						<ul class="scrollbar">
+							<li>
+								<div class="job-listing">
+									<div class="job-title-sec">
+										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
+										<h3><a href="#" title="">Web Designer / Developer</a></h3>
+										<span>Massimo Artemisis</span>
+									</div>
+								</div><!-- Job -->
+							</li>
+							<li>
+								<div class="job-listing">
+									<div class="job-title-sec">
+										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
+										<h3><a href="#" title="">C Developer (Senior) C .Net</a></h3>
+										<span>StarHealth</span>
+									</div>
+								</div><!-- Job -->
+							</li>
+							<li>
+								<div class="job-listing">
+									<div class="job-title-sec">
+										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
+										<h3><a href="#" title="">Marketing Director</a></h3>
+										<span>Tix Dog</span>
+									</div>
+								</div><!-- Job -->
+							</li>
+							<li>
+								<div class="job-listing">
+									<div class="job-title-sec">
+										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
+										<h3><a href="#" title="">Web Designer / Developer</a></h3>
+										<span>Massimo Artemisis</span>
+									</div>
+								</div><!-- Job -->
+							</li>
+							<li>
+								<div class="job-listing">
+									<div class="job-title-sec">
+										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
+										<h3><a href="#" title="">Web Designer / Developer</a></h3>
+										<span>Massimo Artemisis</span>
+									</div>
+								</div><!-- Job -->
+							</li>
+						</ul>
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				@else
 				<div class="btn-extars">
 					<a href="#" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a>
 					<ul class="account-btns">
@@ -90,6 +223,7 @@
 						<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Iniciar Sección</a></li>
 					</ul>
 				</div><!-- Btn Extras -->
+				@endif
 				<nav>
 					<ul>
 						<li class="menu-item-has-children">
@@ -200,6 +334,33 @@
 	</footer>
 
 </div>
+@if(Auth::User())
+<div class="profile-sidebar">
+	<span class="close-profile"><i class="la la-close"></i></span>
+	<div class="can-detail-s">
+		<div class="cst"><img src="{{URL::asset(Auth::User()->avatar)}}" alt="" style="max-width: 145px; max-height:145px;" /></div>
+		<h3>David CARLOS</h3>
+		<span><i>UX / UI Designer</i> at Atract Solutions</span>
+		<p>creativelayers088@gmail.com</p>
+		<p>Member Since, 2017</p>
+		<p><i class="la la-map-marker"></i>Istanbul / Turkey</p>
+	</div>
+	<div class="tree_widget-sec">
+		<ul>
+				 					<li><a href="candidates_profile.html" title=""><i class="la la-file-text"></i>My Profile</a></li>
+									<li><a href="candidates_my_resume.html" title=""><i class="la la-briefcase"></i>My Resume</a></li>
+									<li><a href="candidates_shortlist.html" title=""><i class="la la-money"></i>Shorlisted Job</a></li>
+									<li><a href="candidates_applied_jobs.html" title=""><i class="la la-paper-plane"></i>Applied Job</a></li>
+									<li><a href="candidates_job_alert.html" title=""><i class="la la-user"></i>Job Alerts</a></li>
+									<li><a href="candidates_cv_cover_letter.html" title=""><i class="la la-file-text"></i>Cv & Cover Letter</a></li>
+									<li><a href="candidates_change_password.html" title=""><i class="la la-flash"></i>Change Password</a></li>
+									<li><a href="{{route('logout')}}" title=""><i class="la la-unlink"></i>Logout</a></li>
+				 				</ul>
+	</div>
+</div><!-- Profile Sidebar -->
+@endif
+
+
 
 <div class="account-popup-area signin-popup-box">
 	<div class="account-popup">
@@ -249,10 +410,10 @@
 			<button type="submit">Login</button>
 		</form>
 		<div class="extra-login">
-			<span>Or</span>
+			<span>O a través de</span>
 			<div class="login-social">
-				<a class="fb-login" href="#" title=""><i class="fa fa-facebook"></i></a>
-				<a class="tw-login" href="#" title=""><i class="fa fa-twitter"></i></a>
+				<a class="fb-login" href="{{ url('/auth/redirect/facebook') }}" title=""><i class="fa fa-facebook"></i></a>
+				<a class="tw-login" href="{{ url('/auth/redirect/google') }}" title=""><i class="fa fa-twitter"></i></a>
 			</div>
 		</div>
 	</div>
@@ -268,6 +429,9 @@
 <script src="{{URL::asset('tema/js/select-chosen.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/counter.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/mouse.js')}}" type="text/javascript"></script>
+
+<!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+
 @yield('scripts')
 
 </html></body>

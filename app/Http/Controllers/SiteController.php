@@ -32,6 +32,12 @@ class SiteController extends Controller
         return view('suscripcion', compact('plans', 'industries'));
     }
 
+    public function suscripcionTalentos(Request $request)
+    {
+        $industries = Industry::all();
+        return view('suscripcion-talentos', compact('industries'));
+    }
+
     public function talentos(Request $request)
     {
         $categories = Category::all();

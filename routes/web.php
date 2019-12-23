@@ -17,6 +17,19 @@ Route::get('talentos', 'SiteController@talentos');
 Route::get('canjes', 'SiteController@canjes');
 route::get('suscripcion', 'SiteController@suscripcion');
 
+
+
+
+
+Route::get('logout', function ()
+{
+    auth()->logout();
+    Session()->flush();
+
+    return Redirect::to('/');
+})->name('logout');
+
+
 //Filtrado de Telentos
 Route::post('talentos','SearchController@talentsFilter')->name('talentos');
 //paginacion de talentos
@@ -29,6 +42,11 @@ Route::post('canjes','SearchController@exchangesFilter')->name('canjes');
 Route::get('pagination/fetch_data_talents', 'SiteController@fetch_data_talents');*/
 
 Auth::routes(['verify' => true]);
+
+
+route::get('suscripcion-talentos', 'SiteController@suscripcionTalentos');
+
+
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 

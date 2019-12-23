@@ -2,7 +2,6 @@
     pointer-events: none;
 }
 
-
 .c-logo > img{
 	width: 98px;
 	height: 51px;
@@ -12,4 +11,42 @@
 .btn-filtrar{
 	margin-top: 1em;
 	margin-bottom: 1em;
+}
+
+.span-disabled{
+	pointer-events: none;
+	cursor: default;
+}
+
+.pf-field > input, .pf-field > textarea {
+	margin-bottom: 0;
+}
+
+.pf-field > span {
+	color: #ff9200;
+	font-size: 14px;
+}
+
+/**
+ * Set default style for invalid elements.
+ */
+:not(output):-moz-ui-invalid {
+  box-shadow: 0 0 1.5px 1px #ff9200;
+}
+
+.coverletter-sec > form > span{
+	color: #ff9200;
+}
+
+
+/* boton de google */
+.login-social a.gg-login {
+    color: #d5472c;
+    border-color: #d5472c;
+}
+
+.login-social a.gg-login:hover{
+    background: #d5472c;
+    border-color: #d5472c;  
+    color: #ffffff;
 }

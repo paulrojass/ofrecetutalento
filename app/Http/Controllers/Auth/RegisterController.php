@@ -15,6 +15,8 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Carbon\Carbon;
+
 class RegisterController extends Controller
 {
     /*
@@ -56,9 +58,17 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => ['required', 'string', 'max:100'],
+            'lastname' => ['required', 'string', 'max:100'],
+            'nationality' => ['required', 'string', 'max:100'],
+            'address' => ['required', 'string', 'max:191'],
+            'city' => ['required', 'string', 'max:100'],
+            'country' => ['required', 'string', 'max:100'],
+            'document' => ['required', 'string', 'max:50'],
+            'phone' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'abilities' => ['required']
         ]);
     }
 
@@ -91,11 +101,13 @@ class RegisterController extends Controller
         return $user;  */      
     }
 
-    public function newSuscription($user_id, $plan_id){
+    public function newSuscription($user_id, $plan_id, $periodo){
         $suscripcion = new Suscription();
         $suscripcion->user_id = $user_id;
         $suscripcion->plan_id = $plan_id;
-
+        if ($periodo == 'mensual') $suscripcion->expiration_date = Carbon::now()->addMonth();
+        if ($periodo == 'trimestral') $suscripcion->expiration_date = Carbon::now()->addMonth(3);
+        if ($periodo == 'anual') $suscripcion->expiration_date = Carbon::now()->addYear();
         $suscripcion->save();
     }
 
@@ -107,17 +119,17 @@ class RegisterController extends Controller
         
 
         //Agregando suscripcion
-        $this->newSuscription($user->id, $request->plan);
+        $this->newSuscription($user->id, $request->plan, $request->periodo);
 
         //Agregando Rol
         $user->roles()->attach(Role::where('name', 'user')->first());
 
         $this->guard()->login($user);
 
-        //return $this->registered($request, $user)
-        //               ?: redirect($this->redirectPath());
+        return $this->registered($request, $user)
+                       ?: redirect($this->redirectPath());
         
-        return response()->json(['success'=>'usuario registrado.', 'id_user' => $user->id]);
+        //return response()->json(['success'=>'usuario registrado.', 'id_user' => $user->id]);
     }
 
 
