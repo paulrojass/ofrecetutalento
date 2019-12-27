@@ -96,4 +96,10 @@ class UserController extends Controller
         return view('perfil', compact('user', 'languages'));
     }
 
+
+    public function myAccount()
+    {
+        return view('mi-cuenta');
+    }    
+
 }

@@ -5,74 +5,97 @@
 @section('header_type', 'gradient')
 
 @section('content')
-	<section id="talentos" hidden="hidden">
-		<div class="block">
+<!-- 	<section class="overlape">
+	<div class="block no-padding">
+		<div data-velocity="-.1" style="background: url(http://placehold.it/1600x800) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>PARALLAX BACKGROUND IMAGE
+		<div class="container fluid">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="inner-header">
+						<h3>Welcome Tera Planer</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section> -->
+
+	<section>
+		<div class="block no-padding">
 			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-								<div class="account-popup-area signup-popup-box static">
-									<div class="account-popup">
-								<h1> Agrega tus talentos </h1>
+				 <div class="row no-gape">
+				 	<aside class="col-lg-4 column border-right">
+				 		<div class="widget" id="listadoTalentos">
 
-								<p id="talentos-disponibles"></p>
-
-									{!! Form::open(['method' =>'post', 'role' => 'form']) !!}
+				 		</div>
+				 	</aside>
+				 	<div class="col-lg-8 column">
+				 		<div class="padding-left">
+					 		<div class="manage-jobs-sec">
+					 			<h3 id="talentos-agregados">Agrega tus talentos <strong></strong></h3>
+						 		<div class="contact-edit">
+									<form method="post">
 										@csrf
-
-											<div class="pf-field">
-												{!! Form::text('title',null,
-												[
-												'required' => 'required',
-												'value' => 'old("title")'
-												]) !!}
-												<i class="la la-email"></i>
+										<div class="row">
+											<div class="col-lg-12">
+												<span class="pf-title">Talento</span>									
+												<div class="pf-field">
+													<input type="text" name="title" id="title" required value="{{old('title')}}">
+													<i class="la la-email"></i>
+												</div>
 											</div>
 
-					 						<div class="pf-field">
-												<select name="industries" id="industries" class="chosen">
-													<option value = "">Selecciona una industria</option>
-													@foreach($industries as $industry)
-														<option value = "{{$industry->id}}">
-															{{ $industry->name }}						
-														</option>
-													@endforeach
-												</select>												
-												<i class="la la-email"></i>
+
+											<div class="col-lg-4">
+												<span class="pf-title">Industria</span>
+													<div class="pf-field">
+													<select name="industries" id="industries">
+														<option value = "">Selecciona una industria</option>
+														@foreach($industries as $industry)
+															<option value = "{{$industry->id}}">
+																{{ $industry->name }}						
+															</option>
+														@endforeach
+													</select>												
+												</div>
 											</div>
 
-	
-					 						<div id="select-cat">
-						 						<div class="pf-field">
+
+											<div class="col-lg-4">
+					 							<span class="pf-title">Categoría</span>
+						 						<div class="pf-field" id="select-cat">
 													<select name="categories" id="categories" class="chosen">
 															<option value = "">Primero selecciona una Industria</option>
 													</select>
 												</div>
 											</div>
 
-											<div class="pf-field">
-												{!! Form::text('level',null,
-												[
-												'required' => 'required',
-												'value' => 'old("level")'
-												]) !!}
+											<div class="col-lg-4">
+												<span class="pf-title result">Nivel de experiencia: <b></b></span>
+												<input type="range" class="slider" min="0" max="10" id="level" name="level" required value="{{old('level')}}">
 											</div>
 
-											<div class="pf-field">
-												{!! Form::text('description',null,
-												[
-												'required' => 'required',
-												'value' => 'old("description")'
-												]) !!}
-												<i class="la la-email"></i>
+											<div class="col-lg-12">
+												<span class="pf-title">Descripcion</span>
+												<div class="pf-field">
+													<input type="text" name="description" id="description" required value="{{old('description')}}">
+												</div>
 											</div>
 
-											{!! Form::button('Agregar',['class'=>'btn-submit-talent','type'=>'button']) !!}
 
-									{!! Form::close() !!}
-							</div>
-						</div>
+											<div class="col-lg-6">
+												<button type="button" name="agregar" id="agregar" class="srch-lctn btn-submit-talent">Agregar</button>
+											</div>
+											<div class="col-lg-6">
+												<button type="button" name="salir" id="salir" class="srch-lctn btn-submit-talent">Salir</button>
+											</div>
+										</div>
+									</form>
+						 		</div>
+					 		</div>
+					 	</div>
 					</div>
-				</div>
+				 </div>
 			</div>
 		</div>
 	</section>
@@ -88,10 +111,24 @@
 	});
 
 	$(function() {
+        id_user = '{!! auth()->user()->id !!}';
+		actualizarTalentos();
+		verificarTalentos(id_user);
+
+        // Read value on page load
+        $(".result b").html($("#level").val());
+
+        // Read value on change
+        $("#level").change(function(){
+            $(".result b").html($(this).val());
+        });
+
+
+
 		$('.btn-submit-talent').click(function(){
 			var _token = $("input[name='_token']").val();
 			var title = $("input[name='title']").val();
-			var category = $("input[name='category']").val();
+			var category = $("#categories").val();
 			var level = $("input[name='level']").val();
 			var description = $("input[name='description']").val();
 			$.ajax({
@@ -106,10 +143,8 @@
 					_token:_token},
 				success:function(data){
 					verificarTalentos(id_user);
+					actualizarTalentos();
 					$("input[name='title']").val('');
-					$("input[name='industry']").val('');
-					$("input[name='category']").val('');
-					$("input[name='level']").val('');
 					$("input[name='description']").val('');
 				}
 			});
@@ -120,16 +155,26 @@
 			if ($.trim(industry_id) != ''){
 				$.get('select-categorias', {industry_id : industry_id}, function(categories){
 					$('#select-cat').empty();
-					$('#select-cat').append("<div class='pf-field'><select name='categories' id='categories' class='chosen'><option value = ''>Selecciona una categoria</option>");
+					$('#select-cat').html(categories);
+				});
+			}
+		});
+
+/*		$('#industries').on('change', function() {
+			var industry_id = $(this).val();
+			if ($.trim(industry_id) != ''){
+				$.get('select-categorias', {industry_id : industry_id}, function(categories){
+					$('#select-cat').empty();
+					$('#select-cat').append('<div class="pf-field"><select name="categories" id="categories" class="chosen"><option value = "">Selecciona una categoria</option>');
 					$.each(categories, function(index, value){
 						$('#select-cat').append("<option value = '"+index+"'>"+value+"</option>");
-					})
+					});
 					$('#select-cat').append("</select>");
 					$('#select-cat').append("</div>");
 
 				});
 			}
-		});
+		});*/
 	});
 
 	function verificarTalentos(id_user){
@@ -140,14 +185,27 @@
 			data:{user_id : id_user, _token:_token},
 			success:function(data){
 				if(data.disponibles > 0){
-					$('#talentos-agregados').html('Tienes '+data.agregados+' talentos agregados');
-					$('#talentos-disponibles').html('Tienes '+data.disponibles+' talentos disponibles');
+					$('#talentos-agregados strong').html('('+data.disponibles+' disponibles)');
 				}else{
-					$('#nuevo-talento').html('<p> Ya no tiene talentos disponibles </p>');
+					$('#agregar').hide();
+					$('#talentos-agregados strong').html('(Para agregar mas talentos puede cambiar su plan)');
+
 				}
 			}
 		});
 	}
+
+	function actualizarTalentos(){
+		$.ajax({
+			url: 'actualizar-talentos',
+			type: 'GEt',
+			dataType: 'html',
+		})
+		.done(function(data) {
+			$('#listadoTalentos').html(data);
+		})	
+	}
+
 </script>
 
 @endsection

@@ -502,34 +502,35 @@
 		$(".pricetable").mouseout(function(event){
 			$(this).removeClass("active");
 		});
+	});
 
-		$('.btn-submit-plan').click(function(){
-			plan = $(this).data('value');
-			plan_name = $(this).text();
-			periodo = $(this).data('plan');
-			
-			$("#plan").val(plan);
-			$("#plan_name").val(plan_name);
-			$("#periodo").val(periodo);
-			$('#perfil-button').removeClass('span-disabled');
-			$('#plan-button').removeClass('active');
-			$('#perfil-button').addClass('active');
+	$('.btn-submit-plan').click(function(){
+		plan = $(this).data('value');
+		plan_name = $(this).text();
+		periodo = $(this).data('plan');
+		
+		$("#plan").val(plan);
+		$("#plan_name").val(plan_name);
+		$("#periodo").val(periodo);
+		$('#perfil-button').removeClass('span-disabled');
+		$('#plan-button').removeClass('active');
+		$('#perfil-button').addClass('active');
 
-			$('#registro').fadeOut('slow', function() {
-				$('#mensaje_plan').html('Has seleccionado el plan '+plan_name+' '+periodo);
-				$('#perfil').fadeIn('slow');
-			});
+		$('#registro').fadeOut('slow', function() {
+			$('#mensaje_plan').html('Has seleccionado el plan '+plan_name+' '+periodo);
+			$('#perfil').fadeIn('slow');
 		});
+	});
 
-		$('#plan-button').click(function(){
-			$('#perfil').fadeOut();
-			$('#registro').fadeIn();
-		});
+	$('#plan-button').click(function(){
+		$('#perfil').fadeOut();
+		$('#registro').fadeIn();
+	});
 
-		$('#perfil-button').click(function(){
-			$('#registro').fadeOut();
-			$('#perfil').fadeIn();
-		});
+	$('#perfil-button').click(function(){
+		$('#registro').fadeOut();
+		$('#perfil').fadeIn();
+	});
 
 /*
 		$('.btn-facebook').click(function(){
@@ -561,7 +562,7 @@
 			});
 		});
 */
-		$('.btn-submit').click(function(e){
+/*		$('.btn-submit').click(function(e){
 
 			e.preventDefault();
 
@@ -605,74 +606,9 @@
 					alert('Mensaje: '+data.success+' Usuario:'+data.id_user);
 					id_user = data.id_user;
 					verificarTalentos(id_user);
-				},
-				error:function(data){
-					console.log(data);
 				}
 			});
-		});
-		
-
-		$('.btn-submit-talent').click(function(){
-			var _token = $("input[name='_token']").val();
-			var title = $("input[name='title']").val();
-			var category = $("input[name='category']").val();
-			var level = $("input[name='level']").val();
-			var description = $("input[name='description']").val();
-			$.ajax({
-				type:'POST',
-				url:'guardar_talento',
-				data:{
-					id_user: id_user,
-					title:title,
-					category:category,
-					level:level,
-					description:description,
-					_token:_token},
-				success:function(data){
-					verificarTalentos(id_user);
-					$("input[name='title']").val('');
-					$("input[name='industry']").val('');
-					$("input[name='category']").val('');
-					$("input[name='level']").val('');
-					$("input[name='description']").val('');
-				}
-			});
-		});
-
-		$('#industries').on('change', function() {
-			var industry_id = $(this).val();
-			if ($.trim(industry_id) != ''){
-				$.get('select-categorias', {industry_id : industry_id}, function(categories){
-					$('#select-cat').empty();
-					$('#select-cat').append("<div class='pf-field'><select name='categories' id='categories' class='chosen'><option value = ''>Selecciona una categoria</option>");
-					$.each(categories, function(index, value){
-						$('#select-cat').append("<option value = '"+index+"'>"+value+"</option>");
-					})
-					$('#select-cat').append("</select>");
-					$('#select-cat').append("</div>");
-
-				});
-			}
-		});
-	});
-
-	function verificarTalentos(id_user){
-		var _token = $("input[name='_token']").val();
-		$.ajax({
-			type: 'POST',
-			url:'verificar_talentos',
-			data:{user_id : id_user, _token:_token},
-			success:function(data){
-				if(data.disponibles > 0){
-					$('#talentos-agregados').html('Tienes '+data.agregados+' talentos agregados');
-					$('#talentos-disponibles').html('Tienes '+data.disponibles+' talentos disponibles');
-				}else{
-					$('#nuevo-talento').html('<p> Ya no tiene talentos disponibles </p>');
-				}
-			}
-		});
-	}
+		});*/
 </script>
 
 @endsection

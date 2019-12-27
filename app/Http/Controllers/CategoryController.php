@@ -50,13 +50,18 @@ class CategoryController extends Controller
     }
 
     public function showCategoriesSelect(Request $request){
-        if ($request->ajax()){
+/*        if ($request->ajax()){
             $categories = Category::where('industry_id', $request->industry_id)->get();
             foreach ($categories as $category) {
                 $categoriesArray[$category->id] = $category->name;
             }
 
             return response()->json($categoriesArray);
+        }*/
+
+        if ($request->ajax()){
+            $categories = Category::where('industry_id', $request->industry_id)->get();
+            return view('filtros.select-categorias', compact('categories'));
         }
     }
 

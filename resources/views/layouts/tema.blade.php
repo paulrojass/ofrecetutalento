@@ -18,7 +18,6 @@
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/colors/colors.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/bootstrap.css')}}" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-<!-- 	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css"> -->
 	
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('css/estilos.css')}}" />
 </head>
@@ -204,17 +203,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 				@else
 				<div class="btn-extars">
 					<a href="#" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a>
@@ -339,23 +327,23 @@
 	<span class="close-profile"><i class="la la-close"></i></span>
 	<div class="can-detail-s">
 		<div class="cst"><img src="{{URL::asset(Auth::User()->avatar)}}" alt="" style="max-width: 145px; max-height:145px;" /></div>
-		<h3>David CARLOS</h3>
-		<span><i>UX / UI Designer</i> at Atract Solutions</span>
-		<p>creativelayers088@gmail.com</p>
-		<p>Member Since, 2017</p>
-		<p><i class="la la-map-marker"></i>Istanbul / Turkey</p>
+		<h3>{{auth()->user()->name}} {{auth()->user()->lastname}}</h3>
+		<span><i>Usuario {{auth()->user()->suscription->plan->name}}</i> at Atract Solutions</span>
+		<p>{{ auth()->user()->email }}</p>
+		<p>Miembro desde, {{ \Carbon\Carbon::parse(auth()->user()->created_at)->format('Y')}} </p>
+		<p><i class="la la-map-marker"></i>{{ auth()->user()->city }}, {{ auth()->user()->country }}</p>
 	</div>
 	<div class="tree_widget-sec">
 		<ul>
-				 					<li><a href="candidates_profile.html" title=""><i class="la la-file-text"></i>My Profile</a></li>
-									<li><a href="candidates_my_resume.html" title=""><i class="la la-briefcase"></i>My Resume</a></li>
-									<li><a href="candidates_shortlist.html" title=""><i class="la la-money"></i>Shorlisted Job</a></li>
-									<li><a href="candidates_applied_jobs.html" title=""><i class="la la-paper-plane"></i>Applied Job</a></li>
-									<li><a href="candidates_job_alert.html" title=""><i class="la la-user"></i>Job Alerts</a></li>
-									<li><a href="candidates_cv_cover_letter.html" title=""><i class="la la-file-text"></i>Cv & Cover Letter</a></li>
-									<li><a href="candidates_change_password.html" title=""><i class="la la-flash"></i>Change Password</a></li>
-									<li><a href="{{route('logout')}}" title=""><i class="la la-unlink"></i>Logout</a></li>
-				 				</ul>
+			<li><a href="{{url('mi-cuenta')}}" title=""><i class="la la-file-text"></i>Mi cuenta</a></li>
+			<!-- <li><a href="{{url('mi-cuenta')}}" title=""><i class="la la-briefcase"></i>My Resume</a></li> -->
+			<li><a href="candidates_shortlist.html" title=""><i class="la la-money"></i>Shorlisted Job</a></li>
+			<li><a href="candidates_applied_jobs.html" title=""><i class="la la-paper-plane"></i>Applied Job</a></li>
+			<li><a href="candidates_job_alert.html" title=""><i class="la la-user"></i>Job Alerts</a></li>
+			<li><a href="candidates_cv_cover_letter.html" title=""><i class="la la-file-text"></i>Cv & Cover Letter</a></li>
+			<li><a href="candidates_change_password.html" title=""><i class="la la-flash"></i>Change Password</a></li>
+			<li><a href="{{route('logout')}}" title=""><i class="la la-unlink"></i>Logout</a></li>
+		</ul>
 	</div>
 </div><!-- Profile Sidebar -->
 @endif
@@ -366,36 +354,23 @@
 	<div class="account-popup">
 		<span class="close-popup"><i class="la la-close"></i></span>
 		<h3>Inicio de Sesión</h3>
-		<span>Click To Login With Demo User</span>
+		@error('email')
+			<span id="email-error"><strong>{{ $message }}</strong></span>
+		@enderror
 		<form method="POST" action="{{ route('login') }}">
             @csrf
 			<div class="cfield">
 				<input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('E-Mail Address') }}" value="{{ old('email') }}" />
 				<i class="la la-user"></i>
 			</div>
-			@error('email')
-				<span class="invalid-feedback" role="alert">
-					<strong>{{ $message }}</strong>
-				</span>
-			@enderror
 
 			<div class="cfield">
                 <input id="password" placeholder="********" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-
 				<i class="la la-key"></i>
 			</div>
 			@error('password')
-			    <span class="invalid-feedback" role="alert">
-			        <strong>{{ $message }}</strong>
-			    </span>
+			    <span>{{ $message }}</span>
 			@enderror
-
-
-
-
-
-
 
 			<p class="remember-label">
 				<input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -430,9 +405,31 @@
 <script src="{{URL::asset('tema/js/counter.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/mouse.js')}}" type="text/javascript"></script>
 
-<!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
-
 @yield('scripts')
 
-</html></body>
+<script>
+	$(function(){
+		/*si hay errores en login*/
+		const error = {!! json_encode( $errors->has('email') ) !!};
+		if (error) { 
+			$('.signin-popup-box').fadeIn('fast');
+			$('html').addClass('no-scroll');
+		}
 
+		$('.close-popup').click(function(){
+			$('#email-error').hide();
+		});
+
+		$('#email').keypress(function(){
+			$('#email-error').hide();
+		});
+
+		$('#password').keypress(function(){
+			$('#email-error').hide();
+		});
+		/*fin si hay errores en login*/
+	});
+</script>
+
+</html>
+</body>

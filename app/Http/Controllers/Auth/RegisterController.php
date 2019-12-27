@@ -37,7 +37,16 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+   //protected $redirectTo = '/home';
+
+    protected function redirectTo()
+    {
+        if (auth()->user()->hasRole('user')) {
+            if((auth()->user()->suscription->plan_id > 1) && (!auth()->user()->hasAnyTalent())) return 'suscripcion-talentos';
+            return 'mi-cuenta';
+        }
+        return 'panel';
+    }
 
     /**
      * Create a new controller instance.

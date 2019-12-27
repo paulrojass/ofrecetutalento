@@ -43,11 +43,6 @@ Route::get('pagination/fetch_data_talents', 'SiteController@fetch_data_talents')
 
 Auth::routes(['verify' => true]);
 
-
-route::get('suscripcion-talentos', 'SiteController@suscripcionTalentos');
-
-
-
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
 
@@ -69,3 +64,7 @@ Route::get('select-categorias', 'CategoryController@showCategoriesSelect');
 
 //Perfil de usuario:
 Route::get('perfil/{id}', 'UserController@profile');
+
+Route::get('mi-cuenta', 'UserController@myAccount');
+Route::get('suscripcion-talentos', 'SiteController@suscripcionTalentos');
+Route::get('actualizar-talentos', 'SiteController@actualizarTalentos');

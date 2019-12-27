@@ -7,6 +7,7 @@ use App\Talent;
 use App\Language;
 use App\Experience;
 use App\Suscription;
+use App\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -21,7 +22,8 @@ class UsersTableSeeder extends Seeder
 			factory(Talent::class,5)->create(['user_id'=>$user->id]);
 			factory(Language::class,5)->create(['user_id'=>$user->id]);
 			factory(Experience::class,5)->create(['user_id'=>$user->id]);
-			factory(Suscription::class,1)->create(['user_id'=>$user->id]);
+            factory(Suscription::class,1)->create(['user_id'=>$user->id]);
+			$user->roles()->attach(Role::where('name', 'user')->first());
 		});
     }
 

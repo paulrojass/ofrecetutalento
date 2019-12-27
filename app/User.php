@@ -98,6 +98,13 @@ class User extends Authenticatable implements MustVerifyEmail
 		return $this->hasOne(Experience::class);
 	}
 
+	public function hasAnyTalent()
+	{
+		$contador = Talent::where('user_id', $this->id)->count();
+		if ($contador > 0 ) return true;
+		return false;
+	}
+
 //Query Scopes
 	public function scopeTalent($query, $busqueda)
 	{

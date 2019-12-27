@@ -74,4 +74,12 @@ class SiteController extends Controller
             return view('filtros.talentos', compact('users', 'categories'))->render();
         }
     }
+
+    public function actualizarTalentos()
+    {
+        return view('filtros.suscripcion-talentos');
+
+    }
+
+
 }
