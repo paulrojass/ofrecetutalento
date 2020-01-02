@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->text('abilities')->nullable();
             $table->string('provider',100)->nullable();
             $table->string('provider_id',100)->nullable();
-            $table->string('avatar')->default('images/users/default.png');
+            $table->string('avatar')->default('default.png');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('company')->default(0);

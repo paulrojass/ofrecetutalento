@@ -99,7 +99,7 @@
 										@foreach($tops as $top)
 										<div class="col-lg-3">
 											<div class="team">
-												<div class="team-img"><img src="{{URL::asset($top->avatar)}}" alt="" style="max-width: 101px" /></div>
+												<div class="team-img"><img src="{{URL::asset('images/users/'.$top->avatar)}}" alt="" style="max-width: 101px" /></div>
 												<div class="team-detail">
 													<h3><a href="#" title="">{{$top->name}} {{$top->lastname}}</a></h3>
 													<span>I Knew You Were Trouble</span>

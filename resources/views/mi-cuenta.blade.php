@@ -3,8 +3,14 @@
 @section('title', 'Mi cuenta')
 
 @section('header_type', 'stick-top style3')
+	<link rel="stylesheet" type="text/css" href="{{URL::asset('js/bootstrap-fileinput/css/fileinput.min.css')}}">
+@section('css')
+	
+@endsection
 
 @section('content')
+
+	@csrf
 	<section class="overlape">
 		<div class="block no-padding">
 			<div data-velocity="-.1" style="background: url(http://placehold.it/1600x800) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
@@ -59,40 +65,22 @@
 				 	<div class="col-lg-9 column">
 				 		<div class="padding-left">
 					 		<div class="manage-jobs-sec">
-
-
-
-
 								<div id="mi-perfil">
 						 			<div class="border-title"><h3>Mi perfil</h3><a href="#" title=""><i class="la la-edit"></i> Editar Perfil</a></div>
-							 		<div class="edu-history-sec">
-			 							<div class="edu-history">
-			 								<i class="la la-graduation-cap"></i>
-			 								<div class="edu-hisinfo">
-			 									<h3>University</h3>
-			 									<i>2008 - 2012</i>
-			 									<span>Middle East Technical University <i>Computer Science</i></span>
-			 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-			 								</div>
-			 								<ul class="action_job">
-					 							<li><span>Edit</span><a href="#" title=""><i class="la la-pencil"></i></a></li>
-					 							<li><span>Delete</span><a href="#" title=""><i class="la la-trash-o"></i></a></li>
-					 						</ul>
-			 							</div>
-			 							<div class="edu-history">
-			 								<i class="la la-graduation-cap"></i>
-			 								<div class="edu-hisinfo">
-			 									<h3>High School</h3>
-			 									<i>2008 - 2012</i>
-			 									<span>Tomms College <i>Bachlors in Fine Arts</i></span>
-			 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-			 								</div>
-			 								<ul class="action_job">
-					 							<li><span>Edit</span><a href="#" title=""><i class="la la-pencil"></i></a></li>
-					 							<li><span>Delete</span><a href="#" title=""><i class="la la-trash-o"></i></a></li>
-					 						</ul>
-			 							</div>
-			 						</div>
+									<form files="true" enctype="multipart/form-data" id="form-avatar">
+							 			<div class="upload-img-bar">
+							 				<span class="round" id="div-imagen">
+							 					<img id="img-avatar" src="{{URL::asset('images/users/'.Auth::User()->avatar)}}" style="cursor:pointer" alt="" />
+							 				</span>
+							 				<div class="upload-info">
+							 					<div id="ll"></div>
+
+												<input id="avatar" name="avatar" type="file" accept="image/*" capture style="display:none">
+							 					<a id="button-avatar" title="">Cambiar foto</a>
+							 					<span>Tamaño maximo 1Mb, dimension minima: 270x210, archivos permitidos: .jpg & .png</span>
+							 				</div>
+							 			</div>
+									</form>			 					
 			 					</div>
 
 								<div id="talentos">
@@ -218,11 +206,79 @@
 
 
 @section('scripts')
+<script src="{{URL::asset('js/bootstrap-fileinput/js/fileinput.min.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('js/bootstrap-fileinput/js/locales/es.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('js/bootstrap-fileinput/themes/fas/theme.min.js')}}" type="text/javascript"></script>
+
 <script>
 
 	$(function(){
 		mostrar('#mi-perfil', '#a-perfil');
+
+		$('#avatar').change(function(){
+			cambiarFoto();
+			$("#ll").html('<p>La foto ha sido cambiada exitosamente</p>');
+		});
+
+		$("#img-avatar").click(function () {
+		    $("#avatar").trigger('click');
+		});
+		$("#button-avatar").click(function () {
+		    $("#avatar").trigger('click');
+		});
+
+
+
+/*        $("#form-avatar").on("submit", function(e){
+            e.preventDefault();
+            var f = $(this);
+            var formData = new FormData(document.getElementById("form-avatar"));
+            formData.append("dato", "valor");
+            //formData.append(f.attr("name"), $(this)[0].files[0]);
+            $.ajax({
+                url: "recibe.php",
+                type: "post",
+                dataType: "html",
+                data: formData,
+                cache: false,
+                contentType: false,
+	     processData: false
+            })
+                .done(function(res){
+                    $("#mensaje").html("Respuesta: " + res);
+                });
+        });*/
+
+
+
+
+
 	});
+
+
+	function cambiarFoto(){
+		var formData = new FormData();
+		formData.append('avatar', $('#avatar')[0].files[0]);
+		formData.append('_token', '{{csrf_token()}}');
+		formData.append('id', '{{Auth::User()->id}}');
+		$.ajax({
+			url: 'cambiar-foto',
+			type: 'post',
+			data: formData,
+			contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+			processData: false, // NEEDED, DON'T OMIT THIS
+		})
+		.done(function(response) {
+			$('#div-imagen').html(response);
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+		
+	}
 
 
 	function mostrar(div,a){

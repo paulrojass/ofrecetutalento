@@ -150,7 +150,7 @@
 		var token = '{{csrf_token()}}';// ó $("#token").val() si lo tienes en una etiqueta html.
 		//we will send data and recive data fom our AjaxController
 		$.ajax({
-			type:'post',
+			type:'get',
 			url:'{{route("talentos")}}',
 			data:{ search:search, location:location, _token:token, category:category },
 			success: function (response) {

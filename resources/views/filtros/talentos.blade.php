@@ -7,7 +7,7 @@
 				<div class="emply-resume-list square">
 					<div class="emply-resume-thumb">
 						<!-- <img src="http://placehold.it/90x90" alt="" /> -->
-						<img src="{{URL::asset($user->avatar)}}" alt="" />
+						<img src="{{URL::asset('images/users/'.$user->avatar)}}" alt="" />
 					</div>
 					<div class="emply-resume-info">
 						<h3><a href="#" title="">{{ $user->name}} {{ $user->lastname }}</a></h3>

@@ -66,5 +66,6 @@ Route::get('select-categorias', 'CategoryController@showCategoriesSelect');
 Route::get('perfil/{id}', 'UserController@profile');
 
 Route::get('mi-cuenta', 'UserController@myAccount');
+Route::post('cambiar-foto', 'UserController@updateAvatar');
 Route::get('suscripcion-talentos', 'SiteController@suscripcionTalentos');
 Route::get('actualizar-talentos', 'SiteController@actualizarTalentos');

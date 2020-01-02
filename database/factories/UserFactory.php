@@ -28,7 +28,7 @@ $factory->define(User::class, function (Faker $faker) {
         'phone' => $faker->phoneNumber,
 		'abilities' => $faker->realText(50,5),
         'email' => $faker->unique()->safeEmail,
-        'avatar' => 'images/users/default.png',
+        'avatar' => 'default.png',
 
         'email_verified_at' => now(),
         'password' => bcrypt('secret'), // password

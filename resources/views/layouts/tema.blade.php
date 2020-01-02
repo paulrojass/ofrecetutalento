@@ -20,6 +20,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 	
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('css/estilos.css')}}" />
+
+	@yield('css')
 </head>
 <body>
 
@@ -146,7 +148,7 @@
 				@if(Auth::User())
 
 				<div class="my-profiles-sec">
-					<span><img src="{{URL::asset(Auth::User()->avatar)}}" alt="" style="max-width: 50px; max-height: 50px;" /> {{Auth::User()->name}} {{Auth::User()->lastname}}<i class="la la-bars"></i></span>
+					<span><img src="{{URL::asset('images/users/'.Auth::User()->avatar)}}" alt="" style="max-width: 50px; max-height: 50px;" /> {{Auth::User()->name}} {{Auth::User()->lastname}}<i class="la la-bars"></i></span>
 				</div>
 				<div class="wishlist-dropsec">
 					<span><i class="la la-comment"></i><strong>3</strong></span>
@@ -326,7 +328,7 @@
 <div class="profile-sidebar">
 	<span class="close-profile"><i class="la la-close"></i></span>
 	<div class="can-detail-s">
-		<div class="cst"><img src="{{URL::asset(Auth::User()->avatar)}}" alt="" style="max-width: 145px; max-height:145px;" /></div>
+		<div class="cst"><img src="{{URL::asset('images/users/'.Auth::User()->avatar)}}" alt="" style="max-width: 145px; max-height:145px;" /></div>
 		<h3>{{auth()->user()->name}} {{auth()->user()->lastname}}</h3>
 		<span><i>Usuario {{auth()->user()->suscription->plan->name}}</i> at Atract Solutions</span>
 		<p>{{ auth()->user()->email }}</p>
@@ -430,6 +432,6 @@
 		/*fin si hay errores en login*/
 	});
 </script>
+</body>
 
 </html>
-</body>
