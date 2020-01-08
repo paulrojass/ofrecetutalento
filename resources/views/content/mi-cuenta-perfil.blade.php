@@ -57,7 +57,7 @@
 							<h3>Experiencia laboral</h3>
 						</div>
 					</div>
-
+						@if(Auth::User()->experiences->position1)
 						<div class="edu-history style2">
 							<i></i>
 							<div class="edu-hisinfo">
@@ -67,7 +67,9 @@
 								<p>{{ Auth::User()->experiences->achievements1 }} </p>
 							</div>
 						</div>
+						@endif
 
+						@if(Auth::User()->experiences->position2)
 						<div class="edu-history style2">
 							<i></i>
 							<div class="edu-hisinfo">
@@ -77,7 +79,9 @@
 								<p>{{ Auth::User()->experiences->achievements2 }} </p>
 							</div>
 						</div>
+						@endif
 
+						@if(Auth::User()->experiences->position3)
 						<div class="edu-history style2">
 							<i></i>
 							<div class="edu-hisinfo">
@@ -87,6 +91,7 @@
 								<p>{{ Auth::User()->experiences->achievements3 }} </p>
 							</div>
 						</div>
+						@endif
 					</div>
 				</div>
 			</div>

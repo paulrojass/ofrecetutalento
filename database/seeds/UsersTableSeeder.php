@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
 		factory(User::class,20)->create()->each(function($user){
 			factory(Talent::class,5)->create(['user_id'=>$user->id]);
 			factory(Language::class,5)->create(['user_id'=>$user->id]);
-			factory(Experience::class,5)->create(['user_id'=>$user->id]);
+			factory(Experience::class,1)->create(['user_id'=>$user->id]);
             factory(Suscription::class,1)->create(['user_id'=>$user->id]);
 			$user->roles()->attach(Role::where('name', 'user')->first());
 		});

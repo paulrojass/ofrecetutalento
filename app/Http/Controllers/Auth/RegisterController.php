@@ -7,6 +7,7 @@ use App\Role;
 use App\Plan;
 use App\Suscription;
 use App\User;
+use App\Experience;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -120,6 +121,12 @@ class RegisterController extends Controller
         $suscripcion->save();
     }
 
+    public function newExperience($user_id){
+        $experience = new Experience();
+        $experience->user_id = $user_id;
+        $experience->save();
+    }
+
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -127,8 +134,9 @@ class RegisterController extends Controller
         event(new Registered($user = $this->create($request->all())));
         
 
-        //Agregando suscripcion
+        //Agregando suscripcion y experiencia
         $this->newSuscription($user->id, $request->plan, $request->periodo);
+        $this->newExperience($user->id);
 
         //Agregando Rol
         $user->roles()->attach(Role::where('name', 'user')->first());
