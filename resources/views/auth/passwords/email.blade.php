@@ -1,8 +1,8 @@
-@extends('layouts.tema')
+@extends('layouts.login')
 
 @section('title', 'Restablecer contraseña')
 
-@section('header_type', 'gradient')
+@section('header_type', 'white')
 
 @section('content')
     <section>

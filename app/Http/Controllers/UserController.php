@@ -12,6 +12,13 @@ use Image;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('profile');
+    }
+
+
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -117,11 +124,21 @@ class UserController extends Controller
 		// generar un nombre aleatorio para la imagen
 		$temp_name = Str::random(20) . '.' . $imagenOriginal->getClientOriginalExtension();
 
-		$imagen->resize(300,300);
+/*		$imagen->resize(300,300, function($img){
+			$img->aspectRatio();
+		});*/
+
+		if($imagen->height() >= $imagen->width()){
+			$imagen->widen(300);
+			$imagen->resizeCanvas(300,300);
+		}else
+		{
+			$imagen->heighten(300);
+			$imagen->resizeCanvas(300,300);
+		}
 
 		// guardar imagen
 		// save( [ruta], [calidad])
-		// 
 		$ruta_final = $ruta . $temp_name;
 		$imagen->save($ruta_final, 100);
 
@@ -129,20 +146,12 @@ class UserController extends Controller
 		if ($user->avatar != 'default.png')
 		{
 		  if(\File::exists('images/users/'.$user->avatar)){
-
 		    \File::delete('images/users/'.$user->avatar);
-
-		  }else{
-
-		    //dd('File does not exists.');
-
 		  }
 		}
-
 		$user->avatar = $temp_name;
 		$user->save();
 
 		return view('filtros.cambiar-foto');
-
 	}
 }

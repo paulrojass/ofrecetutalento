@@ -48,7 +48,7 @@
 		<div class="responsive-opensec">
 			@if(Auth::User())
 				<div class="my-profiles-sec">
-					<span><img src="{{URL::asset('images/users/'.Auth::User()->avatar)}}" alt="" style="max-width: 50px; max-height:50px" /> {{Auth::User()->name}} {{Auth::User()->lastname}} <i class="la la-bars"></i></span>
+					<span><img src="http://placehold.it/50x50" alt="" /> Ali TUFAN <i class="la la-bars"></i></span>
 				</div>
 				<div class="wishlist-dropsec">
 					<span><i class="la la-heart"></i><strong>3</strong></span>
@@ -107,10 +107,9 @@
 
 			@else
 			<div class="btn-extars">
-				<a href="{{url('suscripcion')}}" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a>
+				<a href="#" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a>
 				<ul class="account-btns">
 					<li><a href="{{url('suscripcion')}}" title=""><i class="la la-key"></i> Registrar</a></li>
-					<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Iniciar Seccion</a></li>
 				</ul>
 			</div><!-- Btn Extras -->
 			@endif
@@ -118,25 +117,6 @@
 				<input type="text" placeholder="Job title, keywords or company name" />
 				<button type="submit"><i class="la la-search"></i></button>
 			</form>
-			<div class="responsivemenu">
-				<ul>
-					<li class="menu-item">
-						<a href="{{url('/')}}" title="">Home</a>
-
-					</li>
-					<li class="menu-item">
-						<a href="{{url('como_funciona')}}" title="">Como funciona</a>
-
-					</li>
-					<li class="menu-item">
-						<a href="{{url('quienes_somos')}}" title="">¿Quienes somos?</a>
-
-					</li>
-					<li class="menu-item">
-						<a href="{{url('planes')}}" title="">Planes</a>
-					</li>
-				</ul>
-			</div>
 		</div>
 
 	</div>
@@ -213,34 +193,12 @@
 
 				@else
 				<div class="btn-extars">
-					<a href="{{url('suscripcion')}}" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a>
 					<ul class="account-btns">
 						<li class="signup-popup"><a href="{{url('suscripcion')}}" title=""><i class="la la-key"></i> Registrar</a></li>
-						<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Iniciar Sección</a></li>
 					</ul>
 				</div><!-- Btn Extras -->
 				@endif
 				<nav>
-					<ul>
-						<li class="menu-item">
-							<a href="{{url('/')}}" title="">Home</a>
-							
-						</li>
-						<li class="menu-item">
-							<a href="{{url('como_funciona')}}"title="">Como funciona</a>
-							
-						</li>
-						<li class="menu-item">
-							<a href="{{url('quienes_somos')}}" title="">¿Quienes somos?</a>
-							
-						</li>
-						<li class="menu-item">
-							<a href="{{url('planes')}}" title="">Planes</a>
-							
-						</li>
-						
-						
-					</ul>
 				</nav><!-- Menus -->
 			</div>
 		</div>

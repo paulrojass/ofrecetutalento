@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
+
 .nav-tabs li.disabled a {
     pointer-events: none;
 }
@@ -149,4 +151,61 @@ input[type=range].slider:focus::-ms-fill-upper {
 .seleccionado {
   /* color: #8b91dd; */
   color: red;
+}
+
+
+.alert {
+  display:inline-block;
+  font-family: 'Questrial' !important;
+}
+
+.job-details-m {
+    float: left;
+    width: 100%;
+    padding-top: 20px;
+}
+.job-details-m h3 {
+    float: left;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 500;
+    color: #202020;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+.job-details-m p,
+.job-details-m li {
+    float: left;
+    width: 100%;
+    font-size: 14px;
+    color: #888888;
+    line-height: 24px;
+    margin: 0;
+    margin-bottom: 19px;
+}
+.job-details-m > ul {
+    float: left;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.job-details-m > ul li {
+    float: left;
+    width: 100%;
+    margin: 0;
+        margin-bottom: 0px;
+    position: relative;
+    padding-left: 23px;
+    line-height: 21px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #888888;
+}
+.job-details-m > ul li::before {
+    position: absolute;
+    left: 0;
+    top: 13px;
+    width: 10px;
+    height: 1px;
+    background: #888888;
+    content: "";
 }

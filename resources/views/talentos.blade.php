@@ -1,6 +1,6 @@
 @extends('layouts.tema')
 
-@section('title', 'Inicio')
+@section('title', 'Talentos')
 
 @section('header_type', 'stick-top style3')
 

@@ -25,6 +25,28 @@ class SiteController extends Controller
         return view('principal', compact('tops','industries'));
     }
 
+    public function howItWorks()
+    {
+        return view('como-funciona');
+    }
+
+    public function planes()
+    {
+        $plans = Plan::all();
+        return view('planes', compact('plans'));
+    }
+
+    public function quienesSomos()
+    {
+        return view('quienes-somos');
+    }
+
+    public function terminos()
+    {
+        return view('terminos');
+    }
+
+
     public function suscripcion(Request $request)
     {
         $plans = Plan::all();
@@ -79,6 +101,11 @@ class SiteController extends Controller
     {
         return view('filtros.suscripcion-talentos');
 
+    }
+
+    public function perfilInfo()
+    {
+        return view('content.mi-cuenta-perfil');
     }
 
 

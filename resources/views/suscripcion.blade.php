@@ -456,9 +456,7 @@
 												]) !!}
 												<i class="la la-email"></i>
 											</div>
-
 											{!! Form::button('Agregar',['class'=>'btn-submit-talent','type'=>'button']) !!}
-
 									{!! Form::close() !!}
 							</div>
 						</div>
@@ -479,7 +477,7 @@
 	});
 
 	$(function() {
-		$('#perfil').fadeOut();
+		$('#perfil').hide();
 		plan = '{{old('plan')}}';
 		plan_name = '{{old('plan_name')}}';
 		periodo = '{{old('periodo')}}';

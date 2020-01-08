@@ -42,7 +42,7 @@
 				 				<a href="#" title="" class="share-twitter"><i class="fa fa-twitter"></i></a>
 				 			</div>
 				 			<div class="can-detail-s">
-				 				<div class="cst"><img src="{{URL::asset($user->avatar)}}" alt="" /></div>
+				 				<div class="cst"><img src="{{URL::asset('images/users/'.$user->avatar)}}" alt="" /></div>
 				 				<h3>{{ $user->name }} {{ $user->lastname }}</h3>
 				 				<span><i>Usuario {{$user->suscription->plan->name}}</i> at Atract Solutions</span>
 				 				<p>{{ $user->email }}</p>

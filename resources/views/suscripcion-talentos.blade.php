@@ -87,7 +87,7 @@
 												<button type="button" name="agregar" id="agregar" class="srch-lctn btn-submit-talent">Agregar</button>
 											</div>
 											<div class="col-lg-6">
-												<button type="button" name="salir" id="salir" class="srch-lctn btn-submit-talent">Salir</button>
+												<a type="button" href="{{url('mi-cuenta')}}" name="salir" id="salir" class="srch-lctn btn-submit-talent">Salir</a>
 											</div>
 										</div>
 									</form>
@@ -184,7 +184,9 @@
 			url:'verificar_talentos',
 			data:{user_id : id_user, _token:_token},
 			success:function(data){
-				if(data.disponibles > 0){
+				if(data.disponibles == null){
+					$('#talentos-agregados strong').html('(Puede agregar todos los talentos que desee)');
+				}else if(data.disponibles > 0){
 					$('#talentos-agregados strong').html('('+data.disponibles+' disponibles)');
 				}else{
 					$('#agregar').hide();

@@ -1,8 +1,8 @@
-@extends('layouts.tema')
+@extends('layouts.login')
 
 @section('title', 'Verificar correo electrónico')
 
-@section('header_type', 'gradient')
+@section('header_type', 'white')
 
 @section('content')
     <section>

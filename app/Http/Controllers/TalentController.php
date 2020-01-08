@@ -75,7 +75,12 @@ class TalentController extends Controller
 
         $maximo = $plan->talents;
 
-        $disponibles = $maximo - $agregados;
+        if($maximo == null){
+            $disponibles = null;
+        }else{
+            $disponibles = $maximo - $agregados;
+        }
+
         
         return response()->json([
             'success'=> 'Nuevo talento',
