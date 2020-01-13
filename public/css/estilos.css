@@ -209,3 +209,30 @@ input[type=range].slider:focus::-ms-fill-upper {
     background: #888888;
     content: "";
 }
+
+.required{
+  color: red;
+  font-size: 1.5em;
+}
+
+.boton-normal {
+    float: left;
+    width: 30%;
+    height: 40px;
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+    margin-top: 20px;
+    background: #0f36a5;
+    
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
+
+}
+
+.boton-normal:hover {
+    background: #fb236a;
+}

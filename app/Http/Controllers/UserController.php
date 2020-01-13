@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Language;
+use App\Experience;
+
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -81,7 +84,47 @@ class UserController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		//
+		$user = User::where('id', $id)->first();
+		$user->name = $request->name;
+		$user->lastname = $request->lastname;
+		$user->nationality = $request->nationality;
+		$user->address = $request->address;
+		$user->city = $request->city;
+		$user->country = $request->country;
+		$user->document = $request->document;
+		$user->phone = $request->phone;
+		$user->abilities = $request->abilities;
+		$user->email = $request->email;
+		$user->save();
+	}
+
+	public function updateExperience(Request $request, $id)
+	{
+		$experience = Experience::where('user_id', $id)->first();
+		$experience->company1 = $request->company1;
+		$experience->position1 = $request->position1;
+		$experience->start_date1 = $request->start_date1;
+		$experience->due_date1 = $request->due_date1;
+		$experience->achievements1 = $request->achievements1;
+		$experience->company2 = $request->company2;
+		$experience->position2 = $request->position2;
+		$experience->start_date2 = $request->start_date2;
+		$experience->due_date2 = $request->due_date2;
+		$experience->achievements2 = $request->achievements2;
+		$experience->company3 = $request->company3;
+		$experience->position3 = $request->position3;
+		$experience->start_date3 = $request->start_date3;
+		$experience->due_date3 = $request->due_date3;
+		$experience->achievements3 = $request->achievements3;
+		$experience->save();
+	}
+
+
+
+	public function updateUser(Request $request)
+	{
+		$this->update($request, Auth::user()->id);
+		$this->updateExperience($request, Auth::user()->id);
 	}
 
 	/**
@@ -111,7 +154,9 @@ class UserController extends Controller
 	public function myAccount()
 	{
 		return view('mi-cuenta');
-	}    
+	}
+
+
 
 
 	public function updateAvatar(Request $request){

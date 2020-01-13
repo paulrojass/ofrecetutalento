@@ -69,7 +69,12 @@ Route::get('perfil/{id}', 'UserController@profile');
 
 Route::get('mi-cuenta', 'UserController@myAccount')->middleware('verified');
 Route::post('cambiar-foto', 'UserController@updateAvatar');
+Route::post('eliminar-idioma', 'LanguageController@deleteLanguage');
+Route::post('cambiar-idioma', 'LanguageController@newLanguage');
 Route::get('suscripcion-talentos', 'SiteController@suscripcionTalentos');
 Route::get('actualizar-talentos', 'SiteController@actualizarTalentos');
 Route::get('info-perfil', 'SiteController@perfilInfo');
 Route::get('form-perfil', 'SiteController@formInfo');
+
+Route::get('actualizar_usuario', 'UserController@updateUser');
+

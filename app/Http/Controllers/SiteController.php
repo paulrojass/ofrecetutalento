@@ -108,5 +108,8 @@ class SiteController extends Controller
         return view('content.mi-cuenta-perfil');
     }
 
-
+    public function formInfo()
+    {
+        return view('forms.mi-cuenta-perfil');
+    }
 }

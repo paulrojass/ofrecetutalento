@@ -48,63 +48,64 @@
 </div>
 <div class="cand-details-sec">
 	<div class="row">
-		<div class="col-lg-6 column">
+		<div class="col-lg-8 column">
 			<div class="edu-history-sec">
-			<div class="job-details-m">	
-					<div class="container">
-					<div class="row">
-						<div class="col-sm">
-							<h3>Experiencia laboral</h3>
-						</div>
-					</div>
-						@if(Auth::User()->experiences->position1)
-						<div class="edu-history style2">
-							<i></i>
-							<div class="edu-hisinfo">
-								<h3>{{ Auth::User()->experiences->position1 }} <span>{{ Auth::User()->experiences->company1 }}</span></h3>
-								<i>{{ \Carbon\Carbon::parse(Auth::User()->experiences->start_date1)->format('Y')}} - 
-									{{ \Carbon\Carbon::parse(Auth::User()->experiences->due_date1)->format('Y')}} </i>
-								<p>{{ Auth::User()->experiences->achievements1 }} </p>
-							</div>
-						</div>
-						@endif
-
-						@if(Auth::User()->experiences->position2)
-						<div class="edu-history style2">
-							<i></i>
-							<div class="edu-hisinfo">
-								<h3>{{ Auth::User()->experiences->position2 }} <span>{{ Auth::User()->experiences->company2 }}</span></h3>
-								<i>{{ \Carbon\Carbon::parse(Auth::User()->experiences->start_date2)->format('Y')}} - 
-									{{ \Carbon\Carbon::parse(Auth::User()->experiences->due_date2)->format('Y')}} </i>
-								<p>{{ Auth::User()->experiences->achievements2 }} </p>
-							</div>
-						</div>
-						@endif
-
-						@if(Auth::User()->experiences->position3)
-						<div class="edu-history style2">
-							<i></i>
-							<div class="edu-hisinfo">
-								<h3>{{ Auth::User()->experiences->position3 }} <span>{{ Auth::User()->experiences->company3 }}</span></h3>
-								<i>{{ \Carbon\Carbon::parse(Auth::User()->experiences->start_date3)->format('Y')}} - 
-									{{ \Carbon\Carbon::parse(Auth::User()->experiences->due_date3)->format('Y')}} </i>
-								<p>{{ Auth::User()->experiences->achievements3 }} </p>
-							</div>
-						</div>
-						@endif
-					</div>
+				<div class="border-title">
+					<h3>Experiencia Laboral</h3>
 				</div>
+				@if(Auth::User()->experiences->company1 || Auth::User()->experiences->company2 || Auth::User()->experiences->company3 )
+					@if(Auth::User()->experiences->company1)
+					<div class="edu-history style2">
+						<i></i>
+						<div class="edu-hisinfo">
+							<h3>{{ Auth::User()->experiences->position1 }} <span>{{ Auth::User()->experiences->company1 }}</span></h3>
+							<i>{{ \Carbon\Carbon::parse(Auth::User()->experiences->start_date1)->format('Y')}} - 
+								{{ \Carbon\Carbon::parse(Auth::User()->experiences->due_date1)->format('Y')}} </i>
+							<p>{{ Auth::User()->experiences->achievements1 }} </p>
+						</div>
+					</div>
+					@endif
+
+					@if(Auth::User()->experiences->company2)
+					<div class="edu-history style2">
+						<i></i>
+						<div class="edu-hisinfo">
+							<h3>{{ Auth::User()->experiences->position2 }} <span>{{ Auth::User()->experiences->company2 }}</span></h3>
+							<i>{{ \Carbon\Carbon::parse(Auth::User()->experiences->start_date2)->format('Y')}} - 
+								{{ \Carbon\Carbon::parse(Auth::User()->experiences->due_date2)->format('Y')}} </i>
+							<p>{{ Auth::User()->experiences->achievements2 }} </p>
+						</div>
+					</div>
+					@endif
+
+					@if(Auth::User()->experiences->company3)
+					<div class="edu-history style2">
+						<i></i>
+						<div class="edu-hisinfo">
+							<h3>{{ Auth::User()->experiences->position3 }} <span>{{ Auth::User()->experiences->company3 }}</span></h3>
+							<i>{{ \Carbon\Carbon::parse(Auth::User()->experiences->start_date3)->format('Y')}} - 
+								{{ \Carbon\Carbon::parse(Auth::User()->experiences->due_date3)->format('Y')}} </i>
+							<p>{{ Auth::User()->experiences->achievements3 }} </p>
+						</div>
+					</div>
+					@endif
+				@else
+					<p>No se han agregado experiencias laborales</p>
+				@endif
 			</div>
 		</div>
 
-		<div class="col-lg-6 column">
-			<div class="job-details-m">	
-				<div class="col-sm">
-					<h3>Idiomas</h3>
-				</div>
+		<div class="col-lg-4 column">
+			<div class="border-title">
+				<h3>Idiomas</h3>
+				<a title="" data-toggle="modal" data-target="#modal-idioma">
+					<i class="la la-plus"></i>
+				Agregar</a>
+			</div>
+			@if(Auth::User()->languages->count() > 0)
 				@foreach(Auth::User()->languages as $language)
 					<div class="progress-sec">
-						<span class="mb-4">{{ $language->language }}</span>
+						<span class="mb-4">{{ $language->language }}<a class="pull-right elimina-idioma" value="{{$language->id}}" title=""><i class="la la-trash-o"></i></a></span>
 						@php($porcentaje = $language->level * 10)
 						<div class="progressbar">
 							<div class="progress" style="width: {{$porcentaje}}%">
@@ -113,7 +114,9 @@
 						</div>
 					</div>
 				@endforeach
-			</div>
+			@else
+				<p>No hay idiomas agreagados</p>
+			@endif
 		</div>
 	</div>	
 </div>
