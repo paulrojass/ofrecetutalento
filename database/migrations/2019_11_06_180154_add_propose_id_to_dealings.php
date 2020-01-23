@@ -15,7 +15,7 @@ class AddProposeIdToDealings extends Migration
     {
         Schema::table('dealings', function (Blueprint $table) {
             $table->unsignedBigInteger('propose_id');
-            $table->foreign('propose_id')->references('id')->on('users');
+            $table->foreign('propose_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

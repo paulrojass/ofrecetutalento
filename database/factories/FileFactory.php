@@ -17,8 +17,7 @@ $factory->define(File::class, function (Faker $faker) {
 	if($type == 'pdf') $file = 'pdf';
 
 	return [
-		'location' => 'files/'.$type.'/default.'.$file,
-		'type' => $type,
-		'exchange_id' => App\Exchange::all(['id'])->random()
+		'location' => 'default.'.$file,
+		'type' => $type
 	];
 });

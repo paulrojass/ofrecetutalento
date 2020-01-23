@@ -15,7 +15,7 @@ class AddPlanIdToSuscriptions extends Migration
     {
         Schema::table('suscriptions', function (Blueprint $table) {
             $table->unsignedBigInteger('plan_id');
-            $table->foreign('plan_id')->references('id')->on('plans');
+            $table->foreign('plan_id')->references('id')->on('plans')->onDelete('cascade');
         });
     }
 

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+
+
 use DB;
 
 use App\Plan;
@@ -56,8 +59,8 @@ class SiteController extends Controller
 
     public function suscripcionTalentos(Request $request)
     {
-        $industries = Industry::all();
-        return view('suscripcion-talentos', compact('industries'));
+        $categories = Category::all();
+        return view('suscripcion-talentos', compact('categories'));
     }
 
     public function talentos(Request $request)
@@ -106,6 +109,12 @@ class SiteController extends Controller
     public function perfilInfo()
     {
         return view('content.mi-cuenta-perfil');
+    }
+
+    public function perfilTalentos()
+    {
+        
+        return view('content.mi-cuenta-talentos');
     }
 
     public function formInfo()

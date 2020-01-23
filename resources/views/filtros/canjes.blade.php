@@ -8,13 +8,13 @@
 	@foreach($exchanges as $exchange)
 	<div class="job-listing wtabs">
 		<div class="job-title-sec">
-			<div class="c-logo"> <img src="{{URL::asset($exchange->image)}}" alt="" /> </div>
+			<div class="c-logo"> <img src="{{URL::asset('images/exchanges/'.$exchange->image)}}" alt="" /> </div>
 			<h3><a href="#" title="">{{$exchange->title}}</a></h3>
 			<span><i class="la la-user"></i>{{$exchange->talent->user->name}} {{$exchange->talent->user->lastname}}</span>
 			<div class="job-lctn"><i class="la la-map-marker"></i>{{$exchange->talent->user->city}}, {{$exchange->talent->user->country}}</div>
 		</div>
 		<div class="job-style-bx">
-	 		<a href="#" title="">
+	 		<a href="{{url('canjes/'.$exchange->id)}}" title="">
 			<span class="job-is ft">Ver detalles</span>
 			</a>
 

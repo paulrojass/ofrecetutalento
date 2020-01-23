@@ -15,7 +15,7 @@ class AddTalentIdToExchanges extends Migration
     {
         Schema::table('exchanges', function (Blueprint $table) {
             $table->unsignedBigInteger('talent_id');
-            $table->foreign('talent_id')->references('id')->on('talents');
+            $table->foreign('talent_id')->references('id')->on('talents')->onDelete('cascade');
         });
     }
 

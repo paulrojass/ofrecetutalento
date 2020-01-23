@@ -15,7 +15,7 @@ class AddUserIdToLikes extends Migration
     {
         Schema::table('likes', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

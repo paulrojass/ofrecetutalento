@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Language;
 use App\Experience;
+use App\Industry;
+use App\Category;
+use App\Talent;
+use App\Exchange;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -153,7 +157,18 @@ class UserController extends Controller
 
 	public function myAccount()
 	{
-		return view('mi-cuenta');
+/*		$user_id = Auth()->User()->id;
+        $talentos = Talent::where('user_id', $user_id)->get();
+
+        $foreach ($talentos as $talent) {
+        	$exchanges->push(Exchange::where('talent_id', $talent_id));
+        }
+
+        dd($exchanges);*/
+
+		request()->session()->regenerateToken();
+		$categories = Category::all();
+		return view('mi-cuenta',compact('categories'));
 	}
 
 

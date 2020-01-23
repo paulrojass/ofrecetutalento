@@ -15,7 +15,7 @@ class AddAcceptIdToDealings extends Migration
     {
         Schema::table('dealings', function (Blueprint $table) {
             $table->unsignedBigInteger('accept_id');
-            $table->foreign('accept_id')->references('id')->on('users');
+            $table->foreign('accept_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

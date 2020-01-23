@@ -15,7 +15,7 @@ class AddFromIdToMessages extends Migration
     {
         Schema::table('messages', function (Blueprint $table) {
             $table->unsignedBigInteger('from_id');
-            $table->foreign('from_id')->references('id')->on('users');
+            $table->foreign('from_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

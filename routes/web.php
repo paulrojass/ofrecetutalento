@@ -18,6 +18,7 @@ Route::get('quienes_somos','SiteController@quienesSomos');
 Route::get('planes','SiteController@planes');
 Route::get('talentos', 'SiteController@talentos');
 Route::get('canjes', 'SiteController@canjes');
+Route::get('canjes/{id}', 'ExchangeController@canje');
 route::get('suscripcion', 'SiteController@suscripcion');
 route::get('terminos_&_condiciones', 'SiteController@terminos');
 
@@ -58,15 +59,11 @@ Route::get('/callback/{provider}', 'SocialController@callback');
 Route::post('verificar_talentos', 'TalentController@showTalentsUser');
 //Guardar talento
 Route::post('guardar_talento', 'TalentController@store');
-
-//Mostrar select de categorias en suscripcion
-Route::get('select-categorias', 'CategoryController@showCategoriesSelect');
-
-
-
+Route::post('actualizar_talento', 'TalentController@actualizarTalento');
 //Perfil de usuario:
 Route::get('perfil/{id}', 'UserController@profile');
 
+//rutas de mi cuenta
 Route::get('mi-cuenta', 'UserController@myAccount')->middleware('verified');
 Route::post('cambiar-foto', 'UserController@updateAvatar');
 Route::post('eliminar-idioma', 'LanguageController@deleteLanguage');
@@ -74,7 +71,8 @@ Route::post('cambiar-idioma', 'LanguageController@newLanguage');
 Route::get('suscripcion-talentos', 'SiteController@suscripcionTalentos');
 Route::get('actualizar-talentos', 'SiteController@actualizarTalentos');
 Route::get('info-perfil', 'SiteController@perfilInfo');
+Route::get('talentos-perfil', 'SiteController@perfilTalentos');
+Route::post('eliminar-talento', 'TalentController@eliminarTalento');
 Route::get('form-perfil', 'SiteController@formInfo');
-
 Route::get('actualizar_usuario', 'UserController@updateUser');
 

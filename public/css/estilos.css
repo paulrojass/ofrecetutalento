@@ -236,3 +236,23 @@ input[type=range].slider:focus::-ms-fill-upper {
 .boton-normal:hover {
     background: #fb236a;
 }
+
+.font-likes{
+  font-size: 14px;
+  margin-left: 1em;
+  color: #8b91dd;
+  margin-top: 5px;
+}
+
+.job-title2 > .me-gusta > a > i {
+    transform: translate(0,-5px);
+    -webkit-transform: translate(0,-5px); /** Chrome & Safari **/
+    -o-transform: translate(0,-5px); /** Opera **/
+    -moz-transform: translate(0,-5px); /** Firefox **/
+
+    float: left;
+    font-size: 30px;
+    /* color: #B8B8B8; */
+    color: #ff9200;
+    margin: 1px 0;
+}

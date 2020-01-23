@@ -40,33 +40,33 @@
 											<div class="col-lg-12">
 												<span class="pf-title">Talento</span>									
 												<div class="pf-field">
-													<input type="text" name="title" id="title" required value="{{old('title')}}">
+													<input type="text" name="title" id="title" required value="{{old('title')}}" maxlength="100">
 													<i class="la la-email"></i>
 												</div>
 											</div>
 
-
 											<div class="col-lg-4">
 												<span class="pf-title">Industria</span>
-													<div class="pf-field">
-													<select name="industries" id="industries">
-														<option value = "">Selecciona una industria</option>
-														@foreach($industries as $industry)
-															<option value = "{{$industry->id}}">
-																{{ $industry->name }}						
-															</option>
-														@endforeach
-													</select>												
-												</div>
-											</div>
-
-
-											<div class="col-lg-4">
-					 							<span class="pf-title">Categoría</span>
-						 						<div class="pf-field" id="select-cat">
-													<select name="categories" id="categories" class="chosen">
-															<option value = "">Primero selecciona una Industria</option>
-													</select>
+												<div class="pf-field">
+						                            <select name="categories" id="categories" class="chosen">
+						                            	<option value = "">Selecciona una categoría</option>
+						                            	@php($industria = "")
+						                            	@foreach($categories as $category)
+						                            	@if($category->industry->name != $industria)
+						                            		@php($industria = $category->industry->name)
+						                            			@if(!$loop->first)
+						                            				</optgroup>
+																@endif
+																<optgroup label="{{$industria}}">
+																    <option value="{{$category->id}}">{{$category->name}}</option>
+						                            	@else
+															<option value="{{$category->id}}">{{$category->name}}</option>
+															@if($loop->last)
+																</optgroup>
+															@endif
+						                            	@endif
+						                                @endforeach
+						                            </select>
 												</div>
 											</div>
 
@@ -149,32 +149,6 @@
 				}
 			});
 		});
-
-		$('#industries').on('change', function() {
-			var industry_id = $(this).val();
-			if ($.trim(industry_id) != ''){
-				$.get('select-categorias', {industry_id : industry_id}, function(categories){
-					$('#select-cat').empty();
-					$('#select-cat').html(categories);
-				});
-			}
-		});
-
-/*		$('#industries').on('change', function() {
-			var industry_id = $(this).val();
-			if ($.trim(industry_id) != ''){
-				$.get('select-categorias', {industry_id : industry_id}, function(categories){
-					$('#select-cat').empty();
-					$('#select-cat').append('<div class="pf-field"><select name="categories" id="categories" class="chosen"><option value = "">Selecciona una categoria</option>');
-					$.each(categories, function(index, value){
-						$('#select-cat').append("<option value = '"+index+"'>"+value+"</option>");
-					});
-					$('#select-cat').append("</select>");
-					$('#select-cat').append("</div>");
-
-				});
-			}
-		});*/
 	});
 
 	function verificarTalentos(id_user){
@@ -191,7 +165,6 @@
 				}else{
 					$('#agregar').hide();
 					$('#talentos-agregados strong').html('(Para agregar mas talentos puede cambiar su plan)');
-
 				}
 			}
 		});

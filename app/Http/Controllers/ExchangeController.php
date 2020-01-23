@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Exchange;
+use App\File;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Auth;
+
 
 class ExchangeController extends Controller
 {
@@ -44,9 +48,21 @@ class ExchangeController extends Controller
      * @param  \App\Exchange  $exchange
      * @return \Illuminate\Http\Response
      */
-    public function show(Exchange $exchange)
+    public function show($id)
     {
-        //
+        return Exchange::find($id);
+    }
+
+    public function canje($id)
+    {
+        $canje = $this->show($id);
+        $archivos = $this->archivosCanje($canje);
+        return view('canje', compact('canje','archivos'));
+    }
+
+    public function archivosCanje(Exchange $exchange)
+    {
+        return File::where('exchange_id', $exchange->id)->get();
     }
 
     /**

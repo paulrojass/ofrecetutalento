@@ -15,7 +15,7 @@ class AddExchangeIdToLikes extends Migration
     {
         Schema::table('likes', function (Blueprint $table) {
             $table->unsignedBigInteger('exchange_id');
-            $table->foreign('exchange_id')->references('id')->on('exchanges');
+            $table->foreign('exchange_id')->references('id')->on('exchanges')->onDelete('cascade');
         });
     }
 

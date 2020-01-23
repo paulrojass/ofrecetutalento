@@ -15,7 +15,7 @@ class AddExchangeIdToDealings extends Migration
     {
         Schema::table('dealings', function (Blueprint $table) {
             $table->unsignedBigInteger('exchange_id');
-            $table->foreign('exchange_id')->references('id')->on('exchanges');
+            $table->foreign('exchange_id')->references('id')->on('exchanges')->onDelete('cascade');
         });
     }
 

@@ -24,7 +24,7 @@ class Talent extends Model
 
 	public function exchanges()
 	{
-		return $this->belongsTo(Exchange::class);
+		return $this->hasMany(Exchange::class);
 	}
 
 	public function category()
