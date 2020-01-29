@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Like;
+use App\Exchange;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Auth;
+
 
 class LikeController extends Controller
 {
@@ -22,9 +26,12 @@ class LikeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($canje_id)
     {
-        //
+        $like = new Like;
+        $like->exchange_id = $canje_id;
+        $like->user_id = auth()->user()->id;
+        $like->save();
     }
 
     /**
@@ -72,6 +79,21 @@ class LikeController extends Controller
         //
     }
 
+    public function changeLike(Request $request)
+    {
+        $canje = Exchange::find($request->canje_id);
+        $like = Like::where('exchange_id', $request->canje_id)->where('user_id', Auth()->user()->id)->first();
+        if($like)
+        {
+            $this->destroy($like);
+        }
+        else
+        {
+            $this->create($request->canje_id);
+        }
+        return view('content.likes', compact('canje'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -80,6 +102,6 @@ class LikeController extends Controller
      */
     public function destroy(Like $like)
     {
-        //
+        $like->delete();
     }
 }

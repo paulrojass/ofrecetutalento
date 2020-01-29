@@ -63,6 +63,10 @@ Route::post('actualizar_talento', 'TalentController@actualizarTalento');
 //Perfil de usuario:
 Route::get('perfil/{id}', 'UserController@profile');
 
+//Canjes Autenticado
+Route::get('cambiar-like', 'LikeController@changeLike');
+
+
 //rutas de mi cuenta
 Route::get('mi-cuenta', 'UserController@myAccount')->middleware('verified');
 Route::post('cambiar-foto', 'UserController@updateAvatar');

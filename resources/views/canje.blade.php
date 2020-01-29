@@ -31,18 +31,7 @@
 				 				<div class="job-title2">
 				 					@auth
 					 					<div class="me-gusta">
-					 						<a id="a-me-gusta">
-											@if(($canje->likes->where('user_id', auth()->user()->id))->count() > 0)
-						 						<i class="la la-heart"></i>
-						 					@else
-						 						<i class="la la-heart-o"></i>
-						 					@endif
-						 					</a>
-						 					<span class="font-likes">
-						 						<strong>
-						 							{{$canje->likes->count()}}
-						 						</strong> Me gusta
-						 					</span>
+
 					 					</div>
 				 					@endauth
 				 				</div>
@@ -108,17 +97,27 @@
 	 							</div>
 	 						</div>
 
-
-
-
-
-
-
-				 			<div class="comment-sec">
+				 			<div class="comment-sec" id="div-comentarios">
 				 				@php($comments = ($canje->comments->where('replyto', null)))
 				 				@php($replys = ($canje->comments->where('replyto', !null)) )
+								<div class="border-title"><h3>{{$canje->comments->count()}} Comentarios</h3><a id="a-agregar-comentario" title=""><i class="la la-plus"></i> Agregar comentario</a></div>
 
-				 				<h3>{{$canje->comments->count()}} Comentarios</h3>
+					 			<div class="commentform-sec mb-3" id="comentario" style="display: none">
+					 				<h3>Dejar comentario</h3>
+					 				<form>
+					 					<div class="row">
+					 						<div class="col-lg-10">
+						 						<!-- <span class="pf-title">Comentario</span> -->
+						 						<div class="pf-field">
+						 							<textarea id="textarea-comentario"></textarea>
+						 						</div>
+						 					</div>
+						 					<div class="col-lg-2">
+						 						<button type="submit">publicar</button>
+						 					</div>
+					 					</div>
+					 				</form>
+					 			</div>
 				 				<ul>
 				 					@foreach($comments as $comment)
 					 					<li>
@@ -126,49 +125,52 @@
 					 							<div class="comment-avatar"> <img src="{{URL::asset('images/users/'.$comment->user->avatar)}}" style="max-width: 90px" alt="" /> </div>
 					 							<div class="comment-detail">
 					 								<h3>{{$comment->user->name}} {{$comment->user->lastname}}</h3>
-					 								<div class="date-comment"><a href="#" title=""><i class="la la-calendar-o"></i>{{$comment->created_at->format('j \\of F Y')}}</a></div>
+					 								<div class="date-comment"><a href="#" title=""><i class="la la-calendar-o"></i>{{$comment->created_at->format('l d, F Y')}}</a></div>
 					 								<p>{{$comment->comment}}</p>
 													@auth
 														@if(auth()->user() == $canje->talent->user)
-					 										<a href="#" title=""><i class="la la-reply"></i>Responder</a>
+					 										<a class="a-responder" data-responder="{{$comment->id}}" title=""><i class="la la-reply"></i>Responder</a>
 					 									@endif
 					 								@endauth
 					 							</div>
 					 						</div>
-					 						@foreach($replys->where('replyto', $comment->id) as $reply)
 					 						<ul class="comment-child">
+					 							<li class="respuesta" id="respuesta{{$comment->id}}" style="display: none">
+										 			<div class="commentform-sec mb-3" >
+										 				<h3>Responder</h3>
+										 				<form>
+										 					<div class="row">
+										 						<div class="col-lg-10">
+											 						<!-- <span class="pf-title">Comentario</span> -->
+											 						<div class="pf-field">
+											 							<textarea id="textarea-respuesta{{$comment->id}}"></textarea>
+											 						</div>
+											 					</div>
+											 					<div class="col-lg-2">
+											 						<button type="submit">publicar</button>
+											 					</div>
+										 					</div>
+										 				</form>
+										 			</div>
+					 							</li>
+					 							@foreach($replys->where('replyto', $comment->id) as $reply)
 					 							<li>
 					 								<div class="comment">
 							 							<div class="comment-avatar"> <img src="{{URL::asset('images/users/'.$reply->user->avatar)}}" style="max-width: 90px" alt="" /> </div>
 							 							<div class="comment-detail">
 							 								<h3>{{$reply->user->name}} {{$reply->user->lastname}}</h3>
 							 								<div class="date-comment"><a href="#" title=""><i class="la la-calendar-o"></i>Jan 16, 2016 07:48 am</a></div>
-							 								<p>{{$reply->comment}}</p>												
-							 							</div>
+							 								<p>{{$reply->comment}}</p>	
+							 							</div>							 							
 							 						</div>
 					 							</li>
+					 							@endforeach
 					 						</ul>
-					 						@endforeach
 					 					</li>
 				 					@endforeach
 				 				</ul>
 				 			</div>
-				 			<div class="commentform-sec">
-				 				<h3>Dejar comentario</h3>
-				 				<form>
-				 					<div class="row">
-				 						<div class="col-lg-12">
-					 						<!-- <span class="pf-title">Comentario</span> -->
-					 						<div class="pf-field">
-					 							<textarea></textarea>
-					 						</div>
-					 					</div>
-					 					<div class="col-lg-12">
-					 						<button type="submit">Enviar</button>
-					 					</div>
-				 					</div>
-				 				</form>
-				 			</div>
+
 <!--
 				 			<div class="job-overview">
 					 			<h3>Job Overview</h3>
@@ -209,18 +211,89 @@
 			</div>
 		</div>
 	</section>
+
+
+	<!-- Modal Idioma -->
+	<div class="modal fade" id="modal-comentario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Agregar nuevo idioma</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form id="form-idioma">
+			  <div class="modal-body">
+					<div class="contact-edit pl-5 pr-5">
+						@csrf
+						<div class="row">
+							<span class="pf-title">Idioma</span>									
+							<div class="pf-field">
+								<input type="text" name="language" id="language" required>
+								<i class="la la-email"></i>
+							</div>
+							<span class="pf-title result-language">Nivel: <b></b></span>
+							<input type="range" class="slider" min="0" max="10" id="level-language" name="level-language" required>
+						</div>
+					</div>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="boton-normal">Cerrar</button>
+				<button type="button" class="boton-normal" id="nuevo-idioma">Agregar</button>
+			  </div>
+			</form>
+		</div>
+	  </div>
+	</div>
+
+
+
+
+
 @endsection
 
 
 @section('scripts')
 <script>
 	$(function(){
+		var id_canje = '{!! $canje->id !!}';
+		actualizarLikes(id_canje);
+
+		$('#div-comentarios').on('click', '#a-agregar-comentario', function(e){
+			e.preventDefault();
+			$('#comentario').slideDown('slow', function(){
+				$('#textarea-comentario').focus();
+				$('#a-agregar-comentario').hide();
+			});
+		});
+
+		$('#div-comentarios').on('click', '.a-responder', function(e){
+			e.preventDefault();
+			var clickeado = $(this).data('responder');
+			$('#respuesta'+clickeado).slideDown('slow', function(){
+				$('#textarea-respuesta'+clickeado).focus();
+			});
+		});
+
 		$('.job-title2').on('click', '#a-me-gusta',function(e){
 			e.preventDefault();
-			var id_canje = '{!! $canje->id !!}';
 			console.log(id_canje);
+			actualizarLikes(id_canje);
 		});
+		function actualizarLikes(id_canje){
+			$.ajax({
+				url: '/cambiar-like',
+				type: 'get',
+				data: {canje_id : id_canje},
+				dataType: 'html',
+			})
+			.done(function(data) {
+				$('.me-gusta').html(data);
+			});
+		}
 	});
+
 	
 </script>
 @endsection

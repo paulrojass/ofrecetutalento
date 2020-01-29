@@ -4,7 +4,6 @@
 
 @section('header_type', 'stick-top style3')
 
-
 @section('content')
 <section class="overlape">
 	<div class="block no-padding">

@@ -256,3 +256,7 @@ input[type=range].slider:focus::-ms-fill-upper {
     color: #ff9200;
     margin: 1px 0;
 }
+
+.commentform-sec > form {
+    padding-right: 0px;
+}

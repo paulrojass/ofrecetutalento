@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 
 class LoginController extends Controller
 {
@@ -27,11 +29,13 @@ class LoginController extends Controller
 	 */
    //protected $redirectTo = '/home';
 
-	protected function redirectTo()
+	/*protected function redirectTo()*/
+	protected function redirectPath()
 	{
 		if (auth()->user()->hasRole('user')) {
 			if((auth()->user()->suscription->plan_id > 1) && (!auth()->user()->hasAnyTalent())) return 'suscripcion-talentos';
-			return 'mi-cuenta';
+			/*para redireccionar atras luego de login*/
+			return Session::get('backUrl') ? Session::get('backUrl') :   $this->redirectTo;
 		}
 		return 'panel';
 	}
@@ -44,5 +48,7 @@ class LoginController extends Controller
 	public function __construct()
 	{
 		$this->middleware('guest')->except('logout');
+		/*para redireccionar atras luego de login*/
+    	Session::put('backUrl', URL::previous());
 	}
 }

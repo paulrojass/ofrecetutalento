@@ -7,10 +7,13 @@ use App\File;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use App\Traits\DatesTranslator;
 
 
 class ExchangeController extends Controller
 {
+    use DatesTranslator;
+
     /**
      * Display a listing of the resource.
      *

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
+use App\Traits\DatesTranslator;
+
 
 use DB;
 
@@ -21,6 +23,8 @@ use Carbon\Carbon;
  
 class SiteController extends Controller
 {
+    use DatesTranslator;
+
     public function principal(Request $request)
     {
         $industries = Industry::all();
