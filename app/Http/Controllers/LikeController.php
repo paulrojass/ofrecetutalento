@@ -82,14 +82,17 @@ class LikeController extends Controller
     public function changeLike(Request $request)
     {
         $canje = Exchange::find($request->canje_id);
-        $like = Like::where('exchange_id', $request->canje_id)->where('user_id', Auth()->user()->id)->first();
-        if($like)
-        {
-            $this->destroy($like);
-        }
-        else
-        {
-            $this->create($request->canje_id);
+
+        if(($request->cambiar) == 1){
+            $like = Like::where('exchange_id', $request->canje_id)->where('user_id', Auth()->user()->id)->first();
+            if($like)
+            {
+                $this->destroy($like);
+            }
+            else
+            {
+                $this->create($request->canje_id);
+            }
         }
         return view('content.likes', compact('canje'));
     }

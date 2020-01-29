@@ -96,79 +96,8 @@
 		 								</div>
 	 							</div>
 	 						</div>
-
+							<!-- Seccion de comentarios-->
 				 			<div class="comment-sec" id="div-comentarios">
-				 				@php($comments = ($canje->comments->where('replyto', null)))
-				 				@php($replys = ($canje->comments->where('replyto', !null)) )
-								<div class="border-title"><h3>{{$canje->comments->count()}} Comentarios</h3><a id="a-agregar-comentario" title=""><i class="la la-plus"></i> Agregar comentario</a></div>
-
-					 			<div class="commentform-sec mb-3" id="comentario" style="display: none">
-					 				<h3>Dejar comentario</h3>
-					 				<form>
-					 					<div class="row">
-					 						<div class="col-lg-10">
-						 						<!-- <span class="pf-title">Comentario</span> -->
-						 						<div class="pf-field">
-						 							<textarea id="textarea-comentario"></textarea>
-						 						</div>
-						 					</div>
-						 					<div class="col-lg-2">
-						 						<button type="submit">publicar</button>
-						 					</div>
-					 					</div>
-					 				</form>
-					 			</div>
-				 				<ul>
-				 					@foreach($comments as $comment)
-					 					<li>
-					 						<div class="comment">
-					 							<div class="comment-avatar"> <img src="{{URL::asset('images/users/'.$comment->user->avatar)}}" style="max-width: 90px" alt="" /> </div>
-					 							<div class="comment-detail">
-					 								<h3>{{$comment->user->name}} {{$comment->user->lastname}}</h3>
-					 								<div class="date-comment"><a href="#" title=""><i class="la la-calendar-o"></i>{{$comment->created_at->format('l d, F Y')}}</a></div>
-					 								<p>{{$comment->comment}}</p>
-													@auth
-														@if(auth()->user() == $canje->talent->user)
-					 										<a class="a-responder" data-responder="{{$comment->id}}" title=""><i class="la la-reply"></i>Responder</a>
-					 									@endif
-					 								@endauth
-					 							</div>
-					 						</div>
-					 						<ul class="comment-child">
-					 							<li class="respuesta" id="respuesta{{$comment->id}}" style="display: none">
-										 			<div class="commentform-sec mb-3" >
-										 				<h3>Responder</h3>
-										 				<form>
-										 					<div class="row">
-										 						<div class="col-lg-10">
-											 						<!-- <span class="pf-title">Comentario</span> -->
-											 						<div class="pf-field">
-											 							<textarea id="textarea-respuesta{{$comment->id}}"></textarea>
-											 						</div>
-											 					</div>
-											 					<div class="col-lg-2">
-											 						<button type="submit">publicar</button>
-											 					</div>
-										 					</div>
-										 				</form>
-										 			</div>
-					 							</li>
-					 							@foreach($replys->where('replyto', $comment->id) as $reply)
-					 							<li>
-					 								<div class="comment">
-							 							<div class="comment-avatar"> <img src="{{URL::asset('images/users/'.$reply->user->avatar)}}" style="max-width: 90px" alt="" /> </div>
-							 							<div class="comment-detail">
-							 								<h3>{{$reply->user->name}} {{$reply->user->lastname}}</h3>
-							 								<div class="date-comment"><a href="#" title=""><i class="la la-calendar-o"></i>Jan 16, 2016 07:48 am</a></div>
-							 								<p>{{$reply->comment}}</p>	
-							 							</div>							 							
-							 						</div>
-					 							</li>
-					 							@endforeach
-					 						</ul>
-					 					</li>
-				 					@endforeach
-				 				</ul>
 				 			</div>
 
 <!--
@@ -184,8 +113,8 @@
 					 			</ul>
 					 		</div>
  				 			<div class="share-bar">
-	<span>Share</span><a href="#" title="" class="share-fb"><i class="fa fa-facebook"></i></a><a href="#" title="" class="share-twitter"><i class="fa fa-twitter"></i></a>
-</div> -->
+							<span>Share</span><a href="#" title="" class="share-fb"><i class="fa fa-facebook"></i></a><a href="#" title="" class="share-twitter"><i class="fa fa-twitter"></i></a>
+						</div> -->
 				 		</div>
 				 	</div>
 				 	<div class="col-lg-4 column">
@@ -246,11 +175,6 @@
 		</div>
 	  </div>
 	</div>
-
-
-
-
-
 @endsection
 
 
@@ -258,7 +182,13 @@
 <script>
 	$(function(){
 		var id_canje = '{!! $canje->id !!}';
-		actualizarLikes(id_canje);
+		var AuthUser = '{{{ (Auth::user()) ? Auth::user() : null }}}';
+		cargaInicial(id_canje);
+
+		function cargaInicial(id_canje){
+			actualizarComentarios(id_canje);
+			if(AuthUser){actualizarLikes(id_canje, '0');}
+		}
 
 		$('#div-comentarios').on('click', '#a-agregar-comentario', function(e){
 			e.preventDefault();
@@ -276,24 +206,74 @@
 			});
 		});
 
+		$('#div-comentarios').on('click', '#b-publicar-comentario', function(e){
+			e.preventDefault();
+			agregarComentario(id_canje);
+		});
+
+		$('#div-comentarios').on('click', '#b-publicar-respuesta', function(e){
+			e.preventDefault();
+			agregarComentario(id_canje);
+		});
+
 		$('.job-title2').on('click', '#a-me-gusta',function(e){
 			e.preventDefault();
-			console.log(id_canje);
-			actualizarLikes(id_canje);
+			actualizarLikes(id_canje, '1');
 		});
-		function actualizarLikes(id_canje){
+
+		function actualizarLikes(id_canje, cambiar){
 			$.ajax({
 				url: '/cambiar-like',
 				type: 'get',
-				data: {canje_id : id_canje},
+				data: {canje_id : id_canje, cambiar:cambiar},
 				dataType: 'html',
 			})
 			.done(function(data) {
 				$('.me-gusta').html(data);
 			});
 		}
-	});
 
-	
+		function actualizarComentarios(id_canje){
+			$.ajax({
+				url: '/actualizar-comentarios',
+				type: 'get',
+				data: {canje_id : id_canje},
+				dataType: 'html',
+			})
+			.done(function(data) {
+				$('#div-comentarios').html(data);
+			});			
+		}
+
+		function agregarComentario(id_canje){
+			var comentario = $('#textarea-comentario').val();
+			if (comentario != ''){
+				$.ajax({
+					url: '/agregar-comentario',
+					type: 'get',
+					data: {canje_id : id_canje, comment:comentario},
+					dataType: 'html',
+				})
+				.done(function(data) {
+					$('#div-comentarios').html(data);
+				});				
+			}
+		}
+
+		function agregarRespuesta(id_canje){
+			var comentario = $('#textarea-comentario').val();
+			if (comentario != ''){
+				$.ajax({
+					url: '/agregar-respuesta',
+					type: 'get',
+					data: {canje_id : id_canje, comment:comentario},
+					dataType: 'html',
+				})
+				.done(function(data) {
+					$('#div-comentarios').html(data);
+				});				
+			}
+		}
+	});
 </script>
 @endsection

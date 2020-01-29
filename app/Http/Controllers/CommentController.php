@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Exchange;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -22,9 +24,17 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $comment = new Comment();
+        $comment->comment = $request->comment;
+        $comment->user_id = Auth()->User()->id;
+        $comment->exchange_id = $request->canje_id;
+        if($request->replyto)
+        {
+            $comment->replyto = $comment->replyto;
+        }
+        $comment->save();
     }
 
     /**
@@ -82,4 +92,20 @@ class CommentController extends Controller
     {
         //
     }
+
+
+    public function newComment(Request $request)
+    {
+        $canje = Exchange::find($request->canje_id);
+        $this->create($request);
+        return view('content.comments', compact('canje'));
+    }
+
+    public function updateCommentsView(Request $request)
+    {
+        $canje = Exchange::find($request->canje_id);
+        return view('content.comments', compact('canje'));
+    }
+
+
 }

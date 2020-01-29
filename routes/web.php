@@ -37,7 +37,7 @@ Route::post('talentos','SearchController@talentsFilter')->name('talentos');
 //paginacion de talentos
 Route::get('/pagination', 'SiteController@paginationTalents');
 Route::get('pagination/fetch_data_talents', 'SiteController@fetch_data_talents');
-//Filtrado de Telentos
+//Filtrado de canjes
 Route::post('canjes','SearchController@exchangesFilter')->name('canjes');
 //paginacion de talentos
 /*Route::get('/pagination', 'SiteController@paginationTalents');
@@ -65,7 +65,8 @@ Route::get('perfil/{id}', 'UserController@profile');
 
 //Canjes Autenticado
 Route::get('cambiar-like', 'LikeController@changeLike');
-
+Route::get('agregar-comentario', 'CommentController@newComment');
+Route::get('actualizar-comentarios', 'CommentController@updateCommentsView');
 
 //rutas de mi cuenta
 Route::get('mi-cuenta', 'UserController@myAccount')->middleware('verified');
@@ -79,4 +80,3 @@ Route::get('talentos-perfil', 'SiteController@perfilTalentos');
 Route::post('eliminar-talento', 'TalentController@eliminarTalento');
 Route::get('form-perfil', 'SiteController@formInfo');
 Route::get('actualizar_usuario', 'UserController@updateUser');
-
