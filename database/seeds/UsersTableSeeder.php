@@ -9,6 +9,7 @@ use App\Experience;
 use App\Suscription;
 use App\Role;
 use App\Comment;
+use App\Message;
 use App\Like;
 
 class UsersTableSeeder extends Seeder

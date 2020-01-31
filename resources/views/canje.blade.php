@@ -129,7 +129,7 @@
 			 				</div>
 			 				@auth
 							@if(auth()->user() != $canje->talent->user)
-			 				<a href="#" title="" class="apply-job-btn"><i class="la la-paper-plane"></i>Ofrecer trato</a>
+			 				<a data-toggle="modal" data-target="#modal-trato" title="" class="apply-job-btn"><i class="la la-paper-plane"></i>Ofrecer trato</a>
 			 				@endif
 			 				@else
 			 				<a href="{{url('suscripcion')}}" title="" class="apply-job-btn"><i class="la la-paper-plane"></i>Registrate para ofrecer trato</a>
@@ -143,33 +143,58 @@
 
 
 	<!-- Modal Idioma -->
-	<div class="modal fade" id="modal-comentario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="modal-trato" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Agregar nuevo idioma</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Ofrecer Trato</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form id="form-idioma">
+			<form id="form-trato">
 			  <div class="modal-body">
 					<div class="contact-edit pl-5 pr-5">
 						@csrf
 						<div class="row">
-							<span class="pf-title">Idioma</span>									
+	 						<span class="pf-title">Especificar requerimiento</span>
+	 						<div class="pf-field">
+	 							<textarea id="description" name="description"></textarea>
+	 						</div>
+
+							<span class="pf-title">forma de pago</span>								
 							<div class="pf-field">
-								<input type="text" name="language" id="language" required>
-								<i class="la la-email"></i>
+								<div class="form-check">
+								  <input class="form-check-input" type="radio" name="trato" id="tipo-pago" value="pago" checked>
+								  <label class="form-check-label" for="tipo-pago">
+								    Pagar ${{$canje->price}}
+								  </label>
+								</div>
+								<div class="form-check">
+								  <input class="form-check-input" type="radio" name="trato" id="tipo-canje" value="canje">
+								  <label class="form-check-label" for="tipo-canje">
+								    Ofrecer Canje
+								  </label>
+								</div>
 							</div>
-							<span class="pf-title result-language">Nivel: <b></b></span>
-							<input type="range" class="slider" min="0" max="10" id="level-language" name="level-language" required>
+						</div>
+						<div class="row" id="div-select-canje" style="display: none">
+	 						<span class="pf-title">Mis Canjes</span>
+	 						<div class="pf-field">
+	 							<select id="exchange_proposal" name="exchange_proposal" data-placeholder="Selecciona tu canje" class="chosen">
+									@foreach(Auth()->user()->talents as $talent)
+										@foreach($talent->exchanges as $exchange)
+										<option value="{{$exchange->id}}">{{$exchange->title}}</option>
+										@endforeach
+									@endforeach
+								</select>
+	 						</div>
 						</div>
 					</div>
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" data-dismiss="modal" class="boton-normal">Cerrar</button>
-				<button type="button" class="boton-normal" id="nuevo-idioma">Agregar</button>
+				<button type="button" data-dismiss="modal" class="boton-normal">cancelar</button>
+				<button type="button" class="boton-normal" id="nuevo-idioma">enviar</button>
 			  </div>
 			</form>
 		</div>
@@ -186,6 +211,7 @@
 		cargaInicial(id_canje);
 
 		function cargaInicial(id_canje){
+			//$("#tipo-pago").checked();
 			actualizarComentarios(id_canje);
 			if(AuthUser){actualizarLikes(id_canje, '0');}
 		}
@@ -211,9 +237,10 @@
 			agregarComentario(id_canje);
 		});
 
-		$('#div-comentarios').on('click', '#b-publicar-respuesta', function(e){
+		$('#div-comentarios').on('click', '.b-publicar-respuesta', function(e){
 			e.preventDefault();
-			agregarComentario(id_canje);
+			var comentario = $(this).data('value');
+			agregarRespuesta(id_canje, comentario);
 		});
 
 		$('.job-title2').on('click', '#a-me-gusta',function(e){
@@ -260,13 +287,13 @@
 			}
 		}
 
-		function agregarRespuesta(id_canje){
-			var comentario = $('#textarea-comentario').val();
+		function agregarRespuesta(id_canje, comentario_id){
+			var comentario = $('#textarea-respuesta'+comentario_id).val();
 			if (comentario != ''){
 				$.ajax({
 					url: '/agregar-respuesta',
 					type: 'get',
-					data: {canje_id : id_canje, comment:comentario},
+					data: {canje_id : id_canje, comment:comentario, replyto: comentario_id},
 					dataType: 'html',
 				})
 				.done(function(data) {
@@ -274,6 +301,15 @@
 				});				
 			}
 		}
+
+		$('#tipo-canje').click(function () {
+			$('#div-select-canje').show();
+		});
+		$('#tipo-pago').click(function () {
+			$('#div-select-canje').hide();
+		});
+
+
 	});
 </script>
 @endsection

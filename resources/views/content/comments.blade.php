@@ -50,7 +50,7 @@
 	 						</div>
 	 					</div>
 	 					<div class="col-lg-2">
-							<button type="button" id="b-publicar-respuesta{{$comment->id}}">publicar</button>
+							<button type="button" data-value="{{$comment->id}}" class="b-publicar-respuesta">publicar</button>
 	 					</div>
  					</div>
  				</form>
@@ -62,7 +62,7 @@
 					<div class="comment-avatar"> <img src="{{URL::asset('images/users/'.$reply->user->avatar)}}" style="max-width: 90px" alt="" /> </div>
 					<div class="comment-detail">
 						<h3>{{$reply->user->name}} {{$reply->user->lastname}}</h3>
-						<div class="date-comment"><a href="#" title=""><i class="la la-calendar-o"></i>Jan 16, 2016 07:48 am</a></div>
+						<div class="date-comment"><a href="#" title=""><i class="la la-calendar-o"></i>{{$reply->created_at->format('l d, F Y')}}</a></div>
 						<p>{{$reply->comment}}</p>	
 					</div>							 							
 				</div>

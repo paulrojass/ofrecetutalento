@@ -26,13 +26,14 @@ class CommentController extends Controller
      */
     public function create(Request $request)
     {
+
         $comment = new Comment();
         $comment->comment = $request->comment;
         $comment->user_id = Auth()->User()->id;
         $comment->exchange_id = $request->canje_id;
         if($request->replyto)
         {
-            $comment->replyto = $comment->replyto;
+            $comment->replyto = $request->replyto;
         }
         $comment->save();
     }

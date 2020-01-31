@@ -15,7 +15,7 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('date')->nullable();
+            /*$table->date('date')->nullable();*/
             $table->string('subject', 100)->nullable();
             $table->text('body')->nullable();
             $table->boolean('received')->default(0);

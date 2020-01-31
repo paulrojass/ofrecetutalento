@@ -7,6 +7,7 @@ use App\Exchange;
 use App\File;
 use App\Like;
 use App\Comment;
+use App\Dealing;
 
 class TalentsTableSeeder extends Seeder
 {
@@ -23,7 +24,8 @@ class TalentsTableSeeder extends Seeder
 				factory(Exchange::class,2)->create(['talent_id'=>$talent->id])->each(function($exchange){
 					factory(File::class,3)->create(['exchange_id'=>$exchange->id]);
 					factory(Like::class,3)->create(['exchange_id'=>$exchange->id]);
-					factory(Comment::class,2)->create(['exchange_id'=>$exchange->id]);
+                    factory(Comment::class,2)->create(['exchange_id'=>$exchange->id]);
+					factory(Dealing::class,3)->create(['exchange_id'=>$exchange->id, 'accept_id' => $exchange->talent->user_id]);
 				});
 			});
     	}

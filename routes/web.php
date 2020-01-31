@@ -66,6 +66,7 @@ Route::get('perfil/{id}', 'UserController@profile');
 //Canjes Autenticado
 Route::get('cambiar-like', 'LikeController@changeLike');
 Route::get('agregar-comentario', 'CommentController@newComment');
+Route::get('agregar-respuesta', 'CommentController@newComment');
 Route::get('actualizar-comentarios', 'CommentController@updateCommentsView');
 
 //rutas de mi cuenta
