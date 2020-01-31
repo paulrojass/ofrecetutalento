@@ -165,13 +165,13 @@
 							<span class="pf-title">forma de pago</span>								
 							<div class="pf-field">
 								<div class="form-check">
-								  <input class="form-check-input" type="radio" name="trato" id="tipo-pago" value="pago" checked>
+								  <input class="form-check-input" type="radio" name="pay" id="tipo-pago" value="1" checked>
 								  <label class="form-check-label" for="tipo-pago">
 								    Pagar ${{$canje->price}}
 								  </label>
 								</div>
 								<div class="form-check">
-								  <input class="form-check-input" type="radio" name="trato" id="tipo-canje" value="canje">
+								  <input class="form-check-input" type="radio" name="pay" id="tipo-canje" value="0">
 								  <label class="form-check-label" for="tipo-canje">
 								    Ofrecer Canje
 								  </label>
@@ -182,11 +182,13 @@
 	 						<span class="pf-title">Mis Canjes</span>
 	 						<div class="pf-field">
 	 							<select id="exchange_proposal" name="exchange_proposal" data-placeholder="Selecciona tu canje" class="chosen">
+	 								@auth
 									@foreach(Auth()->user()->talents as $talent)
 										@foreach($talent->exchanges as $exchange)
 										<option value="{{$exchange->id}}">{{$exchange->title}}</option>
 										@endforeach
 									@endforeach
+									@endauth
 								</select>
 	 						</div>
 						</div>
@@ -194,7 +196,7 @@
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" data-dismiss="modal" class="boton-normal">cancelar</button>
-				<button type="button" class="boton-normal" id="nuevo-idioma">enviar</button>
+				<button type="button" class="boton-normal" id="nuevo-trato">enviar</button>
 			  </div>
 			</form>
 		</div>
@@ -307,6 +309,32 @@
 		});
 		$('#tipo-pago').click(function () {
 			$('#div-select-canje').hide();
+		});
+
+		$('#nuevo-trato').click(function () {
+			var accept_id = '{{$canje->talent->user_id}}';
+			var pay = $('input:radio[name=pay]:checked').val();
+			if (pay == 1){
+				var exchange_proposal = null;
+			}else{
+				var exchange_proposal = $('#exchange_proposal').val();
+			}
+			var description = $('#description').val();
+			var exchange_id = '{{$canje->id}}';
+			//alert('acepta: '+accept_id+', canje propuesto: '+exchange_proposal+',forma de pago: '+pay+', description: '+description+', canje: '+exchange_id);
+			var token = '{{csrf_token()}}';// ó $("#token").val() si lo tienes en una etiqueta html.
+			//we will send data and recive data fom our AjaxController
+			$.ajax({
+				type:'get',
+				url:'/nuevo-trato',
+				data:{description:description, accept_id:accept_id, pay:pay, exchange_proposal: exchange_proposal, exchange_id: exchange_id, _token: token},
+				success: function (response) {
+					alert(response);
+				},
+				error:function(response){
+					alert('no funciona');
+				}
+			});
 		});
 
 

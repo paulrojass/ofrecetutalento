@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Dealing;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+
 class DealingController extends Controller
 {
     /**
@@ -22,9 +24,16 @@ class DealingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $trato = new Dealing();
+        $trato->description = $request->description;
+        $trato->pay = $request->pay;
+        $trato->exchange_proposal = auth()->user()->id;
+        $trato->propose_id = $request->propose_id;
+        $trato->accept_id = $request->accept_id;
+        $trato->exchange_id = $request->exchange_id;
+        $trato->save();
     }
 
     /**
@@ -82,4 +91,11 @@ class DealingController extends Controller
     {
         //
     }
+
+    public function newDealing(Request $request)
+    {
+        $this->create($request);
+    }
+
+
 }

@@ -68,6 +68,7 @@ Route::get('cambiar-like', 'LikeController@changeLike');
 Route::get('agregar-comentario', 'CommentController@newComment');
 Route::get('agregar-respuesta', 'CommentController@newComment');
 Route::get('actualizar-comentarios', 'CommentController@updateCommentsView');
+Route::get('nuevo-trato', 'DealingController@newDealing');
 
 //rutas de mi cuenta
 Route::get('mi-cuenta', 'UserController@myAccount')->middleware('verified');
