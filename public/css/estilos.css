@@ -4,11 +4,11 @@
     pointer-events: none;
 }
 
-.c-logo > img{
-	width: 98px;
-	height: 51px;
-	object-fit: cover;	
-}
+/* .c-logo > img{
+  width: 98px;
+  height: 51px;
+  object-fit: cover;  
+} */
 
 .btn-filtrar{
 	margin-top: 1em;
@@ -259,4 +259,23 @@ input[type=range].slider:focus::-ms-fill-upper {
 
 .commentform-sec > form {
     padding-right: 0px;
+}
+
+
+.my-profiles-message > img {
+    float: left;
+    
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+
+    border: 2px solid #ffffff;
+    margin-right: 18px;
+}
+
+/* listado de usuarios en mensajes */
+.no-pad{
+  padding : 0;
 }

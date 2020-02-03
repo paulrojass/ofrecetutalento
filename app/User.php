@@ -7,6 +7,7 @@ use App\Talent;
 use App\Suscription;
 use App\Language;
 use App\Experience;
+use App\Message;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
@@ -89,6 +90,12 @@ class User extends Authenticatable implements MustVerifyEmail
 		return $this->hasMany(Talent::class);
 	}
 
+    public function exchanges()
+    {
+        return $this->hasManyThrough('App\Exchange', 'App\Talent');
+    }
+
+
 	public function suscription()
 	{
 		return $this->hasOne(Suscription::class);
@@ -100,6 +107,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
 	public function experiences(){
 		return $this->hasOne(Experience::class);
+	}
+
+	public function users_to(){
+		return $this->hasMany(Message::class, 'to_id');
+	}
+
+	public function users_from(){
+		return $this->hasMany(Message::class, 'from_id');
 	}
 
 	public function hasAnyTalent()

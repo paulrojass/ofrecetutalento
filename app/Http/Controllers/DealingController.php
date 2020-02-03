@@ -29,8 +29,8 @@ class DealingController extends Controller
         $trato = new Dealing();
         $trato->description = $request->description;
         $trato->pay = $request->pay;
-        $trato->exchange_proposal = auth()->user()->id;
-        $trato->propose_id = $request->propose_id;
+        $trato->exchange_proposal = $request->exchange_proposal;
+        $trato->propose_id = auth()->user()->id;
         $trato->accept_id = $request->accept_id;
         $trato->exchange_id = $request->exchange_id;
         $trato->save();

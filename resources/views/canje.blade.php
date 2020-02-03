@@ -321,9 +321,7 @@
 			}
 			var description = $('#description').val();
 			var exchange_id = '{{$canje->id}}';
-			//alert('acepta: '+accept_id+', canje propuesto: '+exchange_proposal+',forma de pago: '+pay+', description: '+description+', canje: '+exchange_id);
-			var token = '{{csrf_token()}}';// ó $("#token").val() si lo tienes en una etiqueta html.
-			//we will send data and recive data fom our AjaxController
+			var token = '{{csrf_token()}}';
 			$.ajax({
 				type:'get',
 				url:'/nuevo-trato',

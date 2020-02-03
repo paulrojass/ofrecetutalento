@@ -8,12 +8,13 @@ use App\User;
 
 class Message extends Model
 {
-    public function from()
+    public function user_to()
     {
-        return $this->belongsTo(User::class);
-    } 
-    public function to()
+        return $this->belongsTo(User::class, 'to_id', 'id');
+    }
+
+    public function user_from()
     {
-        return $this->belongsTo(User::class);
-    } 
+        return $this->belongsTo(User::class, 'from_id', 'id');
+    }
 }

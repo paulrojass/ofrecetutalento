@@ -28,10 +28,10 @@
 					<div class="widget">
 						<div class="tree_widget-sec">
 							<ul>
-								<li><a id="a-perfil" onclick="mostrar('#mi-perfil','#a-perfil')" title=""><i class="la la-file-text"></i>Mi perfil</a></li>
+								<li><a id="a-perfil" onclick="mostrar('#mi-perfil','#a-perfil')" title=""><i class="la la-user"></i>Mi perfil</a></li>
 								@if(auth()->user()->suscription->plan_id > 1)
 									<li><a id="a-talentos" onclick="mostrar('#talentos','#a-talentos')" title=""><i class="la la-diamond"></i>Talentos</a></li>
-									<li><a id="a-tratos" onclick="mostrar('#tratos', '#a-tratos')" title=""><i class="la la-thumbs-up"></i>Canges</a></li>
+									<li><a id="a-canjes" onclick="mostrar('#canjes', '#a-canjes')" title=""><i class="la la-lightbulb-o"></i>Canjes</a></li>
 								@endif
 								<li><a id="a-tratos" onclick="mostrar('#tratos', '#a-tratos')" title=""><i class="la la-exchange"></i>Tratos</a></li>
 								<li><a id="a-mensajes" onclick="mostrar('#mensajes', '#a-mensajes')" title=""><i class="la la-comments"></i>Mensajes</a></li>
@@ -78,62 +78,132 @@
 							<div id="talentos">
 							</div>
 
+
+							<div id="canjes">
+								<div class="border-title"><h3>Canjes</h3><a href="#" title=""><i class="la la-plus"></i> Agregar canje</a></div>
+								<div class="mini-portfolio">
+
+
+
+
+
+			<div class="container">
+				 <div class="row">
+				 	<div class="col-lg-12">
+				 		<div class="filterbar">
+				 			<h5>Ha agregado {{$exchanges->count()}} Canjes</h5>
+<!-- 				 			<div class="sortby-sec">
+	<span>Ordenar por</span>
+	<select data-placeholder="Most Recent" class="chosen">
+									<option>Most Recent</option>
+									<option>Most Recent</option>
+									<option>Most Recent</option>
+									<option>Most Recent</option>
+								</select>
+								<select data-placeholder="20 Per Page" class="chosen">
+									<option>30 Per Page</option>
+									<option>40 Per Page</option>
+									<option>50 Per Page</option>
+									<option>60 Per Page</option>
+								</select>
+</div> -->
+				 		</div>
+				 		<div class="job-grid-sec">
+							<div class="row">
+								@foreach($exchanges as $exchange)
+								<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+									<div class="job-grid border">
+										<div class="job-title-sec">
+											<div class="c-logo"> <img src="{{URL::asset('images/exchanges/'.$exchange->image)}}" style="max-width: 235px; max-height: 115px" alt="" /> </div>
+											<h3><a href="{{url('canjes/'.$exchange->id)}}" title="" href="{{url('canjes/'.$exchange->id)}}">{{$exchange->title}}</a></h3>
+											<span>{{$exchange->talent->title}}</span>
+											<!-- <span class="fav-job"><i class="la la-heart-o">{{$exchange->likes->count()}}</i></span> -->
+										</div>
+										<!-- <span class="job-lctn">Sacramento, California</span> -->
+										<a  href="{{url('canjes/'.$exchange->id)}}" title="" href="{{url('canjes/'.$exchange->id)}}">ver</a>
+									</div><!-- JOB Grid -->
+								</div>
+								@endforeach
+							</div>
+						</div>
+<!-- 						<div class="pagination">
+	<ul>
+		<li class="prev"><a href=""><i class="la la-long-arrow-left"></i> Prev</a></li>
+		<li><a href="">1</a></li>
+		<li class="active"><a href="">2</a></li>
+		<li><a href="">3</a></li>
+		<li><span class="delimeter">...</span></li>
+		<li><a href="">14</a></li>
+		<li class="next"><a href="">Next <i class="la la-long-arrow-right"></i></a></li>
+	</ul>
+</div -->><!-- Pagination -->
+				 	</div>
+				 </div>
+			</div>
+
+
+
+
+
+
+
+
+
+								</div>
+							</div>	
+
+
+
+
+
 							<div id="tratos">
 								<div class="border-title"><h3>Tratos</h3><a href="#" title=""><i class="la la-plus"></i> Agregar Trato</a></div>
 								<div class="mini-portfolio">
-									<div class="block">
-										<div class="container">
-											<div class="row">
-												<div class="col-lg-12">
-													<div class="filterbar">
-														<h5>{{auth()->user()->talents()->count()}} Tratos Agregados</h5>
-														<div class="sortby-sec">
-															<span>Sort by</span>
-															<select data-placeholder="Most Recent" class="chosen">
-																<option>Most Recent</option>
-																<option>Most Recent</option>
-																<option>Most Recent</option>
-																<option>Most Recent</option>
-															</select>
-															<select data-placeholder="20 Per Page" class="chosen">
-																<option>30 Per Page</option>
-																<option>40 Per Page</option>
-																<option>50 Per Page</option>
-																<option>60 Per Page</option>
-															</select>
-														</div>
-													</div>
-													<div class="job-grid-sec">
-														<div class="row">
-															<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-																<div class="job-grid border">
-																	<div class="job-title-sec">
-																		<div class="c-logo"> <img src="http://placehold.it/235x115" alt="" /> </div>
-																		<h3><a href="#" title="">Web Designer / Developer</a></h3>
-																		<span>Massimo Artemisis</span>
-																		<span class="fav-job"><i class="la la-heart-o"></i></span>
-																	</div>
-																	<span class="job-lctn">Sacramento, California</span>
-																	<a  href="#" title="">APPLY NOW</a>
-																</div><!-- JOB Grid -->
-															</div>
-														</div>
-													</div>
-													<div class="pagination">
-														<ul>
-															<li class="prev"><a href=""><i class="la la-long-arrow-left"></i> Prev</a></li>
-															<li><a href="">1</a></li>
-															<li class="active"><a href="">2</a></li>
-															<li><a href="">3</a></li>
-															<li><span class="delimeter">...</span></li>
-															<li><a href="">14</a></li>
-															<li class="next"><a href="">Next <i class="la la-long-arrow-right"></i></a></li>
-														</ul>
-													</div><!-- Pagination -->
-												</div>
-											</div>
-										</div>
-									</div>
+							 		<div class="manage-jobs-sec">
+							 			<div class="extra-job-info">
+								 			<span><i class="la la-clock-o"></i><strong>9</strong> Job Posted</span>
+								 			<span><i class="la la-file-text"></i><strong>20</strong> Application</span>
+								 		</div>
+								 		<table>
+								 			<thead>
+								 				<tr>
+								 					<td>Requerimiento</td>
+								 					<td>Canje Propuesto</td>
+								 					<td>Canje Solicitado</td>
+								 					<td>Estado</td>
+								 					<td>Acciones</td>
+								 				</tr>
+								 			</thead>
+								 			<tbody>
+								 				<tr>
+								 					<td>
+								 						<div class="table-list-title">
+								 							<h3><a href="#" title="">Web Designer / Developer</a></h3>
+								 							<span><i class="la la-map-marker"></i>Sacramento, California</span>
+								 						</div>
+								 					</td>
+								 					<td>
+								 						<span class="applied-field">3+ Applied</span>
+								 					</td>
+								 					<td>
+								 						<span>October 27, 2017</span><br />
+								 						<span>April 25, 2011</span>
+								 					</td>
+								 					<td>
+								 						<span class="status active">Active</span>
+								 					</td>
+								 					<td>
+								 						<ul class="action_job">
+								 							<li><span>View Job</span><a href="#" title=""><i class="la la-eye"></i></a></li>
+								 							<li><span>Edit</span><a href="#" title=""><i class="la la-pencil"></i></a></li>
+								 							<li><span>Delete</span><a href="#" title=""><i class="la la-trash-o"></i></a></li>
+								 						</ul>
+								 					</td>
+								 				</tr>
+								 			</tbody>
+								 		</table>
+							 		</div>
+
 								</div>
 							</div>								
 
@@ -291,7 +361,8 @@
 	$(function(){
 		informacionPerfil();
 		talentosPerfil();
-		mostrar('#mi-perfil', '#a-perfil');
+		//mostrar('#mi-perfil', '#a-perfil');
+		mostrar('#canje', '#a-canje');
 
 		// Read value on page load
 		$(".result-language b").html($("#level-language").val());
@@ -576,8 +647,8 @@
 	}
 
 	function mostrar(div,a){
-		var divs = ['#mi-perfil', '#talentos', '#tratos', '#mensajes'];
-		var as = ['#a-perfil', '#a-talentos', '#a-tratos', '#a-mensajes'];
+		var divs = ['#mi-perfil', '#talentos', '#canjes', '#tratos', '#mensajes'];
+		var as = ['#a-perfil', '#a-talentos', '#a-canjes', '#a-tratos', '#a-mensajes'];
 		$.each(divs, function(index, value){
 			$(value).fadeOut();
 		});

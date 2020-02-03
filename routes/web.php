@@ -82,3 +82,8 @@ Route::get('talentos-perfil', 'SiteController@perfilTalentos');
 Route::post('eliminar-talento', 'TalentController@eliminarTalento');
 Route::get('form-perfil', 'SiteController@formInfo');
 Route::get('actualizar_usuario', 'UserController@updateUser');
+
+
+//mensajes
+Route::get('mensajes', 'MessageController@mensajes')->name('mensajes');
+Route::get('mensajes-usuario', 'MessageController@mensajesUsuario');

@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Image;
 
+use DB;
+
 class UserController extends Controller
 {
     public function __construct()
@@ -157,22 +159,15 @@ class UserController extends Controller
 
 	public function myAccount()
 	{
-/*		$user_id = Auth()->User()->id;
-        $talentos = Talent::where('user_id', $user_id)->get();
-
-        $foreach ($talentos as $talent) {
-        	$exchanges->push(Exchange::where('talent_id', $talent_id));
-        }
-
-        dd($exchanges);*/
-
 		request()->session()->regenerateToken();
+
+        $talents = Auth()->User()->talents;
+
+        $exchanges = Auth()->User()->exchanges;
+
 		$categories = Category::all();
-		return view('mi-cuenta',compact('categories'));
+		return view('mi-cuenta', compact('categories', 'talents', 'exchanges'));
 	}
-
-
-
 
 	public function updateAvatar(Request $request){
 		// ruta de las imagenes guardadas

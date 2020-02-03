@@ -28,10 +28,12 @@
 </head>
 <body>
 
-<div class="page-loading">
+<!-- <div class="page-loading">
 	<img src="{{URL::asset('tema/images/loader.gif')}}" alt="" />
-</div>
-
+</div> -->
+@auth()
+@php($recibidos = App\Message::where('to_id', auth()->user()->id)->where('received', 0)->get())
+@endauth
 <div class="theme-layout" id="scrollup">
 	<div class="responsive-header three">
 		<div class="responsive-menubar">
@@ -50,61 +52,6 @@
 				<div class="my-profiles-sec">
 					<span><img src="{{URL::asset('images/users/'.Auth::User()->avatar)}}" alt="" style="max-width: 50px; max-height:50px" /> {{Auth::User()->name}} {{Auth::User()->lastname}} <i class="la la-bars"></i></span>
 				</div>
-				<div class="wishlist-dropsec">
-					<span><i class="la la-heart"></i><strong>3</strong></span>
-					<div class="wishlist-dropdown">
-						<ul class="scrollbar">
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Web Designer / Developer</a></h3>
-										<span>Massimo Artemisis</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">C Developer (Senior) C .Net</a></h3>
-										<span>StarHealth</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Marketing Director</a></h3>
-										<span>Tix Dog</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Web Designer / Developer</a></h3>
-										<span>Massimo Artemisis</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Web Designer / Developer</a></h3>
-										<span>Massimo Artemisis</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-						</ul>
-					</div>
-				</div>
-
-
-
 			@else
 			<div class="btn-extars">
 				<a href="{{url('suscripcion')}}" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a>
@@ -156,61 +103,31 @@
 						<i class="la la-bars"></i>
 					</span>
 				</div>
+
 				<div class="wishlist-dropsec">
-					<span><i class="la la-comment"></i><strong>3</strong></span>
+					<span><i class="la la-comment"></i>
+						@if($recibidos->count() > 0)
+						<strong>{!!$recibidos->count()!!}</strong>
+						@endif
+					</span>
+					@if($recibidos->count() > 0)
 					<div class="wishlist-dropdown">
 						<ul class="scrollbar">
+							@foreach($recibidos->sortByDesc('created_at') as $recibido)
 							<li>
 								<div class="job-listing">
 									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Web Designer / Developer</a></h3>
-										<span>Massimo Artemisis</span>
+										<div class="my-profiles-message"> <img src="{{URL::asset('images/users/'.$recibido->user_from->avatar) }}" style="max-height: 54px; max-width: 54px" alt="" /> </div>
+										<h3><a href="{{ route('mensajes') }}" title="">{{ $recibido->user_from->name}} {{ $recibido->user_from->lastname}}</a></h3>
+										<span>{{ $recibido->created_at->diffForHumans()}}</span>
 									</div>
-								</div><!-- Job -->
+								</div>
 							</li>
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">C Developer (Senior) C .Net</a></h3>
-										<span>StarHealth</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Marketing Director</a></h3>
-										<span>Tix Dog</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Web Designer / Developer</a></h3>
-										<span>Massimo Artemisis</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Web Designer / Developer</a></h3>
-										<span>Massimo Artemisis</span>
-									</div>
-								</div><!-- Job -->
-							</li>
+							@endforeach
 						</ul>
 					</div>
+					@endif
 				</div>
-
-
-
 				@else
 				<div class="btn-extars">
 					<a href="{{url('suscripcion')}}" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a>
