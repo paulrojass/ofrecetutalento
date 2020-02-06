@@ -168,13 +168,15 @@ $(document).on('ready',function(){
         $('.profile-sidebar').removeClass('active');
     });
 
-    $('.wishlist-dropsec > span').on('click', function(){
+    //$('.wishlist-dropsec > span').on('click', function(){
+    $('#contador-mensajes').on('click', '.wishlist-dropsec > span' ,function(){
         $('.wishlist-dropdown').fadeToggle();
     });
     $('body').on('click', function(){
         $('.wishlist-dropdown').fadeOut();
     });
-    $(".wishlist-dropsec").on("click",function(e){
+    //$(".wishlist-dropsec").on("click",function(e){
+    $('#contador-mensajes').on("click", ".wishlist-dropsec", function(e){
         e.stopPropagation();
     });
 

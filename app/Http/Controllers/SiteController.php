@@ -121,6 +121,13 @@ class SiteController extends Controller
         return view('content.mi-cuenta-talentos');
     }
 
+    public function perfilCanjes()
+    {
+        $exchanges = Auth()->User()->exchanges;
+        
+        return view('content.mi-cuenta-canjes', compact('exchanges'));
+    }
+
     public function formInfo()
     {
         return view('forms.mi-cuenta-perfil');

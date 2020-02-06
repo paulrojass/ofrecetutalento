@@ -21,6 +21,7 @@
 </section>
 
 <section>
+	<input type="hidden" name="auth_user" id=auth_user value="{{ auth()->user()->id }}">
 	<div class="block remove-top">
 		<div class="container">
 			<div class="row no-gape">
@@ -80,79 +81,8 @@
 
 
 							<div id="canjes">
-								<div class="border-title"><h3>Canjes</h3><a href="#" title=""><i class="la la-plus"></i> Agregar canje</a></div>
-								<div class="mini-portfolio">
 
-
-
-
-
-			<div class="container">
-				 <div class="row">
-				 	<div class="col-lg-12">
-				 		<div class="filterbar">
-				 			<h5>Ha agregado {{$exchanges->count()}} Canjes</h5>
-<!-- 				 			<div class="sortby-sec">
-	<span>Ordenar por</span>
-	<select data-placeholder="Most Recent" class="chosen">
-									<option>Most Recent</option>
-									<option>Most Recent</option>
-									<option>Most Recent</option>
-									<option>Most Recent</option>
-								</select>
-								<select data-placeholder="20 Per Page" class="chosen">
-									<option>30 Per Page</option>
-									<option>40 Per Page</option>
-									<option>50 Per Page</option>
-									<option>60 Per Page</option>
-								</select>
-</div> -->
-				 		</div>
-				 		<div class="job-grid-sec">
-							<div class="row">
-								@foreach($exchanges as $exchange)
-								<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-									<div class="job-grid border">
-										<div class="job-title-sec">
-											<div class="c-logo"> <img src="{{URL::asset('images/exchanges/'.$exchange->image)}}" style="max-width: 235px; max-height: 115px" alt="" /> </div>
-											<h3><a href="{{url('canjes/'.$exchange->id)}}" title="" href="{{url('canjes/'.$exchange->id)}}">{{$exchange->title}}</a></h3>
-											<span>{{$exchange->talent->title}}</span>
-											<!-- <span class="fav-job"><i class="la la-heart-o">{{$exchange->likes->count()}}</i></span> -->
-										</div>
-										<!-- <span class="job-lctn">Sacramento, California</span> -->
-										<a  href="{{url('canjes/'.$exchange->id)}}" title="" href="{{url('canjes/'.$exchange->id)}}">ver</a>
-									</div><!-- JOB Grid -->
-								</div>
-								@endforeach
-							</div>
-						</div>
-<!-- 						<div class="pagination">
-	<ul>
-		<li class="prev"><a href=""><i class="la la-long-arrow-left"></i> Prev</a></li>
-		<li><a href="">1</a></li>
-		<li class="active"><a href="">2</a></li>
-		<li><a href="">3</a></li>
-		<li><span class="delimeter">...</span></li>
-		<li><a href="">14</a></li>
-		<li class="next"><a href="">Next <i class="la la-long-arrow-right"></i></a></li>
-	</ul>
-</div -->><!-- Pagination -->
-				 	</div>
-				 </div>
-			</div>
-
-
-
-
-
-
-
-
-
-								</div>
 							</div>	
-
-
 
 
 
@@ -347,6 +277,68 @@
 	</div>
   </div>
 </div>
+
+<section id="section-modal-canjes">
+	<!-- Modal Idioma -->
+	<div class="modal fade bd-example-modal-lg" id="modal-canje" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Agregar nuevo canje</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form id="form-canje">
+			  <div class="modal-body">
+					<div class="contact-edit pl-5 pr-5">
+						@csrf
+						<div class="row">
+							<div class="col-lg-12">
+								<span class="pf-title">Titulo</span>									
+								<div class="pf-field">
+									<input type="text" name="title-exchange" id="title-exchange" required>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<span class="pf-title">Precio</span>									
+								<div class="pf-field">
+									<input type="number" name="title-price" id="title-price" required>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<span class="pf-title">Talento</span>
+								<div class="pf-field">
+									<select name="talents-exchange" id="talents-exchange" class="chosen" required>
+										<option value = "">Selecciona un talento</option>
+										@foreach($talents as $talent)
+										<option value="{{$talent->id}}">{{$talent->title}}</option>
+										@endforeach
+									</select>
+								</div>
+								
+							</div>
+							<div class="col-lg-12">
+								<span class="pf-title">Descripción</span>									
+								<div class="pf-field">
+									<textarea id="description-exchange" name="description-exchange"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="boton-normal">Cerrar</button>
+				<button type="button" class="boton-normal" id="nuevo-canje">Agregar</button>
+				<button type="button" class="boton-normal" id="actualizar-canje">Agregar</button>
+			  </div>
+			</form>
+		</div>
+	  </div>
+	</div>	
+</section>
+
+
 @endsection
 
 
@@ -356,351 +348,6 @@
 <script src="{{URL::asset('tema/js/tag.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/bootstrap-datepicker.js')}}" type="text/javascript"></script>
 
-<script>
-	id_user = '{!! auth()->user()->id !!}';
-	$(function(){
-		informacionPerfil();
-		talentosPerfil();
-		//mostrar('#mi-perfil', '#a-perfil');
-		mostrar('#canje', '#a-canje');
-
-		// Read value on page load
-		$(".result-language b").html($("#level-language").val());
-
-		// Read value on change
-		$("#level-language").change(function(){
-			$(".result-language b").html($(this).val());
-		});
-
-		// Read value on page load
-		$(".result-talent b").html($("#level-talent").val());
-
-		// Read value on change
-		$("#level-talent").change(function(){
-			$(".result-talent b").html($(this).val());
-		});
-
-		$("#title").on('keypress', function(){$('#e_title').hide()});
-		$("#category").on('change', function(){$('#e_category').hide()});
-		$("#description").on('keypress', function(){$('#e_description').hide()});
-
-		$('.datepicker').datepicker({
-			format: 'mm-dd-yyyy'
-		});
-
-		$('#avatar').change(function(){
-			cambiarFoto();
-		});
-
-		$("#img-avatar").click(function () {
-			$("#avatar").trigger('click');
-			$('.alert').alert('close')
-		});
-		$("#button-avatar").click(function () {
-			$("#avatar").trigger('click');
-			$('.alert').alert('close')
-		});
-	});
-
-	$('#talentos').on('click', '#agregar-talento', function(event){
-		event.preventDefault();
-		resetForm();
-		$('#nuevo-talento').show();
-		$('#actualizar-talento').hide();
-	});
-
-	$('#mi-perfil-info').on('click', '#editar-perfil', function(e){
-		e.preventDefault();
-		editarPerfil();
-	});
-
-	$('#mi-perfil-info').on('click', '#no-editar', function(e){
-		e.preventDefault();
-		informacionPerfil();
-	});
-
-	$('#talentos').on('click', '.editar-talento', function(e){
-		e.preventDefault();
-		resetForm();
-		$('#nuevo-talento').hide();
-		$('#actualizar-talento').show();
-		var id = $(this).data("value");
-		var title = $(this).data("title");
-		var category = $(this).data("category");
-		var description = $(this).data("description");
-		var level = $(this).data("level");
-		var _token = $("input[name='_token']").val();
-		console.log(id);
-
-		$("input[name='id_talent']").val(id);
-		$("input[name='title']").val(title);
-		$("#categories").val(category);
-		$("input[name='level-talent']").val(level);
-		$("input[name='description']").val(description);
-		$(".result-talent b").html(level);
-		$('#categories').change();
-	});
-
-	$('#talentos').on('click', '.eliminar-talento', function(e){
-		e.preventDefault();
-		var id = $(this).attr("value");
-		var _token = $("input[name='_token']").val();
-		$.ajax({
-			url: 'eliminar-talento',
-			type: 'post',
-			data: {id : id, _token:_token},
-		})
-		.done(function(response) {
-			talentosPerfil();
-		});	
-	});
-
-	$('#mi-perfil-info').on('click','.elimina-idioma',function(e){
-		var id = $(this).attr("value");
-		var _token = $("input[name='_token']").val();
-		$.ajax({
-			url: 'eliminar-idioma',
-			type: 'post',
-			data: {id : id, _token:_token},
-		})
-		.done(function(response) {
-			informacionPerfil();
-		});			
-	});
-
-	$('#nuevo-idioma').click( function(){
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
-		var language = $('#language').val();
-		var level = $('#level-language').val();
-		var _token = $("input[name='_token']").val();
-		$.ajax({
-			url: 'cambiar-idioma',
-			type: 'post',
-			data: {language : language, level:level , _token:_token},
-		})
-		.done(function(response) {
-			informacionPerfil();
-			$('#modal-idioma').modal('hide');
-			$("#form-idioma")[0].reset();
-		});
-	});
-
-	$('#mi-perfil-info').on('click', '#button-registro', function(e){
-		e.preventDefault();
-		var dataString = $('#form-actualizar-usuario').serialize();
-		$.ajax({
-			url: 'actualizar_usuario',
-			type: 'get',
-			data: dataString,
-			contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
-			processData: false // NEEDED, DON'T OMIT THIS
-		})
-		.done(function(response) {
-			informacionPerfil();
-			$('html, body').animate({scrollTop:0}, 1250);
-		});
-	});
-
-	$('#actualizar-talento').click(function(e){
-		e.preventDefault();
-		var _token = $("input[name='_token']").val();
-		var title = $("input[name='title']").val();
-		var category = $("#categories").val();
-		var level = $("input[name='level-talent']").val();
-		var description = $("input[name='description']").val();
-		var id_talent = $("input[name='id_talent']").val();
-
-		if(title == "" || category == "" || description ==""){
-			if(title == "") $('#e_title').removeAttr('hidden');
-			if(category == "") $('#e_category').removeAttr('hidden');
-			if(description == "") $('#e_description').removeAttr('hidden');
-		}
-		else
-		{
-			$.ajax({
-				type:'POST',
-				url:'actualizar_talento',
-				data:{
-					id_user: id_user,
-					id: id_talent,
-					title:title,
-					category:category,
-					level:level,
-					description:description,
-					_token:_token
-				},
-			})
-			.done(function(data) {
-				if($.isEmptyObject(data.error)){
-					verificarTalentos(id_user);
-					talentosPerfil();
-					$('#modal-talento').modal('hide');
-					resetForm();
-				}else{
-					printErrorMsg(data.error);
-				}
-			})
-			.fail(function(data) {
-				printErrorMsg(data.error);
-			});
-		}
-	});
-
-
-
-
-	$('#nuevo-talento').click(function(e){
-		e.preventDefault();
-		var _token = $("input[name='_token']").val();
-		var title = $("input[name='title']").val();
-		var category = $("#categories").val();
-		var level = $("input[name='level-talent']").val();
-		var description = $("input[name='description']").val();
-
-		if(title == "" || category == "" || description ==""){
-			if(title == "") $('#e_title').removeAttr('hidden');
-			if(category == "") $('#e_category').removeAttr('hidden');
-			if(description == "") $('#e_description').removeAttr('hidden');
-		}
-		else
-		{
-			$.ajax({
-				type:'POST',
-				url:'guardar_talento',
-				data:{
-					id_user: id_user,
-					title:title,
-					category:category,
-					level:level,
-					description:description,
-					_token:_token
-				},
-			})
-			.done(function(data) {
-				if($.isEmptyObject(data.error)){
-					verificarTalentos(id_user);
-					talentosPerfil();
-					$('#modal-talento').modal('hide');
-					resetForm();
-				}else{
-					printErrorMsg(data.error);
-				}
-			})
-			.fail(function(data) {
-				printErrorMsg(data.error);
-			});
-		}
-	});
-
-	function printErrorMsg (msg) {
-		$(".print-error-msg").find("ul").html('');
-		$(".print-error-msg").css('display','block');
-		$.each( msg, function( key, value ) {
-			console.log(value);
-		});
-	}
-
-
-	function verificarTalentos(id_user){
-		var _token = $("input[name='_token']").val();
-		$.ajax({
-			type: 'POST',
-			url:'verificar_talentos',
-			data:{user_id : id_user, _token:_token},
-			success:function(data){
-				if(data.disponibles == null){
-					$('#disponibles').html('(ilimitados)');
-				}else if(data.disponibles > 0){
-					$('#disponibles').html('('+data.disponibles+' disponibles)');
-				}else{
-					$('#agregar-talento').hide();
-					$('#disponibles').html('(Para agregar mas talentos puede cambiar su plan)');
-				}
-			}
-		});
-	}
-
-	function cambiarFoto(){
-		var formData = new FormData();
-		formData.append('avatar', $('#avatar')[0].files[0]);
-		formData.append('_token', '{{csrf_token()}}');
-		formData.append('id', '{{Auth::User()->id}}');
-		$.ajax({
-			url: 'cambiar-foto',
-			type: 'post',
-			data: formData,
-			contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
-			processData: false // NEEDED, DON'T OMIT THIS
-		})
-		.done(function(response) {
-			$('#div-imagen').html(response);
-			$("#ll").html('<div class="alert alert-success" role="alert">La foto ha cambiado exitosamente</div>');
-		})
-		.fail(function() {
-			$("#ll").html('<div class="alert alert-danger" role="alert">El formato del archivo debe ser de imagen (jpg, jpeg, png)</div>');
-		});
-		
-	}
-
-	function mostrar(div,a){
-		var divs = ['#mi-perfil', '#talentos', '#canjes', '#tratos', '#mensajes'];
-		var as = ['#a-perfil', '#a-talentos', '#a-canjes', '#a-tratos', '#a-mensajes'];
-		$.each(divs, function(index, value){
-			$(value).fadeOut();
-		});
-		$.each(as, function(index, value){
-			$(value+' i').css('color','#888888');
-			$(value).css('color','#888888');
-		});
-
-
-		$(div).fadeIn();
-		$(a+' i').css('color','#8b91dd');
-		$(a).css('color','#8b91dd');
-	}
-
-	function informacionPerfil(){
-		$.ajax({
-			url: 'info-perfil',
-			type: 'Get',
-			dataType: 'html',
-		})
-		.done(function(data) {
-			$('#mi-perfil-info').html(data);
-		})	
-	}
-
-	function talentosPerfil(){
-		$.ajax({
-			url: 'talentos-perfil',
-			type: 'Get',
-			dataType: 'html',
-		})
-		.done(function(data) {
-			$('#talentos').html(data);
-			verificarTalentos(id_user);
-		})	
-	}
-
-	function editarPerfil(){
-		$.ajax({
-			url: 'form-perfil',
-			type: 'Get',
-			dataType: 'html',
-		})
-		.done(function(data) {
-			$('#mi-perfil-info').html(data);
-		})	
-	}
-
-	function resetForm() {
-     $("form select").each(function() { this.selectedIndex = 0 });
-     $("form input[type=text] , form textarea").each(function() { this.value = '' });
-	}
-	
+<script src="{{URL::asset('js/mi-cuenta.js')}}" type="text/javascript">
 </script>
 @endsection

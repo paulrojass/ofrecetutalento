@@ -31,9 +31,6 @@
 <!-- <div class="page-loading">
 	<img src="{{URL::asset('tema/images/loader.gif')}}" alt="" />
 </div> -->
-@auth()
-@php($recibidos = App\Message::where('to_id', auth()->user()->id)->where('received', 0)->get())
-@endauth
 <div class="theme-layout" id="scrollup">
 	<div class="responsive-header three">
 		<div class="responsive-menubar">
@@ -104,30 +101,10 @@
 					</span>
 				</div>
 
-				<div class="wishlist-dropsec">
-					<span><i class="la la-comment"></i>
-						@if($recibidos->count() > 0)
-						<strong>{!!$recibidos->count()!!}</strong>
-						@endif
-					</span>
-					@if($recibidos->count() > 0)
-					<div class="wishlist-dropdown">
-						<ul class="scrollbar">
-							@foreach($recibidos->sortByDesc('created_at') as $recibido)
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="my-profiles-message"> <img src="{{URL::asset('images/users/'.$recibido->user_from->avatar) }}" style="max-height: 54px; max-width: 54px" alt="" /> </div>
-										<h3><a href="{{ route('mensajes') }}" title="">{{ $recibido->user_from->name}} {{ $recibido->user_from->lastname}}</a></h3>
-										<span>{{ $recibido->created_at->diffForHumans()}}</span>
-									</div>
-								</div>
-							</li>
-							@endforeach
-						</ul>
-					</div>
-					@endif
+				<div id="contador-mensajes">
+
 				</div>
+
 				@else
 				<div class="btn-extars">
 					<a href="{{url('suscripcion')}}" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a>
@@ -329,6 +306,7 @@
 <script src="{{URL::asset('tema/js/select-chosen.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/counter.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/mouse.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('js/scripts.js')}}" type="text/javascript"></script>
 
 @yield('scripts')
 

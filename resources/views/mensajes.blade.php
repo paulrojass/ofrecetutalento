@@ -43,28 +43,75 @@
 <script>
 	$(function(){
 
+		var auth_id = '{{ auth()->user()->id }}';
+
+		if('{{ $from_id }}'){
+			console.log('{{ $from_id }}');
+			cargarUsuario('{{ $from_id }}', auth_id);
+		}
+
 		$('#columna-usuarios').on('click', '.usuario-id', function (e) {
 			e.preventDefault();
 			var id = $(this).data('value');
+			cargarUsuario(id, auth_id);
+			actualizarMensajes();
+		});
 
-
+		function cargarUsuario(id, auth_id){
 			$.ajax({
 				type:'get',
 				url:'/mensajes-usuario',
 				data:{
-					from_id:id
+					from_id:id, to_id: auth_id
 				},
 			})
 			.done(function(data) {
 				$('#columna-mensajes').html(data);
 			});
+		}
 
 
 
 
 
+		$('#columna-mensajes').on('click', '#enviar-mensaje', function (e) {
+			e.preventDefault();
+			var to_id = $(this).data('value');
+			var body = $('#body').val();
+			var _token = $("input[name='_token']").val();
+			var auth_id = '{{ auth()->user()->id }}';
 
+
+			//console.log('to_id: '+to_id+', from_id:'+from_id+', body: '+body+', token:'+_token);
+
+			$.ajax({
+				type:'post',
+				url:'/enviar-mensaje',
+				data:{
+					from_id:auth_id, to_id: to_id, _token: _token, body:body 
+				},
+			})
+			.done(function(data) {
+				$('#columna-mensajes').html(data);
+				actualizarMensajes();
+			});
 		});
+
+  $('#columna-mensajes').on('keyup','#body',function() {
+    var empty = false;
+    $('#body').each(function() {
+        if ($(this).val().length == 0) {
+            empty = true;
+        }
+    });                   
+    if (empty) {
+        $('#enviar-mensaje').attr('disabled', 'disabled');
+    } else {
+        $('#enviar-mensaje').removeAttr('disabled');
+    }                
+  });
+
+
 
 
 

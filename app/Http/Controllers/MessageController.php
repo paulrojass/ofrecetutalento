@@ -25,9 +25,13 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $message = new Message();
+        $message->to_id = $request->to_id;
+        $message->from_id = $request->from_id;
+        $message->body = $request->body;
+        $message->save();
     }
 
     /**
@@ -87,6 +91,19 @@ class MessageController extends Controller
     }
 
 
+    public function mensajesId($from_id)
+    {
+        $recibidos = Message::where('to_id', auth()->user()->id )->get();
+
+        $enviados = Message::where('from_id', auth()->user()->id )->get();
+
+        $mensajes = $recibidos->merge($enviados);
+
+        $usuarios = $mensajes->unique('from_id')->sortBy('created_at');
+
+        return view('mensajes', compact('mensajes', 'usuarios', 'from_id'));
+    }
+
     public function mensajes()
     {
         $recibidos = Message::where('to_id', auth()->user()->id )->get();
@@ -95,17 +112,53 @@ class MessageController extends Controller
 
         $mensajes = $recibidos->merge($enviados);
 
-        $usuarios = $mensajes->unique('from_id')->sortByDesc('created_at');
+        $usuarios = $mensajes->unique('from_id')->sortBy('created_at');
 
-        return view('mensajes', compact('recibidos', 'usuarios'));
+        
+        $from_id = $usuarios[0]->from_id;
+
+        return view('mensajes', compact('mensajes', 'usuarios', 'from_id'));
     }
 
     public function mensajesUsuario(Request $request)
     {
-        $recibidos = Message::where('to_id', auth()->user()->id )->where('from_id', $request->from_id )->get();
-        $enviados = Message::where('to_id', $request->from_id )->where('from_id', auth()->user()->id )->get();
+        $recibidos = Message::where('to_id', $request->to_id )->where('from_id', $request->from_id )->get();
+
+        foreach ($recibidos as $recibido) { $this->marcar($recibido); }
+        
+        $enviados = Message::where('to_id', $request->from_id )->where('from_id', $request->to_id )->get();
+        
         $mensajes = $recibidos->merge($enviados);
-        $mensajes = $mensajes->sortByDesc('created_at');
+
+        $mensajes = $mensajes->sortBy('created_at');
+        
         return view('filtros.mensajes', compact('mensajes'));
+    }
+
+    public function marcar(Message $message){
+        if(!$message->received){
+            $message->received = 1;
+            $message->save();
+        }
+    }
+
+    public function nuevoMensaje(Request $request)
+    {
+        $this->create($request);
+        
+        $recibidos = Message::where('to_id', $request->to_id )->where('from_id', $request->from_id )->get();
+        
+        $enviados = Message::where('to_id', $request->from_id )->where('from_id', $request->to_id )->get();
+        
+        $mensajes = $recibidos->merge($enviados);
+
+        $mensajes = $mensajes->sortBy('created_at');
+        
+        return view('filtros.mensajes', compact('mensajes'));
+    }
+
+    public function contadorMensajes()
+    {
+        return view('content.contador-mensajes');
     }
 }

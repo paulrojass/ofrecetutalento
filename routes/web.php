@@ -48,7 +48,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
-
+Route::get('actualizar-mensajes', 'MessageController@contadorMensajes');
 
 //Auntenticacion con redes
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
@@ -79,11 +79,13 @@ Route::get('suscripcion-talentos', 'SiteController@suscripcionTalentos');
 Route::get('actualizar-talentos', 'SiteController@actualizarTalentos');
 Route::get('info-perfil', 'SiteController@perfilInfo');
 Route::get('talentos-perfil', 'SiteController@perfilTalentos');
+Route::get('canjes-perfil', 'SiteController@perfilCanjes');
 Route::post('eliminar-talento', 'TalentController@eliminarTalento');
 Route::get('form-perfil', 'SiteController@formInfo');
 Route::get('actualizar_usuario', 'UserController@updateUser');
 
-
 //mensajes
-Route::get('mensajes', 'MessageController@mensajes')->name('mensajes');
+Route::get('mensajes', 'MessageController@mensajes')->middleware('verified');
+Route::get('mensajes/{id}', 'MessageController@mensajesId')->middleware('verified');
 Route::get('mensajes-usuario', 'MessageController@mensajesUsuario');
+Route::post('enviar-mensaje', 'MessageController@nuevoMensaje');

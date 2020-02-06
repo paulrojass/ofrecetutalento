@@ -44,7 +44,7 @@
 				 			<div class="can-detail-s">
 				 				<div class="cst"><img src="{{URL::asset('images/users/'.$user->avatar)}}" alt="" /></div>
 				 				<h3>{{ $user->name }} {{ $user->lastname }}</h3>
-				 				<span><i>Usuario {{$user->suscription->plan->name}}</i> at Atract Solutions</span>
+				 				<span><i>Usuario {{$user->suscription->plan->name}}</i> en Ofrece tu talento</span>
 				 				<p>{{ $user->email }}</p>
 				 				<p>Miembro desde, {{ \Carbon\Carbon::parse($user->created_at)->format('Y')}} </p>
 				 				<p><i class="la la-map-marker"></i>{{ $user->city }}, {{ $user->country }}</p>
@@ -184,14 +184,10 @@
 							 			</ul>
 							 		</div><!-- Job Overview -->
 							 		<div class="quick-form-job">
-							 			<h3>Contact</h3>
+							 			<h3>Enviar Mensaje</h3>
 							 			<form>
-							 				<input type="text" placeholder="Enter your Name *" />
-							 				<input type="text" placeholder="Email Address*" />
-							 				<input type="text" placeholder="Phone Number" />
-							 				<textarea placeholder="Message should have more than 50 characters"></textarea>
-							 				<button class="submit">Send Email</button>
-							 				<span>You accepts our <a href="#" title="">Terms and Conditions</a></span>
+							 				<textarea placeholder="Envia un mensaje directo a {{ $user->name }} {{ $user->lastname }}"></textarea>
+							 				<button class="submit">enviar</button>
 							 			</form>
 							 		</div>
 						 		</div>

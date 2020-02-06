@@ -279,3 +279,34 @@ input[type=range].slider:focus::-ms-fill-upper {
 .no-pad{
   padding : 0;
 }
+
+/* Boton deshabilitado */
+.profile-form-edit > form button:disabled {
+    float: right;
+    background: #e8ecec;
+    border: 2px solid #e8ecec;
+    color: #ffffff;
+    font-family: 'Questrial' !important;
+    font-size: 15px;
+    padding: 11px 40px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: default;
+}
+
+/* parrafo de mensaje */
+.table-list-title > p {
+    float: left;
+    width: 100%;
+    font-size: 13px;
+    color: 
+    #888888;
+    line-height: 24px;
+    margin: 0;
+        margin-top: 0px;
+    margin-top: 4px;
+}

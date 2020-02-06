@@ -14,7 +14,7 @@
 			<p>{{ $talent->description }}</p>
 		</div>
 		<ul class="action_job">
-			<li><span>Edit</span>
+			<li><span>Editar</span>
 				<a class="editar-talento" 
 				data-value="{{$talent->id}}"
 				data-title = "{{$talent->title}}"
@@ -22,7 +22,7 @@
 				data-level = "{{$talent->level}}"
 				data-description = "{{$talent->description}}"
 				data-toggle="modal" data-target="#modal-talento" value="{{$talent->id}}" title=""><i class="la la-pencil"></i></a></li>
-			<li><span>Delete</span><a class="eliminar-talento" value="{{$talent->id}}" title=""><i class="la la-trash-o"></i></a></li>
+			<li><span>Eliminar</span><a class="eliminar-talento" value="{{$talent->id}}" title=""><i class="la la-trash-o"></i></a></li>
 		</ul>
 	</div>
 	@endforeach
