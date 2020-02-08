@@ -29,9 +29,14 @@ class ExchangeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $exchange = new Exchange();
+        $exchange->title = $request->title;
+        $exchange->price = $request->price;
+        $exchange->description = $request->description;
+        $exchange->talent_id = $request->talent_id;
+        $exchange->save();
     }
 
     /**
@@ -88,7 +93,11 @@ class ExchangeController extends Controller
      */
     public function update(Request $request, Exchange $exchange)
     {
-        //
+        $exchange->title = $request->title;
+        $exchange->price = $request->price;
+        $exchange->talent_id = $request->talent_id;
+        $exchange->description = $request->description;
+        $exchange->save();
     }
 
     /**
@@ -99,6 +108,27 @@ class ExchangeController extends Controller
      */
     public function destroy(Exchange $exchange)
     {
-        //
+        $exchange->delete();
     }
+
+    public function guardarCanje(Request $request)
+    {
+        $this->create($request);
+        $exchanges = Auth()->User()->exchanges;
+        return view('content.mi-cuenta-canjes', compact('exchanges'));
+    }
+
+    public function eliminarCanje(Request $request)
+    {
+        $exchange = Exchange::where('id', $request->id)->first();
+        $this->destroy($exchange);
+    }
+
+    public function actualizarCanje(Request $request)
+    {
+        $exchange = Exchange::where('id', $request->id)->first();
+
+        $this->update($request, $exchange);
+    }
+
 }

@@ -52,6 +52,13 @@ $('#talentos').on('click', '#agregar-talento', function(event){
 	$('#actualizar-talento').hide();
 });
 
+$('#canjes').on('click', '#agregar-canje', function(event){
+	event.preventDefault();
+	resetForm();
+	$('#nuevo-canje').show();
+	$('#actualizar-canje').hide();
+});
+
 $('#mi-perfil-info').on('click', '#editar-perfil', function(e){
 	e.preventDefault();
 	editarPerfil();
@@ -73,7 +80,6 @@ $('#talentos').on('click', '.editar-talento', function(e){
 	var description = $(this).data("description");
 	var level = $(this).data("level");
 	var _token = $("input[name='_token']").val();
-	console.log(id);
 
 	$("input[name='id_talent']").val(id);
 	$("input[name='title']").val(title);
@@ -84,17 +90,54 @@ $('#talentos').on('click', '.editar-talento', function(e){
 	$('#categories').change();
 });
 
+
+$('#canjes').on('click', '.editar-canje', function(e){
+	e.preventDefault();
+	resetForm();
+	$('#nuevo-canje').hide();
+	$('#actualizar-canje').show();
+	var id = $(this).data("value");
+	var title = $(this).data("title");
+	var price = $(this).data("price");
+	var description = $(this).data("description");
+	var talent = $(this).data("talent");
+	var _token = $("input[name='_token']").val();
+
+	$("input[name='id_exchange']").val(id);
+	$("input[name='title-exchange']").val(title);
+	$("input[name='price-exchange']").val(price);
+	$("#description-exchange").val(description);
+/*	$("#talent-exchange option[value='"+talent+"']").attr("selected", true);*/
+	$('#talent-exchange').change();
+});
+
+
+
 $('#talentos').on('click', '.eliminar-talento', function(e){
 	e.preventDefault();
 	var id = $(this).attr("value");
 	var _token = $("input[name='_token']").val();
 	$.ajax({
-		url: 'eliminar-talento',
+		url: '/eliminar-talento',
 		type: 'post',
 		data: {id : id, _token:_token},
 	})
 	.done(function(response) {
 		talentosPerfil();
+	});	
+});
+
+$('#canjes').on('click', '.eliminar-canje', function(e){
+	e.preventDefault();
+	var id = $(this).attr("value");
+	var _token = $("input[name='_token']").val();
+	$.ajax({
+		url: '/eliminar-canje',
+		type: 'post',
+		data: {id : id, _token:_token},
+	})
+	.done(function(response) {
+		canjesPerfil();
 	});	
 });
 
@@ -158,9 +201,9 @@ $('#actualizar-talento').click(function(e){
 	var id_talent = $("input[name='id_talent']").val();
 
 	if(title == "" || category == "" || description ==""){
-		if(title == "") $('#e_title').removeAttr('hidden');
-		if(category == "") $('#e_category').removeAttr('hidden');
-		if(description == "") $('#e_description').removeAttr('hidden');
+		if(title == "") $('#e_title').removeAttr('hidden'); else $('#e_title').attr({hidden: 'hidden'});
+		if(category == "") $('#e_category').removeAttr('hidden'); else $('#e_category').attr({hidden: 'hidden'});
+		if(description == "") $('#e_description').removeAttr('hidden'); else $('#e_description').attr({hidden: 'hidden'});
 	}
 	else
 	{
@@ -193,46 +236,75 @@ $('#actualizar-talento').click(function(e){
 	}
 });
 
-$('#nuevo-canje').click(function(e){
+$('#actualizar-canje').click(function(e){
 	e.preventDefault();
 	var _token = $("input[name='_token']").val();
+	var exchange_id = $("input[name='id_exchange']").val();
 	var title = $("input[name='title-exchange']").val();
 	var price = $("input[name='price-exchange']").val();
-	var talent = $("#talent-exchange").val();
 	var description = $("#description-exchange").val();
+	var talent_id = $("#talent-exchange").val();
 
-	if(title == "" || price == "" || description =="" || talent ==""){
-		if(title == "") $('#e_title_exchange').removeAttr('hidden');
-		if(price == "") $('#e_price_exchange').removeAttr('hidden');
-		if(talent == "") $('#e_talent_exchange').removeAttr('hidden');
-		if(description == "") $('#e_description_exchange').removeAttr('hidden');
+	if(title == "" || price == "" || description =="" || talent_id ==""){
+		if(title == "") $('#e_title_exchange').removeAttr('hidden'); else $('#e_title_exchange').attr({hidden: 'hidden'});
+		if(price == "") $('#e_price_exchange').removeAttr('hidden'); else $('#e_price_exchange').attr({hidden: 'hidden'});
+		if(description == "") $('#e_description_description').removeAttr('hidden'); else $('#e_description_description').attr({hidden: 'hidden'});
+		if(talent_id == "") $('#e_talent_exchange').removeAttr('hidden'); else $('#e_talent_exchange').attr({hidden: 'hidden'});
 	}
 	else
 	{
 		$.ajax({
 			type:'POST',
-			url:'guardar_canje',
+			url:'actualizar_canje',
 			data:{
-				id_user: id_user,
+				id: exchange_id,
 				title:title,
-				talent:talent,
 				price:price,
+				talent_id:talent_id,
 				description:description,
 				_token:_token
 			},
 		})
 		.done(function(data) {
-			if($.isEmptyObject(data.error)){
-				verificarTalentos(id_user);
-				talentosPerfil();
-				$('#modal-talento').modal('hide');
-				resetForm();
-			}else{
-				printErrorMsg(data.error);
+			canjesPerfil();
+			$('#modal-canje').modal('hide');
+			resetForm();
+		});
+	}
+});
+
+$('#nuevo-canje').click(function(e){
+	e.preventDefault();
+	var _token = $("input[name='_token']").val();
+	var title = $("input[name='title-exchange']").val();
+	var price = $("input[name='price-exchange']").val();
+	var talent_id = $("#talent-exchange").val();
+	var description = $("#description-exchange").val();
+
+	if(title == "" || price == "" || description =="" || talent_id ==""){
+		if(title == "") $('#e_title_exchange').removeAttr('hidden'); else $('#e_title_exchange').attr({hidden: 'hidden'});
+		if(price == "") $('#e_price_exchange').removeAttr('hidden'); else $('#e_price_exchange').attr({hidden: 'hidden'});
+		if(talent_id == "") $('#e_talent_exchange').removeAttr('hidden'); else $('#e_talent_exchange').attr({hidden: 'hidden'});
+		if(description == "") $('#e_description_exchange').removeAttr('hidden'); else $('#e_description_exchange').attr({hidden: 'hidden'});
+	}
+	else
+	{
+		$.ajax({
+			type:'get',
+			url:'/guardar-canje',
+			data:{
+				id_user: id_user,
+				title:title,
+				talent_id:talent_id,
+				price:price,
+				description:description,
+				_token:_token
 			}
 		})
-		.fail(function(data) {
-			printErrorMsg(data.error);
+		.done(function(data) {
+			$('#canjes').html(data);
+			$('#modal-canje').modal('hide');
+			verificarTalentos(id_user);
 		});
 	}
 });
@@ -252,9 +324,9 @@ $('#nuevo-talento').click(function(e){
 	var description = $("input[name='description']").val();
 
 	if(title == "" || category == "" || description ==""){
-		if(title == "") $('#e_title').removeAttr('hidden');
-		if(category == "") $('#e_category').removeAttr('hidden');
-		if(description == "") $('#e_description').removeAttr('hidden');
+		if(title == "") $('#e_title').removeAttr('hidden'); else $('#e_title').attr({hidden: 'hidden'});
+		if(category == "") $('#e_category').removeAttr('hidden'); else $('#e_category').attr({hidden: 'hidden'});
+		if(description == "") $('#e_description').removeAttr('hidden'); else $('#e_description').attr({hidden: 'hidden'});
 	}
 	else
 	{
@@ -337,8 +409,8 @@ function cambiarFoto(){
 }
 
 function mostrar(div,a){
-	var divs = ['#mi-perfil', '#talentos', '#canjes', '#tratos', '#mensajes'];
-	var as = ['#a-perfil', '#a-talentos', '#a-canjes', '#a-tratos', '#a-mensajes'];
+	var divs = ['#mi-perfil', '#talentos', '#canjes', '#tratos'];
+	var as = ['#a-perfil', '#a-talentos', '#a-canjes', '#a-tratos'];
 	$.each(divs, function(index, value){
 		$(value).fadeOut();
 	});
@@ -400,6 +472,7 @@ function editarPerfil(){
 }
 
 function resetForm() {
- $("form select").each(function() { this.selectedIndex = 0 });
- $("form input[type=text] , form textarea").each(function() { this.value = '' });
+	$('form .form-error').attr({hidden: 'hidden'});
+	$("form select").each(function() { this.selectedIndex = 0 });
+	$("form input[type=text], form input[type=number] , form textarea").each(function() { this.value = '' });
 }

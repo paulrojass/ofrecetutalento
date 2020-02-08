@@ -18,7 +18,7 @@
 									</div>
 									<div class="col-lg-6">
 										<div class="action-inner">
-											<a href="#" title=""><i class="la la-envelope-o"></i>Contact David</a>
+											<!-- <a href="#" title=""><i class="la la-envelope-o"></i>Contact David</a> -->
 										</div>
 									</div>
 								</div>
@@ -50,7 +50,7 @@
 				 				<p><i class="la la-map-marker"></i>{{ $user->city }}, {{ $user->country }}</p>
 				 			</div>
 				 			<div class="download-cv">
-				 				<a href="#" title="">Download CV <i class="la la-download"></i></a>
+				 				<!-- <a href="#" title="">Download CV <i class="la la-download"></i></a> -->
 				 			</div>
 				 		</div>
 				 		<ul class="cand-extralink">
@@ -59,14 +59,14 @@
 				 			<li><a href="#basic" title="">Información Basica</a></li>
 				 			<li><a href="#talentos" title="">Talentos</a></li>
 				 		</ul>
-				 		<div class="cand-details-sec">
+				 		<div class="cand-details-sec" id="informacion-general">
 				 			<div class="row">
-				 				<div class="col-lg-8 column">
 				 					<div class="cand-details" id="abilities">
 				 						<h2>Descripción de habilidades</h2>
 				 						<p>{{ $user->abilities }}</p>
 				 					</div>
 
+				 				<div class="col-lg-6 column">
 			 						<div class="cand-details" id="experience">
 			 							<h2>Experiencia en trabajos</h2>
 			 							<div class="edu-history style2">
@@ -98,7 +98,9 @@
 			 									<p>{{ $user->experiences->achievements3 }} </p>
 			 								</div>
 			 							</div>
-			 						</div>	
+			 						</div>
+			 					</div>
+			 					<div class="col-lg-6 column">
 			 						<div class="cand-details" id="basic">
 				 						<div class="progress-sec">
 				 							<h2>Nivel de lenguajes</h2>
@@ -117,38 +119,39 @@
 				 							@endforeach
 				 						</div>
 			 						</div>
+			 					</div>
 
-			 						<div class="cand-details" id="talentos">
+			 						<div class="cand-details pt-5" id="talentos">
 			 							<h2>Talentos</h2>
 								 		<div class="manage-jobs-sec">
-								 			<div class="extra-job-info">
+<!-- 								 			<div class="extra-job-info">
 									 			<span><i class="la la-clock-o"></i><strong>9</strong> Job Posted</span>
 									 			<span><i class="la la-file-text"></i><strong>20</strong> Application</span>
 									 			<span><i class="la la-users"></i><strong>18</strong> Active Jobs</span>
-									 		</div>
+									 		</div> -->
 									 		<table>
 									 			<thead>
 									 				<tr>
-									 					<td>Descripción</td>
-									 					<td>Industria</td>
-									 					<td>Categoria</td>
-									 					<td>Experiencia</td>
+									 					<td class="col-6">Descripción</td>
+									 					<td class="col-2">Industria</td>
+									 					<td class="col-2">Categoria</td>
+									 					<td class="col-2">Experiencia</td>
 									 				</tr>
 									 			</thead>
 									 			<tbody>
 									 				@foreach($user->talents as $talent)
 										 				<tr>
 										 					<td>
-										 						<div class="table-list-title">
+										 						<div class="table-list-title pr-4">
 										 							<h3>{{ $talent->title }}</h3>
-										 							<span>{{ $talent->description }}</span>
+										 							<p class="text-justify">{{ $talent->description }}</p>
 										 						</div>
 										 					</td>
 										 					<td>
-										 						<span class="applied-field">{{ $talent->category->industry->name }}</span>
+										 						<p class="applied-field text-center">{{ $talent->category->industry->name }}</p>
 										 					</td>
 										 					<td>
-																<span class="applied-field">{{ $talent->category->name }}</span>
+																<p class="applied-field text-center">{{ $talent->category->name }}</p>
 										 					</td>
 										 					<td>
 									 							<!-- <div class="progress-sec with-edit"> -->
@@ -169,11 +172,11 @@
 								 		</div>
 			 						</div>
 
-			 					</div>
-
+			 					<!-- </div>
+			 					 -->
 				 				<div class="col-lg-4 column">
-						 			<div class="job-overview">
-							 			<h3>Job Overview</h3>
+<!-- 						 			<div class="job-overview">
+							 			<h3>Resumen del usuario</h3>
 							 			<ul>
 							 				<li><i class="la la-money"></i><h3>Offerd Salary</h3><span>£15,000 - £20,000</span></li>
 							 				<li><i class="la la-mars-double"></i><h3>Gender</h3><span>Female</span></li>
@@ -182,7 +185,8 @@
 							 				<li><i class="la la-shield"></i><h3>Experience</h3><span>2 Years</span></li>
 							 				<li><i class="la la-line-chart "></i><h3>Qualification</h3><span>Bachelor Degree</span></li>
 							 			</ul>
-							 		</div><!-- Job Overview -->
+							 		</div> --><!-- Job Overview -->
+									@auth
 							 		<div class="quick-form-job">
 							 			<h3>Enviar Mensaje</h3>
 							 			<form>
@@ -190,6 +194,7 @@
 							 				<button class="submit">enviar</button>
 							 			</form>
 							 		</div>
+									@endauth
 						 		</div>
 
 				 			</div>

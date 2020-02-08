@@ -1,6 +1,5 @@
 @auth()
 @php($recibidos = App\Message::where('to_id', auth()->user()->id)->where('received', 0)->get())
-@endauth
 @if($recibidos->count() > 0)
 <div class="wishlist-dropsec">
 	<span><i class="la la-comment"></i>
@@ -31,3 +30,4 @@
 	</span>
 </div>
 @endif
+@endauth

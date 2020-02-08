@@ -29,36 +29,24 @@
 					<div class="widget">
 						<div class="tree_widget-sec">
 							<ul>
-								<li><a id="a-perfil" onclick="mostrar('#mi-perfil','#a-perfil')" title=""><i class="la la-user"></i>Mi perfil</a></li>
+								<li><a  href="javascript:void(0)" id="a-perfil" onclick="mostrar('#mi-perfil','#a-perfil')" title=""><i class="la la-user"></i>Mi perfil</a></li>
 								@if(auth()->user()->suscription->plan_id > 1)
-									<li><a id="a-talentos" onclick="mostrar('#talentos','#a-talentos')" title=""><i class="la la-diamond"></i>Talentos</a></li>
-									<li><a id="a-canjes" onclick="mostrar('#canjes', '#a-canjes')" title=""><i class="la la-lightbulb-o"></i>Canjes</a></li>
+									<li><a href="javascript:void(0)" id="a-talentos" onclick="mostrar('#talentos','#a-talentos')" title=""><i class="la la-diamond"></i>Talentos</a></li>
+									<li><a href="javascript:void(0)" id="a-canjes" onclick="mostrar('#canjes', '#a-canjes')" title=""><i class="la la-lightbulb-o"></i>Canjes</a></li>
 								@endif
-								<li><a id="a-tratos" onclick="mostrar('#tratos', '#a-tratos')" title=""><i class="la la-exchange"></i>Tratos</a></li>
-								<li><a id="a-mensajes" onclick="mostrar('#mensajes', '#a-mensajes')" title=""><i class="la la-comments"></i>Mensajes</a></li>
+								<li><a href="javascript:void(0)" id="a-tratos" onclick="mostrar('#tratos', '#a-tratos')" title=""><i class="la la-exchange"></i>Tratos</a></li>
+								<li><a href="{{ url('mensajes') }}" id="a-mensajes" title=""><i class="la la-comments"></i>Mensajes</a></li>
 								<li><a href="{{route('logout')}}" title=""><i class="la la-unlink"></i>Cerrar Sesión</a></li>
 							</ul>
 						</div>
 					</div>
-<!-- 					<div class="widget">
-	<div class="skill-perc">
-		<h3>Skills Percentage </h3>
-		<p>Put value for "Cover Image" field to increase your skill up to "15%"</p>
-		<div class="skills-bar">
-			<span>85%</span>
-			<div class="second circle" 
-				data-size="155"
-				data-thickness="60">
-			</div>
-		</div>
-	</div>
-</div> -->
 				</aside>
 
 				<div class="col-lg-9 column">
-					<div class="padding-left">
-						<div class="manage-jobs-sec">
-							<div id="mi-perfil">
+
+					<div id="mi-perfil">
+						<div class="padding-left">
+							<div class="manage-jobs-sec">
 								<form files="true" enctype="multipart/form-data" id="form-avatar">
 									<div class="upload-img-bar">
 										<span class="round" id="div-imagen">
@@ -73,104 +61,77 @@
 										</div>
 									</div>
 								</form>
-								<div id="mi-perfil-info"></div>		 					
+								<div id="mi-perfil-info"></div>
 							</div>
+						</div>
+					</div>
 
-							<div id="talentos">
-							</div>
-
-
-							<div id="canjes">
-
-							</div>	
+					<div id="talentos">
+					</div>
 
 
+					<div id="canjes">
+					</div>	
 
-							<div id="tratos">
-								<div class="border-title"><h3>Tratos</h3><a href="#" title=""><i class="la la-plus"></i> Agregar Trato</a></div>
+					<div id="tratos">
+						<div class="padding-left">
+							<div class="manage-jobs-sec">
+								@php($tratos = App\Dealing::where('accept_id', auth()->user()->id)->get())
+
 								<div class="mini-portfolio">
 							 		<div class="manage-jobs-sec">
-							 			<div class="extra-job-info">
-								 			<span><i class="la la-clock-o"></i><strong>9</strong> Job Posted</span>
-								 			<span><i class="la la-file-text"></i><strong>20</strong> Application</span>
-								 		</div>
 								 		<table>
 								 			<thead>
 								 				<tr>
 								 					<td>Requerimiento</td>
-								 					<td>Canje Propuesto</td>
-								 					<td>Canje Solicitado</td>
+								 					<td>Solicitado</td>
+								 					<td>Propuesto</td>
 								 					<td>Estado</td>
 								 					<td>Acciones</td>
 								 				</tr>
 								 			</thead>
 								 			<tbody>
+												@foreach($tratos->sortByDesc('created_at') as $trato)
 								 				<tr>
-								 					<td>
+								 					<td class="col-4">
 								 						<div class="table-list-title">
-								 							<h3><a href="#" title="">Web Designer / Developer</a></h3>
-								 							<span><i class="la la-map-marker"></i>Sacramento, California</span>
+								 							<!-- <span class="applied-field">{{ $trato->description }}</span> -->
+								 							<p>{{ $trato->description }}</p>
+
+								 							<!-- <span><i class="la la-map-marker"></i>Sacramento, California</span> -->
 								 						</div>
 								 					</td>
-								 					<td>
-								 						<span class="applied-field">3+ Applied</span>
+								 					<td class="col-2">
+								 						<span class="applied-field">{{ $trato->exchange_id }}</span>
 								 					</td>
-								 					<td>
-								 						<span>October 27, 2017</span><br />
-								 						<span>April 25, 2011</span>
+								 					<td class="col-2">
+								 						<span>{{ $trato->exchange_proposal }}</span>
 								 					</td>
-								 					<td>
-								 						<span class="status active">Active</span>
+								 					<td class="col-2">
+								 						@if($trato->aproved)
+								 						<span class="status active">Aceptado</span>
+								 						@else
+								 						<span class="status active">Omitido</span>
+								 						@endif
 								 					</td>
-								 					<td>
+								 					<td class="col-2">
 								 						<ul class="action_job">
-								 							<li><span>View Job</span><a href="#" title=""><i class="la la-eye"></i></a></li>
-								 							<li><span>Edit</span><a href="#" title=""><i class="la la-pencil"></i></a></li>
-								 							<li><span>Delete</span><a href="#" title=""><i class="la la-trash-o"></i></a></li>
+								 							<li><span>Aceptar</span><a href="#" title=""><i class="la la-check-circle"></i></a></li>
+								 							<li><span>Omitir</span><a href="#" title=""><i class="la la-times-circle"></i></a></li>
+								 							<!-- <li><span>Delete</span><a href="#" title=""><i class="la la-trash-o"></i></a></li> -->
 								 						</ul>
 								 					</td>
 								 				</tr>
+							 					@endforeach
 								 			</tbody>
 								 		</table>
 							 		</div>
-
-								</div>
-							</div>								
-
-							<div id="mensajes">
-								<div class="border-title"><h3>Mensajes</h3><a href="#" title=""><i class="la la-comment"></i> Enviar Mensaje</a></div>
-								<div class="progress-sec">
-									<div class="manage-jobs-sec">
-										<table class="alrt-table">
-											<thead>
-												<tr>
-													<td>Alert Details</td>
-													<td class="text-right">Email Frequency</td>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>
-														<div class="table-list-title">
-															<h3><a href="#" title="">Test Title</a></h3>
-															<span>Search Keywords: 2, 60, Crawley RH10 8XH, United Kingdom</span>
-														</div>
-													</td>
-													<td>
-														<ul class="action_job">
-															<li><span>Delete</span><a href="#" title=""><i class="la la-trash-o"></i></a></li>
-														</ul>
-														<span>Never</span>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				<!-- AQUI TERMINA LA COLUMNA 2 -->
 			</div>
 		</div>
 	</div>
@@ -230,8 +191,8 @@
 					<input type="hidden" name="id_talent">
 					<span class="pf-title">Talento <strong class="required">*</strong></span>									
 					<div class="pf-field">
-						<input type="text" name="title" id="title" maxlength="100" required>
-						<span id="e_title" hidden> Debe agregar un titulo del talento</span>
+						<input type="text" name="title" id="title" maxlength="60" required>
+						<span class="form-error" id="e_title" hidden> Debe agregar un titulo del talento</span>
 					</div>
 
 					<span class="pf-title">Industria y Categoría <strong class="required">*</strong></span>
@@ -255,7 +216,7 @@
 							@endif
 							@endforeach
 						</select>
-						<span id="e_category" hidden> Selecciona una categoía</span>
+						<span class="form-error" id="e_category" hidden> Selecciona una categoía</span>
 					</div>
 
 					<span class="pf-title result-talent">Nivel de experiencia <strong class="required">*</strong> <b></b></span>
@@ -264,7 +225,7 @@
 					<span class="pf-title">Descripción <strong class="required">*</strong></span>
 					<div class="pf-field">
 						<input type="text" name="description" id="description" required value="{{old('description')}}">
-						<span id="e_description" hidden>Describe el talento</span>
+						<span class="form-error" id="e_description" hidden>Describe el talento</span>
 					</div>
 				</div>
 			</div>
@@ -293,28 +254,33 @@
 			  <div class="modal-body">
 					<div class="contact-edit pl-5 pr-5">
 						@csrf
+						<input type="hidden" name="id_exchange" id="id_exchange">
 						<div class="row">
 							<div class="col-lg-12">
 								<span class="pf-title">Titulo</span>									
 								<div class="pf-field">
-									<input type="text" name="title-exchange" id="title-exchange" required>
+									<input type="text" name="title-exchange" id="title-exchange" maxlength="60" required>
+									<span class="form-error" id="e_title_exchange" hidden> Debe agregar un titulo del talento</span>
+
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<span class="pf-title">Precio</span>									
 								<div class="pf-field">
-									<input type="number" name="title-price" id="title-price" required>
+									<input type="number" name="price-exchange" id="price-exchange" required>
+									<span class="form-error" id="e_price_exchange" hidden> Debe agregar una cantidad válida</span>
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<span class="pf-title">Talento</span>
 								<div class="pf-field">
-									<select name="talents-exchange" id="talents-exchange" class="chosen" required>
+									<select name="talent-exchange" id="talent-exchange" class="chosen" required>
 										<option value = "">Selecciona un talento</option>
 										@foreach($talents as $talent)
 										<option value="{{$talent->id}}">{{$talent->title}}</option>
 										@endforeach
 									</select>
+									<span class="form-error" id="e_talent_exchange" hidden> Debe seleccionar un talento</span>
 								</div>
 								
 							</div>
@@ -322,6 +288,7 @@
 								<span class="pf-title">Descripción</span>									
 								<div class="pf-field">
 									<textarea id="description-exchange" name="description-exchange"></textarea>
+									<span class="form-error" id="e_description_exchange" hidden> Debe agregar una descripción</span>
 								</div>
 							</div>
 						</div>
@@ -330,7 +297,7 @@
 			  <div class="modal-footer">
 				<button type="button" data-dismiss="modal" class="boton-normal">Cerrar</button>
 				<button type="button" class="boton-normal" id="nuevo-canje">Agregar</button>
-				<button type="button" class="boton-normal" id="actualizar-canje">Agregar</button>
+				<button type="button" class="boton-normal" id="actualizar-canje">Actualizar</button>
 			  </div>
 			</form>
 		</div>
@@ -348,6 +315,5 @@
 <script src="{{URL::asset('tema/js/tag.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/bootstrap-datepicker.js')}}" type="text/javascript"></script>
 
-<script src="{{URL::asset('js/mi-cuenta.js')}}" type="text/javascript">
-</script>
+<script src="{{URL::asset('js/mi-cuenta.js')}}" type="text/javascript"></script>
 @endsection

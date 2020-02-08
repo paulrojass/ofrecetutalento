@@ -83,6 +83,9 @@ Route::get('canjes-perfil', 'SiteController@perfilCanjes');
 Route::post('eliminar-talento', 'TalentController@eliminarTalento');
 Route::get('form-perfil', 'SiteController@formInfo');
 Route::get('actualizar_usuario', 'UserController@updateUser');
+Route::get('guardar-canje', 'ExchangeController@guardarCanje');
+Route::post('eliminar-canje', 'ExchangeController@eliminarCanje');
+Route::post('actualizar_canje', 'ExchangeController@actualizarCanje');
 
 //mensajes
 Route::get('mensajes', 'MessageController@mensajes')->middleware('verified');

@@ -50,9 +50,43 @@
 				 				<p>{{$canje->description}}</p>
 				 			</div>
 	 						<div class="border-title"><h3>Imágenes</h3><a href="#" title=""><i class="la la-plus"></i> Agregar imagen</a></div>
-	 						<div class="mini-portfolio">
-	 							<div class="mp-row">
-	 								@foreach(($canje->files->where('type', 'image')) as $imagen)
+
+
+				 			<div class="blogpost">
+				 				<div class="blog-posthumb"> <a href="#" title=""><img src="http://placehold.it/834x340" alt="" /></a> </div>
+				 				<div class="blog-postdetail">
+				 					<ul class="post-metas">
+				 						<li>
+				 							<a href="#" title="">
+				 								<i class="la la-calendar-o"></i>
+			 									November 23, 2017
+			 								</a>
+			 							</li>
+			 							<li>
+			 								<a class="metascomment" href="#" title="">
+			 									<i class="la la-comments"></i>4 comments
+			 								</a>
+			 							</li>
+				 					</ul>
+				 				</div>
+				 			</div><!-- Blog Post -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 	 						<div class="mini-portfolio">
+	<div class="mp-row">
+		@foreach(($canje->files->where('type', 'image')) as $imagen)
 		 								<div class="mp-col">
 		 									<div class="mportolio"><img src="{{URL::asset('files/image/'.$imagen->location)}}" style="max-width: 165px; max-height: 165px" alt="" /><a href="#" title=""><i class="la la-search"></i></a></div>
 		 									<ul class="action_job">
@@ -60,9 +94,9 @@
 					 							<li><span>Delete</span><a href="#" title=""><i class="la la-trash-o"></i></a></li>
 					 						</ul>
 		 								</div>
-	 								@endforeach
-	 							</div>
-	 						</div>
+		@endforeach
+	</div>
+</div> -->
 
 	 						<div class="border-title"><h3>Videos</h3><a href="#" title=""><i class="la la-plus"></i> Agregar video</a></div>
 	 						<div class="mini-portfolio">
@@ -100,7 +134,7 @@
 				 			<div class="comment-sec" id="div-comentarios">
 				 			</div>
 
-<!--
+							<!--
 				 			<div class="job-overview">
 					 			<h3>Job Overview</h3>
 					 			<ul>
@@ -141,8 +175,7 @@
 		</div>
 	</section>
 
-
-	<!-- Modal Idioma -->
+	<!-- Modal trato -->
 	<div class="modal fade" id="modal-trato" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -153,6 +186,9 @@
 				</button>
 			</div>
 			<form id="form-trato">
+
+				<input type="hidden" id="canje_id" name="canje_id" value="{!! $canje->id !!}">
+				<input type="hidden" id="auth_user" name="auth_user" value="{{{ (Auth::user()) ? Auth::user() : null }}}">
 			  <div class="modal-body">
 					<div class="contact-edit pl-5 pr-5">
 						@csrf
@@ -206,136 +242,5 @@
 
 
 @section('scripts')
-<script>
-	$(function(){
-		var id_canje = '{!! $canje->id !!}';
-		var AuthUser = '{{{ (Auth::user()) ? Auth::user() : null }}}';
-		cargaInicial(id_canje);
-
-		function cargaInicial(id_canje){
-			//$("#tipo-pago").checked();
-			actualizarComentarios(id_canje);
-			if(AuthUser){actualizarLikes(id_canje, '0');}
-		}
-
-		$('#div-comentarios').on('click', '#a-agregar-comentario', function(e){
-			e.preventDefault();
-			$('#comentario').slideDown('slow', function(){
-				$('#textarea-comentario').focus();
-				$('#a-agregar-comentario').hide();
-			});
-		});
-
-		$('#div-comentarios').on('click', '.a-responder', function(e){
-			e.preventDefault();
-			var clickeado = $(this).data('responder');
-			$('#respuesta'+clickeado).slideDown('slow', function(){
-				$('#textarea-respuesta'+clickeado).focus();
-			});
-		});
-
-		$('#div-comentarios').on('click', '#b-publicar-comentario', function(e){
-			e.preventDefault();
-			agregarComentario(id_canje);
-		});
-
-		$('#div-comentarios').on('click', '.b-publicar-respuesta', function(e){
-			e.preventDefault();
-			var comentario = $(this).data('value');
-			agregarRespuesta(id_canje, comentario);
-		});
-
-		$('.job-title2').on('click', '#a-me-gusta',function(e){
-			e.preventDefault();
-			actualizarLikes(id_canje, '1');
-		});
-
-		function actualizarLikes(id_canje, cambiar){
-			$.ajax({
-				url: '/cambiar-like',
-				type: 'get',
-				data: {canje_id : id_canje, cambiar:cambiar},
-				dataType: 'html',
-			})
-			.done(function(data) {
-				$('.me-gusta').html(data);
-			});
-		}
-
-		function actualizarComentarios(id_canje){
-			$.ajax({
-				url: '/actualizar-comentarios',
-				type: 'get',
-				data: {canje_id : id_canje},
-				dataType: 'html',
-			})
-			.done(function(data) {
-				$('#div-comentarios').html(data);
-			});			
-		}
-
-		function agregarComentario(id_canje){
-			var comentario = $('#textarea-comentario').val();
-			if (comentario != ''){
-				$.ajax({
-					url: '/agregar-comentario',
-					type: 'get',
-					data: {canje_id : id_canje, comment:comentario},
-					dataType: 'html',
-				})
-				.done(function(data) {
-					$('#div-comentarios').html(data);
-				});				
-			}
-		}
-
-		function agregarRespuesta(id_canje, comentario_id){
-			var comentario = $('#textarea-respuesta'+comentario_id).val();
-			if (comentario != ''){
-				$.ajax({
-					url: '/agregar-respuesta',
-					type: 'get',
-					data: {canje_id : id_canje, comment:comentario, replyto: comentario_id},
-					dataType: 'html',
-				})
-				.done(function(data) {
-					$('#div-comentarios').html(data);
-				});				
-			}
-		}
-
-		$('#tipo-canje').click(function () {
-			$('#div-select-canje').show();
-		});
-		$('#tipo-pago').click(function () {
-			$('#div-select-canje').hide();
-		});
-
-		$('#nuevo-trato').click(function () {
-			var accept_id = '{{$canje->talent->user_id}}';
-			var pay = $('input:radio[name=pay]:checked').val();
-			if (pay == 1){
-				var exchange_proposal = null;
-			}else{
-				var exchange_proposal = $('#exchange_proposal').val();
-			}
-			var description = $('#description').val();
-			var exchange_id = '{{$canje->id}}';
-			var token = '{{csrf_token()}}';
-			$.ajax({
-				type:'get',
-				url:'/nuevo-trato',
-				data:{description:description, accept_id:accept_id, pay:pay, exchange_proposal: exchange_proposal, exchange_id: exchange_id, _token: token},
-				success: function (response) {
-					alert(response);
-				},
-				error:function(response){
-					alert('no funciona');
-				}
-			});
-		});
-
-
-	});
-</script>
+<script src="{{URL::asset('js/canje-single.js')}}" type="text/javascript"></script>
 @endsection

@@ -3,28 +3,32 @@
 		<h5>{{$exchanges->total()}} Canjes disponibles</h5>
 	</div>
 </div><!-- MOdern Job LIst -->
-<div class="job-list-modern">
-	<div class="job-listings-sec no-border">
-	@foreach($exchanges as $exchange)
-	<div class="job-listing wtabs">
-		<div class="job-title-sec">
-			<div class="c-logo"> <img src="{{URL::asset('images/exchanges/'.$exchange->image)}}" alt="" /> </div>
-			<h3><a href="#" title="">{{$exchange->title}}</a></h3>
-			<span><i class="la la-user"></i>{{$exchange->talent->user->name}} {{$exchange->talent->user->lastname}}</span>
-			<div class="job-lctn"><i class="la la-map-marker"></i>{{$exchange->talent->user->city}}, {{$exchange->talent->user->country}}</div>
-		</div>
-		<div class="job-style-bx">
-	 		<a href="{{url('canjes/'.$exchange->id)}}" title="">
-			<span class="job-is ft">Ver detalles</span>
-			</a>
+<div class="blog-sec">
+	<div class="row" id="masonry">
+	@foreach($exchanges->sortByDesc('created_at') as $exchange)
 
-			<span class="fav-job"><i class="la la-heart-o"></i></span>
-			<i>
-				publicado el: <strong>{{$exchange->created_at->format('d/m/Y')}}</strong>
-			</i>
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			<div class="my-blog">
+				<div class="blog-thumb">
+					<a href="{{url('canjes/'.$exchange->id)}}" title=""><img src="{{URL::asset('images/exchanges/'.$exchange->image)}}" style="width: 360px; height: 200px" alt="" /></a>
+					<div class="blog-metas">
+						<a href="javascript:void(0)" title="">{{ $exchange->created_at->diffForHumans() }}</a>
+						<a href="javascript:void(0)" title=""><i class="la la-heart-o"></i> {{$exchange->likes->count()}} Me gusta</a>
+					</div>
+				</div>
+				<div class="blog-details">
+					<h3 class="text-truncate"><a href="{{url('canjes/'.$exchange->id)}}" title="">{{$exchange->title}}</a></h3>
+					<p class="text-truncate">{{$exchange->description}} </p>
+					<p class="text-truncate">
+						<i class="la la-money"></i> ${{$exchange->price}} | 
+						<i class="la la-user"></i> {{$exchange->talent->user->name}} {{$exchange->talent->user->lastname}} | 
+						<i class="la la-map-marker"></i> {{$exchange->talent->user->city}}, {{$exchange->talent->user->country}}
+					</p>
+					<a href="{{url('canjes/'.$exchange->id)}}" title="">Ver Canje <i class="la la-long-arrow-right"></i></a>
+				</div>
+			</div>
 		</div>
-	</div>
 	@endforeach
+	</div>
 	{{ $exchanges->links() }}
-</div>
 </div>
