@@ -206,7 +206,7 @@ class UserController extends Controller
 		}
 		$user->avatar = $temp_name;
 		$user->save();
-
-		return view('filtros.cambiar-foto');
+		$foto = $temp_name;
+		return view('filtros.cambiar-foto', compact('foto'));
 	}
 }

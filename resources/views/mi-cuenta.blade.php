@@ -12,7 +12,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="inner-header">
-						<h3>Bienvenido {{auth()->user()->name}} {{auth()->user()->lastname}}</h3>
+						<h3>{{auth()->user()->name}} {{auth()->user()->lastname}}</h3>
 					</div>
 				</div>
 			</div>
@@ -48,6 +48,7 @@
 						<div class="padding-left">
 							<div class="manage-jobs-sec">
 								<form files="true" enctype="multipart/form-data" id="form-avatar">
+									@csrf
 									<div class="upload-img-bar">
 										<span class="round" id="div-imagen">
 											<img id="img-avatar" src="{{URL::asset('images/users/'.Auth::User()->avatar)}}" style="cursor:pointer" alt="" />

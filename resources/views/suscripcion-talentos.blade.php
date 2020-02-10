@@ -173,7 +173,7 @@
 	function actualizarTalentos(){
 		$.ajax({
 			url: 'actualizar-talentos',
-			type: 'GEt',
+			type: 'Get',
 			dataType: 'html',
 		})
 		.done(function(data) {

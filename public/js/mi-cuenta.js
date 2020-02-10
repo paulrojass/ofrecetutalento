@@ -389,18 +389,18 @@ function verificarTalentos(id_user){
 function cambiarFoto(){
 	var formData = new FormData();
 	formData.append('avatar', $('#avatar')[0].files[0]);
-	formData.append('_token', '{{csrf_token()}}');
-	formData.append('id', '{{Auth::User()->id}}');
+	formData.append('_token', $("input[name='_token']").val());
+	formData.append('id', id_user);
 	$.ajax({
-		url: 'cambiar-foto',
+		url: '/cambiar-foto',
 		type: 'post',
 		data: formData,
 		contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
 		processData: false // NEEDED, DON'T OMIT THIS
 	})
 	.done(function(response) {
-		$('#div-imagen').html(response);
 		$("#ll").html('<div class="alert alert-success" role="alert">La foto ha cambiado exitosamente</div>');
+		$('#div-imagen').html(response).delay(2000);
 	})
 	.fail(function() {
 		$("#ll").html('<div class="alert alert-danger" role="alert">El formato del archivo debe ser de imagen (jpg, jpeg, png)</div>');

@@ -11,10 +11,10 @@
 				<div class="emply-resume-info">
 					<h3><a href="#" title="">{{ $user->name}} {{ $user->lastname }}</a></h3>
 					<span>
-					<i>{{ $user->talents->count() }} Talentos,  {{ $user->exchanges->count() }} Canjes</i>
-<!-- 					@foreach($user->talents  as $talents)
-	<i>{{$talents->title}}</i> ({{$talents->category->name}}), 
-@endforeach -->
+					<i>{{ $user->talents->count() }} Talentos,  {{ $user->exchanges->count() }} Canjes</i><br>
+ 					@foreach($user->talents  as $talents)
+						<i>{{$talents->title}},</i> 
+					@endforeach
 					</span>
 
 					<p><i class="la la-map-marker"></i>{{ $user->city }} / {{ $user->country }}</p>

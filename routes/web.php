@@ -16,7 +16,7 @@ Route::get('/', 'SiteController@principal');
 Route::get('como_funciona','SiteController@howItWorks');
 Route::get('quienes_somos','SiteController@quienesSomos');
 Route::get('planes','SiteController@planes');
-Route::get('talentos', 'SiteController@talentos');
+Route::get('talentos', 'SiteController@talentos')->name('talentos');
 Route::get('canjes', 'SiteController@canjes');
 Route::get('canjes/{id}', 'ExchangeController@canje');
 route::get('suscripcion', 'SiteController@suscripcion');
@@ -33,7 +33,7 @@ Route::get('logout', function ()
 
 
 //Filtrado de Telentos
-Route::post('talentos','SearchController@talentsFilter')->name('talentos');
+Route::post('talentos-filtro','SearchController@talentsFilter');
 //paginacion de talentos
 Route::get('/pagination', 'SiteController@paginationTalents');
 Route::get('pagination/fetch_data_talents', 'SiteController@fetch_data_talents');
@@ -69,6 +69,9 @@ Route::get('agregar-comentario', 'CommentController@newComment');
 Route::get('agregar-respuesta', 'CommentController@newComment');
 Route::get('actualizar-comentarios', 'CommentController@updateCommentsView');
 Route::get('nuevo-trato', 'DealingController@newDealing');
+Route::post('verificar-archivos', 'FileController@showFilesUser');
+Route::get('actualizar-archivos', 'FileController@actualizarArchivos');
+
 
 //rutas de mi cuenta
 Route::get('mi-cuenta', 'UserController@myAccount')->middleware('verified');

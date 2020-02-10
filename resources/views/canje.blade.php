@@ -49,85 +49,26 @@
 				 				<h3>Descripción</h3>
 				 				<p>{{$canje->description}}</p>
 				 			</div>
-	 						<div class="border-title"><h3>Imágenes</h3><a href="#" title=""><i class="la la-plus"></i> Agregar imagen</a></div>
 
+							<!-- Imagenes -->
+	 						<div class="border-title"><h3 id="titulo-image">Imágenes <strong></strong></h3><a id="agregar-image" href="#" title=""><i class="la la-plus"></i> Agregar imagen</a></div>
+							<div class="mini-portfolio">
+								<div class="mp-row" id="div-image">
 
-				 			<div class="blogpost">
-				 				<div class="blog-posthumb"> <a href="#" title=""><img src="http://placehold.it/834x340" alt="" /></a> </div>
-				 				<div class="blog-postdetail">
-				 					<ul class="post-metas">
-				 						<li>
-				 							<a href="#" title="">
-				 								<i class="la la-calendar-o"></i>
-			 									November 23, 2017
-			 								</a>
-			 							</li>
-			 							<li>
-			 								<a class="metascomment" href="#" title="">
-			 									<i class="la la-comments"></i>4 comments
-			 								</a>
-			 							</li>
-				 					</ul>
-				 				</div>
-				 			</div><!-- Blog Post -->
+								</div>
+							</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 	 						<div class="mini-portfolio">
-	<div class="mp-row">
-		@foreach(($canje->files->where('type', 'image')) as $imagen)
-		 								<div class="mp-col">
-		 									<div class="mportolio"><img src="{{URL::asset('files/image/'.$imagen->location)}}" style="max-width: 165px; max-height: 165px" alt="" /><a href="#" title=""><i class="la la-search"></i></a></div>
-		 									<ul class="action_job">
-					 							<li><span>Edit</span><a href="#" title=""><i class="la la-pencil"></i></a></li>
-					 							<li><span>Delete</span><a href="#" title=""><i class="la la-trash-o"></i></a></li>
-					 						</ul>
-		 								</div>
-		@endforeach
-	</div>
-</div> -->
-
-	 						<div class="border-title"><h3>Videos</h3><a href="#" title=""><i class="la la-plus"></i> Agregar video</a></div>
+							<!-- Videos -->
+	 						<div class="border-title"><h3 id="titulo-video">Videos <strong></strong></h3><a id="agregar-video" href="#" title=""><i class="la la-plus"></i> Agregar video</a></div>
 	 						<div class="mini-portfolio">
-	 							<div class="mp-row">
-	 								@foreach(($canje->files->where('type', 'video')) as $video)
-		 								<div class="mp-col">
-		 									<div class="mportolio"><img src="{{URL::asset('files/video/'.$video->location)}}" style="max-width: 165px; max-height: 165px" alt="" /><a href="#" title=""><i class="la la-search"></i></a></div>
-		 									<ul class="action_job">
-					 							<li><span>Edit</span><a href="#" title=""><i class="la la-pencil"></i></a></li>
-					 							<li><span>Delete</span><a href="#" title=""><i class="la la-trash-o"></i></a></li>
-					 						</ul>
-		 								</div>
-	 								@endforeach
+	 							<div class="mp-row" id="div-video">
 	 							</div>
 	 						</div>
 
-
-
-	 						<div class="border-title"><h3>Videos</h3><a href="#" title=""><i class="la la-plus"></i> Agregar video</a></div>
+							<!-- Pdfs -->
+	 						<div class="border-title"><h3 id="titulo-pdf">Pdf <strong></strong></h3><a id="agregar-pdf" href="#" title=""><i class="la la-plus"></i> Agregar video</a></div>
 	 						<div class="mini-portfolio">
-	 							<div class="mp-row">
-		 								<div class="mp-col">
-		 									<div class="mportolio">
-		 										<a><img class="img-fluid z-depth-1" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg" style="max-width: 165px; max-height: 165px" alt="video" data-toggle="modal" data-target="#modal1"/></a>
-		 										<a href="#" title=""><i class="la la-search"></i>
-		 										</a>
-		 									</div>
-		 									<ul class="action_job">
-					 							<li><span>Delete</span><a href="#" title=""><i class="la la-trash-o"></i></a></li>
-					 						</ul>
-		 								</div>
+	 							<div class="mp-row" id="div-pdf">
 	 							</div>
 	 						</div>
 							<!-- Seccion de comentarios-->
@@ -188,7 +129,7 @@
 			<form id="form-trato">
 
 				<input type="hidden" id="canje_id" name="canje_id" value="{!! $canje->id !!}">
-				<input type="hidden" id="auth_user" name="auth_user" value="{{{ (Auth::user()) ? Auth::user() : null }}}">
+				<input type="hidden" id="auth_user" name="auth_user" value="{{{ (Auth::user()) ? Auth::user()->id : null }}}">
 			  <div class="modal-body">
 					<div class="contact-edit pl-5 pr-5">
 						@csrf

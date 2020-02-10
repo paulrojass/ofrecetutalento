@@ -1,12 +1,18 @@
 $(function(){
 	var id_canje = $('#canje_id').val();
-	var AuthUser = $('#auth_user').val();
+	var user_id = $('#auth_user').val();
 	cargaInicial(id_canje);
 
 	function cargaInicial(id_canje){
 		//$("#tipo-pago").checked();
+		verificarArchivos('video');
+		verificarArchivos('image');
+		actualizarArchivos('video');
+		actualizarArchivos('image');
+		verificarArchivos('pdf');
+		actualizarArchivos('pdf');
 		actualizarComentarios(id_canje);
-		if(AuthUser){actualizarLikes(id_canje, '0');}
+		if(user_id){actualizarLikes(id_canje, '0');}
 	}
 
 	$('#div-comentarios').on('click', '#a-agregar-comentario', function(e){
@@ -125,4 +131,35 @@ $(function(){
 			}
 		});
 	});
+
+	function verificarArchivos(tipo){
+		var _token = $("input[name='_token']").val();
+		$.ajax({
+			type: 'POST',
+			url:'/verificar-archivos',
+			data:{user_id : user_id, canje_id: id_canje, _token:_token, type: tipo},
+			success:function(data){
+				if(data.disponibles == null){
+					$('#titulo-'+tipo+' strong').html('(ilimitadas)');
+				}else if(data.disponibles > 0){
+					$('#titulo-'+tipo+' strong').html('('+data.disponibles+' disponibles)');
+				}else{
+					$('#agregar-'+tipo).hide();
+					$('#titulo-'+tipo+' strong').html('(Para agregar mas '+tipo+' puede cambiar su plan)');
+				}
+			}
+		});
+	}
+
+	function actualizarArchivos(tipo){
+		$.ajax({
+			url: '/actualizar-archivos',
+			type: 'Get',
+			data:{type: tipo, canje_id: id_canje},
+			dataType: 'html',
+		})
+		.done(function(data) {
+			$('#div-'+tipo).html(data);
+		})	
+	}
 });

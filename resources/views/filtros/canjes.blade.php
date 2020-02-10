@@ -10,7 +10,7 @@
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			<div class="my-blog">
 				<div class="blog-thumb">
-					<a href="{{url('canjes/'.$exchange->id)}}" title=""><img src="{{URL::asset('images/exchanges/'.$exchange->image)}}" style="width: 360px; height: 200px" alt="" /></a>
+					<a href="{{url('canjes/'.$exchange->id)}}" title=""><img src="{{URL::asset('images/exchanges/'.$exchange->image)}}" style="object-fit: cover; height: 200px;" alt="" /></a>
 					<div class="blog-metas">
 						<a href="javascript:void(0)" title="">{{ $exchange->created_at->diffForHumans() }}</a>
 						<a href="javascript:void(0)" title=""><i class="la la-heart-o"></i> {{$exchange->likes->count()}} Me gusta</a>

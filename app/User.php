@@ -132,7 +132,7 @@ class User extends Authenticatable implements MustVerifyEmail
 			{
 				$query->where('title', 'LIKE' , '%' . $busqueda . '%')
 					->orWhere('description', 'LIKE' , '%' . $busqueda . '%');
-			});
+			})->orWhere('name', 'LIKE', '%'.$busqueda.'%')->orWhere('lastname', 'LIKE', '%'.$busqueda.'%');
 		}
 	}
 

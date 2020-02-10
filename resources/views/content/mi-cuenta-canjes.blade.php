@@ -9,7 +9,7 @@
 		@foreach($exchanges->sortByDesc('created_at') as $exchange)
 		<div class="job-listing wtabs">
 			<div class="job-title-sec">
-				<div class="c-logo"> <img src="{{URL::asset('images/exchanges/'.$exchange->image)}}" style="max-width: 98px; max-height: 51px" alt="" /> </div>
+				<div class="c-logo"> <img src="{{URL::asset('images/exchanges/'.$exchange->image)}}" style="object-fit: cover; height: 51px; width: 98px"  alt="" /> </div>
 				<h3><a href="{{url('canjes/'.$exchange->id)}}" title="">{{$exchange->title}}</a></h3>
 				<span>
 					 <strong> Talento:</strong>  {{$exchange->talent->title}} - <i class="la la-heart-o"></i> {{ $exchange->likes->count() }} 
