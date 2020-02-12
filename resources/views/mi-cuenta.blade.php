@@ -305,8 +305,6 @@
 	  </div>
 	</div>	
 </section>
-
-
 @endsection
 
 

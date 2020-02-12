@@ -39,15 +39,42 @@
 			 					<h3>Acerca de Ofrece tu talento</h3>
 			 				</div>
 			 				<div class="col-lg-7">
-			 					<p>Far much that one rank beheld bluebird after outside ignobly allegedly more when oh arrogantly vehement irresistibly fussy penguin insect additionally wow absolutely crud meretriciously hastily dalmatian a glowered inset one echidna cassowary some parrot and much as goodness some froze the sullen much connected bat wonderfully on instantaneously eel valiantly petted this along across highhandedly much. </p>
-			 					<p>Repeatedly dreamed alas opossum but dramatically despite expeditiously that jeepers loosely yikes that as or eel underneath kept and slept compactly far purred sure abidingly up above fitting to strident wiped set waywardly far the and pangolin horse approving paid chuckled cassowary oh above a much opposite far much hypnotically more therefore wasp less that hey apart well like while superbly orca and far hence one.Far much that one rank beheld bluebird after outside ignobly allegedly more when oh arrogantly vehement irresistibly fussy.</p>
+<p>Ofrece Tu Talento es una plataforma digital hecha por latinos y para latinos. Nuestra misión es
+promover el intercambio y desarrollo del talento en hispanoamérica a través de eventos,
+conexiones e interacción digital. Buscamos empoderar al usuario X a lograr su mejor versión y
+ofrecer su talento a la mayor cantidad de empresas y personas.</p>
+
+<p>¿Quién es el Usuario X? Es un profesional de servicios, veterano o novato, independiente o
+asalariado que busca crecer su mercado teniendo así mayor impacto y aporte al mundo. Este
+usuario quizás quiera desarrollar y empoderar su talento pero no sabe cómo y adónde crecer.
+Creemos firmemente que el Usuario X tiene un don y habilidad única que al ser compartida con
+amor y empeño, logra aportar valor a la vida de otras personas.</p>
+
+
+<blockquote><p><i>“</i><span>Creemos en las economías creativas y en cómo la imaginación puede lograr fabricar arte a través del talento y la disciplina.<i>”</i></span></p></blockquote>
+
+
+
+
 			 				</div>
 			 				<div class="col-lg-5">
 			 					<img src="http://placehold.it/432x280" alt="" />
 			 				</div>
 			 				<div class="col-lg-12">
-			 					<p>Far much that one rank beheld bluebird after outside ignobly allegedly more when oh arrogantly vehement irresistibly fussy penguin insect additionally wow absolutely crud meretriciously hastily dalmatian a glowered inset one echidna cassowary some parrot and much as goodness some froze the sullen much connected bat wonderfully on instantaneously eel valiantly petted this along across highhandedly much. </p>
-			 					<p>Repeatedly dreamed alas opossum but dramatically despite expeditiously that jeepers loosely yikes that as or eel underneath kept and slept compactly far purred sure abidingly up above fitting to strident wiped set waywardly far the and pangolin horse approving paid chuckled cassowary oh above a much opposite far much hypnotically more therefore wasp less that hey apart well like while superbly orca and far hence one.Far much that one rank beheld bluebird after outside ignobly allegedly more when oh arrogantly vehement irresistibly fussy.</p>
+<p>Al poner en contacto al Usuario X con empresas, organizaciones o gestores que estén
+buscando el mejor talento de la región, OTT funge como una plataforma intermediaria que
+permite a los involucrados potenciar su búsqueda e intercambio de servicios.</p>
+
+<p>OTT es diseñada y desarrollada por un grupo de promotores de talento que están dedicados a
+encender el potencial creativo de las personas. Basados en diferentes países de latinoamérica,
+el grupo de Innovemos Conciencia tiene como misión crear ecosistemas de talento que
+busquen promover la innovación como herramienta de crecimiento, evolución e inclusión en la
+región.</p>
+
+<blockquote><p><i>“</i><span>Al Innovar nuestra conciencia, Innovemos Latinoamérica.<i>”</i></span></p><strong>Ofrece tu talento</strong></blockquote>
+
+
+
 			 				</div>
 			 			</div>
 			 			<div class="tags-share">

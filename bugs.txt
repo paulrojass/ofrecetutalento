@@ -1,0 +1,10 @@
+Inicio de Session
+-redireccionar despues de verificar
+
+
+Buscador de talentos:
+- Al filtrar no funciona la paginacion
+
+
+
+-Revisar campos de fecha

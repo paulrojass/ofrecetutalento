@@ -51,7 +51,13 @@
 				 			</div>
 
 							<!-- Imagenes -->
-	 						<div class="border-title"><h3 id="titulo-image">Imágenes <strong></strong></h3><a id="agregar-image" href="#" title=""><i class="la la-plus"></i> Agregar imagen</a></div>
+	 						<div class="border-title"><h3 id="titulo-image">Imágenes <strong></strong></h3>
+								<form files="true" enctype="multipart/form-data" id="form-avatar">
+									@csrf
+									<input id="image-files" name="image-files" type="file" accept="image/*" capture style="display:none">
+								</form>
+	 							<a id="agregar-image" title=""><i class="la la-plus"></i> Agregar imagen</a></div>
+
 							<div class="mini-portfolio">
 								<div class="mp-row" id="div-image">
 

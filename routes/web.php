@@ -71,6 +71,8 @@ Route::get('actualizar-comentarios', 'CommentController@updateCommentsView');
 Route::get('nuevo-trato', 'DealingController@newDealing');
 Route::post('verificar-archivos', 'FileController@showFilesUser');
 Route::get('actualizar-archivos', 'FileController@actualizarArchivos');
+Route::post('agregar-imagen', 'FileController@agregarImagen');
+Route::post('eliminar-imagen', 'FileController@eliminarImagen');
 
 
 //rutas de mi cuenta
@@ -95,3 +97,5 @@ Route::get('mensajes', 'MessageController@mensajes')->middleware('verified');
 Route::get('mensajes/{id}', 'MessageController@mensajesId')->middleware('verified');
 Route::get('mensajes-usuario', 'MessageController@mensajesUsuario');
 Route::post('enviar-mensaje', 'MessageController@nuevoMensaje');
+
+

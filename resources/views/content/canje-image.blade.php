@@ -5,7 +5,7 @@
 		<a href="#" title=""><i class="la la-search"></i></a>
 	</div>
 	<ul class="action_job">
-		<li><span>Eliminar</span><a href="#" title=""><i class="la la-trash-o"></i></a></li>
+		<li class="boton-eliminar-imagen" value="{{ $imagen->id }}"><span>Eliminar</span><a  title=""><i class="la la-trash-o"></i></a></li>
 	</ul>
 </div>
 @endforeach

@@ -47,6 +47,26 @@ $(function(){
 		actualizarLikes(id_canje, '1');
 	});
 
+	/*Agregar imagenes*/
+	$('#image-files').change(function(){
+		agregarImagen();
+	});
+
+	$("#agregar-image").click(function () {
+		$("#image-files").trigger('click');
+	});
+	/*fin Agregar imagenes*/
+
+	/*eliminar imagenes*/
+
+	$('#div-image').on('click', '.boton-eliminar-imagen', function(){
+		var id = $(this).val();
+		eliminarImagen(id);
+	});
+
+
+
+
 	function actualizarLikes(id_canje, cambiar){
 		$.ajax({
 			url: '/cambiar-like',
@@ -162,4 +182,36 @@ $(function(){
 			$('#div-'+tipo).html(data);
 		})	
 	}
+
+	function agregarImagen(){
+		var formData = new FormData();
+		formData.append('location', $('#image-files')[0].files[0]);
+		formData.append('_token', $("input[name='_token']").val());
+		formData.append('exchange_id', id_canje);
+		$.ajax({
+			url: '/agregar-imagen',
+			type: 'post',
+			data: formData,
+			contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+			processData: false // NEEDED, DON'T OMIT THIS
+		})
+		.done(function(response) {
+			$('#div-image').html(response);
+		});
+	}
+
+	function eliminarImagen(image_id)
+	{
+		var _token = $("input[name='_token']").val();
+		$.ajax({
+			url: '/eliminar-imagen',
+			type: 'post',
+			data: {id: image_id, _token: _token},
+		})
+		.done(function(response) {
+			$('#div-image').html(response);
+		});
+	}
+
+
 });

@@ -8,6 +8,10 @@ use App\Exchange;
 use App\Suscription;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Image;
+
 class FileController extends Controller
 {
 	/**
@@ -83,7 +87,7 @@ class FileController extends Controller
 	 */
 	public function destroy(File $file)
 	{
-		//
+        $file->delete();
 	}
 
 	public function showFilesUser(Request $request)
@@ -120,5 +124,45 @@ class FileController extends Controller
         if($request->type == 'video') return view('content.canje-video', compact('archivos'));
 
         if($request->type == 'pdf') return view('content.canje-pdf', compact('archivos'));
-    }	
+    }
+
+    public function agregarImagen(Request $request)
+    {
+		// ruta de las imagenes guardadas
+		$ruta = public_path().'/files/image/';
+		// recogida del form
+		$imagenOriginal = $request->file('location');
+		// crear instancia de imagen
+		$imagen = Image::make($imagenOriginal);
+		// generar un nombre aleatorio para la imagen
+		$temp_name = Str::random(20) . '.' . $imagenOriginal->getClientOriginalExtension();
+
+		// guardar imagen
+		// save( [ruta], [calidad])
+		$ruta_final = $ruta . $temp_name;
+		$imagen->save($ruta_final, 100);
+
+		$file = new File();
+		$file->location = $temp_name;
+		$file->type = 'image';
+		$file->exchange_id = $request->exchange_id;
+		$file->save();
+
+		$archivos = File::where('exchange_id', $request->exchange_id)->where('type', 'image')->get();
+
+		return view('content.canje-image', compact('archivos'));    	
+    }
+
+    public function eliminarImagen(Request $request)
+    {
+    	$imagen = File::where('id', $request->id)->first();
+    	\File::delete('files/image/'.$imagen->location);
+        $this->destroy($imagen);
+
+		$archivos = File::where('exchange_id', $imagen->exchange_id)->where('type', 'image')->get();
+
+		return view('content.canje-image', compact('archivos')); 
+
+
+    }
 }

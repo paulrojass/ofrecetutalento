@@ -114,8 +114,12 @@ class MessageController extends Controller
 
         $usuarios = $mensajes->unique('from_id')->sortBy('created_at');
 
-        
-        $from_id = $usuarios[0]->from_id;
+        if(!$usuarios->isEmpty()){
+            $from_id = $usuarios[0]->from_id;
+        }else
+        {
+            $from_id = 0;
+        }
 
         return view('mensajes', compact('mensajes', 'usuarios', 'from_id'));
     }

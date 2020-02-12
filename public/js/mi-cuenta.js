@@ -400,7 +400,7 @@ function cambiarFoto(){
 	})
 	.done(function(response) {
 		$("#ll").html('<div class="alert alert-success" role="alert">La foto ha cambiado exitosamente</div>');
-		$('#div-imagen').html(response).delay(2000);
+		$('#div-imagen').html(response);
 	})
 	.fail(function() {
 		$("#ll").html('<div class="alert alert-danger" role="alert">El formato del archivo debe ser de imagen (jpg, jpeg, png)</div>');
