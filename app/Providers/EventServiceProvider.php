@@ -19,10 +19,10 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         
-        'Illuminate\Auth\Events\Verified' => [
+/*        'Illuminate\Auth\Events\Verified' => [
             'App\Listeners\LogVerifiedUser',
         ],
-
+*/
     ];
 
     /**

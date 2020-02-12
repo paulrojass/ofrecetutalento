@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('provider_id',100)->nullable();
             $table->string('avatar')->default('default.png');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->boolean('company')->default(0);
             $table->rememberToken();
             $table->timestamps();
