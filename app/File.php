@@ -10,6 +10,6 @@ class File extends Model
 {
     public function exchange()
     {
-        return $this->belongsTo(Exchange::class)->withTimestamps();
+        return $this->belongsTo(Exchange::class);
     }
 }

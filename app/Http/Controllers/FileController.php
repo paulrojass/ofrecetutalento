@@ -153,6 +153,19 @@ class FileController extends Controller
 		return view('content.canje-image', compact('archivos'));    	
     }
 
+    public function agregarPdf(request $request)
+    {
+		// ruta de los pdf guardados
+		$ruta = public_path().'/files/pdf/';
+
+		// generar un nombre aleatorio para el pdf
+		$temp_name = Str::random(20) . '.pdf';
+
+
+
+			
+    }
+
     public function eliminarImagen(Request $request)
     {
     	$imagen = File::where('id', $request->id)->first();
@@ -161,8 +174,6 @@ class FileController extends Controller
 
 		$archivos = File::where('exchange_id', $imagen->exchange_id)->where('type', 'image')->get();
 
-		return view('content.canje-image', compact('archivos')); 
-
-
+		return view('content.canje-image', compact('archivos'));
     }
 }

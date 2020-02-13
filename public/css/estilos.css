@@ -211,7 +211,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 .required{
-  color: red;
+  color: #ff9200;
   font-size: 1.5em;
 }
 

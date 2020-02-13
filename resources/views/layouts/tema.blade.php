@@ -51,10 +51,10 @@
 				</div>
 			@else
 			<div class="btn-extars">
-				<a href="{{url('suscripcion')}}" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a>
+				<!-- <a href="{{url('suscripcion')}}" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a> -->
 				<ul class="account-btns">
-					<li><a href="{{url('suscripcion')}}" title=""><i class="la la-key"></i> Registrar</a></li>
-					<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Iniciar Seccion</a></li>
+					<li><a href="{{url('suscripcion')}}" title=""><i class="la la-key"></i> Crear perfil</a></li>
+					<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Iniciar Sesión</a></li>
 				</ul>
 			</div><!-- Btn Extras -->
 			@endif
@@ -107,10 +107,10 @@
 
 				@else
 				<div class="btn-extars">
-					<a href="{{url('suscripcion')}}" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a>
+					<!-- <a href="{{url('suscripcion')}}" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a> -->
 					<ul class="account-btns">
-						<li class="signup-popup"><a href="{{url('suscripcion')}}" title=""><i class="la la-key"></i> Registrar</a></li>
-						<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Iniciar Sección</a></li>
+						<li class="signup-popup"><a href="{{url('suscripcion')}}" title=""><i class="la la-key"></i> Crear perfil</a></li>
+						<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Iniciar Sesión</a></li>
 					</ul>
 				</div><!-- Btn Extras -->
 				@endif

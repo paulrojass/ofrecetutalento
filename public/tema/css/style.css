@@ -239,7 +239,7 @@ section{
     background-position: inherit !important;
 }
 .layer.color.red::before {
-    background: #d42525;
+    background: #ff9200;
 }
 .layer:before{
     content:"";
@@ -525,7 +525,7 @@ input[type=radio] + label::after {
   width: 6px !important;
   height: 6px !important;
   background: #fff;
-  border: 3px solid #fb236a;
+  border: 3px solid #ff9200;
   
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -1564,7 +1564,7 @@ label::after {
     background: #ff9200;
 }
 .fill.fl {
-    background: #fb236a;
+    background: #ff9200;
 }
 .fill.tp {
     background: #26ae61;
@@ -1581,8 +1581,8 @@ label::after {
 }
 .job-is.fl,
 .job-list-modern .job-is.fl{
-    color: #fb236a;
-    border-color: #fb236a;
+    color: #ff9200;
+    border-color: #ff9200;
 }
 .job-is.tp,
 .job-list-modern .job-is.tp{
@@ -1853,7 +1853,7 @@ label::after {
 }
 
 .simple-text:hover {
-    background: #fb236a;
+    background: #ff9200;
 }
 
 .simple-text h3 {
@@ -1872,7 +1872,7 @@ label::after {
 footer {
     float: left;
     width: 100%;
-    background: #24324a;
+    background: #ffffff;
 }
 .widget {
     float: left;
@@ -2089,13 +2089,13 @@ footer {
     float: left;
     width: 100%;
     text-align: center;
-    background: #1d293e;
+    background: #ff9200;
     padding: 24px 0;
 }
 .bottom-line span {
     font-family: 'Questrial' !important;
     font-size: 13px;
-    color: #6a7d9b;
+    color: #ffffff;
     line-height: 24px;
 }
 
@@ -2158,7 +2158,7 @@ header.style2 nav {
 .search-job2 form button {
     font-size: 15px;
     font-weight: bold;
-    background: #d42525;
+    background: #ff9200;
     padding: 20px 0px;
     width: 100%;
     font-family: 'Questrial' !important;
@@ -2232,7 +2232,7 @@ header.style2 nav {
     margin-top: 1px;
 }
 .quick-select:hover i {
-    background: #d42525;
+    background: #ff9200;
 }
 
 /* Job Grid Sec */
@@ -2304,8 +2304,8 @@ header.style2 nav {
     float: right;
     font-family: 'Questrial' !important;
     font-size: 13px;
-    color: #fb236a;
-    border: 1px solid #fb236a;
+    color: #ff9200;
+    border: 1px solid #ff9200;
     
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -2363,8 +2363,8 @@ header.style2 nav {
     line-height: 94px;
     font-size: 53px;
     text-align: center;
-    color: #d42525;
-    border-color: #d42525;
+    color: #ff9200;
+    border-color: #ff9200;
 }
 .how-to h3 {
     float: left;
@@ -2462,14 +2462,14 @@ header.style2 nav {
     width: 100%;
     font-family: 'Questrial' !important;
     font-size: 13px;
-    color: #fb236a;
+    color: #ff9200;
 }
 .top-compnay > a {
     float: none;
     font-family: 'Questrial' !important;
     font-size: 13px;
-    color: #fb236a;
-    border: 1px solid #fb236a;
+    color: #ff9200;
+    border: 1px solid #ff9200;
     
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -2556,7 +2556,7 @@ header.style2 nav {
     padding: 5px;
     width: 106px;
     height: 106px;
-    border: 2px dashed #d42525;
+    border: 2px dashed #ff9200;
 }
 .reviews.style2 h3 {
     float: left;
@@ -2592,10 +2592,10 @@ header.style2 nav {
     position: absolute;
 }
 .reviews-sec#reviews .slick-dots li {
-    border-color: #b7bac6;
+    border-color: #ff9200;
 }
 .reviews-sec#reviews .slick-dots li button {
-    background: #b7bac6;
+    background: #ff9200;
 }
 .blog-date {
     position: absolute;
@@ -2760,7 +2760,7 @@ header.style2 nav {
 }
 
 .pricetable > a:hover {
-    background: #d42525;
+    background: #ff9200;
     color: #FFF;
 }
 
@@ -2835,7 +2835,7 @@ header.style2 nav {
     height: 50px;
     padding: 0;
     font-size: 24px;
-    background: #d42525;
+    background: #ff9200;
 }
 .social-links {
     float: left;
@@ -2880,7 +2880,7 @@ header.style2 nav {
     background: #bd2a8e;
 }
 .social-links a.gl-color i {
-    background: #d42525;
+    background: #ff9200;
 }
 .mega-widget {
     float: left;
@@ -2918,7 +2918,7 @@ header.style2 nav {
     color: #ffffff;
 }
 header.style3 nav > ul > li > a {
-    color: #333333;
+    color: #252d5f;
 }
 
 /* Find Canditate Sec */
@@ -3109,14 +3109,14 @@ header.style3 .menu-sec nav {
 }
 
 .top-compnay.style2 > a {
-    color: #647585;
-    border-color: #647585;
+    color: #ff9200;
+    border-color: #ff9200;
 }
 
 .top-compnay.style2 > a:hover {
     color: #FFF;
-    background-color: #647585;
-    border-color: #647585;
+    background-color: #ff9200;
+    border-color: #ff9200;
 }
 
 
@@ -3278,7 +3278,7 @@ header.style3 .menu-sec nav {
     float: left;
     width: 100%;
     font-size: 13px;
-    color: #647585;
+    color: #ff9200;
     margin-top: 20px;
     opacity: 0;
 }
@@ -3335,10 +3335,10 @@ header.style3 .menu-sec nav {
     opacity: 1;
 }
 .team-sec .slick-dots li {
-    border-color: #647585;
+    border-color: #ff9200;
 }
 .team-sec .slick-dots li.slick-active button{
-    background: #647585;
+    background: #ff9200;
 }
 .pricetable.style2 .pricetable-head h2 {
     color: #ff9200;
@@ -3347,7 +3347,7 @@ header.style3 .menu-sec nav {
     color: #A3A3A3;
 }
 .pricetable.style2 > a {
-    background: #647585;
+    background: #ff9200;
     color: #ffffff;
 }
 
@@ -3358,14 +3358,14 @@ header.style3 .menu-sec nav {
 
 
 .pricetable.active.style2 {
-    background: #647585;
+    background: #ff9200;
 }
 .pricetable.active.style2 > a {
     background: #ff9200;
     color: #FFF;
 }
 .pricetable.style2.active .pricetable-head h2 {
-    color: #647585;
+    color: #ff9200;
 }
 .ft {
     background: none;
@@ -3614,7 +3614,7 @@ header.style4 .menu-sec nav > ul > li.menu-item-has-children > a::before {
     border: none;
 }
 .p-category.style2 > a i {
-    color: #647585;
+    color: #ff9200;
 }
 .p-category.style2 > a p {
     color: #b1b1b1;
@@ -4275,7 +4275,7 @@ header.style5 .logo {
     font-family: lineawesome;
     content: "\f121";
     font-size: 20px;
-    color: #fb236a;
+    color: #ff9200;
     top: 50%;
     right: 20px;
     margin-top: -12px;
@@ -4580,7 +4580,7 @@ section.overlape {
 }
 .pagination a i {
     font-size: 15px;
-    color: #fb236a;
+    color: #ff9200;
 }
 .inner-header > h3 {
     float: left;
@@ -4624,7 +4624,7 @@ section.overlape {
     position: absolute;
     right: 15px;
     top: 12px;
-    color: #fb236a;
+    color: #ff9200;
     font-size: 24px;
 }
 .border-right {
@@ -4712,7 +4712,7 @@ aside .widget:first-child {
     padding-left: 31px;
 }
 .flchek label::before {
-    border-color: #fb236a !important;
+    border-color: #ff9200 !important;
 }
 .ftchek label::before {
     border-color: #8b91dd !important;
@@ -4805,7 +4805,7 @@ aside .subscribe_widget form input {
     color: #333333;
 }
 aside .subscribe_widget form button {
-    background: #fb236a;
+    background: #ff9200;
 }
 
 
@@ -4853,7 +4853,7 @@ aside .subscribe_widget form button {
     width: 16px;
     height: 16px;
     font-style: normal;
-    background: #fb236a;
+    background: #ff9200;
     
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -5056,7 +5056,7 @@ aside .subscribe_widget form button {
 
 }
 .job-search .tags-bar > span > i {
-    color: #fb236a;
+    color: #ff9200;
     background: #ffffff;
 }
 .job-search .tags-bar .action-tags a {
@@ -5301,8 +5301,8 @@ aside .widget.border:first-child {
     border-color: #1da1f2;
 }
 .share-bar  a.share-google {
-    color: #fb236a;
-    border-color: #fb236a;
+    color: #db4437;
+    border-color: #db4437;
 }
 
 .share-bar a.share-fb:hover {
@@ -5316,8 +5316,8 @@ aside .widget.border:first-child {
     color: #ffffff;
 }
 .share-bar  a.share-google:hover {
-    background: #fb236a;
-    border-color: #fb236a;
+    background: #db4437;
+    border-color: #db4437;
     color: #ffffff;
 }
 
@@ -5410,8 +5410,8 @@ aside .widget.border:first-child {
 }
 
 .apply-alternative span:hover {
-    background: #fb236a;
-    border-color: #fb236a;
+    background: #ff9200;
+    border-color: #ff9200;
     color: #ffffff;
 }
 
@@ -5690,7 +5690,7 @@ aside .widget.border:first-child {
     display: inline-block;
 }
 .apply-job-btn {
-    background: #fb236a;
+    background: #ff9200;
     font-family: 'Questrial' !important;
     font-size: 15px;
     font-weight: bold;
@@ -5735,7 +5735,7 @@ aside .widget.border:first-child {
 
     font-family: 'Questrial' !important;
     font-size: 13px;
-    color: #fb236a;
+    color: #ff9200;
     width: 250px;
     height: 60px;
     margin-top: 35px;
@@ -5815,7 +5815,7 @@ aside .widget.border:first-child {
     float: left;
     width: 100%;
     font-size: 13px;
-    color: #fb236a;
+    color: #ff9200;
     text-align: center;
     margin-top: 23px;
 }
@@ -6041,7 +6041,7 @@ aside .widget.border:first-child {
     float: left;
     width: 100%;
     font-size: 13px;
-    color: #fb236a;
+    color: #ff9200;
 }
 .emply-list-info > h6 {
     float: left;
@@ -6186,7 +6186,7 @@ aside .widget.border:first-child {
   width: 18px;
   height: 18px;
   background: #ffffff;
-  border: 2px solid #fb236a;
+  border: 2px solid #ff9200;
   top: -5px;
 }
 .nstSlider .bar {
@@ -6194,7 +6194,7 @@ aside .widget.border:first-child {
   -moz-border-radius: 6px;
   border-radius: 6px;
   position: absolute;
-  background: #fb236a;
+  background: #ff9200;
   height: 8px;
   top: 0px;
 }
@@ -6326,7 +6326,7 @@ aside .widget.border:first-child {
     float: left;
     width: 50px;
     height: 50px;
-    background: #fb236a;
+    background: #ff9200;
     
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
@@ -6374,7 +6374,7 @@ aside .widget.border:first-child {
 .emply-btns > a {
     float: left;
     width: 100%;
-    background: #fb236a;
+    background: #ff9200;
     font-family: 'Questrial' !important;
     font-size: 13px;
     color: #ffffff;
@@ -6386,7 +6386,7 @@ aside .widget.border:first-child {
     -o-border-radius: 8px;
     border-radius: 8px;
 
-    border: 2px solid #fb236a;
+    border: 2px solid #ff9200;
     padding: 11px 0;
     margin-top: 10px;
 }
@@ -6684,7 +6684,7 @@ aside .widget.border:first-child {
     top: -8px;
     width: 23px;
     height: 23px;
-    background: #fb236a;
+    background: #ff9200;
     color: #ffffff;
     font-style: normal;
     text-align: center;
@@ -6708,8 +6708,8 @@ aside .widget.border:first-child {
     float: left;
     font-family: 'Questrial' !important;
     font-size: 15px;
-    color: #8b91dd;
-    border: 2px solid #8b91dd;
+    color: #ff9200;
+    border: 2px solid #ff9200;
     
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -6780,7 +6780,7 @@ aside .widget.border:first-child {
 .profile-form-edit > form button {
     float: right;
     background: #ffffff;
-    border: 2px solid #fb236a;
+    border: 2px solid #ff9200;
     color: #202020;
     font-family: 'Questrial' !important;
     font-size: 15px;
@@ -6888,7 +6888,7 @@ aside .widget.border:first-child {
 .contact-edit > form button {
     float: right;
     background: #ffffff;
-    border: 2px solid #fb236a;
+    border: 2px solid #ff9200;
     color: #202020;
     font-family: 'Questrial' !important;
     font-size: 15px;
@@ -6958,7 +6958,7 @@ aside .widget.border:first-child {
 .manage-jobs-sec > table thead tr td {
     font-size: 15px;
     font-weight: bold;
-    color: #fb236a;
+    color: #ff9200;
     padding-bottom: 14px;
 }
 .manage-jobs-sec > table thead {
@@ -7420,7 +7420,7 @@ aside .widget.border:first-child {
     top: -20px;
     width: 50px;
     height: 50px;
-    background: #fb236a;
+    background: #ff9200;
     text-align: center;
     color: #ffffff;
     line-height: 50px;
@@ -7518,7 +7518,7 @@ aside .widget.border:first-child {
     right: 19px;
     top: 0;
     font-size: 23px;
-    color: #fb236a;
+    color: #ff9200;
     line-height: 50px;
 }
 .contact-popup form > .popup-field textarea {
@@ -7547,7 +7547,7 @@ aside .widget.border:first-child {
     top: -20px;
     width: 50px;
     height: 50px;
-    background: #fb236a;
+    background: #ff9200;
     text-align: center;
     color: #ffffff;
     line-height: 50px;
@@ -7687,7 +7687,7 @@ table.alrt-table tbody td > span {
 .change-password form button {
     float: right;
     background: #ffffff;
-    border: 2px solid #fb236a;
+    border: 2px solid #ff9200;
     color: #202020;
     font-family: 'Questrial' !important;
     font-size: 15px;
@@ -8192,7 +8192,7 @@ header.gradient{
     vertical-align: top;
     width: 70px;
     font-size: 50px;
-    color: #fb236a;
+    color: #ff9200;
     line-height: 60px;
 }
 .edu-hisinfo {
@@ -8389,7 +8389,7 @@ header.gradient{
     left: 0;
     top: 0;
     height: 100%;
-    background: #f64a84;
+    background: #ff9200;
     
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
@@ -8629,7 +8629,7 @@ header.gradient{
     width: 100%;
     height: 50px;
     font-size: 13px;
-    background: #fb236a;
+    background: #ff9200;
     text-align: center;
     line-height: 50px;
     color: #ffffff;
@@ -8757,7 +8757,7 @@ header.gradient{
     top: 30px;
     width: 32px;
     height: 32px;
-    background: #fb236a;
+    background: #ff9200;
     
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -8961,7 +8961,7 @@ header.gradient{
     top: -20px;
     width: 50px;
     height: 50px;
-    background: #fb236a;
+    background: #ff9200;
     text-align: center;
     line-height: 50px;
     color: #ffffff;
@@ -9039,7 +9039,7 @@ header.gradient{
     top: -20px;
     width: 50px;
     height: 50px;
-    background: #fb236a;
+    background: #ff9200;
     text-align: center;
     line-height: 50px;
     color: #ffffff;
@@ -9161,13 +9161,13 @@ header.gradient{
     line-height: 27px;
     font-family: 'Questrial' !important;
     font-size: 13px;
-    color: #fb236a;
+    color: #ff9200;
 }
 .border-title > a i {
     float: left;
     width: 27px;
     height: 27px;
-    background: #fb236a;
+    background: #ff9200;
     
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -9227,7 +9227,7 @@ header.gradient{
 }
 .resumeadd-form button {
     float: right;
-    border: 2px solid #fb236a;
+    border: 2px solid #ff9200;
     color: #ffffff;
     font-family: 'Questrial' !important;
     font-size: 15px;
@@ -9361,7 +9361,7 @@ input[type="file"] {
 .coverletter-sec > form button {
     float: right;
     background: #ffffff;
-    border: 2px solid #fb236a;
+    border: 2px solid #ff9200;
     color: #202020;
     font-family: 'Questrial' !important;
     font-size: 15px;
@@ -9486,8 +9486,8 @@ input[type="file"] {
     float: left;
     font-family: 'Questrial' !important;
     font-size: 15px;
-    color: #fb236a;
-    border: 2px solid #fb236a;
+    color: #ff9200;
+    border: 2px solid #ff9200;
     
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
@@ -9932,7 +9932,7 @@ blockquote > strong {
 .comment-detail > a {
     float: left;
     font-size: 13px;
-    color: #fb236a;
+    color: #ff9200;
     margin-top: 13px;
 }
 .comment-detail > a i {
@@ -9974,7 +9974,7 @@ blockquote > strong {
 .commentform-sec > form button {
     float: left;
     font-size: 15px;
-    background: #fb236a;
+    background: #ff9200;
     color: #ffffff;
     padding: 15px 28px;
     
@@ -10218,9 +10218,9 @@ box-shadow: 0px 0px 10px rgba(0,0,0,0.15); */
     font-family: 'Questrial' !important;
     font-size: 15px;
     color: #ffffff;
-    background: #fb236a;
+    background: #ff9200;
     padding: 15px 58px;
-    border: 2px solid #fb236a;
+    border: 2px solid #ff9200;
     
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
@@ -10260,7 +10260,7 @@ box-shadow: 0px 0px 10px rgba(0,0,0,0.15); */
     display: table-cell;
     vertical-align: top;
     font-size: 50px;
-    color: #647585;
+    color: #ff9200;
     width: 70px;
 }
 .contact-textinfo > ul > li > span {
@@ -10461,7 +10461,7 @@ terms {
     background: -o-linear-gradient(45deg,  rgba(251,35,106,1) 0%,rgba(251,35,106,1) 44%,rgba(20,31,114,1) 100%);
     background: -ms-linear-gradient(45deg,  rgba(251,35,106,1) 0%,rgba(251,35,106,1) 44%,rgba(20,31,114,1) 100%);
     background: linear-gradient(45deg,  rgba(251,35,106,1) 0%,rgba(251,35,106,1) 44%,rgba(20,31,114,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fb236a', endColorstr='#141f72',GradientType=1 );
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff9200', endColorstr='#141f72',GradientType=1 );
     content: "";
 
     position: absolute;
@@ -10510,7 +10510,7 @@ terms {
 .how-work-box > span {
     width: 66px;
     height: 66px;
-    background: #fb236a;
+    background: #ff9200;
     position: absolute;
     left: 0;
     top: 50%;
@@ -10672,18 +10672,18 @@ terms {
 
 .stick-top .style3 .post-job-btn:hover {
     background: transparent;
-    border: 2px solid #fb236a;
-    color: #fb236a;
+    border: 2px solid #ff9200;
+    color: #ff9200;
 }
 
 .btn-extars .post-job-btn:hover {
     background: transparent;
-    border: 2px solid #fb236a;
+    border: 2px solid #ff9200;
     color: #FFF;
 }
 
 .account-popup > form button:hover{
-    background: #fb236a;
+    background: #ff9200;
 }
 
 .login-social a.tw-login:hover{
@@ -10699,27 +10699,27 @@ terms {
 }
 
 .job-search form button:hover{
-     background: #fb236a;
+     background: #ff9200;
 }
 .or-browser > a:hover {
     background: #ffffff;
     color: #333333;
 }
 .scroll-to:hover{
-    border-color: #fb236a;  
+    border-color: #ff9200;  
 }
 .scroll-to:hover a{
-    background: #fb236a;
+    background: #ff9200;
     color: #ffffff;
 }
 .browse-all-cat a:hover {
-    background: #fb236a;
+    background: #ff9200;
     color: #ffffff;
 }
 .simple-text-block a:hover {
     border-color: #FFF;
     background: #FFF;
-    color: #fb236a;
+    color: #ff9200;
 }
 .fav-job.active {
     color: red;
@@ -10728,22 +10728,22 @@ terms {
     color: #fff;
 }
 header.style2 .post-job-btn:hover {
-    background: #fb236a;
-    border-color: #fb236a;
+    background: #ff9200;
+    border-color: #ff9200;
     color: #ffffff;
 }
 header.style2 .account-btns {
     padding: 10px 0;
 }
 .job-grid > a:hover {
-    background: #fb236a;
+    background: #ff9200;
     color: #ffffff;
-    border-color: #fb236a;
+    border-color: #ff9200;
 }
 .top-compnay > a:hover {
-    background: #fb236a;
+    background: #ff9200;
     color: #ffffff;
-    border-color: #fb236a;
+    border-color: #ff9200;
 }
 .subscription-sec form button:hover {
     background: #333333;
@@ -10767,7 +10767,7 @@ header.style3 .post-job-btn:hover {
 
 }
 .find-cand form > button:hover {
-    background: #fb236a;
+    background: #ff9200;
 }
 .download-text ul li a:hover {
     background: #ff9200;
@@ -10785,13 +10785,13 @@ header.style4 .account-btns > li a:hover {
     color: #ffffff;
 }
 .job-search form button:hover {
-    background: #fb236a;
+    background: #ff9200;
 }
 .p-category.style2:hover > a i {
-    color: #fb236a;
+    color: #ff9200;
 }
 .subscribe_widget form button:hover {
-    background: #fb236a;
+    background: #ff9200;
 }
 header.style5 .post-job-btn:hover {
     background: #ffffff;
@@ -10799,7 +10799,7 @@ header.style5 .post-job-btn:hover {
     border: 2px solid #fff;
 }
 .form-location-sec form button:hover{
-    background: #fb236a;
+    background: #ff9200;
 }
 .p-category.style2.gray:hover {
     background: #ffffff;
@@ -10834,8 +10834,8 @@ header.style5 .post-job-btn:hover {
     color: #333333;
 }
 .emlthis.active {
-    background: #fb236a;
-    border-color: #fb236a;
+    background: #ff9200;
+    border-color: #ff9200;
     color: #ffffff;
 }
 .emlthis.active i {
@@ -10854,13 +10854,13 @@ header.style5 .post-job-btn:hover {
 }
 
 .apply-alternative a:hover {
-    background: #fb236a;
-    border-color: #fb236a;
+    background: #ff9200;
+    border-color: #ff9200;
     color: #ffffff;
 }
 .share-bar a:hover {
-    background: #fb236a;
-    border-color: #fb236a;
+    background: #ff9200;
+    border-color: #ff9200;
     color: #ffffff;
 }
 .quick-form-job form button:hover {
@@ -10869,11 +10869,11 @@ header.style5 .post-job-btn:hover {
     color: #424f95;
 }
 .emply-text > ul > li:hover::before {
-    background: #fb236a;
+    background: #ff9200;
     width: 20px;
 }
 .emply-text > ul > li:hover a {
-    color: #fb236a;
+    color: #ff9200;
 }
 .job-single-head.style2 > a:hover {
     
@@ -10886,10 +10886,10 @@ header.style5 .post-job-btn:hover {
     color: #ffffff;
 }
 .job-single-head.style2 > .apply-job-linkedin:hover {
-    color: #fb236a;
+    color: #ff9200;
 }
 .job-overview ul > li:hover i {
-    color: #fb236a;
+    color: #ff9200;
 }
 
 .emply-btns > a:hover {
@@ -10900,12 +10900,12 @@ header.style5 .post-job-btn:hover {
 
 .emply-btns > a.seemap:hover {
     background: transparent;
-    border-color: #fb236a;
-    color: #fb236a;
+    border-color: #ff9200;
+    color: #ff9200;
 }
 
 .upload-info > a:hover {
-    background: #8b91dd;
+    background: #ff9200;
     color: #ffffff;
 }
 .pf-field .chosen-container.chosen-container-single.chosen-container-single-nosearch.chosen-with-drop.chosen-container-active a {
@@ -10917,7 +10917,7 @@ header.style5 .post-job-btn:hover {
 }
 .profile-form-edit > form button:hover,
 .contact-edit > form button:hover{
-    background: #fb236a;
+    background: #ff9200;
     color: #ffffff;
 }
 .contact-edit .srch-lctn:hover {
@@ -10936,7 +10936,7 @@ header.style5 .post-job-btn:hover {
 
 }
 .table-list-title h3 a:hover {
-    color: #fb236a;
+    color: #ff9200;
 }
 .tree_widget-sec > ul > li > ul > li a:hover {
     color: #202020;
@@ -10945,7 +10945,7 @@ header.style5 .post-job-btn:hover {
     background: #333333;
 }
 .change-password form button:hover {
-    background: #fb236a;
+    background: #ff9200;
     color: #ffffff;
 }
 .shortlists > a:hover {
@@ -10953,12 +10953,12 @@ header.style5 .post-job-btn:hover {
     color: #ffffff;
 }
 .action-inner .download-cv a:hover {
-    background: #fb236a;
-    border-color: #fb236a;
+    background: #ff9200;
+    border-color: #ff9200;
 }
 .follow-companies > ul li .job-listing.wtabs .go-unfollow:hover {
-    background: #fb236a;
-    border-color: #fb236a;
+    background: #ff9200;
+    border-color: #ff9200;
     color: #fff;
 }
 .border-title > a:hover {
@@ -10972,11 +10972,11 @@ header.style5 .post-job-btn:hover {
     border-color: #555555;
 }
 .coverletter-sec > form button:hover {
-    background: #fb236a;
+    background: #ff9200;
     color: #ffffff;
 }
 .bbutton:hover {
-    background: #fb236a;
+    background: #ff9200;
     color: #ffffff;
 }
 .blogpost.style2 .blog-postdetail .bbutton:hover {
@@ -10987,13 +10987,13 @@ header.style5 .post-job-btn:hover {
     background: #fafafa;
 }
 .sidebar-links a:hover {
-    color: #fb236a;
+    color: #ff9200;
 }
 .mb-info > h3:hover{
-    color: #fb236a;
+    color: #ff9200;
 }
 .blog-postdetail > h3:hover {
-    color: #fb236a;
+    color: #ff9200;
 }
 .post-hist a:hover > i {
     background: #fafafa;
@@ -11002,25 +11002,25 @@ header.style5 .post-job-btn:hover {
     background: #555555;
 }
 .service:hover i {
-    background: #fb236a;
-    border-color: #fb236a;
+    background: #ff9200;
+    border-color: #ff9200;
     color: #ffffff;
 }
 .contact-form > form button:hover {
     background: transparent;
-    border: 2px solid #fb236a;
-    color: #fb236a;    
+    border: 2px solid #ff9200;
+    color: #ff9200;    
 }
 .contact-textinfo > a.fill:hover, .contact-textinfo > a:hover {
-    background: #fb236a;
-    border-color: #fb236a;
+    background: #ff9200;
+    border-color: #ff9200;
     color: #ffffff;
 }
 .error-sec form button:hover {
-    background: #fb236a;
+    background: #ff9200;
 }
 .error-sec h6 a:hover {
-    background: #fb236a;
+    background: #ff9200;
 }
 .menu-sec nav > ul > li ul li.menu-item-has-children > ul {
     position: absolute;
@@ -11088,7 +11088,7 @@ header.style5 .post-job-btn:hover {
     color: #FFF;
 }
 
-footer.ft .scrollup:hover{border-color: #647585; color: #647585;}
+footer.ft .scrollup:hover{border-color: #ff9200; color: #ff9200;}
 
 .bottom-line.style2 .scrollup {
     border: none;
@@ -11117,7 +11117,7 @@ footer.ft .scrollup {
     margin-bottom: 17px;
 }
 .forsticky.sticky .post-job-btn:hover {
-    background: #fb236a;
+    background: #ff9200;
     color: #FFF;
 }
 .forsticky.sticky {
@@ -11145,8 +11145,8 @@ footer.ft .scrollup {
 }
 *:focus {outline:0;}
 .top-company-sec button.slick-arrow:hover {
-    background: #fb236a;
-    border: 2px solid #fb236a;
+    background: #ff9200;
+    border: 2px solid #ff9200;
 }
 .top-company-sec button.slick-arrow:hover:before {
     color: #ffffff;
@@ -11167,7 +11167,7 @@ footer.ft .scrollup {
     width: 100%;
 }
 .p-category.green > a i {
-    color: #647585;
+    color: #ff9200;
 }
 .p-category.green:hover a i {
     color: #ff9200;
@@ -11256,7 +11256,7 @@ footer.ft .scrollup {
     width: 16px;
     height: 16px;
     font-style: normal;
-    background: #fb236a;
+    background: #ff9200;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -11557,7 +11557,7 @@ footer.ft .scrollup {
     color: #ffffff;
 }
 .responsivemenu > ul > li ul > li a:hover {
-    color: #fb236a;
+    color: #ff9200;
     padding-left: 15px;
 }
 .res-openmenu.active {
@@ -11863,21 +11863,21 @@ div#enlaces p {
 }
 
 .col-lg-4.amarillo {
-    background: #ffca45db;
+    background: #ffca45;
     padding-top: 10px;
     padding-bottom: 10px;
     
 }
 
 .col-lg-4.naranja {
-    background: #ff9200db;
+    background: #ff9200;
     padding-top: 10px;
     padding-bottom: 10px;
     
 }
 
 .col-lg-4.azul {
-    background: #252d5fdb;
+    background: #252d5f;
     padding-top: 10px;
     padding-bottom: 10px;
     

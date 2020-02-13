@@ -7,4 +7,21 @@ Buscador de talentos:
 
 
 
--Revisar campos de fecha
+- Revisar campos de fecha
+
+- No puede entrar auntenticado a la vista de suscripcion
+
+
+
+
+Cambios de colores:
+
+anterior: fuccia #d42525
+situiente: naranja #ff9200
+
+
+Color fuente anterior: #333333
+Color fuente nueva: #252d5f
+
+
+google color: #db4437

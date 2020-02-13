@@ -52,11 +52,14 @@
 
 							<!-- Imagenes -->
 	 						<div class="border-title"><h3 id="titulo-image">Imágenes <strong></strong></h3>
-								<form files="true" enctype="multipart/form-data" id="form-avatar">
+								@if(auth()->user() == $canje->talent->user)
+								<form files="true" enctype="multipart/form-data" id="form-image">
 									@csrf
 									<input id="image-files" name="image-files" type="file" accept="image/*" capture style="display:none">
 								</form>
-	 							<a id="agregar-image" title=""><i class="la la-plus"></i> Agregar imagen</a></div>
+	 							<a id="agregar-image" title=""><i class="la la-plus"></i> Agregar imagen</a>
+	 							@endif
+	 						</div>
 
 							<div class="mini-portfolio">
 								<div class="mp-row" id="div-image">
@@ -65,7 +68,15 @@
 							</div>
 
 							<!-- Videos -->
-	 						<div class="border-title"><h3 id="titulo-video">Videos <strong></strong></h3><a id="agregar-video" href="#" title=""><i class="la la-plus"></i> Agregar video</a></div>
+	 						<div class="border-title"><h3 id="titulo-video">Videos <strong></strong></h3>
+								@if(auth()->user() == $canje->talent->user)
+								<form files="true" enctype="multipart/form-data" id="form-image">
+									@csrf
+									<input id="video-files" name="video-files" type="file" accept="video/*" capture style="display:none">
+								</form>
+	 							<a id="agregar-video" title=""><i class="la la-plus"></i> Agregar video</a>
+	 							@endif
+	 						</div>
 	 						<div class="mini-portfolio">
 	 							<div class="mp-row" id="div-video">
 	 							</div>
