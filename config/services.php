@@ -33,12 +33,12 @@ return [
     'google' => [
         'client_id' => '450099422966-cf2a1mt5qa8nvkt8pirt0jrom54qhi54.apps.googleusercontent.com',
         'client_secret' => 'CjodlvcaaGl3MsvAmmRbjFSd',
-        'redirect' => 'http://127.0.0.1:8000/callback/google'
+        'redirect' => 'https://ofrecetutalento.com/callback/google'
     ], 
 
     'facebook' => [
         'client_id' => '532608424246127',
         'client_secret' => '0431c1c43c189762b29e6d05588c1d81',
-        'redirect' => 'http://127.0.0.1:8000/callback/facebook'
+        'redirect' => 'https://ofrecetutalento.com/callback/facebook'
     ] 
 ];

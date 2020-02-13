@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Validator,Redirect,Response,File;
 use Socialite;
 use App\User;
-use App\Suscription;
+
 class SocialController extends Controller
 {
     public function redirect($provider)
@@ -20,11 +20,11 @@ class SocialController extends Controller
         $getInfo = Socialite::driver($provider)->user();
          
         $user = $this->createUser($getInfo, $provider);
-     
+        
+        //Agregando Rol
+        $user->roles()->attach(Role::where('name', 'user')->first());
+    
         auth()->login($user);
-
-        //Agregando suscripcion
-        $this->newSuscription($user->id, $plan);
      
         //return redirect()->to('/home');
         return response()->json(['success'=>'usuario registrado.', 'id_user' => $user->id]); 
@@ -43,13 +43,5 @@ class SocialController extends Controller
         ]);
       }
       return $user;
-    }
-
-    public function newSuscription($user_id, $plan_id){
-        $suscripcion = new Suscription();
-        $suscripcion->user_id = $user_id;
-        $suscripcion->plan_id = $plan_id;
-
-        $suscripcion->save();
     }
 }

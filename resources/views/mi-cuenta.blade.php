@@ -2,24 +2,9 @@
 
 @section('title', 'Mi cuenta')
 
-@section('header_type', 'stick-top style3')
+@section('header_type', 'gradient')
 
 @section('content')
-<section class="overlape">
-	<div class="block no-padding">
-		<div data-velocity="-.1" style="background: url(http://placehold.it/1600x800) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
-		<div class="container fluid">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="inner-header">
-						<h3>{{auth()->user()->name}} {{auth()->user()->lastname}}</h3>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
 <section>
 	<input type="hidden" name="auth_user" id=auth_user value="{{ auth()->user()->id }}">
 	<div class="block remove-top">

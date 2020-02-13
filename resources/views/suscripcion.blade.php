@@ -230,16 +230,9 @@
 				 		<div class="manage-jobs-sec">
 					 		<div class="coverletter-sec">
 				 				<h3 id="mensaje_plan" align="center"></h3>
-								<div class="extra-login mb-4" >
-		                       		<span align="center">Registrate a traves de Facebook o Google </span>
-									<div class="login-social">
-										<a class="fb-login" href="{{ url('/auth/redirect/facebook') }}" title=""><i class="fa fa-facebook"></i></a>
-										<a class="gg-login" href="{{ url('/auth/redirect/google') }}" title=""><i class="fa fa-google"></i></a>
-									</div>
-								</div>
-								
+
 					 			<div class="extra-login mb-4" >
-		                       		<span align="center">O tambien completa el formulario con tus datos para registrarte</span>
+		                       		<span align="center">Completa el formulario con tus datos para registrarte</span>
 								</div>
 			                    <form method="POST" action="{{ route('register') }}">
 			                        @csrf

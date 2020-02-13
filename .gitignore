@@ -10,3 +10,9 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
+/public/.well-known
+/public/.htaccess
+/public/images/users
+/public/images/exchanges
+/public/files
