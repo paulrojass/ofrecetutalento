@@ -183,7 +183,7 @@
 <div class="row" id="companies-carousel">
 <div class="col-lg-3">
 <div class="top-compnay style2">
-<img src="http://placehold.it/180x180" alt="" />
+<img src="https://placehold.it/180x180" alt="" />
 <h3><a href="#" title="">Symtech</a></h3>
 <span>United States, Los Angeles</span>
 <a href="#" title="">4 Open Positon</a>
@@ -191,7 +191,7 @@
 </div>
 <div class="col-lg-3">
 <div class="top-compnay style2">
-<img src="http://placehold.it/180x180" alt="" />
+<img src="https://placehold.it/180x180" alt="" />
 <h3><a href="#" title="">Symtech</a></h3>
 <span>United States, Los Angeles</span>
 <a href="#" title="">4 Open Positon</a>
@@ -199,7 +199,7 @@
 </div>
 <div class="col-lg-3">
 <div class="top-compnay style2">
-<img src="http://placehold.it/180x180" alt="" />
+<img src="https://placehold.it/180x180" alt="" />
 <h3><a href="#" title="">Symtech</a></h3>
 <span>United States, Los Angeles</span>
 <a href="#" title="">4 Open Positon</a>
@@ -207,7 +207,7 @@
 </div>
 <div class="col-lg-3">
 <div class="top-compnay style2">
-<img src="http://placehold.it/180x180" alt="" />
+<img src="https://placehold.it/180x180" alt="" />
 <h3><a href="#" title="">Symtech</a></h3>
 <span>United States, Los Angeles</span>
 <a href="#" title="">4 Open Positon</a>
@@ -215,7 +215,7 @@
 </div>
 <div class="col-lg-3">
 <div class="top-compnay style2">
-<img src="http://placehold.it/180x180" alt="" />
+<img src="https://placehold.it/180x180" alt="" />
 <h3><a href="#" title="">Symtech</a></h3>
 <span>United States, Los Angeles</span>
 <a href="#" title="">4 Open Positon</a>
@@ -243,28 +243,28 @@
 					<div class="reviews-sec" id="reviews">
 						<div class="col-lg-12">
 							<div class="reviews style2">
-								<img src="http://placehold.it/101x101" alt="" />
+								<img src="https://placehold.it/101x101" alt="" />
 								<h3>Augusta Silva <span>Web designer</span></h3>
 								<p>Without JobHunt i’d be homeless, they found me a job and got me sorted out quickly with everything!  Can’t quite believe the service level that they offer!</p>
 							</div><!-- Reviews -->
 						</div>
 						<div class="col-lg-12">
 							<div class="reviews style2">
-								<img src="http://placehold.it/101x101" alt="" />
+								<img src="https://placehold.it/101x101" alt="" />
 								<h3>Ali Tufan <span>Web designer</span></h3>
 								<p>Without JobHunt i’d be homeless, they found me a job and got me sorted out quickly with everything!  Can’t quite believe the service level that they offer!</p>
 							</div><!-- Reviews -->
 						</div>
 						<div class="col-lg-12">
 							<div class="reviews style2">
-								<img src="http://placehold.it/101x101" alt="" />
+								<img src="https://placehold.it/101x101" alt="" />
 								<h3>Augusta Silva <span>Web designer</span></h3>
 								<p>Without JobHunt i’d be homeless, they found me a job and got me sorted out quickly with everything!  Can’t quite believe the service level that they offer!</p>
 							</div><!-- Reviews -->
 						</div>
 						<div class="col-lg-12">
 							<div class="reviews style2">
-								<img src="http://placehold.it/101x101" alt="" />
+								<img src="https://placehold.it/101x101" alt="" />
 								<h3>Ali Tufan <span>Web designer</span></h3>
 								<p>Without JobHunt i’d be homeless, they found me a job and got me sorted out quickly with everything!  Can’t quite believe the service level that they offer!</p>
 							</div><!-- Reviews -->
@@ -290,7 +290,7 @@
 							<div class="col-lg-4">
 								<div class="my-blog">
 									<div class="blog-thumb">
-										<a href="#" title=""><img src="http://placehold.it/360x200" alt="" /></a>
+										<a href="#" title=""><img src="https://placehold.it/360x200" alt="" /></a>
 										<div class="blog-date">
 											<a href="#" title="">2017 <i>March 29</i></a>
 										</div>
@@ -305,7 +305,7 @@
 							<div class="col-lg-4">
 								<div class="my-blog">
 									<div class="blog-thumb">
-										<a href="#" title=""><img src="http://placehold.it/360x200" alt="" /></a>
+										<a href="#" title=""><img src="https://placehold.it/360x200" alt="" /></a>
 										<div class="blog-date">
 											<a href="#" title="">2017 <i>March 29</i></a>
 										</div>
@@ -320,7 +320,7 @@
 							<div class="col-lg-4">
 								<div class="my-blog">
 									<div class="blog-thumb">
-										<a href="#" title=""><img src="http://placehold.it/360x200" alt="" /></a>
+										<a href="#" title=""><img src="https://placehold.it/360x200" alt="" /></a>
 										<div class="blog-date">
 											<a href="#" title="">2017 <i>March 29</i></a>
 										</div>

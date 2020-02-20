@@ -7,7 +7,7 @@
 @section('content')
 	<section class="overlape">
 		<div class="block no-padding">
-			<div data-velocity="-.1" style="background: url(http://placehold.it/1600x800) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
+			<div data-velocity="-.1" style="background: url(https://placehold.it/1600x800) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
 			<div class="container fluid">
 				<div class="row">
 					<div class="col-lg-12">
@@ -37,9 +37,10 @@
 					<div class="col-lg-12">
 						<div class="cand-single-user">
 							<div class="share-bar circle">
-				 				<a href="#" title="" class="share-google"><i class="la la-google"></i></a>
-				 				<a href="#" title="" class="share-fb"><i class="fa fa-facebook"></i></a>
-				 				<a href="#" title="" class="share-twitter"><i class="fa fa-twitter"></i></a>
+							<!--
+							<a href="#" title="" class="share-google"><i class="la la-google"></i></a>
+							<a href="#" title="" class="share-fb"><i class="fa fa-facebook"></i></a>
+							<a href="#" title="" class="share-twitter"><i class="fa fa-twitter"></i></a> -->
 				 			</div>
 				 			<div class="can-detail-s">
 				 				<div class="cst"><img src="{{URL::asset('images/users/'.$user->avatar)}}" alt="" /></div>
@@ -55,18 +56,19 @@
 				 		</div>
 				 		<ul class="cand-extralink">
 				 			<li><a href="#abilities" title="">habilidades</a></li>
-				 			<li><a href="#experience" title="">Experiencia</a></li>
-				 			<li><a href="#basic" title="">Información Basica</a></li>
 				 			<li><a href="#talentos" title="">Talentos</a></li>
+				 			@auth
+				 				<li><a href="#mensaje" title="">Enviar Mensaje</a></li>
+				 			@endauth
 				 		</ul>
 				 		<div class="cand-details-sec" id="informacion-general">
 				 			<div class="row">
-				 					<div class="cand-details" id="abilities">
-				 						<h2>Descripción de habilidades</h2>
-				 						<p>{{ $user->abilities }}</p>
-				 					</div>
+			 					<div class="cand-details mr-5 ml-5" id="abilities">
+			 						<h2 class="text-center pb-4">Descripción de habilidades</h2>
+			 						<p>{{ $user->abilities }}</p>
+			 					</div>
 
-				 				<div class="col-lg-6 column">
+				 				<div class="col-lg-9 column">
 			 						<div class="cand-details" id="experience">
 			 							<h2>Experiencia en trabajos</h2>
 			 							<div class="edu-history style2">
@@ -100,31 +102,32 @@
 			 							</div>
 			 						</div>
 			 					</div>
-			 					<div class="col-lg-6 column">
-			 						<div class="cand-details" id="basic">
-				 						<div class="progress-sec">
-				 							<h2>Nivel de lenguajes</h2>
-				 							@foreach($user->languages as $language)
-				 							<div class="progress-sec style2">
-				 								<span>{{ $language->language }}</span>
-				 								<div class="progressbar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i> 
-				 								<div class="progress">
-				 									@for($i = 0; $i < $language->level; $i++)
-				 										<i></i>
-				 									@endfor
-				 								</div> 
-				 								</div>
-				 								<p>{{ $language->level }}</p>
-				 							</div>
-				 							@endforeach
-				 						</div>
-			 						</div>
+			 					<div class="col-lg-3 column">
+									<div class="border-title mt-2">
+										<h3>Idiomas</h3>
+									</div>
+									@if($user->languages->count() > 0)
+										@foreach($user->languages as $language)
+											<div class="progress-sec">
+												<span class="mb-4">{{ $language->language }}</span>
+												@php($porcentaje = $language->level * 10)
+												<div class="progressbar">
+													<div class="progress" style="width: {{$porcentaje}}%">
+														<span>{{$language->level}}</span>
+													</div>
+												</div>
+											</div>
+										@endforeach
+									@else
+										<p>No hay idiomas agreagados</p>
+									@endif
 			 					</div>
-
-			 						<div class="cand-details pt-5" id="talentos">
-			 							<h2>Talentos</h2>
+			 					<div class="col-lg-12 mt-5" id="talentos">
+			 						<div class="cand-details">
+			 							<h2 class="text-center pt-5">Talentos</h2>
 								 		<div class="manage-jobs-sec">
-<!-- 								 			<div class="extra-job-info">
+								 		<!--	
+									 			<div class="extra-job-info">
 									 			<span><i class="la la-clock-o"></i><strong>9</strong> Job Posted</span>
 									 			<span><i class="la la-file-text"></i><strong>20</strong> Application</span>
 									 			<span><i class="la la-users"></i><strong>18</strong> Active Jobs</span>
@@ -171,11 +174,11 @@
 									 		</table>
 								 		</div>
 			 						</div>
+		 						</div>
 
-			 					<!-- </div>
-			 					 -->
-				 				<div class="col-lg-4 column">
-<!-- 						 			<div class="job-overview">
+				 				<div class="col-lg-4 column" id="mensaje">
+				 				<!-- 	
+						 			<div class="job-overview">
 							 			<h3>Resumen del usuario</h3>
 							 			<ul>
 							 				<li><i class="la la-money"></i><h3>Offerd Salary</h3><span>£15,000 - £20,000</span></li>
@@ -187,7 +190,7 @@
 							 			</ul>
 							 		</div> --><!-- Job Overview -->
 									@auth
-							 		<div class="quick-form-job">
+							 		<div class="quick-form-job" >
 							 			<h3>Enviar Mensaje</h3>
 							 			<form>
 							 				<textarea placeholder="Envia un mensaje directo a {{ $user->name }} {{ $user->lastname }}"></textarea>
