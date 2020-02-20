@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
 {
+    
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
@@ -25,5 +26,18 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'mi-cuenta';
+
+    protected $redirectTo = '/';
+
+/*    protected function redirectTo()
+    {
+        if (auth()->user()->hasRole('user')) {
+            if((auth()->user()->suscription->plan_id > 1) && (!auth()->user()->hasAnyTalent())) return 'suscripcion-talentos';
+            return 'mi-cuenta';
+        }
+        return 'panel';
+    }*/
+
+
+
 }

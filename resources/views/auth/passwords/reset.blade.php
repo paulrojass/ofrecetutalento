@@ -15,24 +15,22 @@
                                 <h3>{{ __('Reset Password') }}</h3>
                                 <form method="POST" action="{{ route('password.update') }}">
                                     @csrf
+                                    <input type="hidden" name="token" value="{{ $token }}">
                                     <div class="cfield">
                                         <input id="email" type="email" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="correo electrónico" />
-                                        <i class="la la-email"></i>
+                                    </div>
                                         @error('email')
                                         <span>{{ $message }}</span>
                                         @enderror
-                                    </div>
                                     <div class="cfield">
-                                        <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="{{ __('Password') }}">
-                                        <i class="la la-email"></i>
+                                        <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password" required autocomplete="nuevo-password" placeholder="{{ __('Password') }}">
+                                    </div>
                                         @error('password')
                                         <span>{{ $message }}</span>
                                         @enderror
-                                    </div>
 
                                     <div class="cfield">
-                                        <input id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="{{ __('Confirm Password') }}">
-                                        <i class="la la-email"></i>
+                                        <input id="password-confirm" type="password" name="password_confirmation" required autocomplete="nuevo-password" placeholder="{{ __('Confirm Password') }}">
                                     </div>
                                     <button type="submit">
                                         {{ __('Reset Password') }}
