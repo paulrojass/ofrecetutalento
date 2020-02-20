@@ -23,16 +23,16 @@ class SocialController extends Controller
         $user = $this->createUser($getInfo, $provider);
         
         //Agregando Rol
-        $existe = User::where('email', $user->email)->first();
-        if($existe->count() == 0){
+        if(!(User::where('email', $user->email)->exists())){
             $user->roles()->attach(Role::where('name', 'user')->first());
+            $user->newSuscription($user->id, 0, 'mensual');
             $user->newExperience($user->id);
         }
     
         auth()->login($user);
      
-        //return redirect()->to('/home');
-        return response()->json(['success'=>'usuario registrado.', 'id_user' => $user->id]); 
+        return redirect()->to('/');
+        //return response()->json(['success'=>'usuario registrado.', 'id_user' => $user->id]); 
     }
 
     function createUser($getInfo,$provider){
