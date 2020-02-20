@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Validator,Redirect,Response,File;
 use Socialite;
 use App\User;
+use App\Role;
 
 class SocialController extends Controller
 {
@@ -22,7 +23,11 @@ class SocialController extends Controller
         $user = $this->createUser($getInfo, $provider);
         
         //Agregando Rol
-        $user->roles()->attach(Role::where('name', 'user')->first());
+        $existe = User::where('email', $user->email)->first();
+        if($existe->count() == 0){
+            $user->roles()->attach(Role::where('name', 'user')->first());
+            $user->newExperience($user->id);
+        }
     
         auth()->login($user);
      

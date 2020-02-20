@@ -101,10 +101,10 @@
 											<div class="team">
 												<div class="team-img"><img src="{{URL::asset('images/users/'.$top->avatar)}}" alt="" style="max-width: 101px" /></div>
 												<div class="team-detail">
-													<h3><a href="#" title="">{{$top->name}} {{$top->lastname}}</a></h3>
-													<span>I Knew You Were Trouble</span>
+													<h3><a href="{{ url('perfil/'.$top->id) }}" title="">{{$top->name}} {{$top->lastname}}</a></h3>
+													<span><i class="la la-map-marker"></i>{{ $top->city }}, {{ $top->country }}</span>
 													<p>{{$top->abilities}}</p>
-													<a href="#" title="">Ver Perfil <i class="la la-long-arrow-right"></i></a>
+													<a href="{{ url('perfil/'.$top->id) }}" title="">Ver Perfil <i class="la la-long-arrow-right"></i></a>
 												</div>
 											</div><!-- Team -->
 										</div>
