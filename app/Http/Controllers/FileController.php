@@ -95,13 +95,14 @@ class FileController extends Controller
 		$suscripcion = Suscription::find($request->user_id);
 		$plan = Plan::find($suscripcion->plan_id);
 
-		if($request->type == 'image') $maximo = $plan->images;
+		if($request->type == 'image') $maximo = $plan->photos;
 		if($request->type == 'video') $maximo = $plan->videos;
 		if($request->type == 'pdf') $maximo = $plan->pdfs;
 
+		$files = File::where('exchange_id', $request->exchange_id)->where('type', $request->type)->get();
+		$agregados = $files->count();
+		
 		if($maximo == null){
-			$files = File::where('exchange_id', $request->exchange_id)->where('type', $request->type)->get();
-			$agregados = $files->count();
 			$disponibles = null;
 		}else{
 			$disponibles = $maximo - $agregados;
@@ -109,22 +110,11 @@ class FileController extends Controller
 
 		return response()->json([
 			'success'=> 'Nueva imagen',
-			'talentos' => $files,
+			'archivos' => $files,
 			'agregados' => $agregados,
 			'disponibles' => $disponibles
 		]);
 	}
-
-    public function actualizarArchivos(Request $request)
-    {
-		$archivos = File::where('exchange_id', $request->canje_id)->where('type', $request->type)->get();
-        
-        if($request->type == 'image') return view('content.canje-image', compact('archivos'));
-
-        if($request->type == 'video') return view('content.canje-video', compact('archivos'));
-
-        if($request->type == 'pdf') return view('content.canje-pdf', compact('archivos'));
-    }
 
     public function agregarImagen(Request $request)
     {
@@ -176,4 +166,61 @@ class FileController extends Controller
 
 		return view('content.canje-image', compact('archivos'));
     }
+
+    public function actualizarArchivos(Request $request)
+    {
+		$archivos = File::where('exchange_id', $request->canje_id)->where('type', $request->type)->get();
+        
+        if($request->type == 'image') return view('content.canje-image', compact('archivos'));
+
+        if($request->type == 'video') return view('content.canje-video', compact('archivos'));
+
+        if($request->type == 'pdf') return view('content.canje-pdf', compact('archivos'));
+    }
+
+    public function isVideo(Request $request){
+		$video = $request->file('video_file');
+		return $video;
+		$extension = $video->getClientOriginalExtension();
+		$size = $video->getSize();
+		$maximomb = (50*1024)*1024;
+
+
+		if (($extension == 'mp4' || $extension == 'avi') && ($size <= $maximomb) ){
+			return response()->json(['success'=> true]);
+		}
+		else{
+			return response()->json(['fail'=> true]);
+		}
+    }
+
+/*    public function isVideo(Request $request){ 
+    	$data=$request->all();
+    	$rules=[
+    		'video' => 'mimes:mpeg,ogg,mp4,webm,3gp,mov,flv,avi,wmv,ts|max:100040|required'
+    	];
+
+		$validator = Validator($data,$rules);
+
+		if ($validator->fails()){
+			return redirect()
+			->back()
+			->withErrors($validator)
+			->withInput();
+		}else{
+			$video=$data['video'];
+			$input = time().$video->getClientOriginalExtension();
+			$destinationPath = 'uploads/videos';
+			$video->move($destinationPath, $input);
+
+			$user['video']       =$input;
+			$user['created_at']  =date('Y-m-d h:i:s');
+			$user['updated_at']  =date('Y-m-d h:i:s');
+			$user['user_id']     =session('user_id');
+			DB::table('user_videos')->insert($user);
+			return redirect()->back()->with('upload_success','upload_success');
+		}
+	}*/
+
+
 }

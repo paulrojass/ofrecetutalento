@@ -234,7 +234,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 .boton-normal:hover {
-    background: #fb236a;
+    background: #ff9200;
 }
 
 .font-likes{
@@ -322,3 +322,77 @@ footer {
 }
  */
 
+.modal{
+    background: rgba(20,31,114,0.6);
+}
+
+.close-b .close-popup{
+    position: absolute;
+    top: -20px;
+    width: 50px;
+    height: 50px;
+    float: none;
+    margin: 0;
+    right: -20px;
+    text-align: center;
+    line-height: 50px;
+    color: #ffffff;
+    font-size: 20px;
+    
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+
+    cursor: pointer;
+    background-color: #ff9200;
+
+}
+
+button{
+  background: transparent;
+}
+
+
+.modal-content > h3 {
+    float: left;
+    width: 100%;
+    font-family: 'Questrial' !important;
+    color: #222222;
+    font-weight: bold;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    line-height: 10px;
+    text-align: center;
+}
+
+.modal.and.carousel {
+  position: fixed;
+}
+
+
+
+/* boton input file */
+/* .inputfile {
+  float: left;
+  font-family: 'Questrial' !important;
+  font-size: 15px;
+  color: #ff9200;
+  border: 2px solid #ff9200;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  border-radius: 20px;
+  padding: 10px 40px;
+
+
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile:hover {
+    background-color: red;
+} */

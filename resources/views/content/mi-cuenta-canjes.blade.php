@@ -17,14 +17,7 @@
 			</div>
 	 		<div class="action-tags">
 	 			<a href="{{url('canjes/'.$exchange->id)}}" title=""><i class="la la-eye"></i>Ver</a>
-	 			<a class="editar-canje" 
-						data-value="{{$exchange->id}}"
-						data-title = "{{$exchange->title}}"
-						data-price = "{{$exchange->price}}"
-						data-talent = "{{$exchange->talent_id}}"
-						data-description = "{{$exchange->description}}"
-						data-toggle="modal" data-target="#modal-canje" value="{{$exchange->id}}" title="">
-						<i class="la la-pencil"></i> Editar</a>
+	 			<a class="editar-canje" data-value="{{ $exchange->id }}" title=""><i class="la la-pencil"></i> Editar</a>
 	 			<a class="eliminar-canje" value="{{$exchange->id}}" title=""><i class="la la-trash-o"></i>Eliminar</a>
 	 		</div>
 		</div>

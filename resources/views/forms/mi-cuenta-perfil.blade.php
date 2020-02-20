@@ -1,4 +1,4 @@
-<div id="d-no-editar" class="border-title"><h3>Editar mi perfil</h3><a id="no-editar" title=""><i class="la la-edit"></i> Cancelar</a></div>
+<div id="d-no-editar" class="border-title"><h3>Editar</h3><a id="no-editar" title=""><i class="la la-edit"></i> Cancelar</a></div>
 <!-- <div class="edu-history-sec">--> 
 
 	<div class="block pt-0">

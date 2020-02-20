@@ -18,6 +18,8 @@ $factory->define(File::class, function (Faker $faker) {
 
 	return [
 		'location' => 'default.'.$file,
-		'type' => $type
+		'type' => $type,
+        'name' => $faker->sentence($nbWords = 6, $variableNbWords = true),
+		'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true)
 	];
 });

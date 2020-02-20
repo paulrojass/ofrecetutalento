@@ -126,13 +126,11 @@
 <!-- Modal Idioma -->
 <div class="modal fade" id="modal-idioma" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-	<div class="modal-content">
-		<div class="modal-header">
-			<h5 class="modal-title" id="exampleModalLabel">Agregar nuevo idioma</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
+	<div class="modal-content pt-4">
+		<h3>Nuevo Idioma</h3>
+		<button type="button" class="close-b" data-dismiss="modal" aria-label="Close">
+			<span class="close-popup"><i class="la la-close"></i></span>
+		</button>
 		<form id="form-idioma">
 		  <div class="modal-body">
 				<div class="contact-edit pl-5 pr-5">
@@ -160,13 +158,11 @@
 <!-- Modal Talento -->
 <div class="modal fade" id="modal-talento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-	<div class="modal-content">
-		<div class="modal-header">
-			<h5 class="modal-title" id="exampleModalLabel">Nuevo Talento</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
+	<div class="modal-content pt-4">
+		<h3>Talento</h3>
+		<button type="button" class="close-b" data-dismiss="modal" aria-label="Close">
+			<span class="close-popup"><i class="la la-close"></i></span>
+		</button>
 		<div class="alert alert-danger print-error-msg" style="display:none">
 			<ul></ul>
 		</div>
@@ -229,13 +225,11 @@
 	<!-- Modal Idioma -->
 	<div class="modal fade bd-example-modal-lg" id="modal-canje" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Agregar nuevo canje</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
+		<div class="modal-content pt-4">
+			<h3>Canjes</h3>
+			<button type="button" class="close-b" data-dismiss="modal" aria-label="Close">
+				<span class="close-popup"><i class="la la-close"></i></span>
+			</button>
 			<form id="form-canje">
 			  <div class="modal-body">
 					<div class="contact-edit pl-5 pr-5">
@@ -283,14 +277,128 @@
 			  <div class="modal-footer">
 				<button type="button" data-dismiss="modal" class="boton-normal">Cerrar</button>
 				<button type="button" class="boton-normal" id="nuevo-canje">Agregar</button>
-				<button type="button" class="boton-normal" id="actualizar-canje">Actualizar</button>
 			  </div>
 			</form>
 		</div>
 	  </div>
 	</div>	
 </section>
+
+
+<section id="div-modal-nueva-imagen">
+	<!-- Modal Idioma -->
+	<div class="modal fade bd-example-modal-lg" id="modal-nueva-image" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content pt-4">
+			<h3>Imagen para canje</h3>
+			<button type="button" class="close-b" data-dismiss="modal" aria-label="Close">
+				<span class="close-popup"><i class="la la-close"></i></span>
+			</button>
+			<form id="form-new-image">
+			  <div class="modal-body">
+					<div class="contact-edit pl-5 pr-5">
+						@csrf
+						<input type="hidden" name="id_exchange" id="id_exchange">
+						<div class="row">
+							<div class="col-lg-12">
+								<span class="pf-title">Titulo</span>									
+								<div class="pf-field">
+									<input type="text" name="title-image" id="title-image" maxlength="60" required>
+									<span class="form-error" id="e_title_exchange" hidden> Debe agregar un titulo para la imagen</span>
+
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<span class="pf-title">Descripción</span>									
+								<div class="pf-field">
+									<textarea id="description-image" name="description-image"></textarea>
+									<span class="form-error" id="e_description_exchange" hidden> Debe agregar una descripción</span>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="upload-img-bar">
+									<div class="upload-info">
+										<div id="mensaje-nueva-imagen"></div>
+
+										<input id="input-new-image" name="input-new-image" type="file" accept="image/*" capture style="display:none">
+										<a id="button-input-new-image" title="">Agregar Imagen</a>
+										<span>Tamaño maximo 1Mb, archivos permitidos: .jpg & .png</span>
+									</div>
+								</div>
+							</div>							
+						</div>
+					</div>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="boton-normal">Cerrar</button>
+				<button type="button" class="boton-normal" id="nuevo-canje">Agregar</button>
+			  </div>
+			</form>
+		</div>
+	  </div>
+	</div>	
+</section>
+
+<section id="div-modal-nuevo-video">
+	<!-- Modal Idioma -->
+	<div class="modal fade bd-example-modal-lg" id="modal-nuevo-video" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content pt-4">
+			<h3>Nuevo Video</h3>
+			<button type="button" class="close-b" data-dismiss="modal" aria-label="Close">
+				<span class="close-popup"><i class="la la-close"></i></span>
+			</button>
+			<form id="form-new-video" files="true" enctype="multipart/form-data">
+			  <div class="modal-body">
+					<div class="contact-edit pl-5 pr-5">
+						@csrf
+						<input type="hidden" name="id_exchange" id="id_exchange">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="upload-img-bar">
+									<div class="upload-info">
+										<div id="mensaje-nuevo-video"></div>
+
+										<input id="input-new-video" name="input-new-video" type="file" accept="video/mp4">
+										<a id="button-input-new-video" title="">Agregar video</a>
+										<span>Tamaño maximo 1Mb, formato: mp4</span>
+									</div>
+								</div>
+							</div>							
+							<div class="col-lg-6">
+								<span class="pf-title">Titulo</span>									
+								<div class="pf-field">
+									<input type="text" name="title-video" id="title-video" maxlength="60" required>
+									<span class="form-error" id="e_title_exchange" hidden> Debe agregar un titulo para la video</span>
+
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<span class="pf-title">Descripción</span>									
+								<div class="pf-field">
+									<textarea id="description-video" name="description-video"></textarea>
+									<span class="form-error" id="e_description_exchange" hidden> Debe agregar una descripción</span>
+								</div>
+							</div>
+						</div>
+					</div>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="boton-normal">Cerrar</button>
+				<button type="button" class="boton-normal" id="nuevo-canje">Agregar</button>
+			  </div>
+			</form>
+		</div>
+	  </div>
+	</div>	
+</section>
+
+
+
+
 @endsection
+
+
 
 
 @section('scripts')

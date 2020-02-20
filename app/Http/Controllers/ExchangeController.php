@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\DatesTranslator;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Image;
+
+use DB;
 
 class ExchangeController extends Controller
 {
@@ -64,13 +69,15 @@ class ExchangeController extends Controller
     public function canje($id)
     {
         $canje = $this->show($id);
-        $archivos = $this->archivosCanje($canje);
-        return view('canje', compact('canje','archivos'));
+        $imagenes = $this->archivosCanje($canje, 'image');
+        $videos = $this->archivosCanje($canje, 'video');
+        $pdfs = $this->archivosCanje($canje, 'pdf');
+        return view('canje', compact('canje','imagenes', 'videos', 'pdfs'));
     }
 
-    public function archivosCanje(Exchange $exchange)
+    public function archivosCanje(Exchange $exchange, $type)
     {
-        return File::where('exchange_id', $exchange->id)->get();
+        return File::where('exchange_id', $exchange->id)->where('type',$type)->get();
     }
 
     /**
@@ -126,9 +133,80 @@ class ExchangeController extends Controller
 
     public function actualizarCanje(Request $request)
     {
-        $exchange = Exchange::where('id', $request->id)->first();
+        $canje = Exchange::where('id', $request->id)->first();
 
-        $this->update($request, $exchange);
+        $this->update($request, $canje);
+
+        $exchanges = Auth()->User()->exchanges;
+        return view('content.mi-cuenta-canjes', compact('exchanges'));
     }
+
+    public function formCanje(Request $request){
+
+        $canje = Exchange::find($request->id);
+
+        return $this->vistaCanje($canje);
+
+    }
+
+    public function vistaCanje(Exchange $canje){
+        $imagenes = $canje->files()->where('type', 'image')->get();
+
+        $videos = $canje->files()->where('type', 'video')->get();
+
+        $pdfs = $canje->files()->where('type', 'pdf')->get();
+
+        return view('forms.mi-cuenta-canje', compact('canje', 'imagenes', 'videos', 'pdfs'));
+    }
+
+
+
+    public function updateImageCanje(Request $request){
+        // ruta de las imagenes guardadas
+        $ruta = public_path().'/images/exchanges/';
+        // recogida del form
+        $imagenOriginal = $request->file('img-canje-file');
+        // crear instancia de imagen
+        $imagen = Image::make($imagenOriginal);
+
+        if ($imagen->width() > 800 && $imagen->height() > 400) {
+            // generar un nombre aleatorio para la imagen
+            $temp_name = Str::random(20) . '.' . $imagenOriginal->getClientOriginalExtension();
+
+            if($imagen->height() >= $imagen->width()){
+               $imagen->widen(800);
+ /*                $imagen->heighten(400);*/
+                $imagen->resizeCanvas(800,400);
+            }
+            else
+            {
+               $imagen->heighten(400);
+ /*                $imagen->widen(800);*/
+                $imagen->resizeCanvas(800,400);
+            }
+
+            // guardar imagen
+            // save( [ruta], [calidad])
+            $ruta_final = $ruta . $temp_name;
+            $imagen->save($ruta_final, 100);
+
+            $canje = Exchange::find($request->id);
+            if ($canje->image != 'default.jpg')
+            {
+              if(\File::exists('images/exchanges/'.$canje->image)){
+                \File::delete('images/exchanges/'.$canje->image);
+              }
+            }
+            $canje->image = $temp_name;
+            $canje->save();
+
+            return $this->vistaCanje($canje);
+        }
+        else
+        {
+            return response()->view('errors.custom', [], 500);
+        }
+    }
+
 
 }

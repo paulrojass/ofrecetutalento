@@ -2,7 +2,9 @@
 @php($replys = ($canje->comments->where('replyto', !null)) )
 <div class="border-title">
 	<h3>{{$canje->comments->count()}} Comentarios</h3>
+	@auth
 	<a id="a-agregar-comentario" title=""><i class="la la-plus"></i> Agregar comentario</a>
+	@endauth
 </div>
 
 <div class="commentform-sec mb-3" id="comentario" style="display: none">
@@ -30,7 +32,7 @@
 				<h3>{{$comment->user->name}} {{$comment->user->lastname}}</h3>
 				<div class="date-comment"><a href="#" title=""><i class="la la-calendar-o"></i>{{$comment->created_at->format('l d, F Y')}}</a></div>
 				<p>{{$comment->comment}}</p>
-			@auth
+				@auth
 				@if(auth()->user() == $canje->talent->user)
 						<a class="a-responder" data-responder="{{$comment->id}}" title=""><i class="la la-reply"></i>Responder</a>
 					@endif

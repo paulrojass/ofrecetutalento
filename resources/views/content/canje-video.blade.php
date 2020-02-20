@@ -1,13 +1,19 @@
 @foreach($archivos as $video)
-<div class="mp-col">
-	<div class="mportolio">
-		<img src="{{URL::asset('files/video/'.$video->location)}}" style="object-fit: cover;height: 165px" alt="" />
-		<a href="#" title=""><i class="la la-search"></i></a>
-	</div>
-	@if(auth()->user() == $video->exchange->talent->user)
-	<ul class="action_job">
-		<li class="boton-eliminar-imagen" value="{{ $video->id }}"><span>Eliminar</span><a  title=""><i class="la la-trash-o"></i></a></li>
-	</ul>
-	@endif
+ <!-- <div class="mp-col"> -->
+<div class="mportolio">
+		<div class="embed-responsive embed-responsive-16by9">
+			@if (Str::contains($video->location, 'https://'))
+			 {!!$video->location!!}
+			@else
+		  	<iframe class="embed-responsive-item" src="{{URL::asset('files/video/'.$video->location)}}" allowfullscreen></iframe>
+			@endif
+		</div>
+		<div class="job-details pt-1">
+			<p class="pl-5 pr-5 text-center mb-2"><strong>{{ $video->name }}</strong></p>
+			<p class="pl-5 pr-5">{{ $video->description }}</p>
+		</div>
+
+
+<!-- 	</div> -->
 </div>
 @endforeach

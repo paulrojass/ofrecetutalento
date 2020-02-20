@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/bootstrap-grid.css')}}" />
 	<link rel="stylesheet" href="{{URL::asset('tema/css/icons.css')}}">
 	<link rel="stylesheet" href="{{URL::asset('tema/css/animate.min.css')}}">
+	@yield('css')
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/style.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/responsive.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/chosen.css')}}" />
@@ -24,7 +25,6 @@
 	
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('css/estilos.css')}}" />
 
-	@yield('css')
 </head>
 <body>
 

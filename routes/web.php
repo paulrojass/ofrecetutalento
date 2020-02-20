@@ -19,9 +19,8 @@ Route::get('planes','SiteController@planes');
 Route::get('talentos', 'SiteController@talentos')->name('talentos');
 Route::get('canjes', 'SiteController@canjes');
 Route::get('canjes/{id}', 'ExchangeController@canje');
-route::get('suscripcion', 'SiteController@suscripcion');
-route::get('terminos_&_condiciones', 'SiteController@terminos');
-
+Route::get('suscripcion', 'SiteController@suscripcion');
+Route::get('terminos_&_condiciones', 'SiteController@terminos');
 
 Route::get('logout', function ()
 {
@@ -91,6 +90,11 @@ Route::get('actualizar_usuario', 'UserController@updateUser');
 Route::get('guardar-canje', 'ExchangeController@guardarCanje');
 Route::post('eliminar-canje', 'ExchangeController@eliminarCanje');
 Route::post('actualizar_canje', 'ExchangeController@actualizarCanje');
+//mi cuenta canjes
+Route::get('form-canje', 'ExchangeController@formCanje');
+Route::post('cambiar-imagen-canje', 'ExchangeController@updateImageCanje');
+Route::get('actualizar-datos-canje', 'ExchangeController@actualizarCanje');
+Route::post('es-video', 'FileController@isVideo');
 
 //mensajes
 Route::get('mensajes', 'MessageController@mensajes')->middleware('verified');

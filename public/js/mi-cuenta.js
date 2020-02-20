@@ -1,5 +1,5 @@
-$(function(){
 	id_user = $('#auth_user').val();
+$(function(){
 
 	informacionPerfil();
 	talentosPerfil();
@@ -43,30 +43,37 @@ $(function(){
 		$("#avatar").trigger('click');
 		$('.alert').alert('close')
 	});
+
+	/*imagen de canje*/
+	$('#canjes').on('change','#img-canje-file',function(){
+		canje_id = $('#input-image-canje').val();
+		cambiarImagenCanje(canje_id);
+	});
+
+	$("#canjes").on('click', '#img-canje', function () {
+		$("#img-canje-file").trigger('click');
+		$('.alert').alert('close')
+	});
+	$("#canjes").on('click', '#button-image-canje', function () {
+		$("#img-canje-file").trigger('click');
+		$('.alert').alert('close')
+	});
+	/*fin imagen de canje*/
 });
 
 $('#talentos').on('click', '#agregar-talento', function(event){
 	event.preventDefault();
 	resetForm();
-	$('#nuevo-talento').show();
-	$('#actualizar-talento').hide();
 });
 
 $('#canjes').on('click', '#agregar-canje', function(event){
 	event.preventDefault();
 	resetForm();
-	$('#nuevo-canje').show();
-	$('#actualizar-canje').hide();
 });
 
 $('#mi-perfil-info').on('click', '#editar-perfil', function(e){
 	e.preventDefault();
 	editarPerfil();
-});
-
-$('#mi-perfil-info').on('click', '#no-editar', function(e){
-	e.preventDefault();
-	informacionPerfil();
 });
 
 $('#talentos').on('click', '.editar-talento', function(e){
@@ -93,22 +100,9 @@ $('#talentos').on('click', '.editar-talento', function(e){
 
 $('#canjes').on('click', '.editar-canje', function(e){
 	e.preventDefault();
-	resetForm();
-	$('#nuevo-canje').hide();
-	$('#actualizar-canje').show();
-	var id = $(this).data("value");
-	var title = $(this).data("title");
-	var price = $(this).data("price");
-	var description = $(this).data("description");
-	var talent = $(this).data("talent");
-	var _token = $("input[name='_token']").val();
-
-	$("input[name='id_exchange']").val(id);
-	$("input[name='title-exchange']").val(title);
-	$("input[name='price-exchange']").val(price);
-	$("#description-exchange").val(description);
-/*	$("#talent-exchange option[value='"+talent+"']").attr("selected", true);*/
-	$('#talent-exchange').change();
+	canje_id = $(this).data('value');
+	editarCanje(canje_id);
+	
 });
 
 
@@ -311,6 +305,15 @@ $('#nuevo-canje').click(function(e){
 
 
 
+$('#canjes').on('click', '#no-editar-canje', function(e){
+	e.preventDefault();
+	canjesPerfil();
+});
+
+$('#mi-perfil-info').on('click', '#no-editar', function(e){
+	e.preventDefault();
+	informacionPerfil();
+});
 
 
 
@@ -468,11 +471,225 @@ function editarPerfil(){
 	})
 	.done(function(data) {
 		$('#mi-perfil-info').html(data);
-	})	
+	})
 }
+
+function editarCanje(id){
+	$.ajax({
+		url: '/form-canje',
+		type: 'get',
+		data: {id:id},
+		dataType: 'html',
+	})
+	.done(function(data) {
+		$('#canjes').html(data);
+	});
+	cargaInicial(id);
+}
+
+
 
 function resetForm() {
 	$('form .form-error').attr({hidden: 'hidden'});
 	$("form select").each(function() { this.selectedIndex = 0 });
 	$("form input[type=text], form input[type=number] , form textarea").each(function() { this.value = '' });
 }
+
+
+
+
+
+
+
+//Archivos
+//
+
+
+
+/*Agregar imagenes*/
+$('#image-files').change(function(){
+	agregarImagen();
+});
+
+$("#agregar-image").click(function () {
+	$("#image-files").trigger('click');
+});
+/*fin Agregar imagenes*/
+
+/*eliminar imagenes*/
+
+$('#div-image').on('click', '.boton-eliminar-imagen', function(){
+	var id = $(this).val();
+	eliminarImagen(id);
+});
+
+
+function agregarImagen(){
+	var formData = new FormData();
+	formData.append('location', $('#image-files')[0].files[0]);
+	formData.append('_token', $("input[name='_token']").val());
+	formData.append('exchange_id', id_canje);
+	$.ajax({
+		url: '/agregar-imagen',
+		type: 'post',
+		data: formData,
+		contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+		processData: false // NEEDED, DON'T OMIT THIS
+	})
+	.done(function(response) {
+		$('#div-image').html(response);
+	});
+}
+
+function eliminarImagen(image_id)
+{
+	var _token = $("input[name='_token']").val();
+	$.ajax({
+		url: '/eliminar-imagen',
+		type: 'post',
+		data: {id: image_id, _token: _token},
+	})
+	.done(function(response) {
+		$('#div-image').html(response);
+	});
+}
+
+
+
+
+
+
+
+function cambiarImagenCanje(id){
+	var formData = new FormData();
+	formData.append('img-canje-file', $('#img-canje-file')[0].files[0]);
+	formData.append('_token', $("input[name='_token']").val());
+	formData.append('id', id);
+	$.ajax({
+		url: '/cambiar-imagen-canje',
+		type: 'post',
+		data: formData,
+		contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+		processData: false // NEEDED, DON'T OMIT THIS
+	})
+	.done(function(response) {
+		$("#ll-canje").html('<div class="alert alert-success" role="alert">La foto ha cambiado exitosamente</div>');
+		$('#canjes').html(response);
+	})
+	.fail(function() {
+		$("#ll-canje").html('<div class="alert alert-danger" role="alert">Por favor revisar formato y dimensines minimas</div>');
+	});
+	
+}
+
+/*Canje Formulario*/
+$('#canjes').on('click', '#actualizar-canje', function(e){
+	e.preventDefault();
+	var _token = $("input[name='_token']").val();
+	var id = $('#a-form-canje-id').val();
+	var title = $('#a-title-exchange').val();
+	var price = $('#a-price-exchange').val();
+	var talent_id = $('#a-talent-exchange').val();
+	var description = $('#a-description-exchange').val();
+	if(title == "" || price == "" || description =="" || talent_id ==""){
+		if(title == "") $('#e_a_title_exchange').removeAttr('hidden'); else $('#e_a_title_exchange').attr({hidden: 'hidden'});
+		if(price == "") $('#e_a_price_exchange').removeAttr('hidden'); else $('#e_a_price_exchange').attr({hidden: 'hidden'});
+		if(talent_id == "") $('#e_a_talent_exchange').removeAttr('hidden'); else $('#e_talent_a_exchange').attr({hidden: 'hidden'});
+		if(description == "") $('#e_a_description_exchange').removeAttr('hidden'); else $('#e_a_description_exchange').attr({hidden: 'hidden'});
+	}
+	else
+	{
+		$.ajax({
+			url: '/actualizar-datos-canje',
+			type: 'get',
+			data: {id: id, title: title, price:price, talent_id:talent_id, description:description, _token:_token}
+		})
+		.done(function(response) {
+			$('#canjes').html(response);
+		});
+	}
+});
+
+
+
+//Manipulacion de archivos
+
+
+	function cargaInicial(canje_id){
+		//$("#tipo-pago").checked();
+		verificarArchivos('image', canje_id);
+		//actualizarArchivos('image', canje_id);
+		verificarArchivos('video', canje_id);
+		//actualizarArchivos('video', canje_id);
+		verificarArchivos('pdf', canje_id);
+		//actualizarArchivos('pdf', canje_id);
+	}
+
+
+	function verificarArchivos(tipo, canje_id){
+		var _token = $("input[name='_token']").val();
+		$.ajax({
+			type: 'POST',
+			url:'/verificar-archivos',
+			data:{user_id : id_user, exchange_id: canje_id, _token:_token, type: tipo},
+			success:function(data){
+				if(data.disponibles == null){
+					$('#titulo-'+tipo+' strong').html('(sin limite)');
+				}else if(data.disponibles > 0){
+					$('#titulo-'+tipo+' strong').html('('+data.disponibles+' disponibles)');
+				}else{
+					$('#agregar-'+tipo).hide();
+					$('#titulo-'+tipo+' strong').html('(Para agregar mas '+tipo+' puede cambiar su plan)');
+				}
+			}
+		});
+	}
+
+
+
+
+
+	$('#input-new-image').change(function(){
+		verificarImagen();
+	});
+
+	$("#button-input-new-image").click(function () {
+		$("#input-new-image").trigger('click');
+		$('.alert').alert('close')
+	});
+
+
+	function verificarImagen(){
+		alert('verificando');
+	}
+
+
+
+	$("#button-input-new-video").click(function () {
+		$("#input-new-video").trigger('click');
+		$('.alert').alert('close')
+	});
+
+	$('#input-new-video').change(function(){
+		verificarVideo();
+	});
+
+	function verificarVideo(){
+		var formData = new FormData();
+		formData.append('video_file', $('#input-new-video')[0].files[0]);
+		formData.append('_token', $("input[name='_token']").val());
+		$.ajax({
+			url: '/es-video',
+			type: 'post',
+			data: formData,
+			contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+			processData: false // NEEDED, DON'T OMIT THIS
+		})
+		.done(function(response) {
+			if(response.success){
+				$("#mensaje-nuevo-video").html('<div class="alert alert-success" role="alert">Video aceptado</div>');
+			}else{
+				$("#mensaje-nuevo-video").html('<div class="alert alert-warning" role="alert">Formato invalido, intente de nuevo</div>');
+			}
+		});	
+	}
