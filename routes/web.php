@@ -19,7 +19,7 @@ Route::get('planes','SiteController@planes');
 Route::get('talentos', 'SiteController@talentos')->name('talentos');
 Route::get('canjes', 'SiteController@canjes');
 Route::get('canjes/{id}', 'ExchangeController@canje');
-Route::get('suscripcion', 'SiteController@suscripcion');
+Route::get('suscripcion', 'SiteController@suscripcion')->name('suscripcion');
 Route::get('terminos_&_condiciones', 'SiteController@terminos');
 
 Route::get('logout', function ()
