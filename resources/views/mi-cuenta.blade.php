@@ -4,6 +4,10 @@
 
 @section('header_type', 'gradient')
 
+@section('css')
+	<link rel="stylesheet" href="{{ URL::asset('css/dropzone.css') }}">
+@endsection
+
 @section('content')
 <section>
 	<input type="hidden" name="auth_user" id=auth_user value="{{ auth()->user()->id }}">
@@ -19,7 +23,8 @@
 									<li><a href="javascript:void(0)" id="a-talentos" onclick="mostrar('#talentos','#a-talentos')" title=""><i class="la la-diamond"></i>Talentos</a></li>
 									<li><a href="javascript:void(0)" id="a-canjes" onclick="mostrar('#canjes', '#a-canjes')" title=""><i class="la la-lightbulb-o"></i>Canjes</a></li>
 								@endif
-								<li><a href="javascript:void(0)" id="a-tratos" onclick="mostrar('#tratos', '#a-tratos')" title=""><i class="la la-exchange"></i>Tratos</a></li>
+								<li><a href="javascript:void(0)" id="a-tratos-r" onclick="mostrar('#tratos-r', '#a-tratos-r')" title=""><i class="la la-arrow-left"></i>Tratos Recibidos</a></li>
+								<li><a href="javascript:void(0)" id="a-tratos-p" onclick="mostrar('#tratos-p', '#a-tratos-p')" title=""><i class="la la-arrow-right"></i>Tratos Propuestos</a></li>
 								<li><a href="{{ url('mensajes') }}" id="a-mensajes" title=""><i class="la la-comments"></i>Mensajes</a></li>
 								<li><a href="{{route('logout')}}" title=""><i class="la la-unlink"></i>Cerrar Sesión</a></li>
 							</ul>
@@ -52,70 +57,13 @@
 						</div>
 					</div>
 
-					<div id="talentos">
-					</div>
+					<div id="talentos"> </div>
 
+					<div id="canjes"> </div>	
 
-					<div id="canjes">
-					</div>	
+					<div id="tratos-r"> </div>
 
-					<div id="tratos">
-						<div class="padding-left">
-							<div class="manage-jobs-sec">
-								@php($tratos = App\Dealing::where('accept_id', auth()->user()->id)->get())
-
-								<div class="mini-portfolio">
-							 		<div class="manage-jobs-sec">
-								 		<table>
-								 			<thead>
-								 				<tr>
-								 					<td>Requerimiento</td>
-								 					<td>Solicitado</td>
-								 					<td>Propuesto</td>
-								 					<td>Estado</td>
-								 					<td>Acciones</td>
-								 				</tr>
-								 			</thead>
-								 			<tbody>
-												@foreach($tratos->sortByDesc('created_at') as $trato)
-								 				<tr>
-								 					<td class="col-4">
-								 						<div class="table-list-title">
-								 							<!-- <span class="applied-field">{{ $trato->description }}</span> -->
-								 							<p>{{ $trato->description }}</p>
-
-								 							<!-- <span><i class="la la-map-marker"></i>Sacramento, California</span> -->
-								 						</div>
-								 					</td>
-								 					<td class="col-2">
-								 						<span class="applied-field">{{ $trato->exchange_id }}</span>
-								 					</td>
-								 					<td class="col-2">
-								 						<span>{{ $trato->exchange_proposal }}</span>
-								 					</td>
-								 					<td class="col-2">
-								 						@if($trato->aproved)
-								 						<span class="status active">Aceptado</span>
-								 						@else
-								 						<span class="status active">Omitido</span>
-								 						@endif
-								 					</td>
-								 					<td class="col-2">
-								 						<ul class="action_job">
-								 							<li><span>Aceptar</span><a href="#" title=""><i class="la la-check-circle"></i></a></li>
-								 							<li><span>Omitir</span><a href="#" title=""><i class="la la-times-circle"></i></a></li>
-								 							<!-- <li><span>Delete</span><a href="#" title=""><i class="la la-trash-o"></i></a></li> -->
-								 						</ul>
-								 					</td>
-								 				</tr>
-							 					@endforeach
-								 			</tbody>
-								 		</table>
-							 		</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					<div id="tratos-p">	</div>
 				</div>
 				<!-- AQUI TERMINA LA COLUMNA 2 -->
 			</div>
@@ -294,6 +242,17 @@
 			<button type="button" class="close-b" data-dismiss="modal" aria-label="Close">
 				<span class="close-popup"><i class="la la-close"></i></span>
 			</button>
+
+                    {!! Form::open([ 'method' => 'POST', 'files'=>'true', 'id' => 'my-dropzone' , 'class' => 'dropzone']) !!}
+                    <div class="dz-message" style="height:200px;">
+                        Drop your files here
+                    </div>
+                    <div class="dropzone-previews"></div>
+                    <button type="submit" class="btn btn-success" id="submit">Save</button>
+                    {!! Form::close() !!}
+
+
+
 			<form id="form-new-image">
 			  <div class="modal-body">
 					<div class="contact-edit pl-5 pr-5">
@@ -315,17 +274,19 @@
 									<span class="form-error" id="e_description_exchange" hidden> Debe agregar una descripción</span>
 								</div>
 							</div>
-							<div class="col-lg-12">
-								<div class="upload-img-bar">
-									<div class="upload-info">
-										<div id="mensaje-nueva-imagen"></div>
 
-										<input id="input-new-image" name="input-new-image" type="file" accept="image/*" capture style="display:none">
-										<a id="button-input-new-image" title="">Agregar Imagen</a>
-										<span>Tamaño maximo 1Mb, archivos permitidos: .jpg & .png</span>
-									</div>
-								</div>
-							</div>							
+
+
+
+
+
+
+
+
+
+
+
+						
 						</div>
 					</div>
 			  </div>
@@ -402,10 +363,14 @@
 
 
 @section('scripts')
-<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/bootstrap-datepicker.css')}}" />
+<!-- <link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/bootstrap-datepicker.css')}}" />
 <script src="{{URL::asset('tema/js/jquery.scrollbar.min.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/tag.js')}}" type="text/javascript"></script>
-<script src="{{URL::asset('tema/js/bootstrap-datepicker.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('tema/js/bootstrap-datepicker.js')}}" type="text/javascript"></script> -->
+
+<script src="{{URL::asset('js/dropzone.js')}}" type="text/javascript"></script>
+
+
 
 <script src="{{URL::asset('js/mi-cuenta.js')}}" type="text/javascript"></script>
 @endsection

@@ -35,7 +35,7 @@
 			 	<!-- Columna de mensajes -->
 			 	<div class="col-lg-9 column" id="columna-mensajes">
 			 		@if($usuarios->isNotEmpty())
-						<h3> Todavía no tienes mensajes en tu buzón</h3>
+						<!-- <h3> Todavía no tienes mensajes en tu buzón</h3> -->
 			 		@endif
 				</div>
 			 </div>

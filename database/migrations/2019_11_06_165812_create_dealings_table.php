@@ -16,7 +16,7 @@ class CreateDealingsTable extends Migration
         Schema::create('dealings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('description')->nullable();
-            $table->boolean('approved')->default(0);
+            $table->boolean('approved')->nullable();
             $table->boolean('pay')->default(0);
             $table->unsignedBigInteger('exchange_proposal')->nullable();
             $table->timestamps();

@@ -18,6 +18,7 @@ use App\Category;
 use App\User;
 use App\Talent;
 use App\Exchange;
+use App\Dealing;
     
 use Carbon\Carbon;
  
@@ -126,6 +127,20 @@ class SiteController extends Controller
         $exchanges = Auth()->User()->exchanges;
         
         return view('content.mi-cuenta-canjes', compact('exchanges'));
+    }
+
+    public function perfilRecibidos()
+    {
+        $recibidos = Dealing::where('accept_id', auth()->user()->id)->get();
+        
+        return view('content.mi-cuenta-tratos-r', compact('recibidos'));
+    }
+
+    public function perfilPropuestos()
+    {
+        $propuestos = Dealing::where('propose_id', auth()->user()->id)->get();
+        
+        return view('content.mi-cuenta-tratos-p', compact('propuestos'));
     }
 
     public function formInfo()

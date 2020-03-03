@@ -98,4 +98,13 @@ class DealingController extends Controller
     }
 
 
+    public function aprobar(Request $request)
+    {
+        $trato = Dealing::find($request->dealing_id);
+        $trato->approved = $request->aprobar;
+        $trato->save();
+        return $trato;
+    }
+
+
 }

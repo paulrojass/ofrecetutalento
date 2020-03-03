@@ -93,6 +93,8 @@ class MessageController extends Controller
 
     public function mensajesId($from_id)
     {
+        //if ($from_id != auth()->user()->id) return back();
+
         $recibidos = Message::where('to_id', auth()->user()->id )->get();
 
         $enviados = Message::where('from_id', auth()->user()->id )->get();

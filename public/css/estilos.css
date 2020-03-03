@@ -371,7 +371,9 @@ button{
   position: fixed;
 }
 
-
+.profile-sidebar{
+  z-index: 100;
+}
 
 /* boton input file */
 /* .inputfile {

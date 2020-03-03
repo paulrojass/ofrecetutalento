@@ -84,6 +84,8 @@ Route::get('actualizar-talentos', 'SiteController@actualizarTalentos');
 Route::get('info-perfil', 'SiteController@perfilInfo');
 Route::get('talentos-perfil', 'SiteController@perfilTalentos');
 Route::get('canjes-perfil', 'SiteController@perfilCanjes');
+Route::get('recibidos-perfil', 'SiteController@perfilRecibidos');
+Route::get('propuestos-perfil', 'SiteController@perfilPropuestos');
 Route::post('eliminar-talento', 'TalentController@eliminarTalento');
 Route::get('form-perfil', 'SiteController@formInfo');
 Route::get('actualizar_usuario', 'UserController@updateUser');
@@ -95,6 +97,8 @@ Route::get('form-canje', 'ExchangeController@formCanje');
 Route::post('cambiar-imagen-canje', 'ExchangeController@updateImageCanje');
 Route::get('actualizar-datos-canje', 'ExchangeController@actualizarCanje');
 Route::post('es-video', 'FileController@isVideo');
+//mi cuento tratos
+Route::post('aprobar-trato', 'DealingController@aprobar');
 
 //mensajes
 Route::get('mensajes', 'MessageController@mensajes')->middleware('verified');

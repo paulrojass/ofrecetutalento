@@ -12,16 +12,17 @@
 	<link rel="shortcut icon" href="{{URL::asset('favicon.ico')}}">
 
 	<!-- Styles -->
+	<!-- <link rel="stylesheet" type="text/css" href="{{URL::asset('css/app.css')}}" /> -->
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/bootstrap-grid.css')}}" />
 	<link rel="stylesheet" href="{{URL::asset('tema/css/icons.css')}}">
 	<link rel="stylesheet" href="{{URL::asset('tema/css/animate.min.css')}}">
-	@yield('css')
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/style.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/responsive.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/chosen.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/colors/colors.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/bootstrap.css')}}" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+	@yield('css')
 	
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('css/estilos.css')}}" />
 
@@ -32,6 +33,8 @@
 	<img src="{{URL::asset('tema/images/loader.gif')}}" alt="" />
 </div> -->
 <div class="theme-layout" id="scrollup">
+
+	<!-- Menu RESPONSIVE -->
 	<div class="responsive-header three">
 		<div class="responsive-menubar">
 			<div class="res-logo"><a href="{{url('/')}}" title=""><img src="{{URL::asset('tema/images/logo.png')}}" alt="" /></a></div>
@@ -46,7 +49,7 @@
 		</div>
 		<div class="responsive-opensec">
 			@if(Auth::User())
-				<div class="my-profiles-sec">
+				<div class="my-profiles-sec mt-4">
 					<span><img src="{{URL::asset('images/users/'.Auth::User()->avatar)}}" alt="" style="max-width: 50px; max-height:50px" /> {{Auth::User()->name}} {{Auth::User()->lastname}} <i class="la la-bars"></i></span>
 				</div>
 			@else
@@ -58,10 +61,10 @@
 				</ul>
 			</div><!-- Btn Extras -->
 			@endif
-			<form class="res-search">
-				<input type="text" placeholder="Job title, keywords or company name" />
-				<button type="submit"><i class="la la-search"></i></button>
-			</form>
+<!-- 			<form class="res-search">
+	<input type="text" placeholder="Job title, keywords or company name" />
+	<button type="submit"><i class="la la-search"></i></button>
+</form> -->
 			<div class="responsivemenu">
 				<ul>
 					<li class="menu-item">
@@ -85,6 +88,9 @@
 
 	</div>
 	
+
+
+	<!-- Menu Pantallas PC -->	
 	<header class="@yield('header_type')">
 		<div class="menu-sec">
 			<div class="container">
@@ -147,7 +153,7 @@
 </div>
 @if(Auth::User())
 <div class="profile-sidebar">
-	<span class="close-profile"><i class="la la-close"></i></span>
+	<span class="close-profile"><i class="la la-arrow-right"></i></span>
 	<div class="can-detail-s">
 		<div class="cst"><img src="{{URL::asset('images/users/'.Auth::User()->avatar)}}" alt="" style="max-width: 145px; max-height:145px;" /></div>
 		<h3>{{auth()->user()->name}} {{auth()->user()->lastname}}</h3>
@@ -217,6 +223,7 @@
 	</div>
 </div><!-- LOGIN POPUP -->
 
+<!-- <script src="{{URL::asset('js/app.js')}}" type="text/javascript"></script> -->
 <script src="{{URL::asset('tema/js/jquery.min.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/modernizr.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/script.js')}}" type="text/javascript"></script>

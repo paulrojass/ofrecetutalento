@@ -1,9 +1,11 @@
-	id_user = $('#auth_user').val();
+id_user = $('#auth_user').val();
 $(function(){
 
 	informacionPerfil();
 	talentosPerfil();
 	canjesPerfil();
+	recibidosPerfil();
+	propuestosPerfil();
 	mostrar('#mi-perfil', '#a-perfil');
 	//mostrar('#canje', '#a-canje');
 
@@ -27,10 +29,10 @@ $(function(){
 	$("#category").on('change', function(){$('#e_category').hide()});
 	$("#description").on('keypress', function(){$('#e_description').hide()});
 
-	$('.datepicker').datepicker({
+/*	$('.datepicker').datepicker({
 		format: 'mm-dd-yyyy'
 	});
-
+*/
 	$('#avatar').change(function(){
 		cambiarFoto();
 	});
@@ -412,8 +414,8 @@ function cambiarFoto(){
 }
 
 function mostrar(div,a){
-	var divs = ['#mi-perfil', '#talentos', '#canjes', '#tratos'];
-	var as = ['#a-perfil', '#a-talentos', '#a-canjes', '#a-tratos'];
+	var divs = ['#mi-perfil', '#talentos', '#canjes', '#tratos-r', '#tratos-p'];
+	var as = ['#a-perfil', '#a-talentos', '#a-canjes', '#a-tratos-r', '#a-tratos-p'];
 	$.each(divs, function(index, value){
 		$(value).fadeOut();
 	});
@@ -430,7 +432,7 @@ function mostrar(div,a){
 
 function informacionPerfil(){
 	$.ajax({
-		url: 'info-perfil',
+		url: '/info-perfil',
 		type: 'Get',
 		dataType: 'html',
 	})
@@ -441,7 +443,7 @@ function informacionPerfil(){
 
 function talentosPerfil(){
 	$.ajax({
-		url: 'talentos-perfil',
+		url: '/talentos-perfil',
 		type: 'Get',
 		dataType: 'html',
 	})
@@ -453,7 +455,7 @@ function talentosPerfil(){
 
 function canjesPerfil(){
 	$.ajax({
-		url: 'canjes-perfil',
+		url: '/canjes-perfil',
 		type: 'Get',
 		dataType: 'html',
 	})
@@ -462,10 +464,31 @@ function canjesPerfil(){
 	})	
 }
 
+function recibidosPerfil(){
+	$.ajax({
+		url: '/recibidos-perfil',
+		type: 'get',
+		dataType: 'html',
+	})
+	.done(function(data) {
+		$('#tratos-r').html(data);
+	})	
+}
+
+function propuestosPerfil(){
+	$.ajax({
+		url: '/propuestos-perfil',
+		type: 'Get',
+		dataType: 'html',
+	})
+	.done(function(data) {
+		$('#tratos-p').html(data);
+	})	
+}
 
 function editarPerfil(){
 	$.ajax({
-		url: 'form-perfil',
+		url: '/form-perfil',
 		type: 'Get',
 		dataType: 'html',
 	})
@@ -693,3 +716,75 @@ $('#canjes').on('click', '#actualizar-canje', function(e){
 			}
 		});	
 	}
+
+	/* Aprobar Trato */
+	$('#tratos-r').on('click', '.aprobar', function(e){
+		e.preventDefault();
+		var trato_id = $(this).data('value');
+		aprobarTrato(trato_id, 1);
+	});
+
+	/* Rechazar Trato */
+	$('#tratos-r').on('click', '.rechazar', function(e){
+		e.preventDefault();
+		var trato_id = $(this).data('value');
+		aprobarTrato(trato_id, 0);
+	});
+
+	function aprobarTrato(id, valor){
+		var _token = $("input[name='_token']").val();
+		$.ajax({
+			url: '/aprobar-trato',
+			type: 'post',
+			data: {dealing_id:id, aprobar:valor, _token:_token},
+		})
+		.done(function(response) {
+			recibidosPerfil();
+		});	
+	}
+
+
+
+
+/*	Dropzone*/
+    Dropzone.options.dropzone =
+     {
+        maxFilesize: 10,
+        renameFile: function(file) {
+            var dt = new Date();
+            var time = dt.getTime();
+           return time+file.name;
+        },
+        acceptedFiles: ".jpeg,.jpg,.png,.gif",
+        addRemoveLinks: true,
+        timeout: 50000,
+        removedfile: function(file)
+        {
+            var name = file.upload.filename;
+            $.ajax({
+                headers: {
+                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                        },
+                type: 'POST',
+                url: '{{ url("delete") }}',
+                data: {filename: name},
+                success: function (data){
+                    console.log("File has been successfully removed!!");
+                },
+                error: function(e) {
+                    console.log(e);
+                }});
+                var fileRef;
+                return (fileRef = file.previewElement) != null ?
+                fileRef.parentNode.removeChild(file.previewElement) : void 0;
+        },
+        success: function(file, response)
+        {
+            console.log(response);
+        },
+        error: function(file, response)
+        {
+           return false;
+        }
+    };
+/*    Fin DropZone*/
