@@ -115,6 +115,17 @@ class ExchangeController extends Controller
      */
     public function destroy(Exchange $exchange)
     {
+        foreach ($exchange->files as $file) {
+            $name = $file->location;
+            if(!(Str::contains($name, 'default')))
+            {
+                unlink(public_path() .  '/files/'.$file->type.'/' . $file->location );
+            }
+        }
+        if(!(Str::contains($exchange->image, 'default')))
+        {
+            unlink(public_path() .  '/images/exchanges/' . $exchange->image );
+        }
         $exchange->delete();
     }
 

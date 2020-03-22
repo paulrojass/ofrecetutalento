@@ -24,7 +24,7 @@
 										<form method="GET" action="{{ route('talentos') }}">
 											@csrf
 											<div class="job-field">
-												<input type="text" name="search" placeholder="Search freelancer services (e.g. logo design)" />
+												<input type="text" name="search" placeholder="Busca los talentos que solicitas" />
 											</div>
 											<div class="job-field">
 												<select data-placeholder="City, province or region" class="chosen-city">
@@ -282,7 +282,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading">
-						<h2>Quick Career Tips</h2>
+						<h2>Blogs de talento</h2>
 						<span>Found by employers communicate directly with hiring managers and recruiters.</span>
 					</div><!-- Heading -->
 					<div class="blog-sec">

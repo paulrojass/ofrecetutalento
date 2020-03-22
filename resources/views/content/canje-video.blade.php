@@ -5,7 +5,13 @@
 			@if (Str::contains($video->location, 'https://'))
 			 {!!$video->location!!}
 			@else
-		  	<iframe class="embed-responsive-item" src="{{URL::asset('files/video/'.$video->location)}}" allowfullscreen></iframe>
+			<video class="embed-responsive-item" controls>
+			    <source src="{{URL::asset('files/video/'.$video->location)}}" >
+			    Sorry, your browser doesn't support embedded videos.
+			</video>
+
+
+		  	<!-- <iframe class="embed-responsive-item" src="{{URL::asset('files/video/'.$video->location)}}" allowfullscreen></iframe> -->
 			@endif
 		</div>
 		<div class="job-details pt-1">

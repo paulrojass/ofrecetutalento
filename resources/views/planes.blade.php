@@ -52,7 +52,12 @@
 											<div class="col-lg-3">
 												<div class="pricetable"> 
 													<div class="pricetable-head">
-														<h3>{{$plan->name}}</h3>
+														<h3>
+														@if ( $plan->id > 1 )
+															Talento 
+														@endif
+														{{$plan->name}}
+														</h3>
 														<h2>
 															@if(is_null($plan->monthly_price))
 																Gratis
@@ -108,7 +113,12 @@
 											<div class="col-lg-3">
 												<div class="pricetable"> 
 													<div class="pricetable-head">
-														<h3>{{$plan->name}}</h3>
+														<h3>
+														@if ( $plan->id > 1 )
+															Talento 
+														@endif
+														{{$plan->name}}
+														</h3>
 														<h2>
 															@if(is_null($plan->quarterly_price))
 																Gratis
@@ -164,7 +174,12 @@
 											<div class="col-lg-3">
 												<div class="pricetable"> 
 													<div class="pricetable-head">
-														<h3>{{$plan->name}}</h3>
+														<h3>
+														@if ( $plan->id > 1 )
+															Talento 
+														@endif
+														{{$plan->name}}
+														</h3>
 														<h2>
 															@if(is_null($plan->annual_price))
 																Gratis

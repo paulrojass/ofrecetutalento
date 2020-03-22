@@ -46,7 +46,11 @@ class SiteController extends Controller
 
     public function quienesSomos()
     {
-        return view('quienes-somos');
+        $usuarios = User::count();
+        $talentos = Talent::count();
+        $canjes = Exchange::count();
+        $tratos = Dealing::count();
+        return view('quienes-somos', compact('usuarios', 'talentos', 'canjes', 'tratos'));
     }
 
     public function terminos()
@@ -59,7 +63,10 @@ class SiteController extends Controller
     {
         $plans = Plan::all();
         $industries = Industry::all();
-        return view('suscripcion', compact('plans', 'industries'));
+        $paises_json = file_get_contents(base_path('resources/json/paises.json'));
+        $paises = json_decode($paises_json, true);
+
+        return view('suscripcion', compact('plans', 'industries', 'paises'));
     }
 
     public function suscripcionTalentos(Request $request)

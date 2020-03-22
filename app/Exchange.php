@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 
 use App\Talent;
-use App\File;
 use App\Dealing;
 use App\Like;
 use App\Comment;

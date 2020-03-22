@@ -1,13 +1,15 @@
 id_user = $('#auth_user').val();
+
 $(function(){
+
 
 	informacionPerfil();
 	talentosPerfil();
 	canjesPerfil();
 	recibidosPerfil();
 	propuestosPerfil();
-	mostrar('#mi-perfil', '#a-perfil');
-	//mostrar('#canje', '#a-canje');
+	//mostrar('#mi-perfil', '#a-perfil');
+	mostrar('#canjes', '#a-canjes');
 
 	// Read value on page load
 	$(".result-language b").html($("#level-language").val());
@@ -413,6 +415,12 @@ function cambiarFoto(){
 	
 }
 
+
+
+
+
+
+/* ================================== MENU MENU */
 function mostrar(div,a){
 	var divs = ['#mi-perfil', '#talentos', '#canjes', '#tratos-r', '#tratos-p'];
 	var as = ['#a-perfil', '#a-talentos', '#a-canjes', '#a-tratos-r', '#a-tratos-p'];
@@ -461,6 +469,7 @@ function canjesPerfil(){
 	})
 	.done(function(data) {
 		$('#canjes').html(data);
+		verificarArchivos
 	})	
 }
 
@@ -506,11 +515,13 @@ function editarCanje(id){
 	})
 	.done(function(data) {
 		$('#canjes').html(data);
+		$('#canje_id_image').val(id);
+		$('#canje_id_video').val(id);
+		$('#canje_id_pdf').val(id);
+		cargaInicial(id);
 	});
-	cargaInicial(id);
 }
-
-
+/* ================================== MENU MENU */
 
 function resetForm() {
 	$('form .form-error').attr({hidden: 'hidden'});
@@ -519,92 +530,7 @@ function resetForm() {
 }
 
 
-
-
-
-
-
-//Archivos
-//
-
-
-
-/*Agregar imagenes*/
-$('#image-files').change(function(){
-	agregarImagen();
-});
-
-$("#agregar-image").click(function () {
-	$("#image-files").trigger('click');
-});
-/*fin Agregar imagenes*/
-
-/*eliminar imagenes*/
-
-$('#div-image').on('click', '.boton-eliminar-imagen', function(){
-	var id = $(this).val();
-	eliminarImagen(id);
-});
-
-
-function agregarImagen(){
-	var formData = new FormData();
-	formData.append('location', $('#image-files')[0].files[0]);
-	formData.append('_token', $("input[name='_token']").val());
-	formData.append('exchange_id', id_canje);
-	$.ajax({
-		url: '/agregar-imagen',
-		type: 'post',
-		data: formData,
-		contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
-		processData: false // NEEDED, DON'T OMIT THIS
-	})
-	.done(function(response) {
-		$('#div-image').html(response);
-	});
-}
-
-function eliminarImagen(image_id)
-{
-	var _token = $("input[name='_token']").val();
-	$.ajax({
-		url: '/eliminar-imagen',
-		type: 'post',
-		data: {id: image_id, _token: _token},
-	})
-	.done(function(response) {
-		$('#div-image').html(response);
-	});
-}
-
-
-
-
-
-
-
-function cambiarImagenCanje(id){
-	var formData = new FormData();
-	formData.append('img-canje-file', $('#img-canje-file')[0].files[0]);
-	formData.append('_token', $("input[name='_token']").val());
-	formData.append('id', id);
-	$.ajax({
-		url: '/cambiar-imagen-canje',
-		type: 'post',
-		data: formData,
-		contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
-		processData: false // NEEDED, DON'T OMIT THIS
-	})
-	.done(function(response) {
-		$("#ll-canje").html('<div class="alert alert-success" role="alert">La foto ha cambiado exitosamente</div>');
-		$('#canjes').html(response);
-	})
-	.fail(function() {
-		$("#ll-canje").html('<div class="alert alert-danger" role="alert">Por favor revisar formato y dimensines minimas</div>');
-	});
-	
-}
-
+/* ================ CANJES  */
 /*Canje Formulario*/
 $('#canjes').on('click', '#actualizar-canje', function(e){
 	e.preventDefault();
@@ -632,12 +558,60 @@ $('#canjes').on('click', '#actualizar-canje', function(e){
 		});
 	}
 });
+function cambiarImagenCanje(id){
+	var formData = new FormData();
+	formData.append('img-canje-file', $('#img-canje-file')[0].files[0]);
+	formData.append('_token', $("input[name='_token']").val());
+	formData.append('id', id);
+	$.ajax({
+		url: '/cambiar-imagen-canje',
+		type: 'post',
+		data: formData,
+		contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+		processData: false // NEEDED, DON'T OMIT THIS
+	})
+	.done(function(response) {
+		$("#ll-canje").html('<div class="alert alert-success" role="alert">La foto ha cambiado exitosamente</div>');
+		$('#canjes').html(response);
+	})
+	.fail(function() {
+		$("#ll-canje").html('<div class="alert alert-danger" role="alert">Por favor revisar formato y dimensines minimas</div>');
+	});
+	
+}
+/* ================ CANJES  */
 
 
+/* ================ TRATOS*/
+	/* Aprobar Trato */
+	$('#tratos-r').on('click', '.aprobar', function(e){
+		e.preventDefault();
+		var trato_id = $(this).data('value');
+		aprobarTrato(trato_id, 1);
+	});
 
-//Manipulacion de archivos
+	/* Rechazar Trato */
+	$('#tratos-r').on('click', '.rechazar', function(e){
+		e.preventDefault();
+		var trato_id = $(this).data('value');
+		aprobarTrato(trato_id, 0);
+	});
+
+	function aprobarTrato(id, valor){
+		var _token = $("input[name='_token']").val();
+		$.ajax({
+			url: '/aprobar-trato',
+			type: 'post',
+			data: {dealing_id:id, aprobar:valor, _token:_token},
+		})
+		.done(function(response) {
+			recibidosPerfil();
+		});	
+	}
+/* ================ TRATOS*/
 
 
+//================================== MANIPULACION DE ARCHIVOS
 	function cargaInicial(canje_id){
 		//$("#tipo-pago").checked();
 		verificarArchivos('image', canje_id);
@@ -648,7 +622,6 @@ $('#canjes').on('click', '#actualizar-canje', function(e){
 		//actualizarArchivos('pdf', canje_id);
 	}
 
-
 	function verificarArchivos(tipo, canje_id){
 		var _token = $("input[name='_token']").val();
 		$.ajax({
@@ -657,20 +630,20 @@ $('#canjes').on('click', '#actualizar-canje', function(e){
 			data:{user_id : id_user, exchange_id: canje_id, _token:_token, type: tipo},
 			success:function(data){
 				if(data.disponibles == null){
-					$('#titulo-'+tipo+' strong').html('(sin limite)');
+					$('#titulo-'+tipo+' span').html('(sin limite)');
 				}else if(data.disponibles > 0){
-					$('#titulo-'+tipo+' strong').html('('+data.disponibles+' disponibles)');
+					if(tipo == 'pdf'){
+						$('#titulo-'+tipo+' span').html('('+data.disponibles+' disponibles de '+data.pdfmax+'Mb máximo)');
+					}else{
+						$('#titulo-'+tipo+' span').html('('+data.disponibles+' disponibles)');
+					}
 				}else{
 					$('#agregar-'+tipo).hide();
-					$('#titulo-'+tipo+' strong').html('(Para agregar mas '+tipo+' puede cambiar su plan)');
+					$('#titulo-'+tipo+' span').html('(Catidad máxima alcanzada para este plan)');
 				}
 			}
 		});
 	}
-
-
-
-
 
 	$('#input-new-image').change(function(){
 		verificarImagen();
@@ -685,8 +658,6 @@ $('#canjes').on('click', '#actualizar-canje', function(e){
 	function verificarImagen(){
 		alert('verificando');
 	}
-
-
 
 	$("#button-input-new-video").click(function () {
 		$("#input-new-video").trigger('click');
@@ -717,74 +688,253 @@ $('#canjes').on('click', '#actualizar-canje', function(e){
 		});	
 	}
 
-	/* Aprobar Trato */
-	$('#tratos-r').on('click', '.aprobar', function(e){
-		e.preventDefault();
-		var trato_id = $(this).data('value');
-		aprobarTrato(trato_id, 1);
-	});
+/*Dropzone Image*/
+    Dropzone.options.dropimage =
+    {
+    	autoProcessQueue: false,
+        maxFilesize: 1,
+        maxFiles: 1,
+        acceptedFiles: ".jpeg,.jpg,.png",
+        timeout: 5000,
+       	init: function(formData) {
+            var submitBtnImage = document.querySelector("#enviar-imagen");
+            myDropzoneImage = this;
+            
+            submitBtnImage.addEventListener("click", function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                myDropzoneImage.processQueue();
+            });
+            this.on("addedfile", function(file) {
+                //alert("file uploaded");
+            });
+		    this.on("sending", function(file, xhr, formData) {
+		      formData.append("description", $('#description-image').val());
+		      formData.append("canje_id", $('#canje_id_image').val());
+		    });
 
-	/* Rechazar Trato */
-	$('#tratos-r').on('click', '.rechazar', function(e){
-		e.preventDefault();
-		var trato_id = $(this).data('value');
-		aprobarTrato(trato_id, 0);
-	});
-
-	function aprobarTrato(id, valor){
-		var _token = $("input[name='_token']").val();
-		$.ajax({
-			url: '/aprobar-trato',
-			type: 'post',
-			data: {dealing_id:id, aprobar:valor, _token:_token},
-		})
-		.done(function(response) {
-			recibidosPerfil();
-		});	
-	}
-
-
-
-
-/*	Dropzone*/
-    Dropzone.options.dropzone =
-     {
-        maxFilesize: 10,
-        renameFile: function(file) {
-            var dt = new Date();
-            var time = dt.getTime();
-           return time+file.name;
-        },
-        acceptedFiles: ".jpeg,.jpg,.png,.gif",
-        addRemoveLinks: true,
-        timeout: 50000,
-        removedfile: function(file)
-        {
-            var name = file.upload.filename;
-            $.ajax({
-                headers: {
-                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                        },
-                type: 'POST',
-                url: '{{ url("delete") }}',
-                data: {filename: name},
-                success: function (data){
-                    console.log("File has been successfully removed!!");
-                },
-                error: function(e) {
-                    console.log(e);
-                }});
-                var fileRef;
-                return (fileRef = file.previewElement) != null ?
-                fileRef.parentNode.removeChild(file.previewElement) : void 0;
-        },
-        success: function(file, response)
-        {
-            console.log(response);
-        },
-        error: function(file, response)
-        {
-           return false;
+            this.on("complete", function(file) {
+                myDropzoneImage.removeFile(file);
+	            $('#modal-nueva-image').modal('toggle');
+	            $('#information-image')[0].reset();
+            });
+            this.on("success", function(file, response){
+                myDropzoneImage.processQueue.bind(myDropzoneImage);
+	            editarCanje(response);
+            }
+            );
         }
     };
-/*    Fin DropZone*/
+/*Dropzone Image*/
+    Dropzone.options.dropvideo =
+    {
+    	autoProcessQueue: false,
+        maxFilesize: 20,
+        maxFiles: 1,
+        acceptedFiles: ".mp4",
+        timeout: 5000,
+       	init: function(formData) {
+            var submitBtnVideo = document.querySelector("#enviar-video");
+            myDropzoneVideo = this;
+            
+            submitBtnVideo.addEventListener("click", function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                myDropzoneVideo.processQueue();
+            });
+            this.on("addedfile", function(file) {
+                //alert("file uploaded");
+            });
+		    this.on("sending", function(file, xhr, formData) {
+		      formData.append("description", $('#description-video').val());
+		      formData.append("canje_id", $('#canje_id_video').val());
+		    });
+
+            this.on("complete", function(file) {
+                myDropzoneVideo.removeFile(file);
+	            $('#modal-nuevo-video').modal('toggle');
+	            $('#information-video')[0].reset();
+            });
+            this.on("success", function(file, response){
+                myDropzoneVideo.processQueue.bind(myDropzoneVideo);
+	            editarCanje(response);
+            }
+            );
+        }
+    };
+
+    Dropzone.options.droppdf =
+    {
+    	autoProcessQueue: false,
+        maxFilesize: $('#input_pdf_size').val(),
+        maxFiles: 1,
+        acceptedFiles: ".pdf",
+        timeout: 5000,
+       	init: function(formData) {
+            var submitBtnPdf = document.querySelector("#enviar-pdf");
+            myDropzonePdf = this;
+            
+            submitBtnPdf.addEventListener("click", function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                myDropzonePdf.processQueue();
+            });
+            this.on("addedfile", function(file) {
+                //alert("file uploaded");
+            });
+		    this.on("sending", function(file, xhr, formData) {
+		      formData.append("description", $('#description-pdf').val());
+		      formData.append("name", $('#name_pdf').val());
+		      formData.append("canje_id", $('#canje_id_pdf').val());
+		    });
+
+            this.on("complete", function(file) {
+                myDropzonePdf.removeFile(file);
+	            $('#modal-nuevo-pdf').modal('toggle');
+	            $('#information-pdf')[0].reset();
+            });
+            this.on("success", function(file, response){
+                myDropzonePdf.processQueue.bind(myDropzonePdf);
+	            editarCanje(response);
+            }
+            );
+        }
+    };
+
+/*Dropzone*/
+
+$('#canjes').on('click', '.eliminar_imagen_canje', function (e) {
+	e.preventDefault()
+	archivo = $(this).data('value');
+	canje = $(this).data('canje');
+	eliminarArchivo(archivo);
+});
+
+$('#canjes').on('click', '.editar_inf_image', function (e) {
+	e.preventDefault()
+	$('#canje_id_image_edit').val($(this).data('value'));
+	$("#description-image-edit").val($(this).data('description'));
+});
+
+$('#canjes').on('click', '.editar_inf_pdf', function (e) {
+	e.preventDefault()
+	$('#canje_id_pdf_edit').val($(this).data('value'));
+	$("#description-pdf-edit").val($(this).data('description'));
+	$("#name_pdf_edit").val($(this).data('name'));
+});
+
+$('#b-editar-imagen').click(function (e) {
+	e.preventDefault();
+	var canje = $('#canje_id_image_edit').val();
+	actualizarArchivo(canje);
+});
+
+$('#b-editar-pdf').click(function (e) {
+	e.preventDefault();
+	var canje = $('#canje_id_pdf_edit').val();
+	actualizarArchivoPDF(canje);
+});
+
+function eliminarArchivo(id)
+{
+	var _token = $("input[name='_token']").val();
+	$.ajax({
+		url: '/eliminar-archivo',
+		type: 'post',
+		data: {id: id, _token: _token},
+	})
+	.done(function(response) {
+		editarCanje(response);
+/*		$('#canjes').html(response);*/
+	});
+}
+
+function actualizarArchivo(id)
+{
+	var _token = $("input[name='_token']").val();
+	var description = $("#description-image-edit").val();
+	$.ajax({
+		url: '/editar-archivo',
+		type: 'post',
+		data: {id: id, description:description, _token: _token},
+	})
+	.done(function(response) {
+		$('#modal-edit-image').modal('hide');
+		$('#form-information-image-edit')[0].reset();		
+		editarCanje(response);
+/*		$('#canjes').html(response);*/
+	});
+}
+
+function actualizarArchivoPDF(id)
+{
+	var _token = $("input[name='_token']").val();
+	var name = $("#name_pdf_edit").val();
+	var description = $("#description-pdf-edit").val();
+	$.ajax({
+		url: '/editar-archivo',
+		type: 'post',
+		data: {id: id, description:description, name: name, _token: _token},
+	})
+	.done(function(response) {
+		$('#modal-edit-pdf').modal('hide');
+		$('#form-information-pdf-edit')[0].reset();		
+		editarCanje(response);
+/*		$('#canjes').html(response);*/
+	});
+}
+
+
+//================================== MANIPULACION DE ARCHIVOS
+
+
+/*Scripts eliminados:*/
+//Archivos
+
+
+/*Agregar imagenes
+$('#image-files').change(function(){
+	agregarImagen();
+});
+
+$("#agregar-image").click(function () {
+	//$("#image-files").trigger('click');
+});
+/*fin Agregar imagenes*/
+
+/*eliminar imagenes
+$('#div-image').on('click', '.boton-eliminar-imagen', function(){
+	var id = $(this).val();
+	eliminarImagen(id);
+});*/
+
+
+/*function agregarImagen(){
+	var formData = new FormData();
+	formData.append('location', $('#image-files')[0].files[0]);
+	formData.append('_token', $("input[name='_token']").val());
+	formData.append('exchange_id', id_canje);
+	$.ajax({
+		url: '/agregar-imagen',
+		type: 'post',
+		data: formData,
+		contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+		processData: false // NEEDED, DON'T OMIT THIS
+	})
+	.done(function(response) {
+		$('#div-image').html(response);
+	});
+}
+
+function eliminarImagen(image_id)
+{
+	var _token = $("input[name='_token']").val();
+	$.ajax({
+		url: '/eliminar-imagen',
+		type: 'post',
+		data: {id: image_id, _token: _token},
+	})
+	.done(function(response) {
+		$('#div-image').html(response);
+	});
+}*/

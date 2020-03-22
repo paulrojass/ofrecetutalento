@@ -1,4 +1,4 @@
-<div class="border-title"><h3>{{$propuestos->count()}} Tratos recibidos</h3></div>
+<div class="border-title"><h3>{{$propuestos->count()}} Tratos propuestos</h3></div>
 @if($propuestos->count() > 0)
 <div class="manage-jobs-sec">
 	<div class="mini-portfolio">
@@ -30,10 +30,10 @@
 	 						<span>{{ $propuesto->exchange_proposal }}</span>
 	 					</td>
 	 					<td class="col-1">
-	 						@if($propuesto->aproved == NULL)
+	 						@if($propuesto->approved == NULL)
 	 						<span class="status active">Pendiente</span>
 	 						@else
-	 							@if($propuesto->aproved == 1)
+	 							@if($propuesto->approved == 1)
 	 								<span class="status active">Aceptado</span>
 	 							@else
 	 								<span class="status">Omitido</span>

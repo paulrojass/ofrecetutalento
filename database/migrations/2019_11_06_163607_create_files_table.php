@@ -17,7 +17,7 @@ class CreateFilesTable extends Migration
             $table->bigIncrements('id');
             $table->string('location', 100)->nullable();
             $table->string('type', 10)->nullable();
-            $table->string('name', 300)->nullable();
+            $table->string('name', 50)->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });

@@ -1,6 +1,7 @@
 $(function(){
 	var id_canje = $('#canje_id').val();
 	var user_id = $('#auth_user').val();
+	var user_dealing = $('#user_dealing').val();
 	cargaInicial(id_canje);
 
 	function cargaInicial(id_canje){
@@ -107,7 +108,6 @@ $(function(){
 	});
 
 	$('#nuevo-trato').click(function () {
-		var accept_id = '{{$canje->talent->user_id}}';
 		var pay = $('input:radio[name=pay]:checked').val();
 		if (pay == 1){
 			var exchange_proposal = null;
@@ -115,12 +115,12 @@ $(function(){
 			var exchange_proposal = $('#exchange_proposal').val();
 		}
 		var description = $('#description').val();
-		var exchange_id = '{{$canje->id}}';
+		var exchange_id = id_canje;
 		var token = '{{csrf_token()}}';
 		$.ajax({
 			type:'get',
 			url:'/nuevo-trato',
-			data:{description:description, accept_id:accept_id, pay:pay, exchange_proposal: exchange_proposal, exchange_id: exchange_id, _token: token},
+			data:{description:description, accept_id:user_dealing, pay:pay, exchange_proposal: exchange_proposal, exchange_id: exchange_id, _token: token},
 			success: function (response) {
 				alert(response);
 			},

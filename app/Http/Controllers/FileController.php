@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Image;
 
+//call the controller you want to use its methods
+use App\Http\Controllers\ExchangeController;
+
 class FileController extends Controller
 {
 	/**
@@ -87,6 +90,10 @@ class FileController extends Controller
 	 */
 	public function destroy(File $file)
 	{
+        if(!(Str::contains($file->location, 'default')))
+        {
+        unlink(public_path() . '/files/' . $file->type.'/' . $file->location );
+        }
         $file->delete();
 	}
 
@@ -112,7 +119,8 @@ class FileController extends Controller
 			'success'=> 'Nueva imagen',
 			'archivos' => $files,
 			'agregados' => $agregados,
-			'disponibles' => $disponibles
+			'disponibles' => $disponibles,
+			'pdfmax' => $plan->pdf_size
 		]);
 	}
 
@@ -149,23 +157,31 @@ class FileController extends Controller
 		$ruta = public_path().'/files/pdf/';
 
 		// generar un nombre aleatorio para el pdf
-		$temp_name = Str::random(20) . '.pdf';
-
-
-
-			
+		$temp_name = Str::random(20) . '.pdf';	
     }
 
-    public function eliminarImagen(Request $request)
+    public function eliminarArchivo(Request $request)
     {
-    	$imagen = File::where('id', $request->id)->first();
-    	\File::delete('files/image/'.$imagen->location);
-        $this->destroy($imagen);
-
-		$archivos = File::where('exchange_id', $imagen->exchange_id)->where('type', 'image')->get();
-
-		return view('content.canje-image', compact('archivos'));
+    	$file = File::find($request->id);
+        $this->destroy($file);
+        return $file->exchange->id;
+/*		$exchange = new ExchangeController;		
+		return $exchange->vistaCanje($canje);*/
     }
+
+    public function editarArchivo(Request $request)
+    {
+    	$file = File::find($request->id);
+    	$file->description = $request->description;
+    	if($file->name) $file->name = $request->name;
+    	$file->save();
+        return $file->exchange->id;
+
+
+/*		$exchange = new ExchangeController;		
+		return $exchange->vistaCanje($canje);*/
+    }
+
 
     public function actualizarArchivos(Request $request)
     {
@@ -222,5 +238,79 @@ class FileController extends Controller
 		}
 	}*/
 
+	public function newImage(Request $request)
+	{
+		// ruta de las imagenes guardadas
+		$ruta = public_path().'/files/image/';
+		// recogida del form
+		$imagenOriginal = $request->file('file');
+		// crear instancia de imagen
+		$imagen = Image::make($imagenOriginal);
+		// generar un nombre aleatorio para la imagen
+		$temp_name = Str::random(20) . '.' . $imagenOriginal->getClientOriginalExtension();
 
+		// guardar imagen
+		// save( [ruta], [calidad])
+		$ruta_final = $ruta . $temp_name;
+		$imagen->save($ruta_final, 100);
+
+		File::create([
+			'description' => $request->description,
+			'location' => $temp_name,
+			'type' => 'image',
+			'exchange_id' => $request->canje_id
+		]);
+
+		return $request->canje_id;
+	}
+	public function newVideo(Request $request)
+	{
+		// ruta de las imagenes guardadas
+		$ruta = public_path().'/files/video/';
+		// recogida del form
+		$video = $request->file('file');
+		// generar un nombre aleatorio para la imagen
+		$temp_name = Str::random(20) . '.' . $video->getClientOriginalExtension();
+		// guardar imagen
+		// save( [ruta], [calidad])
+		//$ruta_final = $ruta . $temp_name;
+		// crear instancia de imagen
+		
+		$video->move($ruta, $temp_name);
+
+		File::create([
+			'description' => $request->description,
+			'location' => $temp_name,
+			'type' => 'video',
+			'exchange_id' => $request->canje_id
+		]);
+
+		return $request->canje_id;
+	}
+
+	public function newPdf(Request $request)
+	{
+		// ruta de las imagenes guardadas
+		$ruta = public_path().'/files/pdf/';
+		// recogida del form
+		$pdf = $request->file('file');
+		// generar un nombre aleatorio para la imagen
+		$temp_name = Str::random(20) . '.' . $pdf->getClientOriginalExtension();
+		// guardar imagen
+		// save( [ruta], [calidad])
+		//$ruta_final = $ruta . $temp_name;
+		// crear instancia de imagen
+		
+		$pdf->move($ruta, $temp_name);
+
+		File::create([
+			'name' => $request->name,
+			'description' => $request->description,
+			'location' => $temp_name,
+			'type' => 'pdf',
+			'exchange_id' => $request->canje_id
+		]);
+
+		return $request->canje_id;
+	}	
 }

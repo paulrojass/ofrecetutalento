@@ -4,6 +4,11 @@
 
 @section('header_type', 'gradient')
 
+@section('css')
+<link rel="stylesheet" href="{{ URL::asset('css/input-tel/intlTelInput.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/input-tel/demo.css') }}">
+@endsection
+
 @section('content')
 <section>
 	<div class="block pb-0">
@@ -45,7 +50,12 @@
 											<div class="col-lg-3">
 												<div class="pricetable"> 
 													<div class="pricetable-head">
-														<h3>{{$plan->name}}</h3>
+														<h3>
+														@if ( $plan->id > 1 )
+															Talento 
+														@endif
+														{{$plan->name}}
+														</h3>
 														<h2>
 															@if(is_null($plan->monthly_price))
 																Gratis
@@ -104,7 +114,12 @@
 											<div class="col-lg-3">
 												<div class="pricetable"> 
 													<div class="pricetable-head">
-														<h3>{{$plan->name}}</h3>
+														<h3>
+														@if ( $plan->id > 1 )
+															Talento 
+														@endif
+														{{$plan->name}}
+														</h3>
 														<h2>
 															@if(is_null($plan->quarterly_price))
 																Gratis
@@ -163,7 +178,12 @@
 											<div class="col-lg-3">
 												<div class="pricetable"> 
 													<div class="pricetable-head">
-														<h3>{{$plan->name}}</h3>
+														<h3>
+														@if ( $plan->id > 1 )
+															Talento 
+														@endif
+														{{$plan->name}}
+														</h3>
 														<h2>
 															@if(is_null($plan->annual_price))
 																Gratis
@@ -329,15 +349,17 @@
 											</div>
 										</div>
 
-										<div class="col-lg-4">
-											<span class="pf-title">País</span>
-											<div class="pf-field">
-												<input type="text" name="country" id="country" value="{{old('country')}}" required />
-												@error('country')
-		                                    		<span> {{ $message }}</span>
-												@enderror
-											</div>
-										</div>
+					 					<div class="col-lg-4">
+					 						<span class="pf-title">País</span>
+					 						<div class="pf-field">
+					 							<select data-placeholder="Por favor seleccione su país" class="chosen" name="country" id="country" value="{{old('country')}}" required >
+													<option value="">-- Seleccione --</option>
+													@foreach ($paises as $pais)
+														<option value="{{$pais}}">{{$pais}}</option>
+													@endforeach
+												</select>
+					 						</div>
+					 					</div>
 									</div>
 
 									<div class="row">
@@ -354,7 +376,7 @@
 										<div class="col-lg-4">
 											<span class="pf-title">Teléfono</span>
 											<div class="pf-field">
-												<input type="text" name="phone" id="phone" value="{{old('phone')}}" required />
+												<input type="tel" name="phone" id="phone" value="{{old('phone')}}" required />
 												@error('phone')
 		                                    		<span> {{ $message }}</span>
 												@enderror
@@ -365,7 +387,7 @@
 
 									<div class="row">
 										<div class="col-lg-6">
-											<span class="pf-title">Describe algunas habilidades adquiridas</span>
+											<span class="pf-title">Cuéntanos cómo tus habilidades y destrezas aportan una solución o beneficio real a tus clientes</span>
 											<div class="pf-field">
 												<textarea rows="2" name="abilities" id="abilities" required>{{old('abilities')}}</textarea>
 											</div>
@@ -462,12 +484,39 @@
 @endsection
 
 @section('scripts')
+<script src="{{ URL::asset('js/input-tel/intlTelInput.js') }}"></script>
 <script type="text/javascript">
 	$.ajaxSetup({
 		headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		}
 	});
+
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+      // allowDropdown: false,
+      // autoHideDialCode: false,
+      // autoPlaceholder: "off",
+      // dropdownContainer: document.body,
+      // excludeCountries: ["us"],
+      // formatOnDisplay: false,
+      // geoIpLookup: function(callback) {
+      //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+      //     var countryCode = (resp && resp.country) ? resp.country : "";
+      //     callback(countryCode);
+      //   });
+      // },
+      // hiddenInput: "full_number",
+      // initialCountry: "auto",
+      // localizedCountries: { 'de': 'Deutschland' },
+      // nationalMode: false,
+      // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+      // placeholderNumberType: "MOBILE",
+      // preferredCountries: ['cn', 'jp'],
+      // separateDialCode: true,
+      //utilsScript: "build/js/utils.js",
+      utilsScript: "{{ asset('js/input-tel/utils.js') }}",
+    });
 
 	$(function() {
 		$('#perfil').hide();

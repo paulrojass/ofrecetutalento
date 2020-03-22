@@ -13,7 +13,7 @@
 					<div class="inner2">
 						<div class="inner-title2">
 							<h3>¿Quienes Somos?</h3>
-							<span>Keep up to date with the latest news</span>
+							<!-- <span>Keep up to date with the latest news</span> -->
 						</div>
 						<div class="page-breacrumbs">
 							<ul class="breadcrumbs">
@@ -77,62 +77,9 @@ región.</p>
 
 			 				</div>
 			 			</div>
-			 			<div class="tags-share">
-					 		<div class="share-bar">
-				 				<a href="#" title="" class="share-fb"><i class="fa fa-facebook"></i></a><a href="#" title="" class="share-twitter"><i class="fa fa-twitter"></i></a><a href="#" title="" class="share-google"><i class="la la-google"></i></a><span>Share</span>
-				 			</div>
-			 			</div>
 			 		</div>
 			 	</div>
 			 </div>
-		</div>
-	</div>
-</section>
-
-<section>
-	<div class="block remove-top">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="our-services">
-						<div class="row">
-							<div class="col-lg-12"><h2>Our Service</h2></div>
-							<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-								<div class="service">
-									<i class="la la-clock-o"></i><div class="service-info"><h3>Advertise A Job</h3><p>Duis a tristique lacus. Donec vehicula ante id lorem venenatis posuere. Morbi in lectus.</p></div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-								<div class="service">
-									<i class="la la-search"></i><div class="service-info"><h3>CV Search</h3><p>Duis a tristique lacus. Donec vehicula ante id lorem venenatis posuere. Morbi in lectus.</p></div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-								<div class="service">
-									<i class="la la-user"></i><div class="service-info"><h3>Recruiter Profiles</h3><p>Duis a tristique lacus. Donec vehicula ante id lorem venenatis posuere. Morbi in lectus.</p></div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-								<div class="service">
-									<i class="la la-codepen"></i><div class="service-info"><h3>Temp Search</h3><p>Duis a tristique lacus. Donec vehicula ante id lorem venenatis posuere. Morbi in lectus.</p></div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-								<div class="service">
-									<i class="la la-tv"></i><div class="service-info"><h3>Display Jobs</h3><p>Duis a tristique lacus. Donec vehicula ante id lorem venenatis posuere. Morbi in lectus.</p></div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-								<div class="service">
-									<i class="la la-diamond"></i><div class="service-info"><h3>For Agencies</h3><p>Duis a tristique lacus. Donec vehicula ante id lorem venenatis posuere. Morbi in lectus.</p></div>
-								</div>
-							</div>
-						</div>
-						
-
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 </section>
@@ -192,26 +139,26 @@ región.</p>
 						<div class="row">
 							<div class="col-lg-3  col-md-3 col-sm-6 col-xs-6">
 								<div class="stats">
-									<span>18</span>
-									<h5>Jobs Posted</h5>
+									<span>{{ $usuarios }}</span>
+									<h5>Usuarios registrados</h5>
 								</div>
 							</div>
 							<div class="col-lg-3  col-md-3 col-sm-6 col-xs-6">
 								<div class="stats">
-									<span>38</span>
-									<h5>Jobs Filled</h5>
+									<span>{{ $talentos }}</span>
+									<h5>Talentos</h5>
 								</div>
 							</div>
 							<div class="col-lg-3  col-md-3 col-sm-6 col-xs-6">
 								<div class="stats">
-									<span>67</span>
-									<h5>Companies</h5>
+									<span>{{ $canjes }}</span>
+									<h5>Canjes</h5>
 								</div>
 							</div>
 							<div class="col-lg-3  col-md-3 col-sm-6 col-xs-6">
 								<div class="stats">
-									<span>92</span>
-									<h5>Members</h5>
+									<span>{{ $tratos }}</span>
+									<h5>Tratos</h5>
 								</div>
 							</div>
 						</div>

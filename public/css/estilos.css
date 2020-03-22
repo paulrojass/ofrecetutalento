@@ -398,3 +398,33 @@ button{
 .inputfile:hover {
     background-color: red;
 } */
+
+
+header.style3 nav > ul > li > a {
+    color: #fff;
+}
+
+.dropzone {
+    min-height: 200px;
+    max-width: 400px;
+    border: 2px solid #e8ecec;
+    border-radius: 8px;
+    background: #e8ecec;
+    padding: 20px 20px;
+}
+
+.dropzone .dz-preview.dz-image-preview {
+    background: transparent;
+}
+
+.dropzone .dz-preview .dz-image {
+    border-radius: 8px;
+}
+
+.message-file {
+    color: #1e83f0;
+    font-family: 'Questrial' !important;
+    font-weight: 500;
+    font-size: 13px;
+    margin-top: 1px;
+}

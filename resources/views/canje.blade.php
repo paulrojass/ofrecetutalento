@@ -92,8 +92,7 @@
 			 			<div class="comment-sec" id="div-comentarios">
 			 			</div>
 
-						<!--
-			 			<div class="job-overview">
+			 			<!--<div class="job-overview">
 				 			<h3>Job Overview</h3>
 				 			<ul>
 				 				<li><i class="la la-money"></i><h3>Offerd Salary</h3><span>£15,000 - £20,000</span></li>
@@ -144,9 +143,9 @@
 			</button>
 		</div>
 		<form id="form-trato">
-
-			<input type="hidden" id="canje_id" name="canje_id" value="{!! $canje->id !!}">
-			<input type="hidden" id="auth_user" name="auth_user" value="{{{ (Auth::user()) ? Auth::user()->id : null }}}">
+		<input type="hidden" id="canje_id" name="canje_id" value="{{ $canje->id }}">
+		<input type="hidden" id="auth_user" name="auth_user" value="{{  (Auth::user()) ? Auth::user()->id : null }}">
+		<input type="hidden" id="user_dealing" name="user_dealing" value="{{  $canje->talent->user_id }}">
 		  <div class="modal-body">
 				<div class="contact-edit pl-5 pr-5">
 					@csrf
@@ -250,7 +249,7 @@
 @endsection
 
 @section('scripts')
-<script src="{{URL::asset('js/app.js')}}" type="text/javascript"></script>
+<!-- <script src="{{URL::asset('js/app.js')}}" type="text/javascript"></script> -->
 
 <script src="{{URL::asset('js/canje-single.js')}}" type="text/javascript"></script>
 @endsection

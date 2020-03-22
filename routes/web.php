@@ -70,8 +70,9 @@ Route::get('actualizar-comentarios', 'CommentController@updateCommentsView');
 Route::get('nuevo-trato', 'DealingController@newDealing');
 Route::post('verificar-archivos', 'FileController@showFilesUser');
 Route::get('actualizar-archivos', 'FileController@actualizarArchivos');
-Route::post('agregar-imagen', 'FileController@agregarImagen');
-Route::post('eliminar-imagen', 'FileController@eliminarImagen');
+Route::post('eliminar-archivo', 'FileController@eliminarArchivo');
+Route::post('editar-archivo', 'FileController@editarArchivo');
+//Route::post('agregar-imagen', 'FileController@agregarImagen');
 
 
 //rutas de mi cuenta
@@ -97,6 +98,14 @@ Route::get('form-canje', 'ExchangeController@formCanje');
 Route::post('cambiar-imagen-canje', 'ExchangeController@updateImageCanje');
 Route::get('actualizar-datos-canje', 'ExchangeController@actualizarCanje');
 Route::post('es-video', 'FileController@isVideo');
+
+
+Route::post('agregar-imagen','FileController@newImage')->name('new-image');
+Route::post('agregar-video','FileController@newVideo')->name('new-video');
+Route::post('agregar-pdf','FileController@newPdf')->name('new-pdf');
+
+
+
 //mi cuento tratos
 Route::post('aprobar-trato', 'DealingController@aprobar');
 

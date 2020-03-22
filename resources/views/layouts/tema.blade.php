@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Ofrece tu Talento | @yield('title')</title>
+	<title>@yield('title') | Ofrece tu Talento</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="keywords" content="">
@@ -69,15 +69,15 @@
 				<ul>
 					<li class="menu-item">
 						<a href="{{url('/')}}" title="">Home</a>
-
 					</li>
 					<li class="menu-item">
 						<a href="{{url('como_funciona')}}" title="">Como funciona</a>
-
+					</li>
+					<li class="menu-item">
+						<a href="{{url('como_funciona')}}" title="">¿Para qué funciona?</a>
 					</li>
 					<li class="menu-item">
 						<a href="{{url('quienes_somos')}}" title="">¿Quienes somos?</a>
-
 					</li>
 					<li class="menu-item">
 						<a href="{{url('planes')}}" title="">Planes</a>
@@ -128,18 +128,17 @@
 						</li>
 						<li class="menu-item">
 							<a href="{{url('como_funciona')}}"title="">Como funciona</a>
-							
+						</li>
+						<li class="menu-item">
+							<a href="{{url('como_funciona')}}"title="">¿Para qué funciona?</a>
 						</li>
 						<li class="menu-item">
 							<a href="{{url('quienes_somos')}}" title="">¿Quienes somos?</a>
-							
 						</li>
 						<li class="menu-item">
 							<a href="{{url('planes')}}" title="">Planes</a>
 							
 						</li>
-						
-						
 					</ul>
 				</nav><!-- Menus -->
 			</div>
@@ -157,7 +156,7 @@
 	<div class="can-detail-s">
 		<div class="cst"><img src="{{URL::asset('images/users/'.Auth::User()->avatar)}}" alt="" style="max-width: 145px; max-height:145px;" /></div>
 		<h3>{{auth()->user()->name}} {{auth()->user()->lastname}}</h3>
-		<span><i>Usuario {{auth()->user()->suscription->plan->name}}</i></span>
+		<span><i>Talento {{auth()->user()->suscription->plan->name}}</i></span>
 		<p>{{ auth()->user()->email }}</p>
 		<p>Miembro desde, {{ \Carbon\Carbon::parse(auth()->user()->created_at)->format('Y')}} </p>
 		<p><i class="la la-map-marker"></i>{{ auth()->user()->city }}, {{ auth()->user()->country }}</p>

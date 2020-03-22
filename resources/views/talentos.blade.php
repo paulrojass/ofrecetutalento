@@ -15,6 +15,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="inner-header">
+							<img src="{{URL::asset('tema/images/busca.png')}}">
 							<h3>Encuentra el talento que solicitas</h3>
 						</div>
 					</div>

@@ -98,12 +98,17 @@
 										</div>
 									</div>
 
-									<div class="col-lg-4">
-										<span class="pf-title">País</span>
-										<div class="pf-field">
-											<input type="text" name="country" id="country" value="{{old('country')}}" required />
-										</div>
-									</div>
+				 					<div class="col-lg-4">
+				 						<span class="pf-title">País</span>
+				 						<div class="pf-field">
+				 							<select data-placeholder="Por favor seleccione su país" class="chosen" name="country" id="country" value="{{old('country')}}" required >
+												<option value="">-- Seleccione --</option>
+												@foreach ($paises as $pais)
+													<option value="{{$pais}}">{{$pais}}</option>
+												@endforeach
+											</select>
+				 						</div>
+				 					</div>
 								</div>
 
 								<div class="row">
