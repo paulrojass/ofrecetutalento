@@ -34,7 +34,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading">
-						<h2>Buy Our Plans And Packeges</h2>
+						<h2>Selecciona nuestros planes y paquetes</h2>
 						<span>One of our jobs has some kind of flexibility option - such as telecommuting, a part-time schedule or a flexible or flextime schedule.</span>
 					</div><!-- Heading -->
 					<div class="tab-sec">
@@ -246,4 +246,9 @@
 		});
 	});
 </script>
+@endsection
+
+
+@section('footer')
+	@include('includes.footer')
 @endsection

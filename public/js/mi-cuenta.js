@@ -8,8 +8,7 @@ $(function(){
 	canjesPerfil();
 	recibidosPerfil();
 	propuestosPerfil();
-	//mostrar('#mi-perfil', '#a-perfil');
-	mostrar('#canjes', '#a-canjes');
+	mostrar('#mi-perfil', '#a-perfil');
 
 	// Read value on page load
 	$(".result-language b").html($("#level-language").val());
@@ -35,6 +34,14 @@ $(function(){
 		format: 'mm-dd-yyyy'
 	});
 */
+
+$('#datepicker').datepicker({
+  uiLibrary: 'bootstrap4',
+  locale: 'es-es',
+});
+
+
+
 	$('#avatar').change(function(){
 		cambiarFoto();
 	});

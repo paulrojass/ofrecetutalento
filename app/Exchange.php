@@ -11,6 +11,7 @@ use App\Talent;
 use App\Dealing;
 use App\Like;
 use App\Comment;
+use App\File;
 
 class Exchange extends Model
 {
@@ -24,10 +25,23 @@ class Exchange extends Model
 		return $this->hasMany(File::class);
 	}
 
-	public function dealings()
+/*	public function dealings()
 	{
 		return $this->hasMany(Dealing::class);
-	}
+	}*/
+
+	//Cotratadores
+    public function contractors()
+    {
+        return $this->hasMany(Dealing::class, 'proposal_id');
+    }
+    //Contratados
+    public function hired()
+    {
+        return $this->hasMany(Dealing::class, 'accept_id');
+    }
+
+
 
 	public function likes()
 	{
@@ -38,10 +52,6 @@ class Exchange extends Model
 	{
 		return $this->hasMany(Comment::class);
 	}
-
-//Query Scopes
-//
-//
 
 	public function scopeSearch($query, $search)
 	{
@@ -57,18 +67,6 @@ class Exchange extends Model
 			return $query->where('created_at', '>', $date);
 		}
 	}
-
-	//exchange->talent->user->city
-	/*public function scopeLocation($query, $ubicacion){
-		if($ubicacion){
-			return $query->talent->
-
-
-			return $query->where('talent_id', function(Builder $query) use($ubicacion){
-				$query->whereHas('')
-			});
-		}
-	}*/
 
 	public function scopeMin($query, $minimo)
 	{
@@ -97,5 +95,15 @@ class Exchange extends Model
 		}
 	}*/
 
+	//exchange->talent->user->city
+	/*public function scopeLocation($query, $ubicacion){
+		if($ubicacion){
+			return $query->talent->
 
+
+			return $query->where('talent_id', function(Builder $query) use($ubicacion){
+				$query->whereHas('')
+			});
+		}
+	}*/
 }

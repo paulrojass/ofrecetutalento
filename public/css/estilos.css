@@ -404,6 +404,10 @@ header.style3 nav > ul > li > a {
     color: #fff;
 }
 
+header.style31 nav > ul > li > a {
+    color: #252d5f;
+}
+
 .dropzone {
     min-height: 200px;
     max-width: 400px;
@@ -427,4 +431,26 @@ header.style3 nav > ul > li > a {
     font-weight: 500;
     font-size: 13px;
     margin-top: 1px;
+}
+
+
+
+footer.style2 {
+    background: #252d5f;
+}
+
+footer .blanco span{
+  color:#fff;
+}
+
+
+/* pagination */
+.page-item.active .page-link {
+    background-color: #8b91dd;
+    border-color: #8b91dd;
+}
+
+.pagination li.active a, .pagination li a:hover {
+    background-color: #252d5f;
+    border-color: #252d5f;
 }

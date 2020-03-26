@@ -2,7 +2,7 @@
 
 @section('title', 'Inicio')
 
-@section('header_type', 'stick-top style3')
+@section('header_type', 'stick-top style3 style31')
 
 @section('content')
 
@@ -21,16 +21,16 @@
 									<div class="find-cand">
 										<h3>La forma mas facil<br> de ofrecer tus talentos</h3>
 										<span>We have 2.567 resumes in our database</span>
-										<form method="GET" action="{{ route('talentos') }}">
+										<form method="GET" action="{{ route('talentos_resultado') }}">
 											@csrf
 											<div class="job-field">
 												<input type="text" name="search" placeholder="Busca los talentos que solicitas" />
 											</div>
 											<div class="job-field">
-												<select data-placeholder="City, province or region" class="chosen-city">
-													<option>Selecciona industria</option>
+												<select name="industry" data-placeholder="para las categorias" class="chosen-city">
+													<option value="">Selecciona industria</option>
 													@foreach($industries as $industry)
-														<option id="{{$industry->id}}">{{$industry->name}}</option>
+														<option value="{{$industry->id}}">{{$industry->name}}</option>
 													@endforeach
 												</select>
 											</div>

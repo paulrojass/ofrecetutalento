@@ -17,8 +17,9 @@ class CreateDealingsTable extends Migration
             $table->bigIncrements('id');
             $table->text('description')->nullable();
             $table->boolean('approved')->nullable();
+            $table->boolean('dealing_ready')->nullable();
+            $table->boolean('proposal_ready')->nullable();
             $table->boolean('pay')->default(0);
-            $table->unsignedBigInteger('exchange_proposal')->nullable();
             $table->timestamps();
         });
     }

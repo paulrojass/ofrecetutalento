@@ -22,6 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/colors/colors.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/bootstrap.css')}}" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+
 	@yield('css')
 	
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('css/estilos.css')}}" />
@@ -71,10 +72,16 @@
 						<a href="{{url('/')}}" title="">Home</a>
 					</li>
 					<li class="menu-item">
+						<a href="{{url('talentos')}}" title="">Busca tu Talento</a>
+					</li>
+					<li class="menu-item">
+						<a href="{{url('canjes')}}" title="">Canjea tu talento</a>
+					</li>
+					<li class="menu-item">
 						<a href="{{url('como_funciona')}}" title="">Como funciona</a>
 					</li>
 					<li class="menu-item">
-						<a href="{{url('como_funciona')}}" title="">¿Para qué funciona?</a>
+						<a href="{{url('para-que-funciona')}}" title="">¿Para qué funciona?</a>
 					</li>
 					<li class="menu-item">
 						<a href="{{url('quienes_somos')}}" title="">¿Quienes somos?</a>
@@ -107,9 +114,11 @@
 					</span>
 				</div>
 
+				@if(auth()->user()->suscription->plan_id > 2)
 				<div id="contador-mensajes">
 
 				</div>
+				@endif
 
 				@else
 				<div class="btn-extars">
@@ -127,17 +136,28 @@
 							
 						</li>
 						<li class="menu-item">
-							<a href="{{url('como_funciona')}}"title="">Como funciona</a>
+							<a href="{{url('talentos')}}" title="">Busca tu talento</a>
 						</li>
 						<li class="menu-item">
-							<a href="{{url('como_funciona')}}"title="">¿Para qué funciona?</a>
+							<a href="{{url('canjes')}}" title="">Canjea tu talento</a>
 						</li>
-						<li class="menu-item">
-							<a href="{{url('quienes_somos')}}" title="">¿Quienes somos?</a>
-						</li>
-						<li class="menu-item">
-							<a href="{{url('planes')}}" title="">Planes</a>
-							
+						<li class="menu-item-has-children">
+							<a href="javascript:void(0)" title="">Acerca de</a>
+							<ul>
+								<li>
+									<a href="{{url('como_funciona')}}"title="">Como funciona</a>
+								</li>
+								<li>
+									<a href="{{url('como_funciona')}}"title="">¿Para qué funciona?</a>
+								</li>
+								<li>
+									<a href="{{url('quienes_somos')}}" title="">¿Quienes somos?</a>
+								</li>
+								<li>
+									<a href="{{url('planes')}}" title="">Planes</a>
+									
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</nav><!-- Menus -->

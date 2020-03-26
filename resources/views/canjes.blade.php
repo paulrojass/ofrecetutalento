@@ -1,6 +1,6 @@
 @extends('layouts.tema')
 
-@section('title', 'Inicio')
+@section('title', 'Canjes')
 
 @section('header_type', 'stick-top style3')
 
@@ -104,6 +104,7 @@
 					<div id="lista-canjes" class="col-lg-9 column">
 						@include('filtros.canjes')
 					</div>
+					<input type="hidden" name="hidden_page" id="hidden_page" value="1" />
 				 </div>
 			</div>
 		</div>
@@ -115,76 +116,81 @@
 	$(function(){
 
 		$('#search').on('focusout', function() {
-			filtrado();
+			var page = $('#hidden_page').val();
+			filtrado(page);
+		});
+		$('#search').on('keypress',function(e) {
+		    if(e.which == 13) {
+				$(this).focusout();
+		    }
 		});
 
 		$('input:radio[name=date]').on('click', function() {
-			filtrado();
+			var page = $('#hidden_page').val();
+			filtrado(page);
 		});
-
-/*		$('#location').on('focusout', function() {
-			filtrado();
-		});
-
-		$('input:checkbox').on('click', function() {
-			filtrado();
-		});*/
 
 		$('#min').on('focusout', function() {
-			filtrado();
+			var page = $('#hidden_page').val();
+			filtrado(page);
+		});
+		$('#min').on('keypress',function(e) {
+		    if(e.which == 13) {
+				$(this).focusout();
+		    }
 		});
 
 		$('#max').on('focusout', function() {
-			filtrado();
+			var page = $('#hidden_page').val();
+			filtrado(page);
+		});
+		$('#max').on('keypress',function(e) {
+		    if(e.which == 13) {
+				$(this).focusout();
+		    }
 		});
 
-		$(document).on('click','.page-link', function(event){
-			event.prevenDefault();
+
+		$(document).on('click', '.page-link', function(event){
+			event.preventDefault();
 			var page = $(this).attr('href').split('page=')[1];
-			fetch_data(page);
+			$('#hidden_page').val(page);
+
+			$('li').removeClass('active');
+			$(this).parent().addClass('active');
+			filtrado(page);
 		});
-
-		function fetch_data(page){
-			$.ajax({
-				url:'/pagination/fetch_data_talents?page='+page,
-				success:function(data){
-					$('#lista-canjes').html(response);
-				}
-			});
-
-		}
 	});
 
 
-	function filtrado(){
-		var category = [];
-
-		$("input[name='category']:checked").each(function() {
-             category.push($(this).val());
-        });
-
+	function filtrado(page){
 		var search = $('#search').val();
-/*		var location = $('#location').val();*/
-		var min = $('#min').val();
-		var max = $('#max').val();
-		var date = $('input:radio[name=date]:checked').val();
+		var min    = $('#min').val();
+		var max    = $('#max').val();
+		var date   = $('input:radio[name=date]:checked').val();
+		var token  = '{{csrf_token()}}';
+		fetch_data(page, search, min, max, date);
+	}
 
-		var token = '{{csrf_token()}}';// ó $("#token").val() si lo tienes en una etiqueta html.
-		//we will send data and recive data fom our AjaxController
+	function fetch_data(page, search, min, max, date){
 		$.ajax({
-			type:'post',
-			url:'{{route("canjes")}}',
-			//data:{ search:search, location:location, _token:token, category:category, min:min, max:max, date:date},
-			data:{ search:search,  _token:token, min:min, max:max, date:date},
-			success: function (response) {
+			url:'/canjes-filtro/fetch_data?page='+page+'&search='+search+'&min='+min+'&max='+max+'&date='+date,
+			type:'get',
+			success:function(response){
+				$('#lista-canjes').html('');
 				$('#lista-canjes').html(response);
 			},
-			error:function(x,xs,xt){
-			//nos dara el error si es que hay alguno
-			window.open(JSON.stringify(x));
-			//alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
-			}
+            error: function (xhr, textStatus, errorMessage) {
+
+                console.log("ERROR" + errorMessage + textStatus + xhr);
+
+            }
 		});
 	}
 </script>
+@endsection
+
+
+@section('footer')
+	@include('includes.footer-simple')
 @endsection

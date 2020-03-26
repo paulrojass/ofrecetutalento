@@ -5,9 +5,6 @@
 @section('header_type', 'stick-top style3')
 
 @section('content')
-
-
-
 	<section class="overlape">
 		<div class="block no-padding">
 			<div data-velocity="-.1" style="background: url(http://placehold.it/1600x800) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
@@ -15,8 +12,10 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="inner-header">
-							<img src="{{URL::asset('tema/images/busca.png')}}">
-							<h3>Encuentra el talento que solicitas</h3>
+							<h3>
+							<img height="60" src="{{URL::asset('tema/images/busca.png')}}">
+
+							Encuentra el talento que deseas</h3>
 						</div>
 					</div>
 				</div>
@@ -29,7 +28,7 @@
 			<div class="container">
 				 <div class="row no-gape">
 					<aside class="col-lg-3 column">
-<!-- 						<form method="POST" action="{{ route('talentos') }}"> -->
+						<!-- 						<form method="POST" action="{{ route('talentos') }}"> -->
 						<form>
 							@csrf
 							<div class="widget">
@@ -44,15 +43,15 @@
 									</div><!-- location Widget -->
 								</div>
 							</div>
-							<div class="widget">
+							<div class="widget mb-5">
 								<h3 class="sb-title open">Categorias</h3>
 								<div class="specialism_widget">
-<!-- 									<div class="simple-checkbox">
-	<p>
-		<input type="checkbox" name="all"  id="all" checked>
-		<label for="all">Todas</label>
-	</p>
-</div>	 -->
+								<!-- 									<div class="simple-checkbox">
+									<p>
+										<input type="checkbox" name="all"  id="all" checked>
+										<label for="all">Todas</label>
+									</p>
+								</div>	 -->
 									@php($industry = 0)
 									@foreach($categories as $category)
 										@if($category->industry_id > $industry)
@@ -75,15 +74,16 @@
 									@endforeach
 								</div>
 							</div>
-<!-- 							<div class="pull-right">
-	<button type="submit" class="post-job-btn btn-filtrar"><i class="la la-filter"></i>Filtrar</button>
-</div> -->
+							<!-- 							<div class="pull-right">
+								<button type="submit" class="post-job-btn btn-filtrar"><i class="la la-filter"></i>Filtrar</button>
+							</div> -->
 						</form>
 					</aside>
 					
 					<div id="lista-talentos" class="col-lg-9 column">
 						@include('filtros.talentos')
 					</div>
+					<input type="hidden" name="hidden_page" id="hidden_page" value="1" />
 				 </div>
 			</div>
 		</div>
@@ -93,34 +93,33 @@
 @section('scripts')
 <script>
 	$(function(){
-
+		/*Busqueda en inputs*/
 		$('#search').on('focusout', function() {
-			filtrado();
+			var page = $('#hidden_page').val();
+			filtrado(page);
+		});
+		$('#search').on('keypress',function(e) {
+		    if(e.which == 13) {
+				$(this).focusout();
+		    }
 		});
 
 		$('#location').on('focusout', function() {
-			filtrado();
+			var page = $('#hidden_page').val();
+			filtrado(page);
 		});
+		$('#location').on('keypress',function(e) {
+		    if(e.which == 13) {
+				$(this).focusout();
+		    }
+		});		
 
+		/*Busqueda en checkbox*/
 		$('input:checkbox').on('click', function() {
-			filtrado();
+			var page = $('#hidden_page').val();
+			filtrado(page);
 		});
 
-		$(document).on('click','.page-link', function(event){
-			event.prevenDefault();
-			var page = $(this).attr('href').split('page=')[1];
-			fetch_data(page);
-		});
-
-		function fetch_data(page){
-			$.ajax({
-				url:'/pagination/fetch_data_talents?page='+page,
-				success:function(data){
-					$('#lista-talentos').html(response);
-				}
-			});
-
-		}
 
 		$('#all').change(function(){
 			if(this.checked) {
@@ -134,37 +133,44 @@
 				});
 			}
 		});
+
+		$(document).on('click', '.page-link', function(event){
+			event.preventDefault();
+			var page = $(this).attr('href').split('page=')[1];
+			$('#hidden_page').val(page);
+
+			$('li').removeClass('active');
+			$(this).parent().addClass('active');
+			filtrado(page);
+		});
 	});
 
-	function filtrado(){
+	function filtrado(page){
 
 		var category = [];
-
 		$("input[name='category']:checked").each(function() {
-             //category.push([$(this).val(), $(this).val()]);
-             category.push($(this).val());
+            category.push($(this).val());
         });
-
 		var search = $('#search').val();
 		var location = $('#location').val();
 
-		var token = '{{csrf_token()}}';// ó $("#token").val() si lo tienes en una etiqueta html.
-		//we will send data and recive data fom our AjaxController
+		fetch_data(page, search, location, category);
+	}
+
+	function fetch_data(page, search, location, category){
 		$.ajax({
-			type:'post',
-			url:'/talentos-filtro',
-			data:{ search:search, location:location, _token:token, category:category },
-			success: function (response) {
+			url:'/talentos/fetch_data?page='+page+'&search='+search+'&location='+location+'&category='+JSON.stringify(category),
+			type:'get',
+			success:function(response){
+				$('#lista-talentos').html('');
 				$('#lista-talentos').html(response);
-			},
-			error:function(x,xs,xt){
-			//nos dara el error si es que hay alguno
-			window.open(JSON.stringify(x));
-			//alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
 			}
 		});
 	}
-
 </script>
 
+@endsection
+
+@section('footer')
+	@include('includes.footer-simple')
 @endsection

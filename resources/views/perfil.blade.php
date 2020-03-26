@@ -54,13 +54,23 @@
 				 				<!-- <a href="#" title="">Download CV <i class="la la-download"></i></a> -->
 				 			</div>
 				 		</div>
+
 				 		<ul class="cand-extralink">
 				 			<li><a href="#abilities" title="">habilidades</a></li>
+				 			@if($user->talents->count() > 0)
 				 			<li><a href="#talentos" title="">Talentos</a></li>
+				 			@endif
 				 			@auth
-				 				<li><a href="#mensaje" title="">Enviar Mensaje</a></li>
+							@if((auth()->user()->suscription->plan_id > 2)&&(auth()->user()->id != $user->id)&&($user->suscription->plan_id > 2))
+
+				 				<li><a href="javascript:void(0)" data-toggle="modal" data-target="#modal-message" title="">Enviar Mensaje</a></li>
+				 				@endif
 				 			@endauth
 				 		</ul>
+
+
+
+
 				 		<div class="cand-details-sec" id="informacion-general">
 				 			<div class="row">
 			 					<div class="cand-details mr-5 ml-5" id="abilities">
@@ -122,6 +132,8 @@
 										<p>No hay idiomas agreagados</p>
 									@endif
 			 					</div>
+
+								@if($user->talents->count() > 0)
 			 					<div class="col-lg-12 mt-5" id="talentos">
 			 						<div class="cand-details">
 			 							<h2 class="text-center pt-5">Talentos</h2>
@@ -142,6 +154,7 @@
 									 				</tr>
 									 			</thead>
 									 			<tbody>
+
 									 				@foreach($user->talents as $talent)
 										 				<tr>
 										 					<td>
@@ -175,31 +188,7 @@
 								 		</div>
 			 						</div>
 		 						</div>
-
-				 				<div class="col-lg-4 column" id="mensaje">
-				 				<!-- 	
-						 			<div class="job-overview">
-							 			<h3>Resumen del usuario</h3>
-							 			<ul>
-							 				<li><i class="la la-money"></i><h3>Offerd Salary</h3><span>£15,000 - £20,000</span></li>
-							 				<li><i class="la la-mars-double"></i><h3>Gender</h3><span>Female</span></li>
-							 				<li><i class="la la-thumb-tack"></i><h3>Career Level</h3><span>Executive</span></li>
-							 				<li><i class="la la-puzzle-piece"></i><h3>Industry</h3><span>Management</span></li>
-							 				<li><i class="la la-shield"></i><h3>Experience</h3><span>2 Years</span></li>
-							 				<li><i class="la la-line-chart "></i><h3>Qualification</h3><span>Bachelor Degree</span></li>
-							 			</ul>
-							 		</div> --><!-- Job Overview -->
-									@auth
-							 		<div class="quick-form-job" >
-							 			<h3>Enviar Mensaje</h3>
-							 			<form>
-							 				<textarea placeholder="Envia un mensaje directo a {{ $user->name }} {{ $user->lastname }}"></textarea>
-							 				<button class="submit">enviar</button>
-							 			</form>
-							 		</div>
-									@endauth
-						 		</div>
-
+								@endif
 				 			</div>
 				 		</div>
 					</div>
@@ -207,4 +196,80 @@
 			</div>
 		</div>
 	</section>
+
+<section id="div-modal-send-message">
+	<div class="modal fade bd-example-modal" id="modal-message" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content pt-4">
+			<!-- <h3>Cambiar información del Pdf</h3> -->
+			<button type="button" class="close-b" data-dismiss="modal" aria-label="Close">
+				<span class="close-popup"><i class="la la-close"></i></span>
+			</button>
+			<div class="modal-body">
+				<div class="contact-edit pl-5 pr-5">
+					<div class="row">
+					<div class="alert alert-light" role="alert" id="alert-message">
+					  El mensaje a {{ $user->name }} {{ $user->lastname }} ha sido enviado
+					</div>
+
+					@auth
+						@if((auth()->user()->suscription->plan_id > 2)&&(auth()->user()->id != $user->id)&&($user->suscription->plan_id > 2))
+					 		<div class="quick-form-job" >
+					 			<h3>Enviar Mensaje</h3>
+					 			<form id="form-message">
+					 				<input type="hidden" name="from_id" id="from_id" value={{ auth()->user()->id }}>
+					 				<input type="hidden" name="to_id" id="to_id" value={{ $user->id }}>
+					 				<textarea id="body" name="body" placeholder="Envia un mensaje directo a {{ $user->name }} {{ $user->lastname }}"></textarea>
+					 				<button id="button-enviar" class="button">enviar</button>
+					 			</form>
+					 		</div>
+				 		@endif
+					@endauth					
+					</div>
+				</div>
+			</div>
+<!-- 			<div class="modal-footer">
+	<button type="button" data-dismiss="modal" class="boton-normal">Cerrar</button>
+	<button type="button" class="boton-normal" id="b-editar-pdf">Guardar</button>
+</div> -->
+		</div>
+	  </div>
+	</div>	
+</section>
+@endsection
+
+@section('scripts')
+<script>
+	$(function(){
+		$("#alert-message").hide();
+		$('#button-enviar').click(function(e){
+			e.preventDefault();
+			var datos = $('#form-message').serialize();
+			$.ajax({
+				url: '/enviar-mensaje-perfil',
+				type: 'GET',
+				data: datos,
+				contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+				processData: false // NEEDED, DON'T OMIT THIS
+			})
+			.done(function() {
+				$("#alert-message").fadeTo(2000, 500).slideUp(500, function(){
+				    $("#alert-message").slideUp(1000);
+				    $('#modal-message').modal('hide');
+					$("#form-message")[0].reset();
+				});
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+
+			});
+		});
+	});
+</script>
+@endsection
+
+@section('footer')
+	@include('includes.footer-simple')
 @endsection

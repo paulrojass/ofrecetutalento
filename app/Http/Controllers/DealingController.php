@@ -94,7 +94,7 @@ class DealingController extends Controller
 
     public function newDealing(Request $request)
     {
-        $this->create($request);
+        return $this->create($request);
     }
 
 

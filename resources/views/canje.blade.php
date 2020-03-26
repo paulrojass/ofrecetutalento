@@ -4,10 +4,6 @@
 
 @section('header_type', 'stick-top style3')
 
-@section('css')
-	<link rel="stylesheet" type="text/css" href="{{URL::asset('css/app.css')}}" />
-@endsection
-
 @section('content')
 <section class="overlape">
 	<div class="block no-padding">
@@ -48,6 +44,17 @@
 			 					<strong>Industria</strong> : {{$canje->talent->category->industry->name}} /
 			 					<strong>Categoria</strong> : {{$canje->talent->category->name}}
 			 				</span>
+
+					 		<div class="job-single-head style2 mt-5 pb-0">
+				 				@auth
+								@if(auth()->user() != $canje->talent->user)
+				 				<a href="javascript:void(0)" data-toggle="modal" data-target="#modal-trato" title="" class="apply-job-btn"></i>Ofrecer trato</a>
+				 				@endif
+				 				@else
+				 				<a href="{{url('suscripcion')}}" title="" class="apply-job-btn"></i>Registrate para ofrecer trato</a>
+				 				@endauth
+				 			</div>
+
 			 			</div><!-- Job Head -->
 			 			<div class="job-details">
 			 				<h3>Descripción</h3>
@@ -118,13 +125,6 @@
 		 					<p><i class="la la-phone"></i> {{$canje->talent->user->phone}}</p>
 		 					<p><i class="la la-envelope-o"></i> {{$canje->talent->user->email}}</p>
 		 				</div>
-		 				@auth
-						@if(auth()->user() != $canje->talent->user)
-		 				<a data-toggle="modal" data-target="#modal-trato" title="" class="apply-job-btn"><i class="la la-paper-plane"></i>Ofrecer trato</a>
-		 				@endif
-		 				@else
-		 				<a href="{{url('suscripcion')}}" title="" class="apply-job-btn"><i class="la la-paper-plane"></i>Registrate para ofrecer trato</a>
-		 				@endauth
 		 			</div><!-- Job Head -->
 			 	</div>
 			</div>
@@ -143,17 +143,18 @@
 			</button>
 		</div>
 		<form id="form-trato">
-		<input type="hidden" id="canje_id" name="canje_id" value="{{ $canje->id }}">
-		<input type="hidden" id="auth_user" name="auth_user" value="{{  (Auth::user()) ? Auth::user()->id : null }}">
-		<input type="hidden" id="user_dealing" name="user_dealing" value="{{  $canje->talent->user_id }}">
-		  <div class="modal-body">
+			<input type="hidden" id="canje_id" name="canje_id" value="{{ $canje->id }}">
+			<input type="hidden" id="auth_user" name="auth_user" value="{{  (Auth::user()) ? Auth::user()->id : null }}">
+			<input type="hidden" id="user_dealing" name="user_dealing" value="{{  $canje->talent->user_id }}">
+			<div class="modal-body">
 				<div class="contact-edit pl-5 pr-5">
 					@csrf
 					<div class="row">
- 						<span class="pf-title">Especificar requerimiento</span>
- 						<div class="pf-field">
- 							<textarea id="description" name="description"></textarea>
- 						</div>
+
+						<span class="pf-title">Especificar requerimiento</span>
+						<div class="pf-field">
+							<textarea id="description" name="description"></textarea>
+						</div>
 
 						<span class="pf-title">forma de pago</span>								
 						<div class="pf-field">
@@ -170,86 +171,44 @@
 							  </label>
 							</div>
 						</div>
+
 					</div>
 					<div class="row" id="div-select-canje" style="display: none">
- 						<span class="pf-title">Mis Canjes</span>
- 						<div class="pf-field">
- 							<select id="exchange_proposal" name="exchange_proposal" data-placeholder="Selecciona tu canje" class="chosen">
- 								@auth
-								@foreach(Auth()->user()->talents as $talent)
-									@foreach($talent->exchanges as $exchange)
-									<option value="{{$exchange->id}}">{{$exchange->title}}</option>
-									@endforeach
+						<span class="pf-title">Mis Canjes</span>
+						<div class="pf-field">
+							<select id="exchange_proposal" name="exchange_proposal" data-placeholder="Selecciona tu canje" class="chosen">
+								@auth
+							@foreach(Auth()->user()->talents as $talent)
+								@foreach($talent->exchanges as $exchange)
+								<option value="{{$exchange->id}}">{{$exchange->title}}</option>
 								@endforeach
-								@endauth
-							</select>
- 						</div>
+							@endforeach
+							@endauth
+						</select>
+						</div>
 					</div>
+					<div class="alert alert-light" role="alert" id="alert-trato">
+					 	Se ha propuesto un trato para este canje
+					</div>
+					<div class="alert alert-light" role="alert" id="alert-trato-fail">
+						No se pudo realizar la propuesta, intente de nuevo
+					</div>	
 				</div>
-		  </div>
-		  <div class="modal-footer">
-			<button type="button" data-dismiss="modal" class="boton-normal">cancelar</button>
-			<button type="button" class="boton-normal" id="nuevo-trato">enviar</button>
-		  </div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="boton-normal">cancelar</button>
+				<button type="button" class="boton-normal" id="nuevo-trato">enviar</button>
+			</div>
 		</form>
 	</div>
   </div>
 </div>
-
-
-<section id="modal-agregar-imagen">
-	<!-- Modal Ver Imagenes -->
-<div class="modal fade bd-example-modal-lg" id="modal-imagenes" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-	<div class="modal-content" style="background: transparent; border: 0">
-<!-- 		<button type="button" class="close-b" data-dismiss="modal" aria-label="Close" style="z-index: 100">
-	<span class="close-popup"><i class="la la-close"></i></span>
-</button> -->
-	  <div class="modal-body p-0">
-
-	  	<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-	  		<ol class="carousel-indicators">
-	  			@php($i=0)
-	  			@foreach($imagenes as $imagen)
-	  			<li data-target="#carouselExampleCaptions" data-slide-to="{{ $i }}" @if($i==0)class="active"@endif></li>
-	  			@php($i++) 
-	  			@endforeach
-	  		</ol>
-	  		<div class="carousel-inner">
-	  			@php($i=0)
-	  			@foreach($imagenes as $imagen)
-	  			<div @if($i==0) class="carousel-item active" @else class="carousel-item"  @endif>
-	  				<img src="{{URL::asset('files/image/'.$imagen->location)}}" class="d-block w-100" alt="...">
-	  				<div class="carousel-caption d-none d-md-block">
-	  					<h5>{{ $imagen->name }}</h5>
-	  					<p>{{ $imagen->description }}.</p>
-	  				</div>
-	  			</div>
-	  			@php($i++) 
-	  			@endforeach
-	  		</div>
-			@if($imagenes->count() > 1)
-	  		<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-	  			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-	  			<span class="sr-only">Previous</span>
-	  		</a>
-	  		<a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-	  			<span class="carousel-control-next-icon" aria-hidden="true"></span>
-	  			<span class="sr-only">Next</span>
-	  		</a>
-	  		@endif
-	  	</div>
-	  </div>
-	</div>
-  </div>
-</div>
-
-</section>
-
 @endsection
 
 @section('scripts')
-<!-- <script src="{{URL::asset('js/app.js')}}" type="text/javascript"></script> -->
-
 <script src="{{URL::asset('js/canje-single.js')}}" type="text/javascript"></script>
+@endsection
+
+@section('footer')
+	@include('includes.footer-simple')
 @endsection

@@ -9,9 +9,12 @@
 					<img src="{{URL::asset('images/users/'.$user->avatar)}}" alt="" />
 				</div>
 				<div class="emply-resume-info">
-					<h3><a href="#" title="">{{ $user->name}} {{ $user->lastname }}</a></h3>
+					<h3><a href="{{ url('perfil/'.$user->id) }}" title="">{{ $user->name}} {{ $user->lastname }} ({{ $user->email }})</a></h3>
 					<span>
-					<i>{{ $user->talents->count() }} Talentos,  {{ $user->exchanges->count() }} Canjes</i><br>
+					<i>
+						<strong> @if($user->suscription->plan_id > 1)Talento @endif {{ $user->suscription->plan->name }}</strong>, 
+
+						{{ $user->talents->count() }} Talentos,  {{ $user->exchanges->count() }} Canjes</i><br>
  					@foreach($user->talents  as $talents)
 						<i>{{$talents->title}},</i> 
 					@endforeach

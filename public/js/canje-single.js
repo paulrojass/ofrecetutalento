@@ -1,4 +1,6 @@
 $(function(){
+	$("#alert-trato").hide();
+	$("#alert-trato-fail").hide();
 	var id_canje = $('#canje_id').val();
 	var user_id = $('#auth_user').val();
 	var user_dealing = $('#user_dealing').val();
@@ -6,9 +8,9 @@ $(function(){
 
 	function cargaInicial(id_canje){
 		//$("#tipo-pago").checked();
-		actualizarArchivos('image');
+		/*actualizarArchivos('image');
 		actualizarArchivos('video');
-		actualizarArchivos('pdf');
+		actualizarArchivos('pdf');*/
 		actualizarComentarios(id_canje);
 		if(user_id){actualizarLikes(id_canje, '0');}
 	}
@@ -122,10 +124,16 @@ $(function(){
 			url:'/nuevo-trato',
 			data:{description:description, accept_id:user_dealing, pay:pay, exchange_proposal: exchange_proposal, exchange_id: exchange_id, _token: token},
 			success: function (response) {
-				alert(response);
+				$("#alert-trato").fadeTo(2000, 500).slideUp(500, function(){
+				    $("#alert-trato").slideUp(1000);
+				    $('#modal-trato').modal('hide');
+					$("#form-trato")[0].reset();
+				});
 			},
 			error:function(response){
-				alert('no funciona');
+				$("#alert-trato-fail").fadeTo(2000, 500).slideUp(500, function(){
+				    $("#alert-trato-fail").slideUp(1000);
+				});
 			}
 		});
 	});
@@ -149,7 +157,7 @@ $(function(){
 		});
 	}*/
 
-	function actualizarArchivos(tipo){
+/*	function actualizarArchivos(tipo){
 		$.ajax({
 			url: '/actualizar-archivos',
 			type: 'get',
@@ -160,5 +168,5 @@ $(function(){
 			$('#div-'+tipo).html(data);
 		})	
 	}
-
+*/
 });

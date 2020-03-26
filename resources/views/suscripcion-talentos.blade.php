@@ -184,3 +184,8 @@
 </script>
 
 @endsection
+
+
+@section('footer')
+	@include('includes.footer-simple')
+@endsection

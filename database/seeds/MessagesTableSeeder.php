@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\User;
 use App\Message;
+use App\Suscription;
 
 class MessagesTableSeeder extends Seeder
 {
@@ -13,9 +14,10 @@ class MessagesTableSeeder extends Seeder
      */
     public function run()
     {
-    	$users = User::all();
+        $users = Suscription::where('plan_id','>', 2)->get();
+
     	foreach ($users as $user) {
-			factory(Message::class,5)->create(['from_id'=>$user->id]);
+			factory(Message::class,5)->create(['from_id'=>$user->user_id]);
     	}
     }
 }

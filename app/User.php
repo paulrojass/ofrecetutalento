@@ -8,6 +8,9 @@ use App\Suscription;
 use App\Language;
 use App\Experience;
 use App\Message;
+use App\Category;
+use App\Rating;
+use App\Dealing;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
@@ -103,6 +106,23 @@ class User extends Authenticatable implements MustVerifyEmail
 	public function languages(){
 		return $this->hasMany(Language::class);
 	}
+	//Evaluadores
+	public function evaluators(){
+		return $this->hasMany(Rating::class, 'evaluator_id');
+	}	
+	//Evaluados
+	public function evaluated(){
+		return $this->hasMany(Rating::class, 'evaluated_id');
+	}
+
+    public function users_propose()
+    {
+        return $this->hasMany(Dealing::class, 'proposal_id');
+    }
+    public function users_accept()
+    {
+        return $this->hasMany(Dealing::class, 'accept_id');
+    }
 
 	public function experiences(){
 		return $this->hasOne(Experience::class);
@@ -131,7 +151,7 @@ class User extends Authenticatable implements MustVerifyEmail
 			{
 				$query->where('title', 'LIKE' , '%' . $busqueda . '%')
 					->orWhere('description', 'LIKE' , '%' . $busqueda . '%');
-			})->orWhere('name', 'LIKE', '%'.$busqueda.'%')->orWhere('lastname', 'LIKE', '%'.$busqueda.'%');
+			})->orWhere('name', 'LIKE', '%'.$busqueda.'%')->orWhere('lastname', 'LIKE', '%'.$busqueda.'%')->orWhere('email', 'LIKE', '%'.$busqueda.'%');
 		}
 	}
 
@@ -156,4 +176,18 @@ class User extends Authenticatable implements MustVerifyEmail
 			return $query;
 		}
 	}
+
+/*	public function scopeCategory($query, $industry)
+	{
+		$categorias = Category::where('industry_id', $industry)->get();
+
+
+		if($category){
+			$query->whereHas('talents', function (Builder $query) use($categoria){
+				$query->where('category_id', $categoria);
+			});
+			return $query;
+		}
+	}*/
+
 }

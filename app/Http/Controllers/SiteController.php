@@ -38,6 +38,11 @@ class SiteController extends Controller
         return view('como-funciona');
     }
 
+    public function itWorksFor()
+    {
+        return view('para-que-funciona');
+    }
+
     public function planes()
     {
         $plans = Plan::all();

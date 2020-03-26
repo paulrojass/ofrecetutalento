@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 
 $factory->define(Message::class, function (Faker $faker) {
     return [
-        'subject' => $faker->sentence($nbWords = 6, $variableNbWords = true),
         'body' => $faker->paragraph($nbSentences = 4, $variableNbSentences = true),
         'received' => $faker->boolean,
         'to_id' => App\User::all(['id'])->random()

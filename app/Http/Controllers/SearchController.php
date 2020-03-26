@@ -9,15 +9,15 @@ use App\Exchange;
 use App\Category;
 use App\User;
 
+use DB;
+
 class SearchController extends Controller
 {
-	public function talentsFilter(Request $request){
-
+	public function principalSearch(Request $request)
+	{
 		$busqueda = $request->input('search');
-		$ubicacion = $request->input('location');
-		$categoria = $request->category;
-
-		if(empty($busqueda) && empty($ubicacion) && $categoria == null){
+		$industry = $request->industry;
+		if(empty($busqueda) && $industry == ""){
 			$users = User::paginate(10);
 		}
 		else{
@@ -27,11 +27,10 @@ class SearchController extends Controller
 				$query->talent($busqueda);
 			}
 
-			if (!empty($ubicacion)) {
-				$query->location($ubicacion);
-			}
+			if ($industry) {
+				$categoria = Category::select('id')->where('industry_id', $industry)->get()->toArray();
 
-			if ($categoria != NULL) {
+			/*if ($categoria != NULL) {*/
 				$query->categories($categoria);
 			}
 
@@ -39,56 +38,90 @@ class SearchController extends Controller
 		}
 
 		$categories = Category::all();
-		return view('filtros.talentos', compact('users', 'categories'));
+		return view('talentos', compact('users', 'categories'));
 	}
 
+    public function fetch_data_talents(Request $request)
+    {
+		if($request->ajax())
+		{
+			$busqueda = $request->input('search');
+			$ubicacion = $request->input('location');
+			//$categoria = $request->category;
+			$categoria = isset($request->category) ? json_decode($request->category) : array();
 
-	public function exchangesFilter(Request $request){
+			if(empty($busqueda) && empty($ubicacion) && $categoria == null){
+				$users = User::paginate(10);
+			}
+			else{
+				$query = User::query();
 
-		$busqueda = $request->input('search');
-		$ubicacion = $request->input('location');
-		$fecha = $request->input('date');
-		$categoria = $request->category;
-		$minimo = $request->input('min');
-		$maximo = $request->input('max');
+				if (!empty($busqueda)) {
+					$query->talent($busqueda);
+				}
 
+				if (!empty($ubicacion)) {
+					$query->location($ubicacion);
+				}
 
+				if ($categoria) {
+				/*if ($categoria != NULL) {*/
+					$query->categories($categoria);
+				}
 
-/*		if(empty($busqueda) && empty($ubicacion) && $categoria == null && $fecha == 'todos' && empty($minimo) && empty($maximo)){*/
-		if(empty($busqueda) && $fecha == 'todos' && empty($minimo) && empty($maximo)){
-			$exchanges = Exchange::paginate(10);
+				$users = $query->paginate(10);
+			}
+
+			$categories = Category::all();
+			//return view('filtros.talentos', compact('users', 'categories'));
+
+		  	return view('filtros.talentos', compact('users', 'categories'))->render();
 		}
-		else{
-			$query = Exchange::query();
+    }
 
-			if (!empty($busqueda)) {
-				$query->search($busqueda);
+    public function fetch_data_exchanges(Request $request)
+    {
+		if($request->ajax())
+		{
+			$busqueda = $request->input('search');
+			//$ubicacion = $request->input('location');
+			$fecha = $request->input('date');
+			//$categoria = $request->category;
+			$minimo = $request->input('min');
+			$maximo = $request->input('max');
+			/*
+			if(empty($busqueda) && empty($ubicacion) && $categoria == null && $fecha == 'todos' && empty($minimo) && empty($maximo)){*/
+			if(empty($busqueda) && $fecha == 'todos' && empty($minimo) && empty($maximo)){
+				$exchanges = Exchange::paginate(10);
+			}
+			else{
+				$query = Exchange::query();
+
+				if (!empty($busqueda)) {
+					$query->search($busqueda);
+				}
+
+				if (!empty($fecha)) {
+					$query->date($fecha);
+				}
+
+				if (!empty($minimo)) {
+					$query->min($minimo);
+				}
+
+				if (!empty($maximo)) {
+					$query->max($maximo);
+				}
+				/*
+				if ($categoria != NULL) {
+					$query->categories($categoria);
+				}*/
+
+				$exchanges = $query->paginate(10);
 			}
 
-/*			if (!empty($ubicacion)) {
-				$query->location($ubicacion);
-			}*/
-
-			if (!empty($fecha)) {
-				$query->date($fecha);
-			}
-
-			if (!empty($minimo)) {
-				$query->min($minimo);
-			}
-
-			if (!empty($maximo)) {
-				$query->max($maximo);
-			}
-
-/*			if ($categoria != NULL) {
-				$query->categories($categoria);
-			}*/
-
-			$exchanges = $query->paginate(10);
+			$categories = Category::all();
+			return view('filtros.canjes', compact('exchanges', 'categories'))->render();
 		}
-
-		$categories = Category::all();
-		return view('filtros.canjes', compact('exchanges', 'categories'));
 	}
 }

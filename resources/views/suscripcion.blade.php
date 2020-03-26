@@ -484,7 +484,8 @@
 @endsection
 
 @section('scripts')
-<script src="{{ URL::asset('js/input-tel/intlTelInput.js') }}"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="{{ URL::asset('js/input-tel/intlTelInput-jquery.min.js') }}"></script>
 <script type="text/javascript">
 	$.ajaxSetup({
 		headers: {
@@ -493,12 +494,20 @@
 	});
 
     var input = document.querySelector("#phone");
-    window.intlTelInput(input, {
+// jQuery
+	$("#phone").intlTelInput({
+		initialCountry: "pa",
+		nationalMode: false,
+	});
+
+
+
+    //window.intlTelInput(input, {
       // allowDropdown: false,
-      // autoHideDialCode: false,
+      //autoHideDialCode: false,
       // autoPlaceholder: "off",
       // dropdownContainer: document.body,
-      // excludeCountries: ["us"],
+      //excludeCountries: ["us"],
       // formatOnDisplay: false,
       // geoIpLookup: function(callback) {
       //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
@@ -510,13 +519,13 @@
       // initialCountry: "auto",
       // localizedCountries: { 'de': 'Deutschland' },
       // nationalMode: false,
-      // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+      //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
       // placeholderNumberType: "MOBILE",
       // preferredCountries: ['cn', 'jp'],
       // separateDialCode: true,
       //utilsScript: "build/js/utils.js",
-      utilsScript: "{{ asset('js/input-tel/utils.js') }}",
-    });
+      //utilsScript: "{{ asset('js/input-tel/utils.js') }}",
+    //});
 
 	$(function() {
 		$('#perfil').hide();
@@ -651,4 +660,8 @@
 		});*/
 </script>
 
+@endsection
+
+@section('footer')
+	@include('includes.footer-simple')
 @endsection

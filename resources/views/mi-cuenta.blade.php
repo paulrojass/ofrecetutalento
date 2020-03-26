@@ -25,7 +25,9 @@
 								@endif
 								<li><a href="javascript:void(0)" id="a-tratos-r" onclick="mostrar('#tratos-r', '#a-tratos-r')" title=""><i class="la la-arrow-left"></i>Tratos Recibidos</a></li>
 								<li><a href="javascript:void(0)" id="a-tratos-p" onclick="mostrar('#tratos-p', '#a-tratos-p')" title=""><i class="la la-arrow-right"></i>Tratos Propuestos</a></li>
+								@if(auth()->user()->suscription->plan_id > 2)
 								<li><a href="{{ url('mensajes') }}" id="a-mensajes" title=""><i class="la la-comments"></i>Mensajes</a></li>
+								@endif
 								<li><a href="{{route('logout')}}" title=""><i class="la la-unlink"></i>Cerrar Sesión</a></li>
 							</ul>
 						</div>
@@ -465,4 +467,7 @@
 <script src="{{URL::asset('tema/js/bootstrap-datepicker.js')}}" type="text/javascript"></script> -->
 <script src="{{URL::asset('js/dropzone.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('js/mi-cuenta.js')}}" type="text/javascript"></script>
+
+
+
 @endsection

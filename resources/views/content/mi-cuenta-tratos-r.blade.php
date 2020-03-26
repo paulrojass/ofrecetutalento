@@ -7,26 +7,35 @@
 	 			<thead>
 	 				<tr>
 	 					<td>Requerimiento</td>
-	 					<td>Solicitado</td>
-	 					<td>Propuesto</td>
+	 					<td>Canje solicitado</td>
+	 					<td>Canje propuesto</td>
 	 					<td></td>
 	 				</tr>
 	 			</thead>
 	 			<tbody>
 					@foreach($recibidos->sortByDesc('created_at') as $recibido)
+
 	 				<tr>
-	 					<td class="col-7">
+	 					<td class="col-5">
 	 						<div class="table-list-title">
-	 							<!-- <span class="applied-field">{{ $recibido->description }}</span> -->
 	 							<p>{{ $recibido->description }}</p>
-	 							<!-- <span><i class="la la-map-marker"></i>Sacramento, California</span> -->
 	 						</div>
 	 					</td>
-	 					<td class="col-2">
-	 						<span class="applied-field">{{ $recibido->exchange_id }}</span>
+	 					<td class="col-3 pl-2 pr-2">
+	 						<span class="applied-field">
+								<a href="{{ url('canjes/'.$recibido->exchange_id) }}" title="">
+	 								{{ App\Exchange::find($recibido->exchange_id)->title }}
+								</a>
+	 						</span>
 	 					</td>
-	 					<td class="col-2">
-	 						<span>{{ $recibido->exchange_proposal }}</span>
+	 					<td class="col-3 pl-2 pr-2">
+	 						<span>
+							@isset($recibido->exchange_proposal)
+	 							<span> {{ App\Exchange::find($recibido->exchange_proposal)->title }} </span>
+							@else
+	 							<span>${{ App\Exchange::find($recibido->exchange_id)->price}}</span>
+							@endisset
+	 						</span>
 	 					</td>
 	 					<td class="col-1">
 	 						@if ($recibido->approved === NULL)

@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Exchange;
-use App\File;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +10,8 @@ use App\Traits\DatesTranslator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Image;
+use App\Exchange;
+use App\File;
 
 use DB;
 
@@ -184,17 +184,18 @@ class ExchangeController extends Controller
             // generar un nombre aleatorio para la imagen
             $temp_name = Str::random(20) . '.' . $imagenOriginal->getClientOriginalExtension();
 
-            if($imagen->height() >= $imagen->width()){
-               $imagen->widen(800);
- /*                $imagen->heighten(400);*/
+            $imagen->widen(800);
+            $imagen->resizeCanvas(800,400);
+
+/*            if($imagen->height() >= $imagen->width()){
+                $imagen->widen(800);
                 $imagen->resizeCanvas(800,400);
             }
             else
             {
-               $imagen->heighten(400);
- /*                $imagen->widen(800);*/
+                $imagen->widen(800);
                 $imagen->resizeCanvas(800,400);
-            }
+            }*/
 
             // guardar imagen
             // save( [ruta], [calidad])

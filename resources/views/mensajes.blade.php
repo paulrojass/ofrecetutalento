@@ -13,7 +13,7 @@
 					<ul class="scrollbar">
 						@if($usuarios->isNotEmpty())
 							@foreach($usuarios as $usuario)
-							@if($usuario->user_from->id != auth()->user()->id)
+							@if($usuario->user_from->id != auth()->user()->id) 
 							<li>
 								<div class="job-listing">
 									<div class="job-title-sec">
@@ -76,10 +76,6 @@
 			});
 		}
 
-
-
-
-
 		$('#columna-mensajes').on('click', '#enviar-mensaje', function (e) {
 			e.preventDefault();
 			var to_id = $(this).data('value');
@@ -116,11 +112,6 @@
         $('#enviar-mensaje').removeAttr('disabled');
     }                
   });
-
-
-
-
-
 
 	});
 </script>

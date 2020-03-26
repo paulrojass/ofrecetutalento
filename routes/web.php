@@ -11,16 +11,29 @@
 |
 */
 
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\NewMessage;Route::get('/test-mail', function (){
+    Notification::route('mail', 'yourMailtrapEmailAddress')->notify(new NewMessage());
+    return 'Sent';
+});
+
+
 //Accesos en principal
 Route::get('/', 'SiteController@principal');
 Route::get('como_funciona','SiteController@howItWorks');
+Route::get('para_que_funciona','SiteController@itWorksfor');
 Route::get('quienes_somos','SiteController@quienesSomos');
 Route::get('planes','SiteController@planes');
 Route::get('talentos', 'SiteController@talentos')->name('talentos');
+Route::get('talentos_resultado', 'SearchController@principalSearch')->name('talentos_resultado');
 Route::get('canjes', 'SiteController@canjes');
 Route::get('canjes/{id}', 'ExchangeController@canje');
 Route::get('suscripcion', 'SiteController@suscripcion')->name('suscripcion');
-Route::get('terminos_&_condiciones', 'SiteController@terminos');
+Route::get('terminos_&_condiciones', 'SiteController@terminos')->name('terminos');
+//Filtrado de Telentos y Canjes
+Route::get('talentos/fetch_data', 'SearchController@fetch_data_talents');
+Route::get('canjes-filtro/fetch_data', 'SearchController@fetch_data_exchanges');
+
 
 Route::get('logout', function ()
 {
@@ -29,18 +42,6 @@ Route::get('logout', function ()
 
     return Redirect::to('/');
 })->name('logout');
-
-
-//Filtrado de Telentos
-Route::post('talentos-filtro','SearchController@talentsFilter');
-//paginacion de talentos
-Route::get('/pagination', 'SiteController@paginationTalents');
-Route::get('pagination/fetch_data_talents', 'SiteController@fetch_data_talents');
-//Filtrado de canjes
-Route::post('canjes','SearchController@exchangesFilter')->name('canjes');
-//paginacion de talentos
-/*Route::get('/pagination', 'SiteController@paginationTalents');
-Route::get('pagination/fetch_data_talents', 'SiteController@fetch_data_talents');*/
 
 
 Auth::routes(['verify' => true]);
@@ -114,5 +115,6 @@ Route::get('mensajes', 'MessageController@mensajes')->middleware('verified');
 Route::get('mensajes/{id}', 'MessageController@mensajesId')->middleware('verified');
 Route::get('mensajes-usuario', 'MessageController@mensajesUsuario');
 Route::post('enviar-mensaje', 'MessageController@nuevoMensaje');
+Route::get('enviar-mensaje-perfil', 'MessageController@nuevoMensajePerfil');
 
 

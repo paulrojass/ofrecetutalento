@@ -14,8 +14,9 @@
 	 			</thead>
 	 			<tbody>
 					@foreach($propuestos->sortByDesc('created_at') as $propuesto)
+
 	 				<tr>
-	 					<td class="col-7">
+	 					<td class="col-5">
 	 						<div class="table-list-title mr-5">
 	 							<!-- <span class="applied-field">{{ $propuesto->description }}</span> -->
 	 							<p>{{ $propuesto->description }}</p>
@@ -23,11 +24,21 @@
 	 							<!-- <span><i class="la la-map-marker"></i>Sacramento, California</span> -->
 	 						</div>
 	 					</td>
-	 					<td class="col-2">
-	 						<span class="applied-field">{{ $propuesto->exchange_id }}</span>
+	 					<td class="col-3">
+	 						<span class="applied-field">
+								<a href="{{ url('canjes/'.$propuesto->exchange_id) }}" title="">
+	 								{{App\Exchange::find($propuesto->exchange_id)->title}}
+								</a>
+							</span>
 	 					</td>
-	 					<td class="col-2">
-	 						<span>{{ $propuesto->exchange_proposal }}</span>
+	 					<td class="col-3">
+							@isset($propuesto->exchange_proposal)
+								@php($nombre = App\Exchange::find($propuesto->exchange_proposal)->title)
+
+	 							<span>{{$nombre}}</span>
+							@else
+	 							<span>${{ App\Exchange::find($propuesto->exchange_id)->price}}</span>
+							@endisset
 	 					</td>
 	 					<td class="col-1">
 	 						@if($propuesto->approved == NULL)

@@ -4,7 +4,7 @@
 			<div class="blog-single">
 	 			<ul class="post-metas">
 	 				<li>
-	 					<a href="#" title="">
+	 					<a href="{{ url('perfil/'.$mensajes[0]->user_from->id) }}" title="">
 	 						<img src="{{URL::asset('images/users/default.png') }}" style="max-height: 40px; max-width: 40px" alt="" />
 	 						{{ $mensajes[0]->user_from->name }} {{ $mensajes[0]->user_from->lastname }}
 	 					</a>
@@ -63,8 +63,8 @@
 		</table>
 		@endif
 		@endforeach
-		<div class="container pl-4 pt-4">
-			<div class="profile-form-edit">
+		<div class="container pl-4 pt-4" >
+			<div class="profile-form-edit" >
 				<form>
 					@csrf
 					<div class="row">

@@ -27,6 +27,7 @@ class MessageController extends Controller
      */
     public function create(Request $request)
     {
+
         $message = new Message();
         $message->to_id = $request->to_id;
         $message->from_id = $request->from_id;
@@ -108,6 +109,9 @@ class MessageController extends Controller
 
     public function mensajes()
     {
+        //Si no es usuario Pro o Gold no entra
+        if(auth()->user()->suscription->plan_id <= 2) return back();
+
         $recibidos = Message::where('to_id', auth()->user()->id )->get();
 
         $enviados = Message::where('from_id', auth()->user()->id )->get();
@@ -116,12 +120,13 @@ class MessageController extends Controller
 
         $usuarios = $mensajes->unique('from_id')->sortBy('created_at');
 
-        if(!$usuarios->isEmpty()){
+        if($usuarios->count()>1){
             $from_id = $usuarios[0]->from_id;
         }else
         {
             $from_id = 0;
         }
+
 
         return view('mensajes', compact('mensajes', 'usuarios', 'from_id'));
     }
@@ -161,6 +166,11 @@ class MessageController extends Controller
         $mensajes = $mensajes->sortBy('created_at');
         
         return view('filtros.mensajes', compact('mensajes'));
+    }
+
+    public function nuevoMensajePerfil(Request $request)
+    {
+        return $this->create($request);
     }
 
     public function contadorMensajes()
