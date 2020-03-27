@@ -18,8 +18,13 @@ use App\Notifications\NewMessage;Route::get('/test-mail', function (){
 });
 
 
+Route::group(['middleware' => ['guest']], function () {
+Route::get('suscripcion', 'SiteController@suscripcion')->name('suscripcion');
+});
+
+
 //Accesos en principal
-Route::get('/', 'SiteController@principal');
+Route::get('/', 'SiteController@principal')->name('principal');
 Route::get('como_funciona','SiteController@howItWorks');
 Route::get('para_que_funciona','SiteController@itWorksfor');
 Route::get('quienes_somos','SiteController@quienesSomos');
@@ -28,7 +33,6 @@ Route::get('talentos', 'SiteController@talentos')->name('talentos');
 Route::get('talentos_resultado', 'SearchController@principalSearch')->name('talentos_resultado');
 Route::get('canjes', 'SiteController@canjes');
 Route::get('canjes/{id}', 'ExchangeController@canje');
-Route::get('suscripcion', 'SiteController@suscripcion')->name('suscripcion');
 Route::get('terminos_&_condiciones', 'SiteController@terminos')->name('terminos');
 //Filtrado de Telentos y Canjes
 Route::get('talentos/fetch_data', 'SearchController@fetch_data_talents');
@@ -46,7 +50,7 @@ Route::get('logout', function ()
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+//Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
 Route::get('actualizar-mensajes', 'MessageController@contadorMensajes');
 
@@ -116,5 +120,3 @@ Route::get('mensajes/{id}', 'MessageController@mensajesId')->middleware('verifie
 Route::get('mensajes-usuario', 'MessageController@mensajesUsuario');
 Route::post('enviar-mensaje', 'MessageController@nuevoMensaje');
 Route::get('enviar-mensaje-perfil', 'MessageController@nuevoMensajePerfil');
-
-

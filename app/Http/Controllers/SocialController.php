@@ -28,11 +28,11 @@ class SocialController extends Controller
         $user = $this->createUser($getInfo, $provider);
         
         //Agregando Rol
-        if(!(User::where('id', $user->id)->exists())){
+/*        if(!(User::where('id', $user->id)->exists())){
             $user->roles()->attach(Role::where('name', 'user')->first());
             $this->newSuscription($user->id, 1, 'mensual');
             $this->newExperience($user->id);
-        }
+        }*/
     
         auth()->login($user);
      
@@ -52,6 +52,11 @@ class SocialController extends Controller
             'provider_id' => $getInfo->id,
             'email_verified_at' => now()
         ]);
+        
+        $user->roles()->attach(Role::where('name', 'user')->first());
+        $this->newSuscription($user->id, 1, 'mensual');
+        $this->newExperience($user->id);
+
       }
       return $user;
     }
