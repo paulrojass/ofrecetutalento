@@ -34,7 +34,7 @@
 							<div class="widget">
 								<div class="search_widget_job">
 									<div class="field_w_search">
-										<input type="text" id="search" name="search" placeholder="Buscar" />
+										<input type="text" id="search" name="search" placeholder="Buscar" @isset($busqueda) value="{{ $busqueda }}" @endisset />
 										<i class="la la-search"></i>
 									</div><!-- Search Widget -->
 									<div class="field_w_search">

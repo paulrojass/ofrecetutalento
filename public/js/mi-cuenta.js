@@ -1,14 +1,14 @@
 id_user = $('#auth_user').val();
 
 $(function(){
-
-
 	informacionPerfil();
 	talentosPerfil();
 	canjesPerfil();
 	recibidosPerfil();
 	propuestosPerfil();
 	mostrar('#mi-perfil', '#a-perfil');
+
+	$('.alert').hide();
 
 	// Read value on page load
 	$(".result-language b").html($("#level-language").val());
@@ -35,11 +35,11 @@ $(function(){
 	});
 */
 
-$('#datepicker').datepicker({
+/*$('#datepicker').datepicker({
   uiLibrary: 'bootstrap4',
   locale: 'es-es',
 });
-
+*/
 
 
 	$('#avatar').change(function(){
@@ -591,18 +591,18 @@ function cambiarImagenCanje(id){
 
 /* ================ TRATOS*/
 	/* Aprobar Trato */
-	$('#tratos-r').on('click', '.aprobar', function(e){
+/*	$('#tratos-r').on('click', '.aprobar', function(e){
 		e.preventDefault();
 		var trato_id = $(this).data('value');
 		aprobarTrato(trato_id, 1);
 	});
 
-	/* Rechazar Trato */
+	 Rechazar Trato 
 	$('#tratos-r').on('click', '.rechazar', function(e){
 		e.preventDefault();
 		var trato_id = $(this).data('value');
 		aprobarTrato(trato_id, 0);
-	});
+	});*/
 
 	function aprobarTrato(id, valor){
 		var _token = $("input[name='_token']").val();
@@ -615,12 +615,271 @@ function cambiarImagenCanje(id){
 			recibidosPerfil();
 		});	
 	}
+
+/*=== Agregar informacion a modal*/
+
+$('#modal-trato').on('show.bs.modal', function (event) {
+	
+	var button = $(event.relatedTarget) // Button that triggered the modal
+	var type = button.data('type')
+	var trato_id = button.data('trato')
+	var canje_solicitado = button.data('canjer')
+	var canje_propuesto = button.data('canjep')
+	var name = button.data('name')
+	var description = button.data('description')
+	var ideal = button.data('ideal')
+	var plus = button.data('plus')
+	var value = button.data('value')
+	var quantity = button.data('quantity')
+	var approved = button.data('approved')
+	var dealingready = button.data('dealingready')
+	var proposalready = button.data('proposalready')
+	var exchangeid = button.data('exchangeid')
+	var exchangeprice = button.data('exchangeprice')
+	var proposalid = button.data('proposalid')
+	var exchangedays = button.data('exchangedays')
+	var proposaldays = button.data('proposaldays')
+	var pay = button.data('pay')
+	var created = button.data('created')
+	var acceptid = button.data('acceptid')
+	var proposeid = button.data('proposeid')
+
+
+	var modal = $(this)
+	modal.find('#info-trato-talento').html('')
+	modal.find('#info-trato-canje-pago').html('')
+	modal.find('#boton-aprobar').html('')
+
+	if (exchangeid === '') {
+		modal.find('#info-trato-talento').html(
+			'<div class="row">'+
+			'	<div class="col-sm">'+
+			'		<p> <strong>Nombre del trato: </strong>'+name+'</p>'+
+			'	</div>'+
+			'</div>'+
+			'<div class="row">'+
+			'	<div class="col-sm">'+
+			'		<p><strong>Descripción: </strong>'+description+'</p>'+
+			'	</div>'+
+			'</div>'+
+			'<div class="row">'+
+			'	<div class="col-sm">'+
+			'		<p><strong>Resultado Final ideal: </strong>'+ideal+'</p>'+
+			'	</div>'+
+			'</div>'+
+			'<div class="row">'+
+			'	<div class="col-sm">'+
+			'		<p><strong>Factor crítico de calidad en el proyecto: </strong>'+plus+'</p>'+
+			'	</div>'+
+			'</div>'+
+			'<div class="row">'+
+			'	<div class="col-sm">'+
+			'		<p><strong>Presupuesto por unidad: </strong> '+value+'</p>'+
+			'	</div>'+
+			'	<div class="col-sm">'+
+			'		<p><strong>Cantidad solicitada: </strong>'+quantity+'</p>'+
+			'	</div>'+
+			'</div>'+
+			'<div class="row">'+			
+			'	<div class="col-sm">'+
+			'		<p><strong>Días aproximados para culminar proyecto:</strong>'+exchangedays+'</p>'+
+			'	</div>'+
+			'</div>'
+		);
+	}
+	else
+	{
+		modal.find('#info-trato-talento').html(
+			'<div class="row">'+
+			'	<div class="col-sm">'+
+			'		<p> <strong>Canje solicitado: </strong><a class="link-canje" href="/canjes/'+canje_solicitado+'">'+exchangeid+'</a></p>'+
+			'	</div>'+
+			'</div>'+
+			'<div class="row">'+
+			'	<div class="col-sm">'+
+			'		<p><strong>Descripción: </strong>'+description+'</p>'+
+			'	</div>'+
+			'</div>'+
+			'<div class="row">'+
+			'	<div class="col-sm">'+
+			'		<p><strong>Días aproximados para entregar el canje solictiado: </strong>'+exchangedays+'</p>'+
+			'	</div>'+
+			'</div>'
+		);
+		if(pay === 0){
+			modal.find('#info-trato-canje-pago').html(
+				'<div class="pago-canje">'+
+				'	<div class="row">'+
+				'		<div class="col-sm">'+
+				'			<p> <strong>Canje propuesto: </strong> <a class="link-canje" href="/canjes/'+canje_propuesto+'">'+proposalid+'</a></p>'+
+				'		</div>'+
+				'	</div>'+
+				'	<div class="row">'+
+				'		<div class="col-sm">'+
+				'			<p><strong>Días aproximados para entregar el canje propuesto: </strong>'+proposaldays+'</p>'+
+				'		</div>'+
+				'	</div>'+
+				'</div>'
+			);
+		}else{
+			modal.find('#info-trato-canje-pago').html(
+				'<div class="pago-precio">'+
+				'	<div class="row">'+
+				'		<div class="col-sm">'+
+				'			<p><strong>Pago al precio del canje:</strong> '+exchangeprice+'</p>'+
+				'		</div>'+
+				'	</div>'+
+				'</div>'
+			);
+
+		}
+
+	}
+	if( approved === ''){modal.find('#info-trato-aprobar').html('<p><strong>Estado del canje:</strong> Pendiente por aprobación </p>');}
+	else if( approved === 0){modal.find('#info-trato-aprobar').html('<p><strong>Estado del canje:</strong> Omitido </p>');}
+	else{modal.find('#info-trato-aprobar').html('<p><strong>Estado del canje:</strong> Aprobado </p>');}
+	
+	if( (type == 'recibido')){
+		if(approved === ''){
+			modal.find('#div-boton-aprobar').html(
+				'<div class="upload-info">'+
+					'<a href="javascript:void(0)" data-trato="'+trato_id+'" id="boton-aprobar-trato">Aceptar</a>'+
+				'</div>'+
+				'<div class="upload-info">'+
+					'<a href="javascript:void(0)" data-trato="'+trato_id+'" id="boton-rechazar-trato">Omitir</a>'+
+				'</div>'
+			);
+		}else if(approved === 1){
+			if(proposalready ===1){
+				modal.find('#div-boton-aprobar').html(
+				'		<div class="col-sm">'+
+				'			<p>Pago o Canje propuesto se ha recibido</p>'+
+				'		</div>'
+				);
+			}else{
+				modal.find('#div-boton-aprobar').html(
+					'<div class="upload-info">'+
+						'<a href="javascript:void(0)" data-trato="'+trato_id+'" id="boton-trato-p-recibido">El canje o pago fue recibido</a>'+
+					'</div>'
+				);
+			}
+		}else{
+			modal.find('#div-boton-aprobar').html('')
+		}
+	}else{
+		if(approved === 1){
+			if(dealingready === 1){
+				modal.find('#div-boton-aprobar').html(
+				'		<div class="col-sm">'+
+				'			<p>Trato o Canje solicitado se ha recibido</p>'+
+				'		</div>'
+				);
+			}else{
+				modal.find('#div-boton-aprobar').html(
+					'<div class="upload-info">'+
+						'<a href="javascript:void(0)" data-trato="'+trato_id+'" id="boton-trato-s-recibido">El trato o canje fue recibido</a>'+
+					'</div>'
+				);
+			}
+		}
+	}
+});
+
+$('#div-boton-aprobar').on('click', '#boton-aprobar-trato', function(event) {
+	event.preventDefault();
+	var trato = $(this).data('trato');
+	aprobar(trato, 1);
+});
+$('#div-boton-aprobar').on('click', '#boton-rechazar-trato', function(event) {
+	event.preventDefault();
+	var trato = $(this).data('trato');
+	aprobar(trato, 0);
+});
+$('#div-boton-aprobar').on('click', '#boton-trato-p-recibido', function(event) {
+	event.preventDefault();
+	var trato = $(this).data('trato');
+	recibido(trato, 'propuesto');
+});
+$('#div-boton-aprobar').on('click', '#boton-trato-s-recibido', function(event) {
+	event.preventDefault();
+	var trato = $(this).data('trato');
+	recibido(trato, 'solicitado');
+});
+
+
+function aprobar(trato, tipo){
+	var _token = $("input[name='_token']").val();
+	$.ajax({
+		url: '/aprobar-trato',
+		type: 'post',
+		data: {dealing_id: trato, aprobar:tipo, _token:_token},
+	})
+	.done(function() {
+		recibidosPerfil();
+		propuestosPerfil();
+		$('#info-trato-aprobar').html('');
+		$('#div-boton-aprobar').html('');
+		if(tipo == 0){
+			$("#alert-trato-rechazado").fadeTo(2000, 500).slideUp(500, function(){
+			    $("#alert-trato-rechazado").slideUp(1000);
+			    $('#modal-trato').modal('toggle');
+			});
+		}else{
+			$("#alert-trato-aceptado").fadeTo(2000, 500).slideUp(500, function(){
+			    $("#alert-trato-aceptado").slideUp(1000);
+			    $('#modal-trato').modal('toggle');
+			});
+		}
+	})
+	.fail(function() {
+		console.log("error");
+	})
+	.always(function() {
+		console.log("complete");
+	});
+}
+
+
+function recibido(trato, tipo){
+	var _token = $("input[name='_token']").val();
+	$.ajax({
+		url: '/trato-recibido',
+		type: 'post',
+		data: {dealing_id: trato, recibido:tipo, _token:_token},
+	})
+	.done(function() {
+		recibidosPerfil();
+		propuestosPerfil();
+		$('#info-trato-aprobar').html('');
+		$('#div-boton-aprobar').html('');
+		if(tipo == 'propuesto'){
+			$("#alert-trato-p-recibido").fadeTo(2000, 500).slideUp(500, function(){
+			    $("#alert-trato-p-recibido").slideUp(1000);
+			    $('#modal-trato').modal('toggle');
+			});
+		}else{
+			$("#alert-trato-s-recibido").fadeTo(2000, 500).slideUp(500, function(){
+			    $("#alert-trato-s-recibido").slideUp(1000);
+			    $('#modal-trato').modal('toggle');
+			});
+		}
+	})
+	.fail(function() {
+		console.log("error");
+	})
+	.always(function() {
+		console.log("complete");
+	});
+}
+
+
+
+
 /* ================ TRATOS*/
 
 
 //================================== MANIPULACION DE ARCHIVOS
 	function cargaInicial(canje_id){
-		//$("#tipo-pago").checked();
 		verificarArchivos('image', canje_id);
 		//actualizarArchivos('image', canje_id);
 		verificarArchivos('video', canje_id);
@@ -645,9 +904,7 @@ function cambiarImagenCanje(id){
 						$('#titulo-'+tipo+' span').html('('+data.disponibles+' disponibles)');
 					}
 				}else{
-					$('#agregar-'+tipo).hide();
-					$('#titulo-'+tipo+' span').html('(Catidad máxima alcanzada para este plan)');
-				}
+					$('#agregar-'+tipo).hide();				}
 			}
 		});
 	}

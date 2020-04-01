@@ -29,10 +29,21 @@ class DealingController extends Controller
         $trato = new Dealing();
         $trato->description = $request->description;
         $trato->pay = $request->pay;
-        $trato->exchange_proposal = $request->exchange_proposal;
+        $trato->proposal_id = $request->proposal_id;
         $trato->propose_id = auth()->user()->id;
         $trato->accept_id = $request->accept_id;
         $trato->exchange_id = $request->exchange_id;
+        $trato->exchange_days = $request->exchange_days;
+        $trato->proposal_days = $request->proposal_days;
+
+        $trato->name = $request->name;
+        $trato->ideal = $request->ideal;
+        $trato->plus = $request->plus;
+        $trato->quantity = $request->quantity;
+        $trato->value = $request->value;
+
+
+
         $trato->save();
     }
 
@@ -106,5 +117,17 @@ class DealingController extends Controller
         return $trato;
     }
 
+    public function recibido(Request $request)
+    {
+    	$trato = Dealing::find($request->dealing_id);
+    	if($request->recibido == 'solicitado'){
+    		$trato->dealing_ready = 1;
+    	}else{
+    		$trato->proposal_ready = 1;	
+    	}
 
+        $trato->save();
+        return $trato;
+
+    }
 }

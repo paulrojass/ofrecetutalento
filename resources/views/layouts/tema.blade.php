@@ -105,21 +105,21 @@
 					<a href="{{url('/')}}" title=""><img src="{{URL::asset('tema/images/logo.png')}}" alt="" /></a>
 				</div><!-- Logo -->
 				@if(Auth::User())
+					@if(!View::hasSection('no-user-link'))
+					<div class="my-profiles-sec">
+						<span>
+							<img src="{{URL::asset('images/users/'.Auth::User()->avatar)}}" alt="" style="max-width: 50px; max-height: 50px;" />
+								{{Auth::User()->name}} {{Auth::User()->lastname}}
+							<i class="la la-bars"></i>
+						</span>
+					</div>
+					@endif
 
-				<div class="my-profiles-sec">
-					<span>
-						<img src="{{URL::asset('images/users/'.Auth::User()->avatar)}}" alt="" style="max-width: 50px; max-height: 50px;" />
-							{{Auth::User()->name}} {{Auth::User()->lastname}}
-						<i class="la la-bars"></i>
-					</span>
-				</div>
-
-				@if(auth()->user()->suscription->plan_id > 2)
-				<div id="contador-mensajes">
-
-				</div>
-				@endif
-
+					@if(auth()->user()->suscription->plan_id > 2)
+						@if(!View::hasSection('messages'))
+						<div id="contador-mensajes"></div>
+						@endif
+					@endif
 				@else
 				<div class="btn-extars">
 					<!-- <a href="{{url('suscripcion')}}" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a> -->
@@ -148,7 +148,7 @@
 									<a href="{{url('como_funciona')}}"title="">Como funciona</a>
 								</li>
 								<li>
-									<a href="{{url('como_funciona')}}"title="">¿Para qué funciona?</a>
+									<a href="{{url('para_que_funciona')}}"title="">¿Para qué funciona?</a>
 								</li>
 								<li>
 									<a href="{{url('quienes_somos')}}" title="">¿Quienes somos?</a>
@@ -183,13 +183,13 @@
 	</div>
 	<div class="tree_widget-sec">
 		<ul>
-			<li><a href="{{url('mi-cuenta')}}" title=""><i class="la la-file-text"></i>Mi cuenta</a></li>
+			<li><a href="{{url('mi-cuenta')}}" title=""><i class="la la-user"></i>Mi cuenta</a></li>
 			<!-- <li><a href="{{url('mi-cuenta')}}" title=""><i class="la la-briefcase"></i>My Resume</a></li>
 			<li><a href="candidates_shortlist.html" title=""><i class="la la-money"></i>Shorlisted Job</a></li>
-<li><a href="candidates_applied_jobs.html" title=""><i class="la la-paper-plane"></i>Applied Job</a></li>
-<li><a href="candidates_job_alert.html" title=""><i class="la la-user"></i>Job Alerts</a></li>
-<li><a href="candidates_cv_cover_letter.html" title=""><i class="la la-file-text"></i>Cv & Cover Letter</a></li>
-<li><a href="candidates_change_password.html" title=""><i class="la la-flash"></i>Change Password</a></li> -->
+			<li><a href="candidates_applied_jobs.html" title=""><i class="la la-paper-plane"></i>Applied Job</a></li>
+			<li><a href="candidates_job_alert.html" title=""><i class="la la-user"></i>Job Alerts</a></li>
+			<li><a href="candidates_cv_cover_letter.html" title=""><i class="la la-file-text"></i>Cv & Cover Letter</a></li>
+			<li><a href="candidates_change_password.html" title=""><i class="la la-flash"></i>Change Password</a></li> -->
 			<li><a href="{{route('logout')}}" title=""><i class="la la-unlink"></i>Cerrar sesión</a></li>
 		</ul>
 	</div>

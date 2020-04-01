@@ -2,15 +2,15 @@
 	<div class="block">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-3 column">
+				<div class="col-lg-4 column">
 					<div class="widget">
 						<div class="about_widget">
 							<div class="logo">
 								<a href="{{url('/')}}" title=""><img src="{{URL::asset('tema/images/logo-white.png')}}" style="max-width: 163px" alt="" /></a>
 							</div>
-							<span>Collin Street West, Victor 8007, Australia.</span>
+							<span>Ciudad de Panamá, Calle 56 Este, República de Panamá.</span>
 							<span>+1 246-345-0695</span>
-							<span>info@ofrecetutalento.com</span>
+							<span>ayuda@ofrecetutalento.com</span>
 						</div><!-- About Widget -->
 					</div>
 				</div>
@@ -45,17 +45,25 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-5 column">
-					<div class="widget">
-						<h3 class="footer-title">Still Need Help ?</h3>
-						<div class="subscribe_widget">
-							<p>Let us now about your issue and a Professional will reach you out.</p>
-							<form>
-								<input type="text" placeholder="Enter Valid Email Address" />
-								<button type="submit"><i class="la la-paper-plane"></i></button>
-							</form>
+				<div class="col-lg-4 column">
+					@auth
+						@if (auth()->user()->suscription->plan_id > 2)
+						<div class="widget">
+							<h3 class="footer-title">¿Desea reportar un talento?</h3>
+							<div class="subscribe_widget">
+								<p> nos gustaría conocer cualquier situación en donde un miembro de nuestra comunidad no cumplió con estos estándares de comportamiento y orden de la comunidad.</p>
+								<div class="simple-text-block">
+									<a href="{{ route('reportes') }}" title="">Reportar</a>
+								</div>
+								<!-- 							
+								<form>
+									<input type="text" placeholder="Enter Valid Email Address" />
+									<button type="submit"><i class="la la-paper-plane"></i></button>
+								</form> -->
+							</div>
 						</div>
-					</div>
+						@endif
+					@endauth
 				</div>
 			</div>
 		</div>

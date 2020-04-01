@@ -150,10 +150,14 @@
 				<div class="contact-edit pl-5 pr-5">
 					@csrf
 					<div class="row">
-
 						<span class="pf-title">Especificar requerimiento</span>
 						<div class="pf-field">
 							<textarea id="description" name="description"></textarea>
+						</div>
+
+						<span class="pf-title">Días aproximados que espero recibir su canje</span>
+						<div class="pf-field">
+							<input type="number" name="exchange_days" id="exchange_days" required>
 						</div>
 
 						<span class="pf-title">forma de pago</span>								
@@ -171,12 +175,11 @@
 							  </label>
 							</div>
 						</div>
-
 					</div>
 					<div class="row" id="div-select-canje" style="display: none">
 						<span class="pf-title">Mis Canjes</span>
 						<div class="pf-field">
-							<select id="exchange_proposal" name="exchange_proposal" data-placeholder="Selecciona tu canje" class="chosen">
+							<select id="proposal_id" name="proposal_id" data-placeholder="Selecciona tu canje" class="chosen" required>
 								@auth
 							@foreach(Auth()->user()->talents as $talent)
 								@foreach($talent->exchanges as $exchange)
@@ -186,7 +189,13 @@
 							@endauth
 						</select>
 						</div>
+
+						<span class="pf-title">Días para culminar mi canje</span>
+						<div class="pf-field">
+							<input type="number" name="proposal_days" id="proposal_days" required>
+						</div>
 					</div>
+
 					<div class="alert alert-light" role="alert" id="alert-trato">
 					 	Se ha propuesto un trato para este canje
 					</div>

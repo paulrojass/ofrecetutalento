@@ -16,14 +16,4 @@ class Dealing extends Model
     {
         return $this->belongsTo(Exchange::class, 'accept_id');
     }
-
-    public function exchange_request()
-    {
-        return $this->belongsTo(Exchange::class, 'exchange_id');
-    }
-    public function exchange_proposal()
-    {
-        return $this->belongsTo(Exchange::class, 'exchange_proposal');
-    } 
-
 }

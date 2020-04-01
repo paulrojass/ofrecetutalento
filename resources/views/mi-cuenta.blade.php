@@ -2,6 +2,8 @@
 
 @section('title', 'Mi cuenta')
 
+@section('no-user-link', '')
+
 @section('header_type', 'gradient')
 
 @section('css')
@@ -458,6 +460,63 @@
 	</div>	
 </section>
 <!--=================================  MODALS PARA AGREGAR Y EDITAR INFORMACION DE PDF -->
+
+
+
+<!--=================================  MODALS PARA TRATOS -->
+<section id="div-modal-nuevo-pdf">
+	<!-- Modal Idioma -->
+	<div class="modal fade bd-example-modal-lg" id="modal-trato" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content pt-4">
+			<h3>Información del trato</h3>
+			<button type="button" class="close-b" data-dismiss="modal" aria-label="Close">
+				<span class="close-popup"><i class="la la-close"></i></span>
+			</button>
+			<div class="modal-body">
+				<div id="info-trato-talento" class="contact-edit pl-5 pr-5 mb-2">
+					{{-- Si se solicita un talento --}}
+				</div>
+				<div id="info-trato-canje-pago" class="contact-edit pl-5 pr-5 mb-2">
+					{{-- Pagar precio de canje o con otro canje --}}
+				</div>
+
+				<div  class="contact-edit pl-5 pr-5 mb-2">
+					<div class="row" id="aprobar">
+						<div class="col-sm">
+							<p id="info-trato-aprobar">
+
+							</p>
+						</div>
+						<div class="col-sm" id="div-boton-aprobar">
+
+			 			</div>
+					</div>
+
+					<div class="alert alert-light" role="alert" id="alert-trato-aceptado">
+					 	El trato ha sido aprobado
+					</div>
+					<div class="alert alert-light" role="alert" id="alert-trato-rechazado">
+						El trato fue rechazado
+					</div>
+
+					<div class="alert alert-light" role="alert" id="alert-trato-p-recibido">
+						El trato o pago propuesto se ha marcado como recibido
+					</div>
+
+					<div class="alert alert-light" role="alert" id="alert-trato-s-recibido">
+						El trato solicitado se ha marcado como recibido
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	  </div>
+	</div>	
+</section>
+<!--=================================  MODALS PARA TRATOS -->
+
 @endsection
 
 @section('scripts')

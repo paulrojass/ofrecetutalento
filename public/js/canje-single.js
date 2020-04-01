@@ -112,17 +112,19 @@ $(function(){
 	$('#nuevo-trato').click(function () {
 		var pay = $('input:radio[name=pay]:checked').val();
 		if (pay == 1){
-			var exchange_proposal = null;
+			var proposal_id = null;
 		}else{
-			var exchange_proposal = $('#exchange_proposal').val();
+			var proposal_id = $('#proposal_id').val();
+			var proposal_days = $('#proposal_days').val();
 		}
 		var description = $('#description').val();
+		var exchange_days = $('#exchange_days').val();
 		var exchange_id = id_canje;
 		var token = '{{csrf_token()}}';
 		$.ajax({
 			type:'get',
 			url:'/nuevo-trato',
-			data:{description:description, accept_id:user_dealing, pay:pay, exchange_proposal: exchange_proposal, exchange_id: exchange_id, _token: token},
+			data:{description:description, accept_id:user_dealing, pay:pay, proposal_id: proposal_id, exchange_id: exchange_id, exchange_days:exchange_days, proposal_days:proposal_days, _token: token},
 			success: function (response) {
 				$("#alert-trato").fadeTo(2000, 500).slideUp(500, function(){
 				    $("#alert-trato").slideUp(1000);

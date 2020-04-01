@@ -23,6 +23,13 @@ Route::get('suscripcion', 'SiteController@suscripcion')->name('suscripcion');
 });
 
 
+
+Route::group(['middleware' => ['auth']], function () {
+Route::get('reportes', 'SiteController@reporte')->name('reportes');
+Route::post('reporte-enviado', 'SiteController@reporteEnviado')->name('reporte-enviado');
+});
+
+
 //Accesos en principal
 Route::get('/', 'SiteController@principal')->name('principal');
 Route::get('como_funciona','SiteController@howItWorks');
@@ -37,6 +44,7 @@ Route::get('terminos_&_condiciones', 'SiteController@terminos')->name('terminos'
 //Filtrado de Telentos y Canjes
 Route::get('talentos/fetch_data', 'SearchController@fetch_data_talents');
 Route::get('canjes-filtro/fetch_data', 'SearchController@fetch_data_exchanges');
+
 
 
 Route::get('logout', function ()
@@ -77,6 +85,9 @@ Route::post('verificar-archivos', 'FileController@showFilesUser');
 Route::get('actualizar-archivos', 'FileController@actualizarArchivos');
 Route::post('eliminar-archivo', 'FileController@eliminarArchivo');
 Route::post('editar-archivo', 'FileController@editarArchivo');
+Route::get('nuevo-trato-talento', 'DealingController@newDealing');
+
+
 //Route::post('agregar-imagen', 'FileController@agregarImagen');
 
 
@@ -109,10 +120,9 @@ Route::post('agregar-imagen','FileController@newImage')->name('new-image');
 Route::post('agregar-video','FileController@newVideo')->name('new-video');
 Route::post('agregar-pdf','FileController@newPdf')->name('new-pdf');
 
-
-
-//mi cuento tratos
+//mi cuenta tratos
 Route::post('aprobar-trato', 'DealingController@aprobar');
+Route::post('trato-recibido', 'DealingController@recibido');
 
 //mensajes
 Route::get('mensajes', 'MessageController@mensajes')->middleware('verified');

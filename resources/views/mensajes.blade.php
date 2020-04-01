@@ -2,6 +2,8 @@
 
 @section('title', 'Mensajes')
 
+@section('messages', '')
+
 @section('header_type', 'gradient')
 
 @section('content')
@@ -11,32 +13,38 @@
 			 <div class="row no-gape">
 			 	<aside class="col-lg-3 column border-right no-pad" id="columna-usuarios">
 					<ul class="scrollbar">
-						@if($usuarios->isNotEmpty())
-							@foreach($usuarios as $usuario)
-							@if($usuario->user_from->id != auth()->user()->id) 
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="my-profiles-message">
-											<img src="{{URL::asset('images/users/'.$usuario->user_from->avatar) }}" style="max-height: 54px; max-width: 54px" alt="" />
-										</div>
-										<h3><a class="usuario-id" data-value="{{ $usuario->user_from->id }}" title="">{{ $usuario->user_from->name}} {{ $usuario->user_from->lastname}}</a></h3>
-										<span>{{ $usuario->created_at->diffForHumans()}}</span>
+						@foreach($usuarios as $usuario)
+						@if($usuario->user_from->id != auth()->user()->id)
+						<li>
+							<div class="job-listing">
+								<div class="job-title-sec">
+									<div class="my-profiles-message">
+										<img src="{{URL::asset('images/users/'.$usuario->user_from->avatar) }}" style="max-height: 54px; max-width: 54px" alt="" />
 									</div>
+									<h3><a class="usuario-id" data-value="{{ $usuario->user_from->id }}" title="">{{ $usuario->user_from->name}} {{ $usuario->user_from->lastname}}</a></h3>
+									<span>{{ $usuario->created_at->diffForHumans()}}</span>
 								</div>
-							</li>
-							@endif
-							@endforeach
+							</div>
+						</li>
 						@else
-							<p>No hay mensajes</p>
+						<li>
+							<div class="job-listing">
+								<div class="job-title-sec">
+									<div class="my-profiles-message">
+										<img src="{{URL::asset('images/users/'.$usuario->user_to->avatar) }}" style="max-height: 54px; max-width: 54px" alt="" />
+									</div>
+									<h3><a class="usuario-id" data-value="{{ $usuario->user_to->id }}" title="">{{ $usuario->user_to->name}} {{ $usuario->user_to->lastname}}</a></h3>
+									<span>{{ $usuario->created_at->diffForHumans()}}</span>
+								</div>
+							</div>
+						</li>
 						@endif
+						@endforeach
 					</ul>
 			 	</aside>
-			 	<!-- Columna de mensajes -->
+			 	{{-- ============================================== COLUMNA DONDE VAN LOS MENSAJES --}}
 			 	<div class="col-lg-9 column" id="columna-mensajes">
-			 		@if($usuarios->isNotEmpty())
-						<!-- <h3> Todavía no tienes mensajes en tu buzón</h3> -->
-			 		@endif
+
 				</div>
 			 </div>
 		</div>
@@ -51,9 +59,8 @@
 
 		var auth_id = '{{ auth()->user()->id }}';
 
-		if('{{ $from_id }}' > 0){
-			console.log('{{ $from_id }}');
-			cargarUsuario('{{ $from_id }}', auth_id);
+		if('{{ $primero }}' > 0){
+			cargarUsuario('{{ $primero }}', auth_id);
 		}
 
 		$('#columna-usuarios').on('click', '.usuario-id', function (e) {
@@ -82,10 +89,6 @@
 			var body = $('#body').val();
 			var _token = $("input[name='_token']").val();
 			var auth_id = '{{ auth()->user()->id }}';
-
-
-			//console.log('to_id: '+to_id+', from_id:'+from_id+', body: '+body+', token:'+_token);
-
 			$.ajax({
 				type:'post',
 				url:'/enviar-mensaje',
@@ -99,10 +102,14 @@
 			});
 		});
 
-  $('#columna-mensajes').on('keyup','#body',function() {
+  $('#columna-mensajes').on('keyup','#body',function(e) {
+   	e.preventDefault();
     var empty = false;
     $('#body').each(function() {
-        if ($(this).val().length == 0) {
+    	if(e.keyCode == 13){
+    		$('#enviar-mensaje').trigger('click');
+    	}
+    	else if ($(this).val().length == 0) {
             empty = true;
         }
     });                   

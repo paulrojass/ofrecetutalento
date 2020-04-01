@@ -38,7 +38,7 @@ class SearchController extends Controller
 		}
 
 		$categories = Category::all();
-		return view('talentos', compact('users', 'categories'));
+		return view('talentos', compact('users', 'categories', 'busqueda'));
 	}
 
     public function fetch_data_talents(Request $request)

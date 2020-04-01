@@ -92,7 +92,7 @@ class MessageController extends Controller
     }
 
 
-    public function mensajesId($from_id)
+    public function mensajesId($primero)
     {
         //if ($from_id != auth()->user()->id) return back();
 
@@ -102,33 +102,35 @@ class MessageController extends Controller
 
         $mensajes = $recibidos->merge($enviados);
 
-        $usuarios = $mensajes->unique('from_id')->sortBy('created_at');
+        $usuarios = $mensajes->where('from_id','<>', auth()->user()->id)->unique('from_id')->sortBy('created_at');
 
-        return view('mensajes', compact('mensajes', 'usuarios', 'from_id'));
+        return view('mensajes', compact('mensajes', 'usuarios', 'primero'));
     }
 
     public function mensajes()
     {
         //Si no es usuario Pro o Gold no entra
         if(auth()->user()->suscription->plan_id <= 2) return back();
-
+        //mensajes que llegan a auth
         $recibidos = Message::where('to_id', auth()->user()->id )->get();
-
+        //mensajes que envio auth
         $enviados = Message::where('from_id', auth()->user()->id )->get();
 
+        //mezcla de mensajes enviados y recibidos
         $mensajes = $recibidos->merge($enviados);
 
-        $usuarios = $mensajes->unique('from_id')->sortBy('created_at');
+        if(!$recibidos->isEmpty()){//si hay recibidos:
+            $usuarios = $mensajes->where('from_id','<>', auth()->user()->id)->unique('from_id')->sortBy('created_at');
+            $primero = $usuarios[0]->from_id;
+        }  
+        elseif (!$enviados->isEmpty())//Si hay enviados:
+            {
+                $usuarios = $mensajes->where('to_id','<>', auth()->user()->id)->unique('to_id')->sortBy('created_at');
+                $primero = $usuarios[0]->to_id;
+            }
+            else return view('no-mensajes');
 
-        if($usuarios->count()>1){
-            $from_id = $usuarios[0]->from_id;
-        }else
-        {
-            $from_id = 0;
-        }
-
-
-        return view('mensajes', compact('mensajes', 'usuarios', 'from_id'));
+        return view('mensajes', compact('mensajes', 'usuarios', 'primero'));
     }
 
     public function mensajesUsuario(Request $request)

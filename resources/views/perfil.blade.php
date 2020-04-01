@@ -53,7 +53,18 @@
 				 			<div class="download-cv">
 				 				<!-- <a href="#" title="">Download CV <i class="la la-download"></i></a> -->
 				 			</div>
+
+
 				 		</div>
+				 		<div class="job-single-head style2 mt-5 pb-0">
+			 				@auth
+							@if(auth()->user()->id != $user->id)
+			 				<a href="javascript:void(0)" data-toggle="modal" data-target="#modal-trato" title="" class="apply-job-btn"></i>Ofrecer trato</a>
+			 				@endif
+			 				@else
+			 				<a href="{{url('suscripcion')}}" title="" class="apply-job-btn"></i>Registrate para ofrecer trato</a>
+			 				@endauth
+			 			</div>
 
 				 		<ul class="cand-extralink">
 				 			<li><a href="#abilities" title="">habilidades</a></li>
@@ -236,12 +247,109 @@
 	  </div>
 	</div>	
 </section>
+
+<section id="div-modal-nuevo-trato">
+	<div class="modal fade bd-example-modal" id="modal-trato" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content pt-4">
+			<h3>Contratar este talento</h3>
+			<button type="button" class="close-b" data-dismiss="modal" aria-label="Close">
+				<span class="close-popup"><i class="la la-close"></i></span>
+			</button>
+			<div class="modal-body">
+				<div class="contact-edit pl-5 pr-5">
+					<div class="row">
+					<div class="alert alert-light" role="alert" id="alert-message">
+					  El mensaje a {{ $user->name }} {{ $user->lastname }} ha sido enviado
+					</div>
+					<p>
+						Parece que has encontrado a quien estabas buscando. ¡Enoharbuena!
+					</p>
+					<p>
+						Con el siguiente paso, nos gustaría recabar información detallada sobre el proyecto que requieres de este talento. Por favor trata de usar lenguaje abierto e informal para poder evitar malos entendidos. En esta étapa inicial queremos conocer tus expectativas como alguien que necesita de un producto o servicio de este talento.
+					</p>
+					</div>
+
+					<form id="form-trato-talento" class="pl-1">
+						@csrf
+						<input type="hidden" name="pay" id="pay" value="0">
+						<input type="hidden" name="accept_id" id="accept_id" value="{{ $user->id }}">
+						<input type="hidden" name="propose_id" id="propose_id" value="{{ auth()->user()->id }}">
+						<div class="col-lg-12">
+							<span class="pf-title">Nombre del proyecto</span>									
+							<div class="pf-field">
+								<input type="text" name="name" id="name" maxlength="100" required>
+								<span class="form-error" id="e_name_pdf" hidden> Debe agregar un nombre válida</span>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<span class="pf-title">Descripción</span>									
+							<div class="pf-field">
+								<textarea id="description" name="description" placeholder="¿Cuál es el producto, servicio o beneficio final en su ​ mejor versión ​ que requieres de este talento?" required></textarea>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<span class="pf-title">Resultado Final Ideal (opcional)</span>									
+							<div class="pf-field">
+								<input type="text" name="ideal" id="ideal" maxlength="100" placeholder="¿Cuál es el producto, servicio o beneficio final en su ​ mejor versión ​ que requieres de este talento?”​ cuando lo recibas." required>
+							</div>
+						</div>
+						<div class="col-lg-12">
+
+							<span class="pf-title">¿Cuál es el factor crítico de calidad en este proyecto? (opcional)</span>				
+							<div class="pf-field">
+								<input type="text" name="plus" id="plus" maxlength="100" placeholder="Descríbenos ese “ingrediente esencial” que necesita tener este proyecto para que tu digas ​“es un éxito”​ cuando lo recibas." required>
+							</div>
+						</div>
+
+						<div class="col-lg-6">
+
+							<span class="pf-title">¿Días aproximados para recibir el producto?</span>				
+							<div class="pf-field">
+								<input type="number" name="exchange_days" id="exchange_days" maxlength="100" required>
+							</div>
+						</div>
+
+
+						<div class="col-lg-12">
+							<span class="pf-title">Oferta económica:</span>			
+						</div>
+	 					<div class="col-lg-6">
+	 						<span class="pf-title">¿Cuánto es tu presupuesto por 1 cantidad de este proyecto?</span>
+	 						<div class="pf-field">
+	 							<input type="number" name="value" id="value" required />
+	 						</div>
+	 					</div>
+	 					<div class="col-lg-6">
+	 						<span class="pf-title">Cantidad Total</span>
+	 						<div class="pf-field">
+	 							<input type="number" name="quantity" id="quantity" required  />
+	 						</div>
+	 					</div>
+	 					<div class="col-lg-6">
+							<div class="alert alert-light" role="alert" id="alert-trato">
+								El trato fue enviado exitosamente
+							</div>					
+	 					</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="boton-normal">Cancelar</button>
+				<button type="submit" class="boton-normal" id="boton-nuevo-trato-talento">Ofrecer Trato</button>
+			</div>
+		</div>
+	  </div>
+	</div>	
+</section>
+
+
 @endsection
 
 @section('scripts')
 <script>
 	$(function(){
-		$("#alert-message").hide();
+		$(".alert").hide();
 		$('#button-enviar').click(function(e){
 			e.preventDefault();
 			var datos = $('#form-message').serialize();
@@ -264,6 +372,26 @@
 			})
 			.always(function() {
 
+			});
+		});
+
+
+		$('#boton-nuevo-trato-talento').click(function(event) {
+			event.preventDefault();
+			var dataString = $('#form-trato-talento').serialize();
+			$.ajax({
+				url: '/nuevo-trato-talento',
+				type: 'get',
+				data: dataString,
+				contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+				processData: false // NEEDED, DON'T OMIT THIS
+			})
+			.done(function(response) {
+				$("#alert-trato").fadeTo(2000, 500).slideUp(500, function(){
+				    $("#alert-trato").slideUp(1000);
+				    $('#modal-trato').modal('hide');
+					$("#form-trato-talento")[0].reset();
+				});
 			});
 		});
 	});

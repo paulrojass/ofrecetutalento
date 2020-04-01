@@ -15,7 +15,9 @@ class AddAcceptIdToDealings extends Migration
     {
         Schema::table('dealings', function (Blueprint $table) {
             $table->unsignedBigInteger('accept_id');
+            $table->unsignedBigInteger('propose_id');
             $table->foreign('accept_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('propose_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -29,6 +31,8 @@ class AddAcceptIdToDealings extends Migration
         Schema::table('dealings', function (Blueprint $table) {
             $table->dropForeign(['accept_id']);
             $table->dropColumn('accept_id');
+            $table->dropForeign(['propose_id']);
+            $table->dropColumn('propose_id');
         });
     }
 }

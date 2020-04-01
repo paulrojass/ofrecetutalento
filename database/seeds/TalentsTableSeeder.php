@@ -25,7 +25,6 @@ class TalentsTableSeeder extends Seeder
 					factory(File::class,3)->create(['exchange_id'=>$exchange->id]);
 					factory(Like::class,3)->create(['exchange_id'=>$exchange->id]);
                     factory(Comment::class,2)->create(['exchange_id'=>$exchange->id]);
-					factory(Dealing::class,3)->create(['exchange_id'=>$exchange->id, 'accept_id' => $exchange->talent->user_id]);
 				});
 			});
     	}

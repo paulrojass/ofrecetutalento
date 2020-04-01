@@ -454,3 +454,53 @@ footer .blanco span{
     background-color: #252d5f;
     border-color: #252d5f;
 }
+
+.chat-button{
+  float: right;
+  background: #ffffff;
+  border: 2px solid #ff9200;
+  color: #202020;
+  font-family: 'Questrial' !important;
+  font-size: 15px;
+  padding: 11px 40px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
+  margin-top: 10px;
+} 
+.chat-button:disabled {
+
+    float: right;
+    background: #e8ecec;
+    border: 2px solid #e8ecec;
+    color: #ffffff;
+    font-family: 'Questrial' !important;
+    font-size: 15px;
+    padding: 11px 40px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: default;
+
+}
+
+
+/* Como funciona */
+ .how-workimg:before{
+/*  background: linear-gradient(45deg, rgba(255,146,0,1) 0%,rgba(255,14,0,1) 44%,rgba(20,31,114,1) 100%);*/
+background: linear-gradient(45deg, rgba(251,35,106,1) 0%,rgba(251,35,106,1) 44%,rgba(255,146,0,1) 100%);
+} 
+
+
+
+.link-canje {
+    font-family: 'Questrial' !important;
+    text-decoration: none;
+    line-height: 30px;
+    color: #ff9200;
+}

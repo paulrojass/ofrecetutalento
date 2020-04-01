@@ -159,4 +159,16 @@ class SiteController extends Controller
     {
         return view('forms.mi-cuenta-perfil');
     }
+
+    public function reporte()
+    {
+        if(auth()->user()->suscription->plan_id > 2) return view('reportes');
+        return back();
+    }
+
+    public function reporteEnviado(Request $request)
+    {
+        dd(back());
+        return view('reporte-enviado');
+    }
 }

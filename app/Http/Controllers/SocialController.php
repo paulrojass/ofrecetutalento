@@ -50,7 +50,7 @@ class SocialController extends Controller
             'email'    => $getInfo->email,
             'provider' => $provider,
             'provider_id' => $getInfo->id,
-            'email_verified_at' => now()
+            'email_verified_at' => date('Y-m-d H:i:s')
         ]);
         
         $user->roles()->attach(Role::where('name', 'user')->first());
