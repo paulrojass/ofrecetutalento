@@ -127,7 +127,7 @@ class DealingController extends Controller
     	}
 
         $trato->save();
-        return $trato;
+        return $trato->proposal_id;
 
     }
 }

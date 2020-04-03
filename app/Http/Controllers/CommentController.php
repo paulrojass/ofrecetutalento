@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Dealing;
+use App\Rating;
 use App\Exchange;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -36,6 +38,8 @@ class CommentController extends Controller
             $comment->replyto = $request->replyto;
         }
         $comment->save();
+
+        return $comment;
     }
 
     /**
@@ -94,7 +98,6 @@ class CommentController extends Controller
         //
     }
 
-
     public function newComment(Request $request)
     {
         $canje = Exchange::find($request->canje_id);
@@ -108,5 +111,39 @@ class CommentController extends Controller
         return view('content.comments', compact('canje'));
     }
 
+    public function valorar(Request $request)
+    {
+        $this->create($request);
+        $this->markCommentDealing($request);
+        return $this->rating($request);
+    }
+
+    public function rating(Request $request)
+    {
+        $canje = Exchange::find($request->canje_id);
+
+        $user_id = $canje->talent->user_id;
+
+        $rating = new Rating();
+        $rating->value = $request->rating;
+        $rating->evaluator_id = auth()->user()->id;
+        $rating->evaluated_id = $user_id;
+        $rating->save();
+        return $rating;
+    }
+
+    public function markCommentDealing(Request $request)
+    {
+        $trato = Dealing::find($request->trato_id);
+        if($request->type == 'solicitado')
+        {
+            $trato->dealing_ready = 2;
+        }else
+        {
+            $trato->proposal_ready = 2;
+        }
+        $trato->save();
+        return $trato;
+    }
 
 }

@@ -504,3 +504,14 @@ background: linear-gradient(45deg, rgba(251,35,106,1) 0%,rgba(251,35,106,1) 44%,
     line-height: 30px;
     color: #ff9200;
 }
+
+
+/* =================== RATING =================== */
+.star-rating {
+  line-height:32px;
+  font-size:1.25em;
+  max-height: 20%;
+}
+
+.star-rating .la-star{color: #ff9200;}
+/* =================== RATING =================== */

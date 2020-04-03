@@ -123,6 +123,7 @@ Route::post('agregar-pdf','FileController@newPdf')->name('new-pdf');
 //mi cuenta tratos
 Route::post('aprobar-trato', 'DealingController@aprobar');
 Route::post('trato-recibido', 'DealingController@recibido');
+Route::post('valorar', 'CommentController@valorar');
 
 //mensajes
 Route::get('mensajes', 'MessageController@mensajes')->middleware('verified');

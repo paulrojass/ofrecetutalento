@@ -24,8 +24,8 @@
 								@if(auth()->user()->suscription->plan_id > 1)
 									<li><a href="javascript:void(0)" id="a-talentos" onclick="mostrar('#talentos','#a-talentos')" title=""><i class="la la-diamond"></i>Talentos</a></li>
 									<li><a href="javascript:void(0)" id="a-canjes" onclick="mostrar('#canjes', '#a-canjes')" title=""><i class="la la-lightbulb-o"></i>Canjes</a></li>
+									<li><a href="javascript:void(0)" id="a-tratos-r" onclick="mostrar('#tratos-r', '#a-tratos-r')" title=""><i class="la la-arrow-left"></i>Tratos Recibidos</a></li>
 								@endif
-								<li><a href="javascript:void(0)" id="a-tratos-r" onclick="mostrar('#tratos-r', '#a-tratos-r')" title=""><i class="la la-arrow-left"></i>Tratos Recibidos</a></li>
 								<li><a href="javascript:void(0)" id="a-tratos-p" onclick="mostrar('#tratos-p', '#a-tratos-p')" title=""><i class="la la-arrow-right"></i>Tratos Propuestos</a></li>
 								@if(auth()->user()->suscription->plan_id > 2)
 								<li><a href="{{ url('mensajes') }}" id="a-mensajes" title=""><i class="la la-comments"></i>Mensajes</a></li>
@@ -481,6 +481,12 @@
 					{{-- Pagar precio de canje o con otro canje --}}
 				</div>
 
+
+
+
+
+
+
 				<div  class="contact-edit pl-5 pr-5 mb-2">
 					<div class="row" id="aprobar">
 						<div class="col-sm">
@@ -508,7 +514,35 @@
 						El trato solicitado se ha marcado como recibido
 					</div>
 
+					<div class="alert alert-light" role="alert" id="alert-comentario">
+						La valoración y el comentario han sido enviados
+					</div>
 
+				</div>
+
+				<div id="valoracion" class="contact-edit pl-5 pr-5 mb-2">
+					<div class="row">
+						<div class="col-lg-12">
+							<span class="pf-title">Deja tu comentario u opinión por el servicio recibido</span>		
+							<div class="pf-field">
+								<textarea id="comment" name="comment" rows="2"></textarea>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="star-rating">
+								<span class="la la-star-o" data-rating="1"></span>
+								<span class="la la-star-o" data-rating="2"></span>
+								<span class="la la-star-o" data-rating="3"></span>
+								<span class="la la-star-o" data-rating="4"></span>
+								<span class="la la-star-o" data-rating="5"></span>
+								<input type="hidden" name="whatever1" id="rating" class="rating-value" value="0">
+							</div>
+
+							<div class="upload-info pull-right">
+								<a href="javascript:void(0)" data-canje="" data-tipo="" id="boton-valorar">Enviar valoración</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

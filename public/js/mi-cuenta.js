@@ -10,6 +10,7 @@ $(function(){
 
 	$('.alert').hide();
 
+
 	// Read value on page load
 	$(".result-language b").html($("#level-language").val());
 
@@ -644,7 +645,7 @@ $('#modal-trato').on('show.bs.modal', function (event) {
 	var acceptid = button.data('acceptid')
 	var proposeid = button.data('proposeid')
 
-
+	$('#valoracion').hide();
 	var modal = $(this)
 	modal.find('#info-trato-talento').html('')
 	modal.find('#info-trato-canje-pago').html('')
@@ -739,8 +740,12 @@ $('#modal-trato').on('show.bs.modal', function (event) {
 	else if( approved === 0){modal.find('#info-trato-aprobar').html('<p><strong>Estado del canje:</strong> Omitido </p>');}
 	else{modal.find('#info-trato-aprobar').html('<p><strong>Estado del canje:</strong> Aprobado </p>');}
 	
+
 	if( (type == 'recibido')){
-		if(approved === ''){
+	/*        SI EL TIPO DE TRATO ES RECIBIDO*/
+
+		if(approved === ''){ 
+		/*   SI EL TRATO RECIBIDO NOOO HA SIDO APROBADO*/
 			modal.find('#div-boton-aprobar').html(
 				'<div class="upload-info">'+
 					'<a href="javascript:void(0)" data-trato="'+trato_id+'" id="boton-aprobar-trato">Aceptar</a>'+
@@ -749,8 +754,22 @@ $('#modal-trato').on('show.bs.modal', function (event) {
 					'<a href="javascript:void(0)" data-trato="'+trato_id+'" id="boton-rechazar-trato">Omitir</a>'+
 				'</div>'
 			);
-		}else if(approved === 1){
-			if(proposalready ===1){
+		}else if(approved === 1){ /*SI EL TRATO RECIBIDO FUE APROBADO*/
+
+			if(proposalready ===0){
+				/*TRATO RECIBIDO, APROBADO Y LO QUE SE PROPUSO NOOOOO SE HA ENTREGADO */
+				modal.find('#div-boton-aprobar').html(
+					'<div class="upload-info">'+
+						'<a href="javascript:void(0)" data-trato="'+trato_id+'" id="boton-trato-p-recibido">El canje o pago fue recibido</a>'+
+					'</div>'
+				);				
+			}else if(proposalready ===1 && exchangeid != ''){
+				/*TRATO RECIBIDO, APROBADO Y LO QUE SE PROPUSO SE ENTREGO*/
+				if(pay == 0){
+					$('#valoracion').show();
+					$('#boton-valorar').data('canje', canje_propuesto);
+					$('#boton-valorar').data('tipo', 'propuesto');
+				}
 				modal.find('#div-boton-aprobar').html(
 				'		<div class="col-sm">'+
 				'			<p>Pago o Canje propuesto se ha recibido</p>'+
@@ -758,53 +777,78 @@ $('#modal-trato').on('show.bs.modal', function (event) {
 				);
 			}else{
 				modal.find('#div-boton-aprobar').html(
-					'<div class="upload-info">'+
-						'<a href="javascript:void(0)" data-trato="'+trato_id+'" id="boton-trato-p-recibido">El canje o pago fue recibido</a>'+
-					'</div>'
+				'		<div class="col-sm">'+
+				'			<p>Pago o Canje propuesto se ha recibido y valorado</p>'+
+				'		</div>'
 				);
 			}
 		}else{
 			modal.find('#div-boton-aprobar').html('')
 		}
-	}else{
+	}else{	
+	 /*      SI EL TRATO ES PROPUESTO POR EL AUTH*/
 		if(approved === 1){
-			if(dealingready === 1){
-				modal.find('#div-boton-aprobar').html(
-				'		<div class="col-sm">'+
-				'			<p>Trato o Canje solicitado se ha recibido</p>'+
-				'		</div>'
-				);
-			}else{
+			/*TRATO PROPUSTO POR AUTH FUE APROBADO*/
+
+			if(dealingready === 0){
+				/*TRATO PROPUESTO POR AUTH, APROBADO Y LO QUE SE PROPUSO NO SE HA ENTREGADO */
 				modal.find('#div-boton-aprobar').html(
 					'<div class="upload-info">'+
 						'<a href="javascript:void(0)" data-trato="'+trato_id+'" id="boton-trato-s-recibido">El trato o canje fue recibido</a>'+
 					'</div>'
 				);
+			}else if(dealingready === 1 && proposalid != ''){
+				/*TRATO PROPUESTO POR AUTH, APROBADO Y LO QUE SE PROPUSO SE ENTREGO */
+				$('#valoracion').show();
+				$('#boton-valorar').data('canje', canje_solicitado);
+				$('#boton-valorar').data('tipo', 'solicitado');
+				modal.find('#div-boton-aprobar').html(
+				'		<div class="col-sm">'+
+				'			<p>Trato o Canje solicitado se ha recibido</p>'+
+				'		</div>'
+				);	
+			}else{
+				modal.find('#div-boton-aprobar').html(
+				'		<div class="col-sm">'+
+				'			<p>Trato o Canje solicitado se ha recibido y valorado</p>'+
+				'		</div>'
+				);	
 			}
 		}
 	}
+
+	$('#div-boton-aprobar').on('click', '#boton-aprobar-trato', function(event) {
+		event.preventDefault();
+		var trato = $(this).data('trato');
+		aprobar(trato, 1);
+	});
+	$('#div-boton-aprobar').on('click', '#boton-rechazar-trato', function(event) {
+		event.preventDefault();
+		var trato = $(this).data('trato');
+		aprobar(trato, 0);
+	});
+	$('#div-boton-aprobar').on('click', '#boton-trato-p-recibido', function(event) {
+		event.preventDefault();
+		var trato = $(this).data('trato');
+		recibido(trato, 'propuesto');
+	});
+	$('#div-boton-aprobar').on('click', '#boton-trato-s-recibido', function(event) {
+		event.preventDefault();
+		var trato = $(this).data('trato');
+		recibido(trato, 'solicitado');
+	});
+
+	$('#boton-valorar').on('click', function(event) {
+		event.preventDefault();
+		var rating = $('#rating').val();
+		var comentario = $('#comment').val();
+		var canje_id = $(this).data('canje');
+		var tipo = $(this).data('tipo');
+		valorar(canje_id, trato_id, comentario, rating, tipo);
+	});	
+
 });
 
-$('#div-boton-aprobar').on('click', '#boton-aprobar-trato', function(event) {
-	event.preventDefault();
-	var trato = $(this).data('trato');
-	aprobar(trato, 1);
-});
-$('#div-boton-aprobar').on('click', '#boton-rechazar-trato', function(event) {
-	event.preventDefault();
-	var trato = $(this).data('trato');
-	aprobar(trato, 0);
-});
-$('#div-boton-aprobar').on('click', '#boton-trato-p-recibido', function(event) {
-	event.preventDefault();
-	var trato = $(this).data('trato');
-	recibido(trato, 'propuesto');
-});
-$('#div-boton-aprobar').on('click', '#boton-trato-s-recibido', function(event) {
-	event.preventDefault();
-	var trato = $(this).data('trato');
-	recibido(trato, 'solicitado');
-});
 
 
 function aprobar(trato, tipo){
@@ -847,7 +891,7 @@ function recibido(trato, tipo){
 		type: 'post',
 		data: {dealing_id: trato, recibido:tipo, _token:_token},
 	})
-	.done(function() {
+	.done(function(data) {
 		recibidosPerfil();
 		propuestosPerfil();
 		$('#info-trato-aprobar').html('');
@@ -855,14 +899,14 @@ function recibido(trato, tipo){
 		if(tipo == 'propuesto'){
 			$("#alert-trato-p-recibido").fadeTo(2000, 500).slideUp(500, function(){
 			    $("#alert-trato-p-recibido").slideUp(1000);
-			    $('#modal-trato').modal('toggle');
 			});
 		}else{
 			$("#alert-trato-s-recibido").fadeTo(2000, 500).slideUp(500, function(){
 			    $("#alert-trato-s-recibido").slideUp(1000);
-			    $('#modal-trato').modal('toggle');
 			});
 		}
+	    if(data!=null){$('#valoracion').show();}
+	    else{$('#modal-trato').modal('toggle');}		
 	})
 	.fail(function() {
 		console.log("error");
@@ -872,8 +916,29 @@ function recibido(trato, tipo){
 	});
 }
 
-
-
+function valorar(exchange_id, trato_id, comment, rating, type){
+	var _token = $("input[name='_token']").val();
+	/*alert('canje: '+exchange_id+', comentario: '+comment+', rating: '+rating);*/
+	$.ajax({
+		url: '/valorar',
+		type: 'post',
+		data: {canje_id: exchange_id, trato_id:trato_id, comment:comment, rating:rating, _token:_token, type: type},
+	})
+	.done(function() {
+		recibidosPerfil();
+		propuestosPerfil();
+		$("#alert-comentario").fadeTo(2000, 500).slideUp(500, function(){
+		    $("#alert-comentario").slideUp(1000);
+		});
+	    $('#modal-trato').modal('toggle');
+	})
+	.fail(function() {
+		console.log("error");
+	})
+	.always(function() {
+		console.log("complete");
+	});
+}
 
 /* ================ TRATOS*/
 
@@ -1148,57 +1213,28 @@ function actualizarArchivoPDF(id)
 	});
 }
 
-
 //================================== MANIPULACION DE ARCHIVOS
 
+/*================================== RATING ==========================*/
 
-/*Scripts eliminados:*/
-//Archivos
+var $star_rating = $('.star-rating .la');
 
+var SetRatingStar = function() {
+  return $star_rating.each(function() {
+    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+      return $(this).removeClass('la-star-o').addClass('la-star');
+    } else {
+      return $(this).removeClass('la-star').addClass('la-star-o');
+    }
+  });
+};
 
-/*Agregar imagenes
-$('#image-files').change(function(){
-	agregarImagen();
+/*$('#valoracion').on('click', '.star-rating .la', function() {*/
+$star_rating.on('click', function() {
+  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+  return SetRatingStar();
 });
 
-$("#agregar-image").click(function () {
-	//$("#image-files").trigger('click');
-});
-/*fin Agregar imagenes*/
+SetRatingStar();
 
-/*eliminar imagenes
-$('#div-image').on('click', '.boton-eliminar-imagen', function(){
-	var id = $(this).val();
-	eliminarImagen(id);
-});*/
-
-
-/*function agregarImagen(){
-	var formData = new FormData();
-	formData.append('location', $('#image-files')[0].files[0]);
-	formData.append('_token', $("input[name='_token']").val());
-	formData.append('exchange_id', id_canje);
-	$.ajax({
-		url: '/agregar-imagen',
-		type: 'post',
-		data: formData,
-		contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
-		processData: false // NEEDED, DON'T OMIT THIS
-	})
-	.done(function(response) {
-		$('#div-image').html(response);
-	});
-}
-
-function eliminarImagen(image_id)
-{
-	var _token = $("input[name='_token']").val();
-	$.ajax({
-		url: '/eliminar-imagen',
-		type: 'post',
-		data: {id: image_id, _token: _token},
-	})
-	.done(function(response) {
-		$('#div-image').html(response);
-	});
-}*/
+/*================================== RATING ==========================*/

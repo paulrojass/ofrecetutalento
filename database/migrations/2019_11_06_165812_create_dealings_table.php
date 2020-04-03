@@ -22,8 +22,8 @@ class CreateDealingsTable extends Migration
 			$table->integer('value')->nullable();
 			$table->integer('quantity')->nullable();
 			$table->boolean('approved')->nullable();
-			$table->boolean('dealing_ready')->default(0);
-			$table->boolean('proposal_ready')->default(0);
+			$table->integer('dealing_ready')->default(0);
+			$table->integer('proposal_ready')->default(0);
 			$table->integer('exchange_id')->nullable();
 			$table->integer('proposal_id')->nullable();
 			$table->integer('exchange_days')->nullable();
