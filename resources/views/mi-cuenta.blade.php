@@ -475,17 +475,11 @@
 			</button>
 			<div class="modal-body">
 				<div id="info-trato-talento" class="contact-edit pl-5 pr-5 mb-2">
-					{{-- Si se solicita un talento --}}
+					{{-- espacio para informacion de canje o trato --}}
 				</div>
 				<div id="info-trato-canje-pago" class="contact-edit pl-5 pr-5 mb-2">
 					{{-- Pagar precio de canje o con otro canje --}}
 				</div>
-
-
-
-
-
-
 
 				<div  class="contact-edit pl-5 pr-5 mb-2">
 					<div class="row" id="aprobar">
@@ -539,7 +533,7 @@
 							</div>
 
 							<div class="upload-info pull-right">
-								<a href="javascript:void(0)" data-canje="" data-tipo="" id="boton-valorar">Enviar valoración</a>
+								<a href="javascript:void(0)" data-canje="" data-tipo="" data-trato="" id="boton-valorar">Enviar valoración</a>
 							</div>
 						</div>
 					</div>

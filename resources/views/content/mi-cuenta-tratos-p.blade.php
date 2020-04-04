@@ -67,6 +67,7 @@
 								<li><span>Ver Trato</span>
 									<a href="javascritp:void(0)" data-toggle="modal" data-target="#modal-trato" title=""
 										data-type="propuesto"
+										data-date="{{ $propuesto->created_at }}"
 										data-trato="{{ $propuesto->id }}"
 										data-canjer="{{ $propuesto->exchange_id }}"
 										data-canjep="{{ $propuesto->proposal_id }}"

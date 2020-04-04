@@ -143,6 +143,7 @@ class CommentController extends Controller
             $trato->proposal_ready = 2;
         }
         $trato->save();
+        dd($trato);
         return $trato;
     }
 

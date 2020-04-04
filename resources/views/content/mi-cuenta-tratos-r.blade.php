@@ -57,6 +57,7 @@
 								<li><span>Ver Trato</span>
 									<a href="javascritp:void(0)" data-toggle="modal" data-target="#modal-trato" title=""
 										data-type="recibido" 
+										data-date="{{ $recibido->created_at }}"
 										data-trato="{{ $recibido->id }}"
 										data-canjer="{{ $recibido->exchange_id }}"
 										data-canjep="{{ $recibido->proposal_id }}"
