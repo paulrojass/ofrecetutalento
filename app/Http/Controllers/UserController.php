@@ -155,9 +155,29 @@ class UserController extends Controller
 	{
 		$user = User::where('id',$id)->first();
 
+		$evaluadores = $user->evaluated()->count();
+
+		$valoracion = $this->valoracion($user);
+
 		$languages = Language::where('user_id', $user->id);
 
-		return view('perfil', compact('user', 'languages'));
+		return view('perfil', compact('user', 'languages', 'valoracion', 'evaluadores'));
+	}
+
+
+	public function valoracion($user){
+		$contar = 0;
+		$evaluadores = $user->evaluated()->count();
+		if($evaluadores == 0 ) return 0;
+
+		else{
+			foreach ($user->evaluated as $evaluacion) {
+				$contar += $evaluacion->value;
+			}
+			$valoracion = $contar/$evaluadores;
+		}
+		return $valoracion;
+
 	}
 
 

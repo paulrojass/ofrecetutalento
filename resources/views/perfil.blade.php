@@ -45,14 +45,34 @@
 				 			<div class="can-detail-s">
 				 				<div class="cst"><img src="{{URL::asset('images/users/'.$user->avatar)}}" alt="" /></div>
 				 				<h3>{{ $user->name }} {{ $user->lastname }}</h3>
-				 				<span><i>Usuario {{$user->suscription->plan->name}}</i> en Ofrece tu talento</span>
+				 				<span>
+				 					<i>
+										@if($user->suscription->plan->id > 1)
+										Talento
+										@endif
+										{{$user->suscription->plan->name}}
+									</i> en Ofrece tu talento
+								</span>
 				 				<p>{{ $user->email }}</p>
 				 				<p>Miembro desde, {{ \Carbon\Carbon::parse($user->created_at)->format('Y')}} </p>
 				 				<p><i class="la la-map-marker"></i>{{ $user->city }}, {{ $user->country }}</p>
+				 				<p>
 				 			</div>
 				 			<div class="download-cv">
-				 				<!-- <a href="#" title="">Download CV <i class="la la-download"></i></a> -->
-				 			</div>
+							<div class="star-rating">
+								<span class="la la-star-o" data-rating="1"></span>
+								<span class="la la-star-o" data-rating="2"></span>
+								<span class="la la-star-o" data-rating="3"></span>
+								<span class="la la-star-o" data-rating="4"></span>
+								<span class="la la-star-o" data-rating="5"></span>
+								<p>{{ $evaluadores }} valoraciones</p>
+								<input type="hidden" name="whatever1" id="rating" class="rating-value" value="{{ $valoracion }}">
+							</div>
+
+
+
+				 			<!--	<a href="#" title="">Download CV <i class="la la-download"></i></a>-->
+				 			 </div> 
 
 
 				 		</div>
@@ -274,7 +294,7 @@
 						@csrf
 						<input type="hidden" name="pay" id="pay" value="0">
 						<input type="hidden" name="accept_id" id="accept_id" value="{{ $user->id }}">
-						<input type="hidden" name="propose_id" id="propose_id" value="{{ auth()->user()->id }}">
+						<input type="hidden" name="propose_id" id="propose_id" value="@auth{{ auth()->user()->id }}@endauth">
 						<div class="col-lg-12">
 							<span class="pf-title">Nombre del proyecto</span>									
 							<div class="pf-field">
@@ -394,6 +414,30 @@
 				});
 			});
 		});
+
+		/*================================== RATING ==========================*/
+
+		var $star_rating = $('.star-rating .la');
+
+		var SetRatingStar = function() {
+		  return $star_rating.each(function() {
+		    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+		      return $(this).removeClass('la-star-o').addClass('la-star');
+		    } else {
+		      return $(this).removeClass('la-star').addClass('la-star-o');
+		    }
+		  });
+		};
+
+		/*$('#valoracion').on('click', '.star-rating .la', function() {*/
+/*		$star_rating.on('click', function() {
+		  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+		  return SetRatingStar();
+		});
+*/
+		SetRatingStar();
+
+		/*================================== RATING ==========================*/
 	});
 </script>
 @endsection
