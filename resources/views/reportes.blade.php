@@ -22,11 +22,11 @@
 			</div>
 		</div>
 	</div>
-
-	<form method="post" action="{{ route('reporte-enviado')}}">
+		<form action="{{route('reporte-enviado')}} "method="POST">
+		@csrf
 		<div class="row">
 			<div class="col-lg-12">
-				<span class="pf-title">Fecha: {{ now() }}</span>
+				<span class="pf-title">Fecha: {{ now()->format('d-m-Y') }}</span>
 				<input type="hidden" name="fecha" id="fecha" value="{{ now() }}">
 			</div>
 			
@@ -40,18 +40,18 @@
 				<span class="pf-title">Causa o razón </span>
 				<div class="pf-field">
 					<select class="chosen" name="causa" id="causa"   required >
-						<option value="1">No cumplió el trato como me lo esperaba</option>
-						<option value="2">No cumplío el canje como me lo esperaba</option>
-						<option value="3">Decidimos en un trato pero no volvió a comunicarse</option>
-						<option value="4">Decidimos en un canje pero no volvió a comunicarse</option>
-						<option value="5">Tardanza en el canje o servicio previamente acordado</option>
-						<option value="6">Falta en la calidad en el canje o servicio previamente acordado</option>
-						<option value="7">Fotos, videos o contenido inapropiado u ofensivo</option>
-						<option value="8">Mensajes internos inapropiados u ofensivos</option>
-						<option value="9">Esta persona está fingiendo alguien que no es</option>
-						<option value="10">Perfil o cuenta falsa</option>
-						<option value="11">Esta persona me estafó o intentó estafarme</option>
-						<option value="12">Esta persona está ofreciendo productos o servicios inapropiados o ilegales</option>
+						<option value="No cumplio el trato">No cumplió el trato como me lo esperaba</option>
+						<option value="No cumplio el canje">No cumplío el canje como me lo esperaba</option>
+						<option value="Decidimos en un trato pero no volvió a comunicarse">Decidimos en un trato pero no volvió a comunicarse</option>
+						<option value="Decidimos en un canje pero no volvió a comunicarse">Decidimos en un canje pero no volvió a comunicarse</option>
+						<option value="Tardanza en el canje o servicio previamente acordado">Tardanza en el canje o servicio previamente acordado</option>
+						<option value="Falta en la calidad en el canje o servicio previamente acordado">Falta en la calidad en el canje o servicio previamente acordado</option>
+						<option value="Fotos, videos o contenido inapropiado u ofensivo">Fotos, videos o contenido inapropiado u ofensivo</option>
+						<option value="Fotos, videos o contenido inapropiado u ofensivo">Fotos, videos o contenido inapropiado u ofensivo</option>
+						<option value="Esta persona está fingiendo alguien que no es">Esta persona está fingiendo alguien que no es</option>
+						<option value="Perfil o cuenta falsa">Perfil o cuenta falsa</option>
+						<option value="Esta persona me estafó o intentó estafarme">Esta persona me estafó o intentó estafarme</option>
+						<option value="Esta persona está ofreciendo productos o servicios inapropiados o ilegale">Esta persona está ofreciendo productos o servicios inapropiados o ilegales</option>
 					</select>
 				</div>
 			</div>

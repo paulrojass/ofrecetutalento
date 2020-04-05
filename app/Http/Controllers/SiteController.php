@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Traits\DatesTranslator;
 
-
 use DB;
+use Mail;
 
 use App\Plan;
 use App\Industry;
@@ -168,7 +168,20 @@ class SiteController extends Controller
 
     public function reporteEnviado(Request $request)
     {
-        dd(back());
+
+        $from = auth()->user()->email;
+        $name = auth()->user()->name.' '.auth()->user()->lastname;
+        $subject = "Nuevo Reporte o Reclamo de $name ($from)";
+        $for = "reportes@ofrecetutalento.com";
+
+        Mail::send('mails.reporte',$request->all(), function($msj) use($subject,$for,$name,$from){
+            $msj->from($from,$name);
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+        
+        //return redirect()->back();
+        //Mail::to($receivers)->send(new EnviarReclamo($call));
         return view('reporte-enviado');
     }
 }

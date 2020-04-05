@@ -23,7 +23,7 @@
 								<h3>Reporte Enviado</h3>
 								<span>Te agradecemos tu tiempo una vez más y queremos asegurarte que trabajamos por mantener el mejor nivel de rendimiento y cordialidad en nuestra comunidad de Ofrece Tu Talento.</span>
 							</div>
-							<img src="{{ URL::asseet('tema/images/logo.png') }}">
+							<!-- <img src="{{ URL::asset('tema/images/logo.png') }}"> -->
 						</div>
 					</div>
 				</div>
