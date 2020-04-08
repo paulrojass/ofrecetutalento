@@ -515,3 +515,9 @@ background: linear-gradient(45deg, rgba(251,35,106,1) 0%,rgba(251,35,106,1) 44%,
 
 .star-rating .la-star{color: #ff9200;}
 /* =================== RATING =================== */
+
+/* checkbox de busqueda */
+.simple-checkbox p input[type="checkbox"]:checked + label::before, .simple-checkbox p input[type="radio"]:checked + label::before {
+    background: #ff9200;
+    border-color: #ff9200;
+}

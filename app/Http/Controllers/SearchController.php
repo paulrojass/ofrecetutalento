@@ -89,9 +89,12 @@ class SearchController extends Controller
 			//$categoria = $request->category;
 			$minimo = $request->input('min');
 			$maximo = $request->input('max');
+
+			$categoria = isset($request->category) ? json_decode($request->category) : array();
+
 			/*
 			if(empty($busqueda) && empty($ubicacion) && $categoria == null && $fecha == 'todos' && empty($minimo) && empty($maximo)){*/
-			if(empty($busqueda) && $fecha == 'todos' && empty($minimo) && empty($maximo)){
+			if(empty($busqueda) && $fecha == 'todos' && empty($minimo) && empty($maximo) && $categoria == null){
 				$exchanges = Exchange::paginate(10);
 			}
 			else{
@@ -112,6 +115,12 @@ class SearchController extends Controller
 				if (!empty($maximo)) {
 					$query->max($maximo);
 				}
+
+				if ($categoria) {
+				/*if ($categoria != NULL) {*/
+					$query->categories($categoria);
+				}
+
 				/*
 				if ($categoria != NULL) {
 					$query->categories($categoria);

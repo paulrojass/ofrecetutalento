@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddExchangeIdToComments extends Migration
+class AddEvaluatedIdToComments extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class AddExchangeIdToComments extends Migration
     public function up()
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->unsignedBigInteger('exchange_id');
-            $table->foreign('exchange_id')->references('id')->on('exchanges')->onDelete('cascade');
+            $table->unsignedBigInteger('evaluated_id');
+            $table->foreign('evaluated_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -27,8 +27,8 @@ class AddExchangeIdToComments extends Migration
     public function down()
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->dropForeign(['exchange_id']);
-            $table->dropColumn('exchange_id');
+            $table->dropForeign(['evaluated_id']);
+            $table->dropColumn('evaluated_id');
         });
     }
 }

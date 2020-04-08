@@ -308,7 +308,8 @@ $('#nuevo-canje').click(function(e){
 			}
 		})
 		.done(function(data) {
-			$('#canjes').html(data);
+			editarCanje(data);
+			/*$('#canjes').html(data);*/
 			$('#modal-canje').modal('hide');
 			verificarTalentos(id_user);
 		});

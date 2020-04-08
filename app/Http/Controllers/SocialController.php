@@ -40,25 +40,24 @@ class SocialController extends Controller
         //return response()->json(['success'=>'usuario registrado.', 'id_user' => $user->id]); 
     }
 
-    function createUser($getInfo,$provider){
+    function createUser($getInfo,$provider){       
+        $user = User::where('provider_id', $getInfo->id)->first();
      
-     $user = User::where('provider_id', $getInfo->id)->first();
-     
-     if (!$user) {
+        if (!$user) {
         $user = User::create([
             'name'     => $getInfo->name,
             'email'    => $getInfo->email,
             'provider' => $provider,
             'provider_id' => $getInfo->id,
-            'email_verified_at' => date('Y-m-d H:i:s')
+            'email_verified_at' => Carbon::now()
         ]);
-        
+
         $user->roles()->attach(Role::where('name', 'user')->first());
         $this->newSuscription($user->id, 1, 'mensual');
         $this->newExperience($user->id);
 
-      }
-      return $user;
+        }
+        return $user;
     }
     
     public function newSuscription($user_id, $plan_id, $periodo){

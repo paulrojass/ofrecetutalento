@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Facades\Auth;
 
+use DB;
 
 use App\Talent;
 use App\Dealing;
@@ -82,28 +83,10 @@ class Exchange extends Model
 		}
 	}
 
-/*	public function scopeCategory($query, $categorias){
-		if($categorias != NULL){
-
-			foreach ($categorias as $categoria) {
-				$query->where('talent_id', function (Builder $query) use($categoria){
-					$query->whereHas('category_id', $categoria);
-				});
-			}
-
-			return $query;
-		}
-	}*/
-
-	//exchange->talent->user->city
-	/*public function scopeLocation($query, $ubicacion){
-		if($ubicacion){
-			return $query->talent->
-
-
-			return $query->where('talent_id', function(Builder $query) use($ubicacion){
-				$query->whereHas('')
-			});
-		}
-	}*/
+	public function scopeCategories($query, $categorias)
+	{
+		$talents = Talent::whereIn('category_id', $categorias)->get('id')->toArray();
+		$query->whereIn('talent_id', $talents);
+		return $query;
+	}
 }

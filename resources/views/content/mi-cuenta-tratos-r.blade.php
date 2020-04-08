@@ -1,8 +1,8 @@
 <div class="border-title"><h3>{{$recibidos->count()}} Tratos recibidos</h3></div>
 
-<div class="manage-jobs-sec">
-	<div class="mini-portfolio">
- 		<div class="manage-jobs-sec">
+<!-- <div class="manage-jobs-sec">
+	<div class="mini-portfolio"> -->
+ 		<div class="manage-jobs-sec addscroll">
 	 		<table>
 	 			<thead>
 	 				<tr>
@@ -15,7 +15,7 @@
 					@foreach($recibidos->sortByDesc('created_at') as $recibido)
 
 	 				<tr>
-	 					<td class="col-4 pl-2 pr-2">
+	 					<td class="pl-2 pr-2" style="width: 30%">
 	 						<span class="applied-field">
 								@if($recibido->exchange_id == null)
 									{{ $recibido->name }}
@@ -26,7 +26,7 @@
 								@endif
 	 						</span>
 	 					</td>
-	 					<td class="col-7">
+	 					<td style="width: 60%">
 	 						<div class="table-list-title">
 	 							<p>{{ $recibido->description }}</p>
 	 						</div>
@@ -52,7 +52,7 @@
 								$titulo_propuesto = null;
 							@endphp
 						@endif
-	 					<td class="col-1">
+	 					<td style="width: 10%">
 							<ul class="action_job pull-right">
 								<li><span>Ver Trato</span>
 									<a href="javascritp:void(0)" data-toggle="modal" data-target="#modal-trato" title=""
@@ -89,5 +89,5 @@
 	 			</tbody>
 	 		</table>
  		</div>
-	</div>
-</div>
+<!-- 	</div>
+</div> -->

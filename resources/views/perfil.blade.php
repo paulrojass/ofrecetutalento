@@ -58,21 +58,21 @@
 				 				<p><i class="la la-map-marker"></i>{{ $user->city }}, {{ $user->country }}</p>
 				 				<p>
 				 			</div>
-				 			<div class="download-cv">
+
+
+				 			<div class="download-cv estrellas">
+							@if($user->suscription->plan_id > 2)
 							<div class="star-rating">
-								<span class="la la-star-o" data-rating="1"></span>
-								<span class="la la-star-o" data-rating="2"></span>
-								<span class="la la-star-o" data-rating="3"></span>
-								<span class="la la-star-o" data-rating="4"></span>
-								<span class="la la-star-o" data-rating="5"></span>
+								<span class="la la-star-o" data-rating="1" style="color:#ff9200"></span>
+								<span class="la la-star-o" data-rating="2" style="color:#ff9200"></span>
+								<span class="la la-star-o" data-rating="3" style="color:#ff9200"></span>
+								<span class="la la-star-o" data-rating="4" style="color:#ff9200"></span>
+								<span class="la la-star-o" data-rating="5" style="color:#ff9200"></span>
 								<p>{{ $evaluadores }} valoraciones</p>
 								<input type="hidden" name="whatever1" id="rating" class="rating-value" value="{{ $valoracion }}">
 							</div>
-
-
-
-				 			<!--	<a href="#" title="">Download CV <i class="la la-download"></i></a>-->
-				 			 </div> 
+							@endif
+				 			</div> 
 
 
 				 		</div>
@@ -88,14 +88,29 @@
 
 				 		<ul class="cand-extralink">
 				 			<li><a href="#abilities" title="">habilidades</a></li>
+
 				 			@if($user->talents->count() > 0)
 				 			<li><a href="#talentos" title="">Talentos</a></li>
 				 			@endif
+
+				 			@auth
+
+							@if((auth()->user()->suscription->plan_id > 2)&&($user->suscription->plan_id > 2))
+
+				 				<li><a href="#canjes" title="">Canjes</a></li>
+				 			@endif
+				 			@endauth				 			
+				 			
+				 			@if($user->talents->count() > 0)
+				 			<li><a href="#comentarios" title="">Comentarios</a></li>
+				 			@endif
+							
 				 			@auth
 							@if((auth()->user()->suscription->plan_id > 2)&&(auth()->user()->id != $user->id)&&($user->suscription->plan_id > 2))
 
 				 				<li><a href="javascript:void(0)" data-toggle="modal" data-target="#modal-message" title="">Enviar Mensaje</a></li>
-				 				@endif
+				 			@endif
+				 			
 				 			@endauth
 				 		</ul>
 
@@ -220,6 +235,22 @@
 			 						</div>
 		 						</div>
 								@endif
+								
+								@auth
+								@if((auth()->user()->suscription->plan_id > 2)&&($user->suscription->plan_id > 2))
+			 					<div class="col-lg-12 mt-5" id="canjes">
+
+		 						</div>
+					 			@endif
+								@endauth
+
+			 					<div class="col-lg-12 mt-5" id="comentarios">
+			 						<div class="cand-details">
+								 		<div class="comment-sec estrellas" id="div-comentarios">
+
+								 		</div>
+								 	</div>
+								</div>
 				 			</div>
 				 		</div>
 					</div>
@@ -369,6 +400,10 @@
 @section('scripts')
 <script>
 	$(function(){
+		var user_id = '{{ $user->id }}';
+		actualizarComentarios(user_id);
+		actualizarCanjes(user_id);
+
 		$(".alert").hide();
 		$('#button-enviar').click(function(e){
 			e.preventDefault();
@@ -417,9 +452,10 @@
 
 		/*================================== RATING ==========================*/
 
-		var $star_rating = $('.star-rating .la');
 
-		var SetRatingStar = function() {
+		var $star_rating = $('div.estrellas .star-rating .la');
+
+		var SetRatingStar = function() {		
 		  return $star_rating.each(function() {
 		    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
 		      return $(this).removeClass('la-star-o').addClass('la-star');
@@ -430,18 +466,73 @@
 		};
 
 		/*$('#valoracion').on('click', '.star-rating .la', function() {*/
-/*		$star_rating.on('click', function() {
+		/*		
+		$star_rating.on('click', function() {
 		  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
 		  return SetRatingStar();
-		});
-*/
+		});*/
+
+		//$('div.estrellas').on('ready', $star_rating, SetRatingStar);
 		SetRatingStar();
 
 		/*================================== RATING ==========================*/
+		$('#div-comentarios').on('click', '.a-responder', function(e){
+			e.preventDefault();
+			var clickeado = $(this).data('responder');
+			$('#respuesta'+clickeado).slideDown('slow', function(){
+				$('#textarea-respuesta'+clickeado).focus();
+			});
+		});
+
+		$('#div-comentarios').on('click', '.b-publicar-respuesta', function(e){
+			e.preventDefault();
+			var comentario = $(this).data('value');
+			var responde = $(this).data('evaluado');
+			agregarRespuesta(comentario, responde);
+		});
+
+		function actualizarComentarios(user_id){
+			$.ajax({
+				url: '/actualizar-comentarios-perfil',
+				type: 'get',
+				data: {user_id : user_id},
+				dataType: 'html',
+			})
+			.done(function(data) {
+				$('#div-comentarios').html(data);
+			});
+		}
+
+		function agregarRespuesta(comentario_id, responde){
+			var comentario = $('#textarea-respuesta'+comentario_id).val();
+			if (comentario != ''){
+				$.ajax({
+					url: '/agregar-respuesta',
+					type: 'get',
+					data: { comment:comentario, replyto:comentario_id, evaluated_id:responde, user_id:responde},
+					dataType: 'html',
+				})
+				.done(function(data) {
+					$('#div-comentarios').html(data);
+				});		
+			}
+		}
+
+		function actualizarCanjes(user_id){
+			$.ajax({
+				url: '/actualizar-canjes-perfil',
+				type: 'post',
+				data: {user_id : user_id},
+				dataType: 'html',
+			})
+			.done(function(data) {
+				$('#canjes').html(data);
+			});
+		}
 	});
 </script>
 @endsection
 
 @section('footer')
-	@include('includes.footer-simple')
+	@include('includes.footer')
 @endsection

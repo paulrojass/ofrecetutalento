@@ -9,7 +9,7 @@ use App\Language;
 use App\Experience;
 use App\Message;
 use App\Category;
-use App\Rating;
+use App\Comment;
 use App\Dealing;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -108,11 +108,11 @@ class User extends Authenticatable implements MustVerifyEmail
 	}
 	//Evaluadores
 	public function evaluators(){
-		return $this->hasMany(Rating::class, 'evaluator_id');
+		return $this->hasMany(Cooment::class, 'user_id');
 	}	
 	//Evaluados
 	public function evaluated(){
-		return $this->hasMany(Rating::class, 'evaluated_id');
+		return $this->hasMany(Comment::class, 'evaluated_id');
 	}
 
     public function users_propose()

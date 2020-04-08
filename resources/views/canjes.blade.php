@@ -37,7 +37,8 @@
 									<div class="field_w_search">
 										<input type="text" id="search" name="search" placeholder="Buscar" />
 										<i class="la la-search"></i>
-									</div><!-- Search Widget -->
+									</div>
+									<!-- Search Widget -->
 <!-- 									<div class="field_w_search">
 	<input type="text" id="location" name="location" placeholder="Ubicacion" />
 	<i class="la la-map-marker"></i>
@@ -55,9 +56,9 @@
 									<input type="radio" class="input-date" value="todos" name="date" id="todos" checked><label class="nm" for="todos">Todos</label><br />
 					 			</div>
 					 		</div>
-<!-- 					 		<div class="widget border">
-	<h3 class="sb-title closed">Industria</h3>
-	<div class="posted_widget">
+							<!-- 					 		<div class="widget border">
+								<h3 class="sb-title closed">Industria</h3>
+								<div class="posted_widget">
 									@php($industry = 0)
 									@foreach($categories as $category)
 										@if($category->industry_id > $industry)
@@ -78,10 +79,10 @@
 											</div>
 										@endif
 									@endforeach
-	</div>
-</div> -->
+								</div>
+							</div> -->
 					 		<div class="widget border">
-						 		<h3 class="sb-title closed">Precio</h3>
+						 		<h3 class="sb-title">Precio</h3>
 						 		<div class="type_widget">
 						 			<div class="row">				 			
 					 					<div class="col-lg-6">
@@ -99,6 +100,34 @@
 					 				</div>
 						 		</div>
 					 		</div>
+
+					 		<div class="widget border">
+						 		<h3 class="sb-title">Categorias</h3>
+						 		<div class="type_widget">
+
+								@php($industry = 0)
+								@foreach($categories as $category)
+									@if($category->industry_id > $industry)
+										@php($industry = $category->industry_id)
+										<h6>{{$category->industry->name}}</h6>
+										<div class="simple-checkbox">
+											<p>
+												<input type="checkbox" name="category"  id="category[{{ $category->id }}]" value="{{ $category->id }}">
+												<label for="category[{{ $category->id }}]">{{ $category->name }}</label>
+											</p>
+										</div>										
+									@else
+										<div class="simple-checkbox">
+											<p>
+												<input type="checkbox" name="category"  id="category[{{ $category->id }}]" value="{{ $category->id }}">
+												<label for="category[{{ $category->id }}]">{{ $category->name }}</label>
+											</p>
+										</div>
+									@endif
+								@endforeach
+								</div>
+					 		</div>
+
 				 		</form>
 				 	</aside>
 					<div id="lista-canjes" class="col-lg-9 column">
@@ -150,6 +179,28 @@
 		    }
 		});
 
+		/*Busqueda en checkbox*/
+		$('input:checkbox').on('click', function() {
+			var page = $('#hidden_page').val();
+			filtrado(page);
+		});
+
+
+		$('#all').change(function(){
+			if(this.checked) {
+				$(':checkbox').each(function(){
+					this.checked = true;                        
+				});
+			} 
+			else {
+				$(':checkbox').each(function() {
+					this.checked = false;                       
+				});
+			}
+		});
+
+
+
 
 		$(document).on('click', '.page-link', function(event){
 			event.preventDefault();
@@ -164,17 +215,23 @@
 
 
 	function filtrado(page){
+		var category = [];
+		$("input[name='category']:checked").each(function() {
+            category.push($(this).val());
+        });
+
+
 		var search = $('#search').val();
 		var min    = $('#min').val();
 		var max    = $('#max').val();
 		var date   = $('input:radio[name=date]:checked').val();
 		var token  = '{{csrf_token()}}';
-		fetch_data(page, search, min, max, date);
+		fetch_data(page, search, min, max, date, category);
 	}
 
-	function fetch_data(page, search, min, max, date){
+	function fetch_data(page, search, min, max, date, category){
 		$.ajax({
-			url:'/canjes-filtro/fetch_data?page='+page+'&search='+search+'&min='+min+'&max='+max+'&date='+date,
+			url:'/canjes-filtro/fetch_data?page='+page+'&search='+search+'&min='+min+'&max='+max+'&date='+date+'&category='+JSON.stringify(category),
 			type:'get',
 			success:function(response){
 				$('#lista-canjes').html('');
@@ -192,5 +249,5 @@
 
 
 @section('footer')
-	@include('includes.footer-simple')
+	@include('includes.footer')
 @endsection

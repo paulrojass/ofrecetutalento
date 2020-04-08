@@ -10,6 +10,5 @@ $factory->define(Message::class, function (Faker $faker) {
     return [
         'body' => $faker->paragraph($nbSentences = 4, $variableNbSentences = true),
         'received' => $faker->boolean,
-        'to_id' => App\User::all(['id'])->random()
     ];
 });

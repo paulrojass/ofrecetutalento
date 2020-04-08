@@ -2,12 +2,14 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Comment;
 use Faker\Generator as Faker;
 
-$factory->define(Comment::class, function (Faker $faker) {
+$factory->define(App\Comment::class, function (Faker $faker) {
+	$rating = [1,2,3,4,5];
+	$valoracion = Arr::random($rating);
     return [
         'comment' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
-		'user_id' => App\User::all(['id'])->random()
+		/*'user_id' => App\User::all(['id'])->random(),*/
+		'value' => $valoracion
     ];
 });

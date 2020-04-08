@@ -4,6 +4,7 @@
 
 use App\Dealing;
 use App\Exchange;
+use App\User;
 use Faker\Generator as Faker;
 
 $factory->define(Dealing::class, function (Faker $faker) {

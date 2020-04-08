@@ -17,7 +17,7 @@ class MessagesTableSeeder extends Seeder
         $users = Suscription::where('plan_id','>', 2)->get();
 
     	foreach ($users as $user) {
-			factory(Message::class,5)->create(['from_id'=>$user->user_id]);
+			factory(Message::class,5)->create(['from_id'=>$user->user->id, 'to_id'=>User::all('id')->except($user->id)->random()]);
     	}
     }
 }

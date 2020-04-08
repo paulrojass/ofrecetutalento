@@ -39,7 +39,8 @@ $(function(){
 	$('#div-comentarios').on('click', '.b-publicar-respuesta', function(e){
 		e.preventDefault();
 		var comentario = $(this).data('value');
-		agregarRespuesta(id_canje, comentario);
+		var responde = $(this).data('evaluado');
+		agregarRespuesta(id_canje, comentario, responde);
 	});
 
 	$('.job-title2').on('click', '#a-me-gusta',function(e){
@@ -87,13 +88,13 @@ $(function(){
 		}
 	}
 
-	function agregarRespuesta(id_canje, comentario_id){
+	function agregarRespuesta(id_canje, comentario_id, responde){
 		var comentario = $('#textarea-respuesta'+comentario_id).val();
 		if (comentario != ''){
 			$.ajax({
 				url: '/agregar-respuesta',
 				type: 'get',
-				data: {canje_id : id_canje, comment:comentario, replyto: comentario_id},
+				data: {canje_id : id_canje, comment:comentario, replyto:comentario_id, evaluated_id:responde},
 				dataType: 'html',
 			})
 			.done(function(data) {
@@ -139,6 +140,33 @@ $(function(){
 			}
 		});
 	});
+
+		/*================================== RATING ==========================*/
+
+		var $star_rating = $('#div-comentarios .star-rating .la');
+
+		var SetRatingStar = function() {
+		  return $star_rating.each(function() {
+		    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+		      return $(this).removeClass('la-star-o').addClass('la-star');
+		    } else {
+		      return $(this).removeClass('la-star').addClass('la-star-o');
+		    }
+		  });
+		};
+
+		/*$('#valoracion').on('click', '.star-rating .la', function() {*/
+/*		$star_rating.on('click', function() {
+		  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+		  return SetRatingStar();
+		});
+*/
+		SetRatingStar();
+
+		/*================================== RATING ==========================*/
+
+
+
 
 /*	function verificarArchivos(tipo){
 		var _token = $("input[name='_token']").val();

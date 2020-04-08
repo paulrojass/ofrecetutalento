@@ -113,14 +113,17 @@ class MessageController extends Controller
         if(auth()->user()->suscription->plan_id <= 2) return back();
         //mensajes que llegan a auth
         $recibidos = Message::where('to_id', auth()->user()->id )->get();
+
         //mensajes que envio auth
         $enviados = Message::where('from_id', auth()->user()->id )->get();
 
         //mezcla de mensajes enviados y recibidos
         $mensajes = $recibidos->merge($enviados);
 
+        //Si genera error este segmento de codigo recordar que no pueden haber from_id y to_id del mismo usuario
         if(!$recibidos->isEmpty()){//si hay recibidos:
             $usuarios = $mensajes->where('from_id','<>', auth()->user()->id)->unique('from_id')->sortBy('created_at');
+
             $primero = $usuarios[0]->from_id;
         }  
         elseif (!$enviados->isEmpty())//Si hay enviados:

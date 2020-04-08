@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Image;
 use App\Exchange;
 use App\File;
+use App\Comment;
 
 use DB;
 
@@ -42,6 +43,7 @@ class ExchangeController extends Controller
         $exchange->description = $request->description;
         $exchange->talent_id = $request->talent_id;
         $exchange->save();
+        return $exchange;
     }
 
     /**
@@ -72,7 +74,8 @@ class ExchangeController extends Controller
         $imagenes = $this->archivosCanje($canje, 'image');
         $videos = $this->archivosCanje($canje, 'video');
         $pdfs = $this->archivosCanje($canje, 'pdf');
-        return view('canje', compact('canje','imagenes', 'videos', 'pdfs'));
+        $comentarios = Comment::where('exchange_id', $id)->get();
+        return view('canje', compact('canje','imagenes', 'videos', 'pdfs', 'comentarios'));
     }
 
     public function archivosCanje(Exchange $exchange, $type)
@@ -131,9 +134,11 @@ class ExchangeController extends Controller
 
     public function guardarCanje(Request $request)
     {
-        $this->create($request);
-        $exchanges = Auth()->User()->exchanges;
-        return view('content.mi-cuenta-canjes', compact('exchanges'));
+        $exchange = $this->create($request);
+
+        return $exchange->id;
+/*        $exchanges = Auth()->User()->exchanges;
+        return view('content.mi-cuenta-canjes', compact('exchanges'));*/
     }
 
     public function eliminarCanje(Request $request)
@@ -170,7 +175,14 @@ class ExchangeController extends Controller
         return view('forms.mi-cuenta-canje', compact('canje', 'imagenes', 'videos', 'pdfs'));
     }
 
+    public function updateExchangesProfileView($user_id)
+    {
+      $user = User::find($user_id);
 
+      $exchanges = $user->exchanges();
+
+      return view('content.canjes-perfil', compact('canjes'));
+    }
 
     public function updateImageCanje(Request $request){
         // ruta de las imagenes guardadas

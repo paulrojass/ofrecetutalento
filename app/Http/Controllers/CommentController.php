@@ -33,6 +33,8 @@ class CommentController extends Controller
         $comment->comment = $request->comment;
         $comment->user_id = Auth()->User()->id;
         $comment->exchange_id = $request->canje_id;
+        $comment->evaluated_id = $request->evaluated_id;
+        $comment->value = $request->rating;
         if($request->replyto)
         {
             $comment->replyto = $request->replyto;
@@ -100,25 +102,47 @@ class CommentController extends Controller
 
     public function newComment(Request $request)
     {
-        $canje = Exchange::find($request->canje_id);
         $this->create($request);
-        return view('content.comments', compact('canje'));
+        if($request->canje_id){
+        $comments    = Comment::where('exchange_id', $request->canje_id)->where('replyto', null)->paginate(5);
+        $replys      = Comment::where('exchange_id', $request->canje_id)->where('replyto', '<>', null)->get();
+        }else{
+        $comments = Comment::where('evaluated_id', $request->user_id)->where('replyto', null)
+                    ->where('user_id', '<>', $request->user_id)
+                    ->paginate(10);
+
+        $replys = Comment::where('evaluated_id', $request->user_id)->where('replyto', '<>', null)->get();
+        }
+        return view('content.comments', compact('comments', 'replys'));
     }
 
     public function updateCommentsView(Request $request)
     {
-        $canje = Exchange::find($request->canje_id);
-        return view('content.comments', compact('canje'));
+        /*$canje = Exchange::find($request->canje_id);*/
+        $comments    = Comment::where('exchange_id', $request->canje_id)->where('replyto', null)->paginate(5);
+        $replys      = Comment::where('exchange_id', $request->canje_id)->where('replyto', '<>', null)->get();
+        return view('content.comments', compact('comments', 'replys'));
+    }
+
+    public function updateCommentsProfileView(Request $request)
+    {
+        $comments = Comment::where('evaluated_id', $request->user_id)->where('replyto', null)
+                    ->where('user_id', '<>', $request->user_id)
+                    ->paginate(10);
+
+        $replys = Comment::where('evaluated_id', $request->user_id)->where('replyto', '<>', null)->get();
+
+        return view('content.comments', compact('comments', 'replys'));
     }
 
     public function valorar(Request $request)
     {
         $this->create($request);
-        $this->markCommentDealing($request);
-        return $this->rating($request);
+        return $this->markCommentDealing($request);
+        /*return $this->rating($request);*/
     }
 
-    public function rating(Request $request)
+/*    public function rating(Request $request)
     {
         $canje = Exchange::find($request->canje_id);
 
@@ -130,7 +154,7 @@ class CommentController extends Controller
         $rating->evaluated_id = $user_id;
         $rating->save();
         return $rating;
-    }
+    }*/
 
     public function markCommentDealing(Request $request)
     {
@@ -143,7 +167,6 @@ class CommentController extends Controller
             $trato->proposal_ready = 2;
         }
         $trato->save();
-        dd($trato);
         return $trato;
     }
 

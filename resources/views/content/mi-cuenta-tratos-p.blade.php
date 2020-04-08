@@ -1,9 +1,9 @@
 <div class="border-title"><h3>{{$propuestos->count()}} Tratos propuestos</h3></div>
 
 @if($propuestos->count() > 0)
-<div class="manage-jobs-sec">
-	<div class="mini-portfolio">
- 		<div class="manage-jobs-sec">
+<!-- <div class="manage-jobs-sec">
+	<div class="mini-portfolio"> -->
+ 		<div class="manage-jobs-sec addscroll">
 	 		<table>
 	 			<thead>
 	 				<tr>
@@ -15,7 +15,7 @@
 	 			<tbody>
 					@foreach($propuestos->sortByDesc('created_at') as $propuesto)
 	 				<tr>
-	 					<td class="col-3">
+	 					<td style="width: 30%">
 	 						<span class="applied-field">
 								@if($propuesto->exchange_id == null)
 									{{ $propuesto->name }}
@@ -26,7 +26,7 @@
 								@endif
 							</span>
 	 					</td>
-	 					<td class="col-5">
+	 					<td style="width: 60%">
 	 						<div class="table-list-title mr-5">
 	 							<p>{{ $propuesto->description }}</p>
 	 						</div>
@@ -52,7 +52,7 @@
 								$titulo_propuesto = null;
 							@endphp
 						@endif
-	 					<td class="col-1">
+	 					<td style="width: 10%">
 <!-- 	 						@if($propuesto->approved == NULL)
 <span class="status active">Pendiente</span>
 @else
@@ -100,8 +100,8 @@
 	 			</tbody>
 	 		</table>
  		</div>
-	</div>
-</div>
+<!-- 	</div>
+</div> -->
 @else
 <h4> Todavia no has realizado propuestas </h4>
 @endif

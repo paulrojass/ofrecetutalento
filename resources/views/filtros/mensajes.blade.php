@@ -10,12 +10,12 @@
 	 						{{ $mensajes[0]->user_to->name }} {{ $mensajes[0]->user_to->lastname }}
 	 					</a>
 	 				</li>
-	 				<li><a class="metascomment" href="#" title=""><i class="la la-map-marker"></i>{{ $mensajes[0]->user_to->city }} / {{ $mensajes[0]->user_to->country }}</a>
+	 				<li><a class="metascomment" href="javascript:void(0)" title=""><i class="la la-map-marker"></i>{{ $mensajes[0]->user_to->city }} / {{ $mensajes[0]->user_to->country }}</a>
 	 				</li>
-	 				<li><a class="metascomment" href="#" title="">
+	 				<li><a class="metascomment" href="javascript:void(0)" title="">
 	 					<i class="la la-comments"></i>{{ $mensajes->count() }} @if($mensajes->count() == 1)Mensaje @else Mensajes @endif </a>
 	 				</li>
-	 				<li><a class="metascomment" href="#" title=""><i class="la la-envelope-o"></i>{{ $mensajes[0]->user_to->email }}</a></li>
+	 				<li><a class="metascomment" href="javascript:void(0)" title=""><i class="la la-envelope-o"></i>{{ $mensajes[0]->user_to->email }}</a></li>
 
 					@else
 	 				<li>
@@ -24,12 +24,12 @@
 	 						{{ $mensajes[0]->user_from->name }} {{ $mensajes[0]->user_from->lastname }}
 	 					</a>
 	 				</li>
-	 				<li><a class="metascomment" href="#" title=""><i class="la la-map-marker"></i>{{ $mensajes[0]->user_from->city }} / {{ $mensajes[0]->user_from->country }}</a>
+	 				<li><a class="metascomment" href="javascript:void(0)" title=""><i class="la la-map-marker"></i>{{ $mensajes[0]->user_from->city }} / {{ $mensajes[0]->user_from->country }}</a>
 	 				</li>
-	 				<li><a class="metascomment" href="#" title="">
+	 				<li><a class="metascomment" href="javascript:void(0)" title="">
 	 					<i class="la la-comments"></i>{{ $mensajes->count() }} @if($mensajes->count() == 1)Mensaje @else Mensajes @endif </a>
 	 				</li>
-	 				<li><a class="metascomment" href="#" title=""><i class="la la-envelope-o"></i>{{ $mensajes[0]->user_from->email }}</a></li>
+	 				<li><a class="metascomment" href="javascript:void(0)" title=""><i class="la la-envelope-o"></i>{{ $mensajes[0]->user_from->email }}</a></li>
 					@endif
 
 
@@ -44,12 +44,12 @@
 		<table class="mt-0 mb-0">
 		<tbody>
 		<tr>
-			<td class="col-9">
+			<td style="width: 70%">
 				<div class="table-list-title">
 					<p>{{ $mensaje->body }}</p>
 				</div>
 			</td>
-			<td class="col-3">
+			<td style="width: 30%">
 				<div class="table-list-title pull-right">
 					<i>Yo</i><br />
 					<span>
@@ -67,13 +67,13 @@
 		<table class="mt-0 mb-0">
 		<tbody>
 		<tr>
-			<td class="col-3">
+			<td style="width: 30%">
 				<div class="table-list-title">
 					<i>{{ $mensaje->user_from->name }}</i><br />
 					<span>{{ $mensaje->created_at->diffForHumans() }}</span>
 				</div>
 			</td>
-			<td class="col-9">
+			<td style="width: 90%">
 				<div class="table-list-title">
 					<p>{{ $mensaje->body }}</p>
 				</div>

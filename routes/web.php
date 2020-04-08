@@ -45,6 +45,9 @@ Route::get('terminos_&_condiciones', 'SiteController@terminos')->name('terminos'
 Route::get('talentos/fetch_data', 'SearchController@fetch_data_talents');
 Route::get('canjes-filtro/fetch_data', 'SearchController@fetch_data_exchanges');
 
+//Filtrado de commentarios y canjes en Perfil
+Route::get('perfil/canjes/fetch_data', 'ExchangeController@fetch_data_exchanges');
+Route::get('perfil/comentarios/fetch_data', 'CommentController@fetch_data_comment');
 
 
 Route::get('logout', function ()
@@ -74,6 +77,9 @@ Route::post('guardar_talento', 'TalentController@store');
 Route::post('actualizar_talento', 'TalentController@actualizarTalento');
 //Perfil de usuario:
 Route::get('perfil/{id}', 'UserController@profile');
+Route::get('actualizar-comentarios-perfil', 'CommentController@updateCommentsProfileView');
+Route::get('agregar-respuesta-perfil', 'CommentController@newProfileComment');
+Route::post('actualizar-canjes-perfil', 'ExchangeController@updateExchangesProfileView');
 
 //Canjes Autenticado
 Route::get('cambiar-like', 'LikeController@changeLike');
@@ -86,6 +92,7 @@ Route::get('actualizar-archivos', 'FileController@actualizarArchivos');
 Route::post('eliminar-archivo', 'FileController@eliminarArchivo');
 Route::post('editar-archivo', 'FileController@editarArchivo');
 Route::get('nuevo-trato-talento', 'DealingController@newDealing');
+
 
 
 //Route::post('agregar-imagen', 'FileController@agregarImagen');
@@ -106,6 +113,7 @@ Route::get('propuestos-perfil', 'SiteController@perfilPropuestos');
 Route::post('eliminar-talento', 'TalentController@eliminarTalento');
 Route::get('form-perfil', 'SiteController@formInfo');
 Route::get('actualizar_usuario', 'UserController@updateUser');
+
 Route::get('guardar-canje', 'ExchangeController@guardarCanje');
 Route::post('eliminar-canje', 'ExchangeController@eliminarCanje');
 Route::post('actualizar_canje', 'ExchangeController@actualizarCanje');

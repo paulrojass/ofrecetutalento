@@ -172,5 +172,5 @@
 @endsection
 
 @section('footer')
-	@include('includes.footer-simple')
+	@include('includes.footer')
 @endsection
