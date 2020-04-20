@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Image;
 
+use Jenssegers\Date\Date;
+
 use DB;
 
 class UserController extends Controller

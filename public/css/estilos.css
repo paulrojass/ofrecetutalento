@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
 
+.nav.nav-tabs > li a.current {
+    color: #ffffff;
+    background-color: #ff9200;
+}
+
+
+
 .nav-tabs li.disabled a {
     pointer-events: none;
 }
@@ -520,4 +527,64 @@ background: linear-gradient(45deg, rgba(251,35,106,1) 0%,rgba(251,35,106,1) 44%,
 .simple-checkbox p input[type="checkbox"]:checked + label::before, .simple-checkbox p input[type="radio"]:checked + label::before {
     background: #ff9200;
     border-color: #ff9200;
+}
+
+.canje-img{
+  object-fit: cover;
+  height: 200px;
+  width: 100%;
+}
+
+.alert{
+  width: 100%;
+}
+
+
+/* Diseño en canje version nueva */
+.blog-postdetail > span {
+    float: left;
+    width: 100%;
+    font-size: 13px;
+    color: #888888;
+    margin-top: 20px;
+}
+
+.date-comment {
+    float: right;
+    font-size: 13px;
+    color: #8b91dd;
+}
+
+
+.pricetable > button {
+  float: none;
+  display: inline-block;
+  font-family: 'Questrial' !important;
+  font-size: 15px;
+  color: #ffffff;
+  padding: 15px 55px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  border-radius: 30px;
+  margin-bottom: 40px;
+  margin-top: 20px;
+  -webkit-transition: all 0.4s ease 0s;
+  -moz-transition: all 0.4s ease 0s;
+  -ms-transition: all 0.4s ease 0s;
+  -o-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+}
+
+.pricetable > button {
+  background-color: #141f72;
+}
+
+.pricetable.active>button{
+  background: #ffffff;
+  color: #141f72;
+}
+.pricetable>button:hover{
+  background: #ff9200;
 }

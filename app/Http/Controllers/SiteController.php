@@ -172,7 +172,7 @@ class SiteController extends Controller
         $from = auth()->user()->email;
         $name = auth()->user()->name.' '.auth()->user()->lastname;
         $subject = "Nuevo Reporte o Reclamo de $name ($from)";
-        $for = "reportes@ofrecetutalento.com";
+        $for = "ksalemidms@gmail.com";
 
         Mail::send('mails.reporte',$request->all(), function($msj) use($subject,$for,$name,$from){
             $msj->from($from,$name);

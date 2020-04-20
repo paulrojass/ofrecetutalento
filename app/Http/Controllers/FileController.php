@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\File;
 use App\Plan;
 use App\Exchange;
+use App\Talent;
 use App\Suscription;
 use Illuminate\Http\Request;
 
@@ -106,7 +107,7 @@ class FileController extends Controller
 		if($request->type == 'video') $maximo = $plan->videos;
 		if($request->type == 'pdf') $maximo = $plan->pdfs;
 
-		$files = File::where('exchange_id', $request->exchange_id)->where('type', $request->type)->get();
+		$files = File::where('talent_id', $request->talent_id)->where('type', $request->type)->get();
 		$agregados = $files->count();
 		
 		if($maximo == null){
@@ -143,12 +144,12 @@ class FileController extends Controller
 		$file = new File();
 		$file->location = $temp_name;
 		$file->type = 'image';
-		$file->exchange_id = $request->exchange_id;
+		$file->talent_id = $request->talent_id;
 		$file->save();
 
-		$archivos = File::where('exchange_id', $request->exchange_id)->where('type', 'image')->get();
+		$archivos = File::where('talent_id', $request->talent_id)->where('type', 'image')->get();
 
-		return view('content.canje-image', compact('archivos'));    	
+		return view('content.talento-image', compact('archivos'));    	
     }
 
     public function agregarPdf(request $request)
@@ -164,7 +165,7 @@ class FileController extends Controller
     {
     	$file = File::find($request->id);
         $this->destroy($file);
-        return $file->exchange->id;
+        return $file->talent->id;
 /*		$exchange = new ExchangeController;		
 		return $exchange->vistaCanje($canje);*/
     }
@@ -175,7 +176,7 @@ class FileController extends Controller
     	$file->description = $request->description;
     	if($file->name) $file->name = $request->name;
     	$file->save();
-        return $file->exchange->id;
+        return $file->talent->id;
 
 
 /*		$exchange = new ExchangeController;		
@@ -185,13 +186,13 @@ class FileController extends Controller
 
     public function actualizarArchivos(Request $request)
     {
-		$archivos = File::where('exchange_id', $request->canje_id)->where('type', $request->type)->get();
+		$archivos = File::where('talent_id', $request->talent_id)->where('type', $request->type)->get();
         
-        if($request->type == 'image') return view('content.canje-image', compact('archivos'));
+        if($request->type == 'image') return view('content.talento-image', compact('archivos'));
 
-        if($request->type == 'video') return view('content.canje-video', compact('archivos'));
+        if($request->type == 'video') return view('content.talento-video', compact('archivos'));
 
-        if($request->type == 'pdf') return view('content.canje-pdf', compact('archivos'));
+        if($request->type == 'pdf') return view('content.talento-pdf', compact('archivos'));
     }
 
     public function isVideo(Request $request){
@@ -258,7 +259,7 @@ class FileController extends Controller
 			'description' => $request->description,
 			'location' => $temp_name,
 			'type' => 'image',
-			'exchange_id' => $request->canje_id
+			'talent_id' => $request->talent_id
 		]);
 
 		return $request->canje_id;
@@ -282,10 +283,10 @@ class FileController extends Controller
 			'description' => $request->description,
 			'location' => $temp_name,
 			'type' => 'video',
-			'exchange_id' => $request->canje_id
+			'talent_id' => $request->talent_id
 		]);
 
-		return $request->canje_id;
+		return $request->talent_id;
 	}
 
 	public function newPdf(Request $request)
@@ -308,9 +309,9 @@ class FileController extends Controller
 			'description' => $request->description,
 			'location' => $temp_name,
 			'type' => 'pdf',
-			'exchange_id' => $request->canje_id
+			'talent_id' => $request->talent_id
 		]);
 
-		return $request->canje_id;
+		return $request->talent_id;
 	}	
 }

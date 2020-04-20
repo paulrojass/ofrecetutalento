@@ -11,11 +11,13 @@ use App\Message;
 use App\Category;
 use App\Comment;
 use App\Dealing;
+use App\Recommendation;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
 use App\Traits\DatesTranslator;
+use Jenssegers\Date\Date;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -136,12 +138,24 @@ class User extends Authenticatable implements MustVerifyEmail
 		return $this->hasMany(Message::class, 'from_id');
 	}
 
+	public function recommendations(){
+		return $this->hasMany(Recommendation::class, 'user_id');
+	}
+
+	public function recommended(){
+		return $this->hasMany(Recommendation::class, 'recommended_id');
+	}
+
 	public function hasAnyTalent()
 	{
 		$contador = Talent::where('user_id', $this->id)->count();
 		if ($contador > 0 ) return true;
 		return false;
 	}
+
+
+
+
 
 //Query Scopes
 	public function scopeTalent($query, $busqueda)

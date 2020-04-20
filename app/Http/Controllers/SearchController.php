@@ -94,7 +94,7 @@ class SearchController extends Controller
 
 			/*
 			if(empty($busqueda) && empty($ubicacion) && $categoria == null && $fecha == 'todos' && empty($minimo) && empty($maximo)){*/
-			if(empty($busqueda) && $fecha == 'todos' && empty($minimo) && empty($maximo) && $categoria == null){
+			if(empty($busqueda) && $fecha == '' && empty($minimo) && empty($maximo) && $categoria == null){
 				$exchanges = Exchange::paginate(10);
 			}
 			else{

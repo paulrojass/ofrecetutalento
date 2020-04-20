@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Suscription;
 use Illuminate\Http\Request;
 
+use Carbon\Carbon;
+
 class SuscriptionController extends Controller
 {
     /**
@@ -69,7 +71,24 @@ class SuscriptionController extends Controller
      */
     public function update(Request $request, Suscription $suscription)
     {
-        //
+        if($request->type){
+            if($request->type == 'Mensual') $suscription->expiration_date = Carbon::now()->addMonth(1);
+            if($request->type == 'Trimestral') $suscription->expiration_date = Carbon::now()->addMonth(3);
+            if($request->type == 'Anual') $suscription->expiration_date = Carbon::now()->addYear(1);
+        }
+        else $suscription->expiration_date = null;
+        
+        $suscription->user_id = $request->user_id;
+        $suscription->plan_id = $request->plan_id;
+        $suscription->save();
+
+        return view('plan-cambiado',compact('suscription'));
+    }
+
+    public function change(Request $request)
+    {
+        $suscription = Suscription::find($request->user_id);
+        return $this->update($request, $suscription);
     }
 
     /**

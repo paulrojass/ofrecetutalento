@@ -19,6 +19,7 @@ class CreatePlansTable extends Migration
             $table->integer('monthly_price')->nullable();
             $table->integer('quarterly_price')->nullable();
             $table->integer('annual_price')->nullable();
+            $table->integer('recommendations')->nullable();
             $table->integer('talents')->nullable();
             $table->integer('photos')->nullable();
             $table->integer('videos')->nullable();

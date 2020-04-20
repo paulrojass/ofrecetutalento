@@ -16,7 +16,7 @@
 	<div class="block remove-top">
 		<div class="container">
 			<div class="row no-gape">
-				<aside class="col-lg-3 column border-right">
+				<aside class="col-lg-2 column border-right">
 					<div class="widget">
 						<div class="tree_widget-sec">
 							<ul>
@@ -36,7 +36,7 @@
 					</div>
 				</aside>
 
-				<div class="col-lg-9 column">
+				<div class="col-lg-10 column">
 
 					<div id="mi-perfil">
 						<div class="padding-left">
@@ -462,90 +462,239 @@
 <!--=================================  MODALS PARA AGREGAR Y EDITAR INFORMACION DE PDF -->
 
 
-
 <!--=================================  MODALS PARA TRATOS -->
-<section id="div-modal-nuevo-pdf">
+<section id="div-modal-trato">
 	<!-- Modal Idioma -->
 	<div class="modal fade bd-example-modal-lg" id="modal-trato" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content pt-4">
-			<h3>Información del trato</h3>
-			<button type="button" class="close-b" data-dismiss="modal" aria-label="Close">
-				<span class="close-popup"><i class="la la-close"></i></span>
-			</button>
-			<div class="modal-body">
-				<div id="info-trato-talento" class="contact-edit pl-5 pr-5 mb-2">
-					{{-- espacio para informacion de canje o trato --}}
-				</div>
-				<div id="info-trato-canje-pago" class="contact-edit pl-5 pr-5 mb-2">
-					{{-- Pagar precio de canje o con otro canje --}}
-				</div>
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content pt-4">
+				<!-- <h3>Información del trato</h3> -->
+				<button type="button" class="close-b" data-dismiss="modal" aria-label="Close">
+					<span class="close-popup"><i class="la la-close"></i></span>
+				</button>
+				<div class="modal-body">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="blog-sec">
+									<div class="row" id="masonry">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+											<div class="my-blog div-boton-trato" id="div-solicitado-canje">
+												<div class="blog-thumb" id="imagen-solicitado-canje">
+												</div>
+												<div class="blog-details">
+													<h3>Canje Solicitado</h3>
+													<p id="solicitado-nombre-canje"></p>
+												</div>
+											</div>
 
-				<div  class="contact-edit pl-5 pr-5 mb-2">
-					<div class="row" id="aprobar">
-						<div class="col-sm">
-							<p id="info-trato-aprobar">
+											<div class="my-blog div-boton-trato" id="div-solicitado-no-canje">
+												<div class="blog-thumb">
+													<a href="#" title=""><img class="canje-img" src="{{ asset('images/exchanges/default.jpg') }}" alt="" />
+													</a>
+												</div>
+												<div class="blog-details">
+													<h3>Solicitud</h3>
+													<p id="solicitado-nombre-no-canje"></p>
+												</div>
+											</div>
+										</div>
 
-							</p>
-						</div>
-						<div class="col-sm" id="div-boton-aprobar">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+											<div class="my-blog div-boton-trato" id="div-propuesto-canje" > 
+												<div class="blog-thumb" id="imagen-propuesto-canje">
+													
+												</div>
+												<div class="blog-details">
+													<h3>Canje Propuesto</h3>
+													<p id="propuesto-nombre-canje"></p>
+												</div>
+											</div>
 
-			 			</div>
-					</div>
+											<div class="my-blog div-boton-trato" id="div-propuesto-no-canje" > 
+												<div class="blog-thumb">
+													<a href="#" title=""><img class="canje-img" src="{{ asset('images/exchanges/default.jpg') }}" alt="" /></a>
+												</div>
+												<div class="blog-details">
+													<h3>Propuesta</h3>
+													<p id="propuesto-nombre-no-canje"></p>
+												</div>
+											</div>
+											<div class="my-blog div-boton-trato" id="div-propuesto-pago" > 
+												<div class="blog-thumb">
+													<img class="canje-img" src="{{ asset('images/exchanges/default.jpg') }}" alt="" />
+												</div>
+												<div class="blog-details">
+													<h3>Pago por unidad</h3>
+													<p id="propuesto-nombre-pago"></p>
+												</div>
+											</div>
 
-					<div class="alert alert-light" role="alert" id="alert-trato-aceptado">
-					 	El trato ha sido aprobado
-					</div>
-					<div class="alert alert-light" role="alert" id="alert-trato-rechazado">
-						El trato fue rechazado
-					</div>
-
-					<div class="alert alert-light" role="alert" id="alert-trato-p-recibido">
-						El trato o pago propuesto se ha marcado como recibido
-					</div>
-
-					<div class="alert alert-light" role="alert" id="alert-trato-s-recibido">
-						El trato solicitado se ha marcado como recibido
-					</div>
-
-					<div class="alert alert-light" role="alert" id="alert-comentario">
-						La valoración y el comentario han sido enviados
-					</div>
-
-				</div>
-
-				<div id="valoracion" class="contact-edit pl-5 pr-5 mb-2">
-					<div class="row">
-						<div class="col-lg-12">
-							<span class="pf-title">Deja tu comentario u opinión por el servicio recibido</span>		
-							<div class="pf-field">
-								<textarea id="comment" name="comment" rows="2"></textarea>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="col-lg-12">
-							<div class="star-rating">
-								<span class="la la-star-o" data-rating="1"></span>
-								<span class="la la-star-o" data-rating="2"></span>
-								<span class="la la-star-o" data-rating="3"></span>
-								<span class="la la-star-o" data-rating="4"></span>
-								<span class="la la-star-o" data-rating="5"></span>
-								<input type="hidden" name="whatever1" id="rating" class="rating-value" value="0">
-							</div>
+					</div>
 
-							<div class="upload-info pull-right">
-								<a href="javascript:void(0)" data-canje="" data-tipo="" data-trato="" id="boton-valorar">Enviar valoración</a>
+					<div  class="contact-edit pl-5 pr-5 mb-2">
+				 		<div class="bloglist-sec">
+				 			<div class="blogpost">
+				 				<div class="blog-postdetail div-boton-trato" id="div-info-canje-solicitado">
+									<h3>
+										Detalles de requerimientos de solicitud
+									</h3>
+									<div id="descripcion-canje-solicitado">
+										
+									</div>
+				 				</div>
+				 				<div class="blog-postdetail div-boton-trato" id="div-info-no-canje-solicitado">
+									<h3>
+										Detalles de requerimientos de solicitud
+									</h3>
+									<div id="descripcion-no-canje-solicitado">
+										
+									</div>
+				 				</div>
+				 			</div>
+				 		</div>
+					</div>
+
+					<div  class="contact-edit pl-5 pr-5 mb-2" >
+				 		<div class="bloglist-sec">
+				 			<div class="blogpost">
+				 				<div class="blog-postdetail div-boton-trato" id="div-info-canje-propuesto">
+									<h3>
+										Detalles de propuesta
+									</h3>
+									<div id="descripcion-canje-propuesto">
+										
+									</div>
+				 				</div>
+				 				<div class="blog-postdetail div-boton-trato" id="div-info-no-canje-propuesto">
+									<h3>
+										Detalles de propuesta
+									</h3>
+									<div id="descripcion-no-canje-propuesto">
+										
+									</div>
+				 				</div>
+				 			</div>
+				 		</div>
+					</div>
+
+					<div  class="contact-edit pl-5 pr-5 mb-2">			
+						<div class="alert alert-success" role="alert" id="alert-trato-aceptado">
+						 	El trato ha sido aprobado
+						</div>
+						<div class="alert alert-success" role="alert" id="alert-trato-rechazado">
+							El trato fue rechazado
+						</div>
+
+						<div class="alert alert-success" role="alert" id="alert-trato-p-recibido">
+							El trato o pago propuesto se ha marcado como recibido
+						</div>
+
+						<div class="alert alert-success" role="alert" id="alert-trato-s-recibido">
+							El trato solicitado se ha marcado como recibido
+						</div>
+
+						<div class="alert alert-success" role="alert" id="alert-comentario">
+							La valoración y el comentario han sido enviados
+						</div>
+					</div>
+
+					<div  class="contact-edit pl-5 pr-5 mb-2 div-boton-trato" id="div-espera-recibido">
+		 				<div class="job-overview divide">
+				 			<!-- <h3>Estatus del Trato</h3> -->
+				 			<p class="text-center">Para activar el trato haz clic en Aprobar</p>
+				 			<ul>
+				 				<li><i class="la la-clock-o"></i><h3>Estatus </h3><span>En espera</span></li>
+				 				<li> <a class="bbutton mt-0" id="aprobar-trato" href="javascript:void(0)" title="">Aprobar</a></li>
+				 				<li> <a class="bbutton mt-0" id="omitir-trato" href="javascript:void(0)" title="">Omitir</a></li>
+				 			</ul>
+				 		</div>
+				 	</div>
+
+					<div  class="contact-edit pl-5 pr-5 mb-2 div-boton-trato" id="div-espera-propuesto">
+		 				<div class="job-overview divide">
+				 			<!-- <h3>Estatus del Trato</h3> -->
+				 			<ul>
+				 				<li><i class="la la-clock-o"></i><h3>Estatus </h3><span>En espera</span></li>
+				 			</ul>
+				 			<p class="text-center">Debes esperar a que el trato sea aprobado u omtido</p>
+				 		</div>
+				 	</div>
+
+
+					<div  class="contact-edit pl-5 pr-5 mb-2 div-boton-trato" id="div-aprobado">
+		 				<div class="job-overview divide">
+				 			<!-- <h3>Estatus del Trato</h3> -->
+				 			<p class="ya-aprobado">Haz clic en recibido cuando ya hayas recibido tu beneficio del trato</p>
+				 			<ul>
+				 				<li><i class="la la-thumbs-up"></i><h3>Estatus </h3><span>Aprobado</span></li>
+
+				 				<li> <a class="bbutton mt-0 ya-aprobado" id="b-recibido" href="#" title="">Recibido</a></li>
+				 			</ul>
+				 		</div>
+				 	</div>
+
+					<div  class="contact-edit pl-5 pr-5 mb-2 div-boton-trato" id="div-omtido">
+		 				<div class="job-overview divide">
+				 			<!-- <h3>Estatus del Trato</h3> -->
+				 			<ul>
+				 				<li><i class="la la-thumbs-down"></i><h3>Estatus </h3><span>Omitido</span></li>
+				 			</ul>
+				 		</div>
+				 	</div>
+
+					<div  class="contact-edit pl-5 pr-5 mb-2 div-boton-trato" id="div-evaluado">				
+		 				<div class="job-overview divide">
+				 			<!-- <h3>Estatus del Trato</h3> -->
+				 			<ul>
+				 				<li><i class="la la-check"></i><h3>Estatus </h3><span>Aprobado y evaluado</span></li>
+				 			</ul>
+				 		</div>
+				 	</div>
+
+					<div class="contact-edit pl-5 pr-5 mb-2 div-boton-trato" id="div-comentario">				
+						<div class="row">
+							<div class="col-lg-12">
+								<span class="pf-title">Deja tu comentario u opinión por el servicio recibido</span>		
+								<div class="pf-field">
+									<textarea id="comment" name="comment" rows="2"></textarea>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<span>Haz tu valoración </span>
+								<div class="star-rating">
+									<span class="la la-star-o" data-rating="1" style="color: #ff9200"></span>
+									<span class="la la-star-o" data-rating="2" style="color: #ff9200"></span>
+									<span class="la la-star-o" data-rating="3" style="color: #ff9200"></span>
+									<span class="la la-star-o" data-rating="4" style="color: #ff9200"></span>
+									<span class="la la-star-o" data-rating="5" style="color: #ff9200"></span>
+									<input type="hidden" name="whatever1" id="rating" class="rating-value" value="0">
+								</div>
+
+								<div class="upload-info pull-right">
+									<a href="javascript:void(0)" id="boton-valorar">Enviar valoración</a>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	  </div>
 	</div>	
 </section>
 <!--=================================  MODALS PARA TRATOS -->
-
 @endsection
+
+
+@section('footer')
+	@include('includes.footer')
+@endsection
+
 
 @section('scripts')
 <!-- <link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/bootstrap-datepicker.css')}}" />

@@ -17,6 +17,8 @@ class CreateDealingsTable extends Migration
 			$table->bigIncrements('id');
 			$table->string('name',100)->nullable();
 			$table->text('description')->nullable();
+			$table->string('name_proposal',100)->nullable();
+			$table->text('description_proposal')->nullable();
 			$table->string('ideal',100)->nullable();
 			$table->string('plus',100)->nullable();
 			$table->integer('value')->nullable();
@@ -29,6 +31,7 @@ class CreateDealingsTable extends Migration
 			$table->integer('exchange_days')->nullable();
 			$table->integer('proposal_days')->nullable();
 			$table->boolean('pay')->default(0);
+			$table->boolean('received')->default(0);
 			$table->timestamps();
 		});
 	}

@@ -10,17 +10,26 @@
 				</div>
 				<div class="emply-resume-info">
 					<h3><a href="{{ url('perfil/'.$user->id) }}" title="">{{ $user->name}} {{ $user->lastname }} ({{ $user->email }})</a></h3>
+					<p><i class="la la-map-marker"></i>{{ $user->city }} / {{ $user->country }}</p>
 					<span>
 					<i>
 						<strong> @if($user->suscription->plan_id > 1)Talento @endif {{ $user->suscription->plan->name }}</strong>, 
+						
 
-						{{ $user->talents->count() }} Talentos,  {{ $user->exchanges->count() }} Canjes</i><br>
- 					@foreach($user->talents  as $talents)
-						<i>{{$talents->title}},</i> 
-					@endforeach
+						{{ $user->talents->count() }} Talentos
+
+						{{--<span class="tooltip tooltip-effect-5">
+							<span class="tooltip-item">{{ $user->talents->count() }} Talentos<</span>
+							<span class="tooltip-content clearfix">
+								<span class="tooltip-text">
+									@foreach($user->talents  as $talents)
+										{{$talents->title}}, 
+									@endforeach
+								</span>
+							</span>
+						</span>--}}
+						,  {{ $user->exchanges->count() }} Canjes</i><br>
 					</span>
-
-					<p><i class="la la-map-marker"></i>{{ $user->city }} / {{ $user->country }}</p>
 				</div>
 				<div class="shortlists">
 					<a href="{{ url('perfil/'.$user->id) }}" title="">Detalles <i class="la la-plus"></i></a>

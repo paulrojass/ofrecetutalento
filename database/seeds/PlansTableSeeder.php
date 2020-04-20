@@ -26,8 +26,9 @@ class PlansTableSeeder extends Seeder
         $plan->name = "Novato";
         $plan->monthly_price = 0;
         $plan->quarterly_price = 0;
-        $plan->annual_price = 0;        
-        $plan->talents = 5;
+        $plan->annual_price = 0;
+        $plan->recommendations = 3;       
+        $plan->talents = 3;
         $plan->photos = 1;
         $plan->videos = 1;
         $plan->pdfs = 1;
@@ -36,9 +37,9 @@ class PlansTableSeeder extends Seeder
 
         $plan = new Plan();
         $plan->name = "Pro";
-        $plan->monthly_price = 7.99;
-        $plan->quarterly_price = 21;
-        $plan->annual_price = 235;
+        $plan->monthly_price = 7;
+        $plan->quarterly_price = 18;
+        $plan->annual_price = 72;
         $plan->talents = 5;
         $plan->photos = 5;
         $plan->videos = 3;
@@ -50,7 +51,7 @@ class PlansTableSeeder extends Seeder
         $plan->name = "Oro";
         $plan->monthly_price = 26;
         $plan->quarterly_price = 72;
-        $plan->annual_price = 235;
+        $plan->annual_price = 290;
         $plan->pdf_size = 500;
         $plan->save();        
     }

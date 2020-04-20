@@ -21,15 +21,15 @@ class Exchange extends Model
 		return $this->belongsTo(Talent::class);
 	}
 
-	public function files()
+/*	public function files()
 	{
 		return $this->hasMany(File::class);
-	}
+	}*/
 
-/*	public function dealings()
+	public function dealings()
 	{
 		return $this->hasMany(Dealing::class);
-	}*/
+	}
 
 	//Cotratadores
     public function contractors()

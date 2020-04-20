@@ -5,7 +5,7 @@
 @section('header_type', 'gradient')
 
 @section('content')
-<section>
+<!-- <section>
 	<div class="block no-padding  gray">
 		<div class="container">
 			<div class="row">
@@ -26,7 +26,7 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section> -->
 
 <section>
 	<div class="block">
@@ -34,14 +34,14 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading">
-						<h2>Selecciona nuestros planes y paquetes</h2>
+						<h2>Conoce nuestros planes y paquetes</h2>
 						<span>One of our jobs has some kind of flexibility option - such as telecommuting, a part-time schedule or a flexible or flextime schedule.</span>
 					</div><!-- Heading -->
 					<div class="tab-sec">
 						<ul class="nav nav-tabs">
-						  <li><a class="current" data-tab="mensual">Mensual</a></li>
-						  <li><a data-tab="trimestral">Trimestral</a></li>
-						  <li><a data-tab="anual">Anual</a></li>
+						  <li><a class="bbutton current" data-tab="mensual">Mensual</a></li>
+						  <li><a class="bbutton" data-tab="trimestral">Trimestral</a></li>
+						  <li><a class="bbutton" data-tab="anual">Anual</a></li>
 						</ul>
 						<div id="mensual" class="tab-content current pt-4">
 							<div class="job-listings-tabs">

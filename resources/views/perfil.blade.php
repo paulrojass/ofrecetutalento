@@ -1,6 +1,6 @@
 @extends('layouts.tema')
 
-@section('title', 'Perfil de usuario')
+@section('title',  $user->name.' '.$user->lastname)
 
 @section('header_type', 'stick-top style3')
 
@@ -53,7 +53,7 @@
 										{{$user->suscription->plan->name}}
 									</i> en Ofrece tu talento
 								</span>
-				 				<p>{{ $user->email }}</p>
+				 				<!-- <p>{{ $user->email }}</p> -->
 				 				<p>Miembro desde, {{ \Carbon\Carbon::parse($user->created_at)->format('Y')}} </p>
 				 				<p><i class="la la-map-marker"></i>{{ $user->city }}, {{ $user->country }}</p>
 				 				<p>
@@ -127,6 +127,8 @@
 				 				<div class="col-lg-9 column">
 			 						<div class="cand-details" id="experience">
 			 							<h2>Experiencia en trabajos</h2>
+
+			 							@if($user->experiences->position1)
 			 							<div class="edu-history style2">
 			 								<i></i>
 			 								<div class="edu-hisinfo">
@@ -136,7 +138,8 @@
 			 									<p>{{ $user->experiences->achievements1 }} </p>
 			 								</div>
 			 							</div>
-
+			 							@endif
+			 							@if($user->experiences->position2)
 			 							<div class="edu-history style2">
 			 								<i></i>
 			 								<div class="edu-hisinfo">
@@ -146,7 +149,8 @@
 			 									<p>{{ $user->experiences->achievements2 }} </p>
 			 								</div>
 			 							</div>
-
+			 							@endif
+			 							@if($user->experiences->position3)
 			 							<div class="edu-history style2">
 			 								<i></i>
 			 								<div class="edu-hisinfo">
@@ -156,6 +160,7 @@
 			 									<p>{{ $user->experiences->achievements3 }} </p>
 			 								</div>
 			 							</div>
+			 							@endif
 			 						</div>
 			 					</div>
 			 					<div class="col-lg-3 column">
@@ -180,60 +185,36 @@
 			 					</div>
 
 								@if($user->talents->count() > 0)
-			 					<div class="col-lg-12 mt-5" id="talentos">
-			 						<div class="cand-details">
-			 							<h2 class="text-center pt-5">Talentos</h2>
-								 		<div class="manage-jobs-sec">
-								 		<!--	
-									 			<div class="extra-job-info">
-									 			<span><i class="la la-clock-o"></i><strong>9</strong> Job Posted</span>
-									 			<span><i class="la la-file-text"></i><strong>20</strong> Application</span>
-									 			<span><i class="la la-users"></i><strong>18</strong> Active Jobs</span>
-									 		</div> -->
-									 		<table>
-									 			<thead>
-									 				<tr>
-									 					<td class="col-6">Descripción</td>
-									 					<td class="col-2">Industria</td>
-									 					<td class="col-2">Categoria</td>
-									 					<td class="col-2">Experiencia</td>
-									 				</tr>
-									 			</thead>
-									 			<tbody>
-
-									 				@foreach($user->talents as $talent)
-										 				<tr>
-										 					<td>
-										 						<div class="table-list-title pr-4">
-										 							<h3>{{ $talent->title }}</h3>
-										 							<p class="text-justify">{{ $talent->description }}</p>
-										 						</div>
-										 					</td>
-										 					<td>
-										 						<p class="applied-field text-center">{{ $talent->category->industry->name }}</p>
-										 					</td>
-										 					<td>
-																<p class="applied-field text-center">{{ $talent->category->name }}</p>
-										 					</td>
-										 					<td>
-									 							<!-- <div class="progress-sec with-edit"> -->
-									 								@php($nivel = $talent->level*100/10)
-									 								<div class="progressbar"> 
-									 									<div class="progress" style="width: {{$nivel}}%;">
-										 									<span>
-												 								{{ $talent->level }}
-												 							</span>
-												 						</div>
-												 					</div>
-									 							<!-- </div> -->
-										 					</td>
-										 				</tr>
-									 				@endforeach
-									 			</tbody>
-									 		</table>
-								 		</div>
-			 						</div>
-		 						</div>
+								<section id="talentos">
+									<div class="block">
+										<div class="container">
+											<div class="row">
+												<div class="col-lg-12">
+													<div class="heading">
+														<h2>Talentos</h2>
+														<!-- <span>Conoce sus .</span> -->
+													</div><!-- Heading -->
+													<div class="job-listings-sec">
+														@foreach($user->talents as $talent)
+														<div class="job-listing pl-4">
+															<div class="job-title-sec">
+																<!-- <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div> -->
+																<h3><a href="{{ url('talento/'.$talent->id) }}" title="">{{ $talent->title }}</a></h3>
+																<span >{{ $talent->exchanges->count()}} Canjes</span></br>
+																<span style="color:#888888">{{ $talent->description }}</span>
+															</div>
+															<span class="job-lctn"></span>
+															<span class="job-lctn">{{ $talent->category->industry->name }} / {{ $talent->category->name }}</span>
+															<!-- <span class="fav-job"><i class="la la-heart-o"></i></span> -->
+															<a href="{{ url('talento/'.$talent->id) }}" title=""><span class="job-is ft">VER MAS</span></a>
+														</div><!-- Job -->
+														@endforeach
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</section>
 								@endif
 								
 								@auth
@@ -301,96 +282,168 @@
 
 <section id="div-modal-nuevo-trato">
 	<div class="modal fade bd-example-modal" id="modal-trato" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content pt-4">
-			<h3>Contratar este talento</h3>
-			<button type="button" class="close-b" data-dismiss="modal" aria-label="Close">
-				<span class="close-popup"><i class="la la-close"></i></span>
-			</button>
-			<div class="modal-body">
-				<div class="contact-edit pl-5 pr-5">
-					<div class="row">
-					<div class="alert alert-light" role="alert" id="alert-message">
-					  El mensaje a {{ $user->name }} {{ $user->lastname }} ha sido enviado
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content pt-4">
+				<h3>Contratar este talento</h3>
+				<button type="button" class="close-b" data-dismiss="modal" aria-label="Close">
+					<span class="close-popup"><i class="la la-close"></i></span>
+				</button>
+				<div class="modal-body">
+					<div class="contact-edit pl-5 pr-5">
+						<form id="form-trato-talento" class="pl-0">
+							<div class="col-lg-12">
+								<p>
+									Parece que has encontrado a quien estabas buscando. ¡Enoharbuena!
+								</p>
+								<p>
+									Con el siguiente paso, nos gustaría recabar información detallada sobre el proyecto que requieres de este talento. Por favor trata de usar lenguaje abierto e informal para poder evitar malos entendidos. En esta étapa inicial queremos conocer tus expectativas como alguien que necesita de un producto o servicio de este talento.
+								</p>
+							</div>
+
+							@csrf
+							<input type="hidden" name="pay" id="pay" value="0">
+							<input type="hidden" name="accept_id" id="accept_id" value="{{ $user->id }}">
+							<input type="hidden" name="propose_id" id="propose_id" value="@auth{{ auth()->user()->id }}@endauth">
+							<div class="col-lg-12">
+								<span class="pf-title">Nombre del proyecto</span>									
+								<div class="pf-field">
+									<input type="text" name="name" id="name" maxlength="100" required>
+									<span class="form-error" id="e_name_pdf" hidden> Debe agregar un nombre válido</span>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<span class="pf-title">¿Cuál es el producto, servicio o beneficio final en su ​ mejor versión ​ que requieres de este talento?</span>									
+								<div class="pf-field">
+									<textarea id="description" name="description" placeholder="" required></textarea>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<span class="pf-title">Resultado Final Ideal: ¿Cuál es el producto, servicio o beneficio final en su ​ mejor versión ​ que requieres de este talento?”​ cuando lo recibas. (opcional)</span>									
+								<div class="pf-field">
+									<input type="text" name="ideal" id="ideal" maxlength="100" placeholder="" required>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<span class="pf-title">¿Cuál es el factor crítico de calidad en este proyecto? Descríbenos ese “ingrediente esencial” que necesita tener este proyecto para que tu digas ​“es un éxito”​ cuando lo recibas. (opcional)</span>
+								<div class="pf-field">
+									<input type="text" name="plus" id="plus" maxlength="100" placeholder="" required>
+								</div>
+							</div>
+
+							<div class="col-lg-6">
+								<span class="pf-title">¿Días aproximados para recibir el producto?</span>				
+								<div class="pf-field">
+									<input type="number" name="exchange_days" id="exchange_days" maxlength="100" required>
+								</div>
+							</div>
+
+
+							<div class="col-lg-12">
+								<span class="pf-title">Oferta económica:</span>			
+							</div>
+							<div class="col-lg-6">
+								<span class="pf-title">Cantidad Total</span>
+								<div class="pf-field">
+									<input type="number" name="quantity" id="quantity" required  />
+								</div>
+							</div>
+
+
+							<div class="col-lg-12">
+								<span class="pf-title">Forma de pago</span>
+							</div>
+
+							<div class="pf-field">
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="pay" id="tipo-pago" value="1" checked>
+									<label class="form-check-label" for="tipo-pago">
+										Realizar Pago
+									</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="pay" id="tipo-canje" value="0">
+									<label class="form-check-label" for="tipo-canje">
+										Ofrecer Canje
+									</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="pay" id="tipo-propuesta" value="0">
+									<label class="form-check-label" for="tipo-propuesta">
+										Ofrecer nueva propuesta
+									</label>
+								</div>
+							</div>
+
+
+							<div class="col-lg-6" id="div-pago" >
+								<span class="pf-title">Pago: ¿Cuánto es tu presupuesto por 1 cantidad de este proyecto?</span>
+								<div class="pf-field">
+									<input type="number" name="value" id="value" required />
+								</div>
+							</div>
+
+							<div class="col-lg-6" id="div-canje" style="display: none">
+								<span class="pf-title">Mis Canjes</span>
+								<div class="pf-field">
+									<select id="proposal_id" name="proposal_id" data-placeholder="Selecciona tu canje" class="chosen" required>
+										@auth
+										@foreach(Auth()->user()->talents as $talent)
+										@foreach($talent->exchanges as $exchange)
+										<option value="{{$exchange->id}}">{{$exchange->title}}</option>
+										@endforeach
+										@endforeach
+										@endauth
+									</select>
+								</div>
+							</div>
+
+							<div id="div-propuesta" style="display: none;">
+								<div class="col-lg-12">
+									<span class="pf-title">Nombre de su propuesta</span>									
+									<div class="pf-field">
+										<input type="text" name="name_proposal" id="name_proposal" maxlength="100" required>
+										<span class="form-error" id="e_name_proposal" hidden> Debe agregar un nombre válido</span>
+									</div>
+								</div>
+
+								<div class="col-lg-12">
+									<span class="pf-title">¿Cuál es el producto, servicio o beneficio final en su ​ mejor versión ​ que propones a este talento?</span>									
+									<div class="pf-field">
+										<textarea id="description_proposal" name="description_proposal" placeholder="" required></textarea>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="col-lg-6" id="div-tiempo" style="display: none;">
+								<span class="pf-title">Días para culminar mi propuesta</span>
+								<div class="pf-field">
+									<input type="number" name="proposal_days" id="proposal_days" required>
+								</div>
+							</div>
+
+							<div class="alert alert-success mt-4" role="alert" id="alert-trato">
+								Propuesta enviada
+							</div>
+
+							<div class="alert alert-danger mt-4" role="alert" id="alert-error">
+								Revise el formato de los campos, todos son obligatorios
+							</div>
+
+							<div class="col-lg-12">
+								<div class="float-right">
+									<button type="button" data-dismiss="modal" class="bbutton ml-4">Cancelar</button>
+									<button type="submit" class="bbutton  ml-4" id="boton-nuevo-trato-talento">Ofrecer Trato</button>
+								</div>
+							</div>
+						</form>
 					</div>
-					<p>
-						Parece que has encontrado a quien estabas buscando. ¡Enoharbuena!
-					</p>
-					<p>
-						Con el siguiente paso, nos gustaría recabar información detallada sobre el proyecto que requieres de este talento. Por favor trata de usar lenguaje abierto e informal para poder evitar malos entendidos. En esta étapa inicial queremos conocer tus expectativas como alguien que necesita de un producto o servicio de este talento.
-					</p>
-					</div>
-
-					<form id="form-trato-talento" class="pl-1">
-						@csrf
-						<input type="hidden" name="pay" id="pay" value="0">
-						<input type="hidden" name="accept_id" id="accept_id" value="{{ $user->id }}">
-						<input type="hidden" name="propose_id" id="propose_id" value="@auth{{ auth()->user()->id }}@endauth">
-						<div class="col-lg-12">
-							<span class="pf-title">Nombre del proyecto</span>									
-							<div class="pf-field">
-								<input type="text" name="name" id="name" maxlength="100" required>
-								<span class="form-error" id="e_name_pdf" hidden> Debe agregar un nombre válida</span>
-							</div>
-						</div>
-						<div class="col-lg-12">
-							<span class="pf-title">Descripción</span>									
-							<div class="pf-field">
-								<textarea id="description" name="description" placeholder="¿Cuál es el producto, servicio o beneficio final en su ​ mejor versión ​ que requieres de este talento?" required></textarea>
-							</div>
-						</div>
-						<div class="col-lg-12">
-							<span class="pf-title">Resultado Final Ideal (opcional)</span>									
-							<div class="pf-field">
-								<input type="text" name="ideal" id="ideal" maxlength="100" placeholder="¿Cuál es el producto, servicio o beneficio final en su ​ mejor versión ​ que requieres de este talento?”​ cuando lo recibas." required>
-							</div>
-						</div>
-						<div class="col-lg-12">
-
-							<span class="pf-title">¿Cuál es el factor crítico de calidad en este proyecto? (opcional)</span>				
-							<div class="pf-field">
-								<input type="text" name="plus" id="plus" maxlength="100" placeholder="Descríbenos ese “ingrediente esencial” que necesita tener este proyecto para que tu digas ​“es un éxito”​ cuando lo recibas." required>
-							</div>
-						</div>
-
-						<div class="col-lg-6">
-
-							<span class="pf-title">¿Días aproximados para recibir el producto?</span>				
-							<div class="pf-field">
-								<input type="number" name="exchange_days" id="exchange_days" maxlength="100" required>
-							</div>
-						</div>
-
-
-						<div class="col-lg-12">
-							<span class="pf-title">Oferta económica:</span>			
-						</div>
-	 					<div class="col-lg-6">
-	 						<span class="pf-title">¿Cuánto es tu presupuesto por 1 cantidad de este proyecto?</span>
-	 						<div class="pf-field">
-	 							<input type="number" name="value" id="value" required />
-	 						</div>
-	 					</div>
-	 					<div class="col-lg-6">
-	 						<span class="pf-title">Cantidad Total</span>
-	 						<div class="pf-field">
-	 							<input type="number" name="quantity" id="quantity" required  />
-	 						</div>
-	 					</div>
-	 					<div class="col-lg-6">
-							<div class="alert alert-light" role="alert" id="alert-trato">
-								El trato fue enviado exitosamente
-							</div>					
-	 					</div>
-					</form>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" data-dismiss="modal" class="boton-normal">Cancelar</button>
-				<button type="submit" class="boton-normal" id="boton-nuevo-trato-talento">Ofrecer Trato</button>
+<!-- 				
+<div class="modal-footer">
+</div> -->
 			</div>
 		</div>
-	  </div>
 	</div>	
 </section>
 
@@ -405,6 +458,8 @@
 		actualizarCanjes(user_id);
 
 		$(".alert").hide();
+
+/*  Enviar Mensjes */		
 		$('#button-enviar').click(function(e){
 			e.preventDefault();
 			var datos = $('#form-message').serialize();
@@ -429,7 +484,7 @@
 
 			});
 		});
-
+/*  Enviar Mensjes */
 
 		$('#boton-nuevo-trato-talento').click(function(event) {
 			event.preventDefault();
@@ -442,11 +497,20 @@
 				processData: false // NEEDED, DON'T OMIT THIS
 			})
 			.done(function(response) {
-				$("#alert-trato").fadeTo(2000, 500).slideUp(500, function(){
-				    $("#alert-trato").slideUp(1000);
-				    $('#modal-trato').modal('hide');
-					$("#form-trato-talento")[0].reset();
-				});
+				if(response.errors){
+					$("#alert-error").fadeTo(2000, 500).slideUp(500, function(){
+					    $("#alert-error").slideUp(1000);
+					});
+          		}else{
+          			$('.alert-danger').hide();
+
+					$("#alert-trato").fadeTo(2000, 500).slideUp(500, function(){
+					    $("#alert-trato").slideUp(1000);
+					    $('#modal-trato').modal('hide');
+						$("#form-trato-talento")[0].reset();
+					});
+
+          		}
 			});
 		});
 
@@ -529,6 +593,39 @@
 				$('#canjes').html(data);
 			});
 		}
+
+		$('#modal-trato').on('show.bs.modal', function (e) {
+			$('#form-trato-talento')[0].reset();
+			$('#div-pago').show();
+			$('#div-canje').hide();
+			$('#div-propuesta').hide();
+			$('#div-tiempo').hide();
+		});
+
+		$('#tipo-pago').click(function () {
+			$('#div-pago').show();
+			$('#div-canje').hide();
+			$('#div-propuesta').hide();
+			$('#div-tiempo').hide();
+			$('#proposal_id').val('');
+		});
+		$('#tipo-canje').click(function () {
+			$('#div-pago').hide();
+			$('#div-canje').show();
+			$('#div-propuesta').hide();
+			$('#div-tiempo').show();
+		});
+		$('#tipo-propuesta').click(function(){
+			$('#div-pago').hide();
+			$('#div-canje').hide();
+			$('#div-propuesta').show();
+			$('#div-tiempo').show();
+			$('#proposal_id').val('');
+		});
+
+
+
+
 	});
 </script>
 @endsection

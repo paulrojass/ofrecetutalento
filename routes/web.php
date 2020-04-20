@@ -37,6 +37,8 @@ Route::get('para_que_funciona','SiteController@itWorksfor');
 Route::get('quienes_somos','SiteController@quienesSomos');
 Route::get('planes','SiteController@planes');
 Route::get('talentos', 'SiteController@talentos')->name('talentos');
+Route::get('talento/{id}', 'TalentController@talento');
+
 Route::get('talentos_resultado', 'SearchController@principalSearch')->name('talentos_resultado');
 Route::get('canjes', 'SiteController@canjes');
 Route::get('canjes/{id}', 'ExchangeController@canje');
@@ -61,9 +63,18 @@ Route::get('logout', function ()
 
 Auth::routes(['verify' => true]);
 
+
+Route::get('cambiar-plan', 'PlanController@index')->name('cambiar-plan');
+Route::post('activar-plan', 'SuscriptionController@change')->name('activar-plan');
+
+
+
+
 //Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
 Route::get('actualizar-mensajes', 'MessageController@contadorMensajes');
+Route::get('actualizar-contador-tratos', 'DealingController@contadorTratos');
+Route::get('trato-visto', 'DealingController@visto');
 
 //Auntenticacion con redes
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
@@ -139,3 +150,15 @@ Route::get('mensajes/{id}', 'MessageController@mensajesId')->middleware('verifie
 Route::get('mensajes-usuario', 'MessageController@mensajesUsuario');
 Route::post('enviar-mensaje', 'MessageController@nuevoMensaje');
 Route::get('enviar-mensaje-perfil', 'MessageController@nuevoMensajePerfil');
+
+
+
+
+
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    Artisan::call('view:clear');
+    return "Cache is cleared";
+});

@@ -64,17 +64,16 @@ $(document).on('ready',function(){
     });
     $('.close-popup').on('click', function(){
         $('.signin-popup-box').fadeOut('fast');
+        $('.signup-popup-box').fadeOut('fast');
         $('html').removeClass('no-scroll');
     });
 
     /* Signup Popup */
-/*    $('.signup-popup').on('click', function(){
+    $('.signup-popup').on('click', function(){
         $('.signup-popup-box').fadeIn('fast');
         $('html').addClass('no-scroll');
     });
-    $('.close-popup').on('click', function(){
-        $('.signup-popup-box').fadeOut('fast');
-        $('html').removeClass('no-scroll');
+/*    $('.close-popup').on('click', function(){
     });*/
 
     /*** QUICK POST SHARE ***/

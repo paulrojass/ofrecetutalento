@@ -8,6 +8,15 @@ use App\Suscription;
 use App\plan;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+use App\Traits\DatesTranslator;
+
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Image;
+use App\File;
+use DB;
+
 use Illuminate\Support\Facades\Validator;
 
 class TalentController extends Controller
@@ -60,9 +69,23 @@ class TalentController extends Controller
      * @param  \App\Talent  $talent
      * @return \Illuminate\Http\Response
      */
-    public function show(Talent $talent)
+    public function show($id)
     {
-        //
+        return Talent::find($id);
+    }
+
+    public function talento($id){
+        $talent = $this->show($id);
+        $imagenes = $this->archivosTalento($talent, 'image');
+        $videos = $this->archivosTalento($talent, 'video');
+        $pdfs = $this->archivosTalento($talent, 'pdf');
+        //$comentarios = Comment::where('exchange_id', $id)->get();
+        return view('talento', compact('talent','imagenes', 'videos', 'pdfs'));
+    }
+
+    public function archivosTalento(Talent $talent, $type)
+    {
+        return File::where('talent_id', $talent->id)->where('type',$type)->get();
     }
 
     public function showTalentsUser(Request $request)

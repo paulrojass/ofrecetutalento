@@ -26,6 +26,74 @@ class DealingController extends Controller
      */
     public function create(Request $request)
     {
+
+
+        if($request->exchange_id != ''){ //si solicita un canje
+            if($request->pay == 1){ // y paga el precio
+            $validator = \Validator::make($request->all(), [    
+            'description' => 'required',
+            'exchange_days' => 'required|numeric',
+            'exchange_id' => 'required'
+            ]);
+            }else if($request->proposal_id){
+            $validator = \Validator::make($request->all(), [                
+            'description' => 'required',
+            'exchange_days' => 'required|numeric',
+            'proposal_days' => 'required|numeric',
+            'proposal_id' => 'required',
+            'exchange_id' => 'required'
+            ]); 
+            }else{
+            $validator = \Validator::make($request->all(), [       
+            'description' => 'required',
+            'proposal_days' => 'required|numeric',
+            'exchange_days' => 'required|numeric',
+            'name_proposal' => 'required',
+            'description_proposal' => 'required',
+            'exchange_id' => 'required'
+            ]); 
+            }
+        }else{ // no solicita un canje
+            if($request->pay == 1){ // y paga el precio
+            $validator = \Validator::make($request->all(), [
+            'description' => 'required',
+            'exchange_days' => 'required|numeric',
+            'ideal' => 'required',
+            'plus' => 'required',
+            'quantity' => 'required|numeric',
+            'value' => 'required|numeric',
+            ]);
+            }else if($request->proposal_id){
+            $validator = \Validator::make($request->all(), [
+            'description' => 'required',
+            'exchange_days' => 'required|numeric',
+            'name' => 'required',
+            'ideal' => 'required',
+            'plus' => 'required',
+            'quantity' => 'required|numeric',
+            'proposal_days' => 'required|numeric',
+            'proposal_id' => 'required'
+            ]);                
+            }else{
+            $validator = \Validator::make($request->all(), [
+            'description' => 'required',
+            'exchange_days' => 'required|numeric',
+            'name' => 'required',
+            'ideal' => 'required',
+            'plus' => 'required',
+            'quantity' => 'required|numeric',
+            'proposal_days' => 'required|numeric',
+            'name_proposal' => 'required',
+            'description_proposal' => 'required'
+            ]); 
+            }
+        }
+
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+
         $trato = new Dealing();
         $trato->description = $request->description;
         $trato->pay = $request->pay;
@@ -42,7 +110,8 @@ class DealingController extends Controller
         $trato->quantity = $request->quantity;
         $trato->value = $request->value;
 
-
+        $trato->name_proposal = $request->name_proposal;
+        $trato->description_proposal = $request->description_proposal;
 
         $trato->save();
     }
@@ -120,15 +189,28 @@ class DealingController extends Controller
     public function recibido(Request $request)
     {
     	$trato = Dealing::find($request->dealing_id);
-    	if($request->recibido == 'solicitado'){
+    	if($request->type == 'propuesto'){
     		$trato->dealing_ready = 1;
     	}else{
-    		$trato->proposal_ready = 1;	
+    		$trato->proposal_ready = 1;
     	}
 
         $trato->save();
 
         if($trato->proposal_id != null) return $trato->proposal_id;
         else return null;
+    }
+
+    public function contadorTratos()
+    {
+        return view('content.contador-tratos');
+    }
+
+    public function visto(Request $request)
+    {
+        $trato = Dealing::find($request->dealing_id);
+        $trato->received = 1;
+        $trato->save();
+        return $trato;
     }
 }

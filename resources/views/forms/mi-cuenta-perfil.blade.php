@@ -157,6 +157,25 @@
 												<input type="text" name="start_date1" id="start_date1" value="{{Auth::User()->experiences->start_date1}}" class="form-control datepicker" />
 											</div>
 										</div>
+<!-- 				<div class="col-lg-4">
+	<span class="pf-title">Fecha de entrada</span>
+	<div class="pf-field">
+		<select name="a-talent-exchange" id="a-talent-exchange" class="chosen" required value={{ $canje->talent_id }}>
+			<option value = "">Selecciona un talento</option>
+			@foreach(auth()->user()->talents as $talent)
+			<option value="{{$talent->id}}">{{$talent->title}}</option>
+			@endforeach
+		</select>
+		<span class="form-error" id="e_a_talent_exchange" hidden> Debe seleccionar un talento</span>
+	</div>
+	
+</div> -->
+
+
+
+
+
+
 										<div class="col-lg-4">
 											<span class="pf-title">Fecha de salida</span>
 											<div class="pf-field">

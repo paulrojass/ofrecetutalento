@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddExchangeIdToFiles extends Migration
+class AddTalentIdToFiles extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class AddExchangeIdToFiles extends Migration
     public function up()
     {
         Schema::table('files', function (Blueprint $table) {
-            $table->unsignedBigInteger('exchange_id');
-            $table->foreign('exchange_id')->references('id')->on('exchanges')->onDelete('cascade');
+            $table->unsignedBigInteger('talent_id');
+            $table->foreign('talent_id')->references('id')->on('talents')->onDelete('cascade');
         });
     }
 
@@ -27,8 +27,8 @@ class AddExchangeIdToFiles extends Migration
     public function down()
     {
         Schema::table('files', function (Blueprint $table) {
-            $table->dropForeign(['exchange_id']);
-            $table->dropColumn('exchange_id');
+            $table->dropForeign(['talent_id']);
+            $table->dropColumn('talent_id');
         });
     }
 }

@@ -1,6 +1,43 @@
-<div class="border-title"><h3>Mi perfil</h3><a id="editar-perfil" title=""><i class="la la-edit"></i> Editar Perfil</a></div>
+<div class="border-title"><h3>Plan Actual</h3><a href="{{ route('cambiar-plan') }}" title=""><i class="la la-edit"></i>Cambiar Plan</a></div>
 <div class="edu-history-sec">
 	<div class="job-details-m">						 			
+		<div class="container">
+<!-- 			<div class="row">
+	<div class="col-sm">
+		<h3>Información Básica</h3>
+	</div>
+</div> -->
+			<div class="row">
+				@php
+					$suscripcion = new Date(Auth::User()->suscription->updated_at);
+					$vencimiento = new Date(Auth::User()->suscription->expiration_date);
+					$hoy = new Date();
+					if($hoy > $vencimiento) $status = 'Vencido';
+					else $status = 'Activo';
+				@endphp
+				<div class="col-sm">
+					<p><strong> Nombre del Plan:</strong> @if(Auth::User()->suscription->plan_id > 1)Talento @endif{{Auth::User()->suscription->plan->name}}</p>
+				</div>
+				<div class="col-sm">
+					<p><strong> Fecha de suscripción: </strong> {{$suscripcion->format('d / m / Y')}}</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm">
+					<p><strong> Estatus: </strong> {{ $status  }}</p>
+				</div>
+				<div class="col-sm">
+					<p><strong> Fecha de vencimiento: </strong> {{$vencimiento->format('d / m / Y')}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="border-title"><h3>Mi perfil</h3><a id="editar-perfil" title=""><i class="la la-edit"></i> Editar Perfil</a></div>
+<div class="edu-history-sec">
+	<div class="job-details-m">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm">

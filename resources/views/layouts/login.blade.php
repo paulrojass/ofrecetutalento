@@ -129,65 +129,14 @@
 				</div><!-- Logo -->
 				@if(Auth::User())
 
-				<div class="my-profiles-sec">
-					<span>
-						<img src="{{URL::asset('images/users/'.Auth::User()->avatar)}}" alt="" style="max-width: 50px; max-height: 50px;" />
-							{{Auth::User()->name}} {{Auth::User()->lastname}}
-						<i class="la la-bars"></i>
-					</span>
-				</div>
-				<div class="wishlist-dropsec">
-					<span><i class="la la-comment"></i><strong>3</strong></span>
-					<div class="wishlist-dropdown">
-						<ul class="scrollbar">
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Web Designer / Developer</a></h3>
-										<span>Massimo Artemisis</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">C Developer (Senior) C .Net</a></h3>
-										<span>StarHealth</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Marketing Director</a></h3>
-										<span>Tix Dog</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Web Designer / Developer</a></h3>
-										<span>Massimo Artemisis</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Web Designer / Developer</a></h3>
-										<span>Massimo Artemisis</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-						</ul>
-					</div>
-				</div>
+<!-- 				<div class="my-profiles-sec">
+	<span>
+		<img src="{{URL::asset('images/users/'.Auth::User()->avatar)}}" alt="" style="max-width: 50px; max-height: 50px;" />
+			{{Auth::User()->name}} {{Auth::User()->lastname}}
+		<i class="la la-bars"></i>
+	</span>
+</div>-->
+
 
 
 

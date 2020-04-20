@@ -14,6 +14,8 @@ use App\Exchange;
 use App\File;
 use App\Comment;
 
+use Jenssegers\Date\Date;
+
 use DB;
 
 class ExchangeController extends Controller
@@ -71,11 +73,12 @@ class ExchangeController extends Controller
     public function canje($id)
     {
         $canje = $this->show($id);
-        $imagenes = $this->archivosCanje($canje, 'image');
+/*        $imagenes = $this->archivosCanje($canje, 'image');
         $videos = $this->archivosCanje($canje, 'video');
-        $pdfs = $this->archivosCanje($canje, 'pdf');
-        $comentarios = Comment::where('exchange_id', $id)->get();
-        return view('canje', compact('canje','imagenes', 'videos', 'pdfs', 'comentarios'));
+        $pdfs = $this->archivosCanje($canje, 'pdf');*/
+        $comentarios = Comment::where('exchange_id', $id)->paginate(2);
+        //return view('canje', compact('canje','imagenes', 'videos', 'pdfs', 'comentarios'));
+        return view('canje', compact('canje', 'comentarios'));
     }
 
     public function archivosCanje(Exchange $exchange, $type)

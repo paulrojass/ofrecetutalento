@@ -14,8 +14,10 @@ class AddExchangeIdToLikes extends Migration
     public function up()
     {
         Schema::table('likes', function (Blueprint $table) {
-            $table->unsignedBigInteger('exchange_id');
+            $table->unsignedBigInteger('exchange_id')->nullable();
+            $table->unsignedBigInteger('talent_id')->nullable();
             $table->foreign('exchange_id')->references('id')->on('exchanges')->onDelete('cascade');
+            $table->foreign('talent_id')->references('id')->on('talents')->onDelete('cascade');
         });
     }
 
@@ -28,7 +30,9 @@ class AddExchangeIdToLikes extends Migration
     {
         Schema::table('likes', function (Blueprint $table) {
             $table->dropForeign(['exchange_id']);
+            $table->dropForeign(['talent_id']);
             $table->dropColumn('exchange_id');
+            $table->dropColumn('talent_id');
         });
     }
 }

@@ -39,10 +39,10 @@
 										<i class="la la-search"></i>
 									</div>
 									<!-- Search Widget -->
-<!-- 									<div class="field_w_search">
-	<input type="text" id="location" name="location" placeholder="Ubicacion" />
-	<i class="la la-map-marker"></i>
-</div> --><!-- location Widget -->
+									<!-- 									<div class="field_w_search">
+										<input type="text" id="location" name="location" placeholder="Ubicacion" />
+										<i class="la la-map-marker"></i>
+									</div> --><!-- location Widget -->
 								</div>
 							</div>
 
@@ -53,7 +53,7 @@
 									<input type="radio" class="input-date" value="{{$semana}}" name="date" id="semana"><label for="semana">Últimos 7 días</label><br />
 									<input type="radio" class="input-date" value="{{$quincena}}" name="date" id="quincena"><label for="quincena">Últimos 14 días</label><br />
 									<input type="radio" class="input-date" value="{{$mes}}" name="date" id="mes"><label for="mes">Últimos 30 días</label><br />
-									<input type="radio" class="input-date" value="todos" name="date" id="todos" checked><label class="nm" for="todos">Todos</label><br />
+									<input type="radio" class="input-date" value="" name="date" id="todos" checked><label class="nm" for="todos">Todos</label><br />
 					 			</div>
 					 		</div>
 							<!-- 					 		<div class="widget border">

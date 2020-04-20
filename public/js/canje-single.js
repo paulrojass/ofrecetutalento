@@ -1,6 +1,5 @@
 $(function(){
-	$("#alert-trato").hide();
-	$("#alert-trato-fail").hide();
+	$(".alert").hide();
 	var id_canje = $('#canje_id').val();
 	var user_id = $('#auth_user').val();
 	var user_dealing = $('#user_dealing').val();
@@ -12,7 +11,7 @@ $(function(){
 		actualizarArchivos('video');
 		actualizarArchivos('pdf');*/
 		actualizarComentarios(id_canje);
-		if(user_id){actualizarLikes(id_canje, '0');}
+		if(user_id){actualizarLikes(id_canje, '0', 'canje');}
 	}
 
 	$('#div-comentarios').on('click', '#a-agregar-comentario', function(e){
@@ -45,15 +44,15 @@ $(function(){
 
 	$('.job-title2').on('click', '#a-me-gusta',function(e){
 		e.preventDefault();
-		actualizarLikes(id_canje, '1');
+		actualizarLikes(id_canje, '1', 'canje');
 	});
 
 
-	function actualizarLikes(id_canje, cambiar){
+	function actualizarLikes(id_canje, cambiar, tipo){
 		$.ajax({
 			url: '/cambiar-like',
 			type: 'get',
-			data: {canje_id : id_canje, cambiar:cambiar},
+			data: {canje_id : id_canje, cambiar:cambiar, tipo:tipo},
 			dataType: 'html',
 		})
 		.done(function(data) {
@@ -103,35 +102,56 @@ $(function(){
 		}
 	}
 
-	$('#tipo-canje').click(function () {
-		$('#div-select-canje').show();
-	});
-	$('#tipo-pago').click(function () {
-		$('#div-select-canje').hide();
+	$('#modal-trato').on('show.bs.modal', function (e) {
+		$('#form-trato')[0].reset();
+
+		$('#div-canje').hide();
+		$('#div-propuesta').hide();
+		$('#div-tiempo').hide();
 	});
 
+	$('#tipo-pago').click(function () {
+		$('#div-canje').hide();
+		$('#div-propuesta').hide();
+		$('#div-tiempo').hide();
+		$('#proposal_id').val('');
+	});
+	$('#tipo-canje').click(function () {
+		$('#div-canje').show();
+		$('#div-propuesta').hide();
+		$('#div-tiempo').show();
+	});
+	$('#tipo-propuesta').click(function(){
+		$('#div-canje').hide();
+		$('#div-propuesta').show();
+		$('#div-tiempo').show();
+		$('#proposal_id').val('');
+	});
+
+
 	$('#nuevo-trato').click(function () {
-		var pay = $('input:radio[name=pay]:checked').val();
-		if (pay == 1){
-			var proposal_id = null;
-		}else{
-			var proposal_id = $('#proposal_id').val();
-			var proposal_days = $('#proposal_days').val();
-		}
-		var description = $('#description').val();
-		var exchange_days = $('#exchange_days').val();
-		var exchange_id = id_canje;
-		var token = '{{csrf_token()}}';
+		event.preventDefault();
+		var dataString = $('#form-trato').serialize();
 		$.ajax({
-			type:'get',
-			url:'/nuevo-trato',
-			data:{description:description, accept_id:user_dealing, pay:pay, proposal_id: proposal_id, exchange_id: exchange_id, exchange_days:exchange_days, proposal_days:proposal_days, _token: token},
+			url: '/nuevo-trato',
+			type: 'get',
+			data: dataString,
+			contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+			processData: false, // NEEDED, DON'T OMIT THIS
+			
 			success: function (response) {
-				$("#alert-trato").fadeTo(2000, 500).slideUp(500, function(){
-				    $("#alert-trato").slideUp(1000);
-				    $('#modal-trato').modal('hide');
-					$("#form-trato")[0].reset();
-				});
+				if(response.errors){
+					$("#alert-error").fadeTo(2000, 500).slideUp(500, function(){
+					    $("#alert-error").slideUp(1000);
+					});
+          		}else{
+          			$('.alert-danger').hide();
+          			$("#alert-trato").fadeTo(2000, 500).slideUp(500, function(){
+					    $("#alert-trato").slideUp(1000);
+					    $('#modal-trato').modal('hide');
+						$("#form-trato")[0].reset();
+					});
+				}
 			},
 			error:function(response){
 				$("#alert-trato-fail").fadeTo(2000, 500).slideUp(500, function(){
@@ -141,29 +161,29 @@ $(function(){
 		});
 	});
 
-		/*================================== RATING ==========================*/
+	/*================================== RATING ==========================*/
 
-		var $star_rating = $('#div-comentarios .star-rating .la');
+	var $star_rating = $('#div-comentarios .star-rating .la');
 
-		var SetRatingStar = function() {
-		  return $star_rating.each(function() {
-		    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
-		      return $(this).removeClass('la-star-o').addClass('la-star');
-		    } else {
-		      return $(this).removeClass('la-star').addClass('la-star-o');
-		    }
-		  });
-		};
+	var SetRatingStar = function() {
+	  return $star_rating.each(function() {
+	    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+	      return $(this).removeClass('la-star-o').addClass('la-star');
+	    } else {
+	      return $(this).removeClass('la-star').addClass('la-star-o');
+	    }
+	  });
+	};
 
-		/*$('#valoracion').on('click', '.star-rating .la', function() {*/
+	/*$('#valoracion').on('click', '.star-rating .la', function() {*/
 /*		$star_rating.on('click', function() {
-		  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
-		  return SetRatingStar();
-		});
+	  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+	  return SetRatingStar();
+	});
 */
-		SetRatingStar();
+	SetRatingStar();
 
-		/*================================== RATING ==========================*/
+	/*================================== RATING ==========================*/
 
 
 

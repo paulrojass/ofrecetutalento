@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\User;
 use App\Exchanges;
 use App\Category;
+use App\Like;
 
 class Talent extends Model
 {
@@ -27,10 +28,21 @@ class Talent extends Model
 		return $this->hasMany(Exchange::class);
 	}
 
+	public function files()
+	{
+		return $this->hasMany(File::class);
+	}
+
 	public function category()
 	{
 		return $this->belongsTo(Category::class);
 	}
+
+	public function likes()
+	{
+		return $this->hasMany(Like::class);
+	}
+
 
 //Query Scopes
 	public function scopeTitle(Builder $query, $busqueda)

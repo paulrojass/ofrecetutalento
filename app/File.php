@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Exchange;
+use App\Talent;
 
 class File extends Model
 {
@@ -14,8 +14,8 @@ class File extends Model
 	];
 
 
-    public function exchange()
+    public function talent()
     {
-        return $this->belongsTo(Exchange::class);
+        return $this->belongsTo(Talent::class);
     }
 }

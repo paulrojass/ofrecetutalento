@@ -70,15 +70,16 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:100'],
             'lastname' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed']
+            /*
             'nationality' => ['required', 'string', 'max:100'],
             'address' => ['required', 'string', 'max:191'],
             'city' => ['required', 'string', 'max:100'],
             'country' => ['required', 'string', 'max:100'],
             'document' => ['required', 'string', 'max:50'],
             'phone' => ['required', 'string', 'max:50'],
-            'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-            'abilities' => ['required']
+            'abilities' => ['required']*/
         ]);
     }
 
@@ -92,10 +93,10 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-
             'lastname' => $data['lastname'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password'])
+            /*
             'nationality' => $data['nationality'],
             'address' => $data['address'],
             'city' => $data['city'],
@@ -103,8 +104,8 @@ class RegisterController extends Controller
             'document' => $data['document'],
             'phone' => $data['phone'],
             'abilities' => $data['abilities'],
-
             'plan' => $data['plan']
+            */
         ]);
 
 /*        $user->roles()->attach(Role::where('name', 'admin')->first());
@@ -134,7 +135,8 @@ class RegisterController extends Controller
         event(new Registered($user = $this->create($request->all())));
 
         //Agregando suscripcion y experiencia
-        $this->newSuscription($user->id, $request->plan, $request->periodo);
+        //$this->newSuscription($user->id, $request->plan, $request->periodo);
+        $this->newSuscription($user->id, 1, 'anual');
         $this->newExperience($user->id);
 
         //Agregando Rol

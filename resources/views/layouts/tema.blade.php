@@ -23,6 +23,13 @@
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/bootstrap.css')}}" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 
+	{{--
+	<link rel="stylesheet" type="text/css" href="{{ URL::asset('css/tooltip/normalize.css') }}" />
+	 <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/tooltip/demo.css') }}" /> 
+	<link rel="stylesheet" type="text/css" href="{{ URL::asset('css/tooltip/tooltip-classic.css') }}" />--}}
+
+
+
 	@yield('css')
 	
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('css/estilos.css')}}" />
@@ -30,9 +37,9 @@
 </head>
 <body>
 
-<!-- <div class="page-loading">
+<div class="page-loading">
 	<img src="{{URL::asset('tema/images/loader.gif')}}" alt="" />
-</div> -->
+</div>
 <div class="theme-layout" id="scrollup">
 
 	<!-- Menu RESPONSIVE -->
@@ -57,15 +64,16 @@
 			<div class="btn-extars">
 				<!-- <a href="{{url('suscripcion')}}" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a> -->
 				<ul class="account-btns">
-					<li><a href="{{url('suscripcion')}}" title=""><i class="la la-key"></i> Crear perfil</a></li>
+					<!-- <li><a href="{{url('suscripcion')}}" title=""><i class="la la-key"></i> Registrarse</a></li> -->
+					<li class="signup-popup"><a title=""><i class="la la-key"></i> Registrarse</a></li>
 					<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Iniciar Sesión</a></li>
 				</ul>
 			</div><!-- Btn Extras -->
 			@endif
-<!-- 			<form class="res-search">
-	<input type="text" placeholder="Job title, keywords or company name" />
-	<button type="submit"><i class="la la-search"></i></button>
-</form> -->
+			<!-- 			<form class="res-search">
+				<input type="text" placeholder="Job title, keywords or company name" />
+				<button type="submit"><i class="la la-search"></i></button>
+			</form> -->
 			<div class="responsivemenu">
 				<ul>
 					<li class="menu-item">
@@ -118,13 +126,18 @@
 					@if(auth()->user()->suscription->plan_id > 2)
 						@if(!View::hasSection('messages'))
 						<div id="contador-mensajes"></div>
+
+						<div id="contador-tratos"></div>
 						@endif
+
 					@endif
 				@else
 				<div class="btn-extars">
 					<!-- <a href="{{url('suscripcion')}}" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a> -->
 					<ul class="account-btns">
-						<li class="signup-popup"><a href="{{url('suscripcion')}}" title=""><i class="la la-key"></i> Crear perfil</a></li>
+						<!-- <li class="signin-popup"><a href="{{url('suscripcion')}}" title=""><i class="la la-key"></i> Registrarse</a></li> -->
+						<li class="signup-popup"><a title=""><i class="la la-key"></i> Registrarse</a></li>
+
 						<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Iniciar Sesión</a></li>
 					</ul>
 				</div><!-- Btn Extras -->
@@ -208,12 +221,12 @@
 		<form method="POST" action="{{ route('login') }}">
             @csrf
 			<div class="cfield">
-				<input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('E-Mail Address') }}" value="{{ old('email') }}" />
+				<input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('E-Mail Address') }}" value="{{ old('email') }}" required />
 				<i class="la la-user"></i>
 			</div>
 
 			<div class="cfield">
-                <input id="password" placeholder="********" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                <input type="password" id="password" placeholder="********" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" minlength="8">
 				<i class="la la-key"></i>
 			</div>
 			@error('password')
@@ -233,7 +246,7 @@
 			<button type="submit">Login</button>
 		</form>
 		<div class="extra-login">
-			<span>O a través de</span>
+			<span>o Accede a través de</span>
 			<div class="login-social">
 				<a class="fb-login" href="{{ url('/auth/redirect/facebook') }}" title=""><i class="fa fa-facebook"></i></a>
 				<a class="gg-login" href="{{ url('/auth/redirect/google') }}" title=""><i class="fa fa-google"></i></a>
@@ -241,6 +254,55 @@
 		</div>
 	</div>
 </div><!-- LOGIN POPUP -->
+
+
+<div class="account-popup-area signup-popup-box">
+	<div class="account-popup">
+		<span class="close-popup"><i class="la la-close"></i></span>
+		<h3>Registro Caza Talentos</h3>
+		@error('email')
+			<span id="email-error"><strong>{{ $message }}</strong></span>
+		@enderror
+		<form method="POST" action="{{ route('register') }}">
+            @csrf
+			<div class="cfield">
+				<input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nombres" value="{{ old('name') }}" required />
+				
+			</div>
+			<div class="cfield">
+				<input type="text" id="lastname" name="lastname" class="form-control @error('lastname') is-invalid @enderror" placeholder="Apellidos" value="{{ old('lastname') }}" required />
+				
+			</div>
+			<div class="cfield">
+				<input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('E-Mail Address') }}" value="{{ old('email') }}" required />
+				<i class="la la-envelope"></i>
+			</div>
+
+			<div class="cfield">
+                <input id="password" placeholder="Contraseña" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" minlength="8"    >
+				<i class="la la-key"></i>
+			</div>
+			@error('password')
+			    <span>{{ $message }}</span>
+			@enderror
+
+			<div class="cfield">
+                <input type="password" placeholder="Repita la contraseña" name="password_confirmation" id="password_confirm" class="form-control @error('password') is-invalid @enderror" required autocomplete="current-password" minlength="8">
+				<i class="la la-key"></i>
+			</div>
+
+			<button type="submit">Crear Cuenta</button>
+		</form>
+		<div class="extra-login">
+			<span>o Registrate a través de</span>
+			<div class="login-social">
+				<a class="fb-login" href="{{ url('/auth/redirect/facebook') }}" title=""><i class="fa fa-facebook"></i></a>
+				<a class="gg-login" href="{{ url('/auth/redirect/google') }}" title=""><i class="fa fa-google"></i></a>
+			</div>
+		</div>
+	</div>
+</div><!-- REGISTRO POPUP -->
+
 
 <!-- <script src="{{URL::asset('js/app.js')}}" type="text/javascript"></script> -->
 <script src="{{URL::asset('tema/js/jquery.min.js')}}" type="text/javascript"></script>
