@@ -45,8 +45,8 @@
 							<div class="extra-login">
 								<span>Accede tambien a través de:</span>
 								<div class="login-social">
-									<a class="fb-login" href="#" title=""><i class="fa fa-facebook"></i></a>
-									<a class="gg-login" href="#" title=""><i class="fa fa-google"></i></a>
+									<a class="fb-login" href="{{ url('/auth/redirect/facebook') }}" title=""><i class="fa fa-facebook"></i></a>
+									<a class="gg-login" href="{{ url('/auth/redirect/google') }}" title=""><i class="fa fa-google"></i></a>
 								</div>
 							</div>
 						</div>

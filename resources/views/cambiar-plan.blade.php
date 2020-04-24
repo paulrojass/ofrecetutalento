@@ -29,7 +29,7 @@
 										@foreach($plans as $plan)
 											@if($plan->id>1)
 											<div class="col-lg-4">
-												<form action='https://www.2checkout.com/checkout/purchase' method='post'>
+												<form action='https://sandbox.2checkout.com/checkout/purchase' method='post'>
 												<div class="pricetable"> 
 													<div class="pricetable-head">
 														<h3>
@@ -103,7 +103,7 @@
 																</button>
 															@endif
 														@else
-															<input type='hidden' name='sid' value='250310269846' >
+															<input type='hidden' name='sid' value='901422522' >
 															<input type='hidden' name='mode' value='2CO' >
 															<input type='hidden' name='li_0_type' value='product' >
 															<input type='hidden' name='li_0_name' value='Talento {{ $plan->name }}' >
@@ -111,12 +111,18 @@
 															<input type='hidden' name='li_0__description' value='Plan Talento {{ $plan->name }}, por un periodo MENSUAL en ofrecetutalento.com ' >
 															<input type='hidden' name='li_0_price' value='{{ $plan->monthly_price }}' >
 															<input type='hidden' name='li_0_tangible' value='N' >
-															<input type='hidden' name='card_holder_name' value='Checkout Shopper' >
+															<input type='hidden' name='card_holder_name' value='{{auth()->user()->name}} {{auth()->user()->lastname}}' >
 															<input type='hidden' name='street_address' value='{{ auth()->user()->address }}' >
 															<input type='hidden' name='city' value='{{ auth()->user()->city }}' >
 															<input type='hidden' name='country' value='{{ auth()->user()->country }}' >
 															<input type='hidden' name='email' value='{{ auth()->user()->email }}' >
 															<input type='hidden' name='phone' value='{{ auth()->user()->phone }}' >
+															<input type='hidden' name='lang' value='sp' >
+
+															<input type='hidden' name='id_usuario' value='{{ auth()->user()->id }}' >
+															<input type='hidden' name='id_producto' value='{{ $plan->id }}' >
+															<input type='hidden' name='periodo' value='Mensual' >
+
 															<button type=submit data-value="{{$plan->id}}" name='submit' data-plan="mensual" class="btn-submit-plan">
 																Talento {{$plan->name}}
 															</button>
@@ -139,7 +145,7 @@
 										@foreach($plans as $plan)
 											@if($plan->id>1)
 											<div class="col-lg-4">
-												<form action='https://www.2checkout.com/checkout/purchase' method='post'>
+												<form action='https://sandbox.2checkout.com/checkout/purchase' method='post'>
 												<div class="pricetable"> 
 													<div class="pricetable-head">
 														<h3>
@@ -151,11 +157,17 @@
 														<h2>
 															@if(is_null($plan->quarterly_price))
 																Gratis
+															@elseif($plan->quarterly_price == 0)
+																<i>{{ $plan->recommendations }} RECOMENDACIONES</i>
 															@else
 																<i>$</i>{{$plan->quarterly_price}}
 															@endif
 														</h2>
+														@if($plan->quarterly_price == 0)
+														<span>Indefinido</span>
+														@else
 														<span>3 meses</span>
+														@endif
 													</div>
 													<ul>
 														<li>
@@ -194,24 +206,44 @@
 														</li>
 													</ul>
 													@else
-													<input type='hidden' name='sid' value='250310269846' >
-													<input type='hidden' name='mode' value='2CO' >
-													<input type='hidden' name='li_0_type' value='product' >
-													<input type='hidden' name='li_0_name' value='Talento {{ $plan->name }}' >
-													<input type='hidden' name='li_0_product_id' value='{{ $plan->id }}' >
-													<input type='hidden' name='li_0__description' value='Plan Talento {{ $plan->name }}, por un periodo MENSUAL en ofrecetutalento.com ' >
-													<input type='hidden' name='li_0_price' value='{{ $plan->monthly_price }}' >
-													<input type='hidden' name='li_0_tangible' value='N' >
-													<input type='hidden' name='card_holder_name' value='Checkout Shopper' >
-													<input type='hidden' name='street_address' value='{{ auth()->user()->address }}' >
-													<input type='hidden' name='city' value='{{ auth()->user()->city }}' >
-													<input type='hidden' name='country' value='{{ auth()->user()->country }}' >
-													<input type='hidden' name='email' value='{{ auth()->user()->email }}' >
-													<input type='hidden' name='phone' value='{{ auth()->user()->phone }}' >													
-													<button type="submit" data-value="{{$plan->id}}" data-plan="trimestral" class="btn-submit-plan">
-														Talento {{$plan->name}}
-													</button>
-													@endif
+														@if($plan->id == 2)
+															@if(auth()->user()->recommended->count() < $plan->recommendations)
+																<ul class="mb-4">
+																	<li>
+																		<strong>TIENES {{ auth()->user()->recommended->count() }} RECOMENDACIONES</strong>
+																	</li>
+																</ul>
+															@else
+																<button type=button data-value="{{$plan->id}}" data-toggle="modal" data-target="#modal-plan-novato" name='button-novato' class="btn-submit-plan">
+																	Talento {{$plan->name}}
+																</button>
+															@endif
+														@else
+															<input type='hidden' name='sid' value='901422522' >
+															<input type='hidden' name='mode' value='2CO' >
+															<input type='hidden' name='li_0_type' value='product' >
+															<input type='hidden' name='li_0_name' value='Talento {{ $plan->name }}' >
+															<input type='hidden' name='li_0_product_id' value='{{ $plan->id }}' >
+															<input type='hidden' name='li_0__description' value='Plan Talento {{ $plan->name }}, por un periodo MENSUAL en ofrecetutalento.com ' >
+															<input type='hidden' name='li_0_price' value='{{ $plan->quarterly_price }}' >
+															<input type='hidden' name='li_0_tangible' value='N' >
+															<input type='hidden' name='card_holder_name' value='{{auth()->user()->name}} {{auth()->user()->lastname}}' >
+															<input type='hidden' name='street_address' value='{{ auth()->user()->address }}' >
+															<input type='hidden' name='city' value='{{ auth()->user()->city }}' >
+															<input type='hidden' name='country' value='{{ auth()->user()->country }}' >
+															<input type='hidden' name='email' value='{{ auth()->user()->email }}' >
+															<input type='hidden' name='phone' value='{{ auth()->user()->phone }}' >
+															<input type='hidden' name='lang' value='sp' >
+
+															<input type='hidden' name='id_usuario' value='{{ auth()->user()->id }}' >
+															<input type='hidden' name='id_producto' value='{{ $plan->id }}' >
+															<input type='hidden' name='periodo' value='Trimestral' >
+
+															<button type=submit data-value="{{$plan->id}}" name='submit' data-plan="mensual" class="btn-submit-plan">
+																Talento {{$plan->name}}
+															</button>
+														@endif
+													@endif	
 												</div>
 												</form>
 											</div>
@@ -229,7 +261,7 @@
 										@foreach($plans as $plan)
 											@if($plan->id>1)
 											<div class="col-lg-4">
-												<form action='https://www.2checkout.com/checkout/purchase' method='post'>
+												<form action='https://sandbox.2checkout.com/checkout/purchase' method='post'>
 												<div class="pricetable"> 
 													<div class="pricetable-head">
 														<h3>
@@ -241,11 +273,17 @@
 														<h2>
 															@if(is_null($plan->annual_price))
 																Gratis
+															@elseif($plan->annual_price == 0)
+																<i>{{ $plan->recommendations }} RECOMENDACIONES</i>
 															@else
-																	<i>$</i>{{$plan->annual_price}}
+																<i>$</i>{{$plan->annual_price}}
 															@endif
 														</h2>
+														@if($plan->annual_price == 0)
+														<span>Indefinido</span>
+														@else
 														<span>1 año</span>
+														@endif
 													</div>
 													<ul>
 														<li>
@@ -284,23 +322,43 @@
 														</li>
 													</ul>
 													@else
-													<input type='hidden' name='sid' value='250310269846' >
-													<input type='hidden' name='mode' value='2CO' >
-													<input type='hidden' name='li_0_type' value='product' >
-													<input type='hidden' name='li_0_name' value='Talento {{ $plan->name }}' >
-													<input type='hidden' name='li_0_product_id' value='{{ $plan->id }}' >
-													<input type='hidden' name='li_0__description' value='Plan Talento {{ $plan->name }}, por un periodo ANUAL en ofrecetutalento.com ' >
-													<input type='hidden' name='li_0_price' value='{{ $plan->monthly_price }}' >
-													<input type='hidden' name='li_0_tangible' value='N' >
-													<input type='hidden' name='card_holder_name' value='Checkout Shopper' >
-													<input type='hidden' name='street_address' value='{{ auth()->user()->address }}' >
-													<input type='hidden' name='city' value='{{ auth()->user()->city }}' >
-													<input type='hidden' name='country' value='{{ auth()->user()->country }}' >
-													<input type='hidden' name='email' value='{{ auth()->user()->email }}' >
-													<input type='hidden' name='phone' value='{{ auth()->user()->phone }}' >													
-													<button type="submit" data-value="{{$plan->id}}" data-plan="anual" class="btn-submit-plan">
-														Talento {{$plan->name}}
-													</button>
+														@if($plan->id == 2)
+															@if(auth()->user()->recommended->count() < $plan->recommendations)
+																<ul class="mb-4">
+																	<li>
+																		<strong>TIENES {{ auth()->user()->recommended->count() }} RECOMENDACIONES</strong>
+																	</li>
+																</ul>
+															@else
+																<button type=button data-value="{{$plan->id}}" data-toggle="modal" data-target="#modal-plan-novato" name='button-novato' class="btn-submit-plan">
+																	Talento {{$plan->name}}
+																</button>
+															@endif
+														@else
+															<input type='hidden' name='sid' value='901422522' >
+															<input type='hidden' name='mode' value='2CO' >
+															<input type='hidden' name='li_0_type' value='product' >
+															<input type='hidden' name='li_0_name' value='Talento {{ $plan->name }}' >
+															<input type='hidden' name='li_0_product_id' value='{{ $plan->id }}' >
+															<input type='hidden' name='li_0__description' value='Plan Talento {{ $plan->name }}, por un periodo MENSUAL en ofrecetutalento.com ' >
+															<input type='hidden' name='li_0_price' value='{{ $plan->annual_price }}' >
+															<input type='hidden' name='li_0_tangible' value='N' >
+															<input type='hidden' name='card_holder_name' value='{{auth()->user()->name}} {{auth()->user()->lastname}}' >
+															<input type='hidden' name='street_address' value='{{ auth()->user()->address }}' >
+															<input type='hidden' name='city' value='{{ auth()->user()->city }}' >
+															<input type='hidden' name='country' value='{{ auth()->user()->country }}' >
+															<input type='hidden' name='email' value='{{ auth()->user()->email }}' >
+															<input type='hidden' name='phone' value='{{ auth()->user()->phone }}' >
+															<input type='hidden' name='lang' value='sp' >
+
+															<input type='hidden' name='id_usuario' value='{{ auth()->user()->id }}' >
+															<input type='hidden' name='id_producto' value='{{ $plan->id }}' >
+															<input type='hidden' name='periodo' value='Anual' >
+
+															<button type=submit data-value="{{$plan->id}}" name='submit' data-plan="mensual" class="btn-submit-plan">
+																Talento {{$plan->name}}
+															</button>
+														@endif	
 													@endif
 												</div>
 												</form>

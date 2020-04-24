@@ -1,6 +1,8 @@
 id_user = $('#auth_user').val();
 
+//========================================          INICIO
 $(function(){
+	$('.alert').hide();
 	informacionPerfil();
 	talentosPerfil();
 	canjesPerfil();
@@ -8,11 +10,9 @@ $(function(){
 	propuestosPerfil();
 
 
-
 	if (parametroURL('acceso') == 'trato') mostrar('#tratos-r', '#a-tratos-r');
 	else mostrar('#mi-perfil', '#a-perfil');
 
-	$('.alert').hide();
 
 	// Read value on page load
 	$(".result-language b").html($("#level-language").val());
@@ -33,409 +33,14 @@ $(function(){
 	$("#title").on('keypress', function(){$('#e_title').hide()});
 	$("#category").on('change', function(){$('#e_category').hide()});
 	$("#description").on('keypress', function(){$('#e_description').hide()});
-
-/*	$('.datepicker').datepicker({
-		format: 'mm-dd-yyyy'
-	});
-*/
-
-/*$('#datepicker').datepicker({
-  uiLibrary: 'bootstrap4',
-  locale: 'es-es',
 });
-*/
-
-
-	$('#avatar').change(function(){
-		cambiarFoto();
-	});
-
-	$("#img-avatar").click(function () {
-		$("#avatar").trigger('click');
-		$('.alert').alert('close')
-	});
-	$("#button-avatar").click(function () {
-		$("#avatar").trigger('click');
-		$('.alert').alert('close')
-	});
-
-	/*imagen de canje*/
-	$('#canjes').on('change','#img-canje-file',function(){
-		canje_id = $('#input-image-canje').val();
-		cambiarImagenCanje(canje_id);
-	});
-
-	$("#canjes").on('click', '#img-canje', function () {
-		$("#img-canje-file").trigger('click');
-		$('.alert').alert('close')
-	});
-	$("#canjes").on('click', '#button-image-canje', function () {
-		$("#img-canje-file").trigger('click');
-		$('.alert').alert('close')
-	});
-	/*fin imagen de canje*/
-});
-
-$('#talentos').on('click', '#agregar-talento', function(event){
-	event.preventDefault();
-	resetForm();
-});
-
-$('#canjes').on('click', '#agregar-canje', function(event){
-	event.preventDefault();
-	resetForm();
-});
-
-$('#mi-perfil-info').on('click', '#editar-perfil', function(e){
-	e.preventDefault();
-	editarPerfil();
-});
-
-$('#talentos').on('click', '.editar-talento', function(e){
-	e.preventDefault();
-	resetForm();
-	$('#nuevo-talento').hide();
-	$('#actualizar-talento').show();
-	var id = $(this).data("value");
-	var title = $(this).data("title");
-	var category = $(this).data("category");
-	var description = $(this).data("description");
-	var level = $(this).data("level");
-	var _token = $("input[name='_token']").val();
-
-	$("input[name='id_talent']").val(id);
-	$("input[name='title']").val(title);
-	$("#categories").val(category);
-	$("input[name='level-talent']").val(level);
-	$("input[name='description']").val(description);
-	$(".result-talent b").html(level);
-	$('#categories').change();
-});
-
-
-$('#canjes').on('click', '.editar-canje', function(e){
-	e.preventDefault();
-	canje_id = $(this).data('value');
-	editarCanje(canje_id);
-	
-});
-
-
-
-$('#talentos').on('click', '.eliminar-talento', function(e){
-	e.preventDefault();
-	var id = $(this).attr("value");
-	var _token = $("input[name='_token']").val();
-	$.ajax({
-		url: '/eliminar-talento',
-		type: 'post',
-		data: {id : id, _token:_token},
-	})
-	.done(function(response) {
-		talentosPerfil();
-	});	
-});
-
-$('#canjes').on('click', '.eliminar-canje', function(e){
-	e.preventDefault();
-	var id = $(this).attr("value");
-	var _token = $("input[name='_token']").val();
-	$.ajax({
-		url: '/eliminar-canje',
-		type: 'post',
-		data: {id : id, _token:_token},
-	})
-	.done(function(response) {
-		canjesPerfil();
-	});	
-});
-
-$('#mi-perfil-info').on('click','.elimina-idioma',function(e){
-	var id = $(this).attr("value");
-	var _token = $("input[name='_token']").val();
-	$.ajax({
-		url: 'eliminar-idioma',
-		type: 'post',
-		data: {id : id, _token:_token},
-	})
-	.done(function(response) {
-		informacionPerfil();
-	});			
-});
-
-$('#nuevo-idioma').click( function(){
-	$.ajaxSetup({
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
-	});
-	var language = $('#language').val();
-	var level = $('#level-language').val();
-	var _token = $("input[name='_token']").val();
-	$.ajax({
-		url: 'cambiar-idioma',
-		type: 'post',
-		data: {language : language, level:level , _token:_token},
-	})
-	.done(function(response) {
-		informacionPerfil();
-		$('#modal-idioma').modal('hide');
-		$("#form-idioma")[0].reset();
-	});
-});
-
-$('#mi-perfil-info').on('click', '#button-registro', function(e){
-	e.preventDefault();
-	var dataString = $('#form-actualizar-usuario').serialize();
-	$.ajax({
-		url: 'actualizar_usuario',
-		type: 'get',
-		data: dataString,
-		contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
-		processData: false // NEEDED, DON'T OMIT THIS
-	})
-	.done(function(response) {
-		informacionPerfil();
-		$('html, body').animate({scrollTop:0}, 1250);
-	});
-});
-
-$('#actualizar-talento').click(function(e){
-	e.preventDefault();
-	var _token = $("input[name='_token']").val();
-	var title = $("input[name='title']").val();
-	var category = $("#categories").val();
-	var level = $("input[name='level-talent']").val();
-	var description = $("input[name='description']").val();
-	var id_talent = $("input[name='id_talent']").val();
-
-	if(title == "" || category == "" || description ==""){
-		if(title == "") $('#e_title').removeAttr('hidden'); else $('#e_title').attr({hidden: 'hidden'});
-		if(category == "") $('#e_category').removeAttr('hidden'); else $('#e_category').attr({hidden: 'hidden'});
-		if(description == "") $('#e_description').removeAttr('hidden'); else $('#e_description').attr({hidden: 'hidden'});
-	}
-	else
-	{
-		$.ajax({
-			type:'POST',
-			url:'actualizar_talento',
-			data:{
-				id_user: id_user,
-				id: id_talent,
-				title:title,
-				category:category,
-				level:level,
-				description:description,
-				_token:_token
-			},
-		})
-		.done(function(data) {
-			if($.isEmptyObject(data.error)){
-				verificarTalentos(id_user);
-				talentosPerfil();
-				$('#modal-talento').modal('hide');
-				resetForm();
-			}else{
-				printErrorMsg(data.error);
-			}
-		})
-		.fail(function(data) {
-			printErrorMsg(data.error);
-		});
-	}
-});
-
-$('#actualizar-canje').click(function(e){
-	e.preventDefault();
-	var _token = $("input[name='_token']").val();
-	var exchange_id = $("input[name='id_exchange']").val();
-	var title = $("input[name='title-exchange']").val();
-	var price = $("input[name='price-exchange']").val();
-	var description = $("#description-exchange").val();
-	var talent_id = $("#talent-exchange").val();
-
-	if(title == "" || price == "" || description =="" || talent_id ==""){
-		if(title == "") $('#e_title_exchange').removeAttr('hidden'); else $('#e_title_exchange').attr({hidden: 'hidden'});
-		if(price == "") $('#e_price_exchange').removeAttr('hidden'); else $('#e_price_exchange').attr({hidden: 'hidden'});
-		if(description == "") $('#e_description_description').removeAttr('hidden'); else $('#e_description_description').attr({hidden: 'hidden'});
-		if(talent_id == "") $('#e_talent_exchange').removeAttr('hidden'); else $('#e_talent_exchange').attr({hidden: 'hidden'});
-	}
-	else
-	{
-		$.ajax({
-			type:'POST',
-			url:'actualizar_canje',
-			data:{
-				id: exchange_id,
-				title:title,
-				price:price,
-				talent_id:talent_id,
-				description:description,
-				_token:_token
-			},
-		})
-		.done(function(data) {
-			canjesPerfil();
-			$('#modal-canje').modal('hide');
-			resetForm();
-		});
-	}
-});
-
-$('#nuevo-canje').click(function(e){
-	e.preventDefault();
-	var _token = $("input[name='_token']").val();
-	var title = $("input[name='title-exchange']").val();
-	var price = $("input[name='price-exchange']").val();
-	var talent_id = $("#talent-exchange").val();
-	var description = $("#description-exchange").val();
-
-	if(title == "" || price == "" || description =="" || talent_id ==""){
-		if(title == "") $('#e_title_exchange').removeAttr('hidden'); else $('#e_title_exchange').attr({hidden: 'hidden'});
-		if(price == "") $('#e_price_exchange').removeAttr('hidden'); else $('#e_price_exchange').attr({hidden: 'hidden'});
-		if(talent_id == "") $('#e_talent_exchange').removeAttr('hidden'); else $('#e_talent_exchange').attr({hidden: 'hidden'});
-		if(description == "") $('#e_description_exchange').removeAttr('hidden'); else $('#e_description_exchange').attr({hidden: 'hidden'});
-	}
-	else
-	{
-		$.ajax({
-			type:'get',
-			url:'/guardar-canje',
-			data:{
-				id_user: id_user,
-				title:title,
-				talent_id:talent_id,
-				price:price,
-				description:description,
-				_token:_token
-			}
-		})
-		.done(function(data) {
-			editarCanje(data);
-			/*$('#canjes').html(data);*/
-			$('#modal-canje').modal('hide');
-			verificarTalentos(id_user);
-		});
-	}
-});
-
-
-
-$('#canjes').on('click', '#no-editar-canje', function(e){
-	e.preventDefault();
-	canjesPerfil();
-});
-
-$('#mi-perfil-info').on('click', '#no-editar', function(e){
-	e.preventDefault();
-	informacionPerfil();
-});
-
-
-
-
-$('#nuevo-talento').click(function(e){
-	e.preventDefault();
-	var _token = $("input[name='_token']").val();
-	var title = $("input[name='title']").val();
-	var category = $("#categories").val();
-	var level = $("input[name='level-talent']").val();
-	var description = $("input[name='description']").val();
-
-	if(title == "" || category == "" || description ==""){
-		if(title == "") $('#e_title').removeAttr('hidden'); else $('#e_title').attr({hidden: 'hidden'});
-		if(category == "") $('#e_category').removeAttr('hidden'); else $('#e_category').attr({hidden: 'hidden'});
-		if(description == "") $('#e_description').removeAttr('hidden'); else $('#e_description').attr({hidden: 'hidden'});
-	}
-	else
-	{
-		$.ajax({
-			type:'POST',
-			url:'guardar_talento',
-			data:{
-				id_user: id_user,
-				title:title,
-				category:category,
-				level:level,
-				description:description,
-				_token:_token
-			},
-		})
-		.done(function(data) {
-			if($.isEmptyObject(data.error)){
-				verificarTalentos(id_user);
-				talentosPerfil();
-				$('#modal-talento').modal('hide');
-				resetForm();
-			}else{
-				printErrorMsg(data.error);
-			}
-		})
-		.fail(function(data) {
-			printErrorMsg(data.error);
-		});
-	}
-});
-
-function printErrorMsg (msg) {
-	$(".print-error-msg").find("ul").html('');
-	$(".print-error-msg").css('display','block');
-	$.each( msg, function( key, value ) {
-		console.log(value);
-	});
-}
-
-
-function verificarTalentos(id_user){
-	var _token = $("input[name='_token']").val();
-	$.ajax({
-		type: 'POST',
-		url:'verificar_talentos',
-		data:{user_id : id_user, _token:_token},
-		success:function(data){
-			if(data.disponibles == null){
-				$('#disponibles').html('(ilimitados)');
-			}else if(data.disponibles > 0){
-				$('#disponibles').html('('+data.disponibles+' disponibles)');
-			}else{
-				$('#agregar-talento').hide();
-				$('#disponibles').html('(Para agregar mas talentos puede cambiar su plan)');
-			}
-		}
-	});
-}
-
-function cambiarFoto(){
-	var formData = new FormData();
-	formData.append('avatar', $('#avatar')[0].files[0]);
-	formData.append('_token', $("input[name='_token']").val());
-	formData.append('id', id_user);
-	$.ajax({
-		url: '/cambiar-foto',
-		type: 'post',
-		data: formData,
-		contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
-		processData: false // NEEDED, DON'T OMIT THIS
-	})
-	.done(function(response) {
-		$("#ll").html('<div class="alert alert-success" role="alert">La foto ha cambiado exitosamente</div>');
-		$('#div-imagen').html(response);
-	})
-	.fail(function() {
-		$("#ll").html('<div class="alert alert-danger" role="alert">El formato del archivo debe ser de imagen (jpg, jpeg, png)</div>');
-	});
-	
-}
-
-
-
-
+//========================================= FIN DEL INICIO
 
 
 /* ================================== MENU MENU */
 function mostrar(div,a){
 	var divs = ['#mi-perfil', '#talentos', '#canjes', '#tratos-r', '#tratos-p'];
-	var as = ['#a-perfil', '#a-talentos', '#a-canjes', '#a-tratos-r', '#a-tratos-p'];
+	var as   = ['#a-perfil', '#a-talentos', '#a-canjes', '#a-tratos-r', '#a-tratos-p'];
 	$.each(divs, function(index, value){
 		$(value).fadeOut();
 	});
@@ -518,6 +123,786 @@ function editarPerfil(){
 	})
 }
 
+
+
+function editarArchivosTalento(id){
+	$.ajax({
+		url: '/editar-archivos-talento',
+		type: 'get',
+		data: {id:id},
+		dataType: 'html',
+	})
+	.done(function(data) {
+		$('#talentos').html(data);
+		$('#canje_id_image').val(id);
+		$('#canje_id_video').val(id);
+		$('#canje_id_pdf').val(id);
+		cargaInicial(id);
+	});
+}
+/* ================================== MENU MENU */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*===========================================     Seccion de PERFIL */
+	/*Edicion de perfil*/
+/*	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});*/
+
+var input = document.querySelector("#phone");
+// jQuery
+	$("#phone").intlTelInput({
+		initialCountry: "pa",
+		nationalMode: false,
+	});
+/*Fin Edicion de perfil*/
+
+//AVATAR
+$('#avatar').change(function(){
+	cambiarFoto();
+});
+
+$("#img-avatar").click(function () {
+	$("#avatar").trigger('click');
+	$('.alert').alert('close')
+});
+$("#button-avatar").click(function () {
+	$("#avatar").trigger('click');
+	$('.alert').alert('close')
+});
+
+$('#boton-editar-perfil').click(function(e){
+	e.preventDefault();
+	var dataString = $('#form-edit-perfil').serialize();
+	$.ajax({
+		url: '/actualizar-perfil',
+		type: 'get',
+		data: dataString,
+		contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+		processData: false // NEEDED, DON'T OMIT THIS
+	})
+	.done(function(response) {
+		$('#modal-edit-perfil').modal('hide');
+
+		informacionPerfil();
+		//$('html, body').animate({scrollTop:0}, 1250);
+	});
+});
+
+$('#mi-perfil-info').on('click','.elimina-idioma',function(e){
+	var id = $(this).attr("value");
+	var _token = $("input[name='_token']").val();
+	$.ajax({
+		url: 'eliminar-idioma',
+		type: 'post',
+		data: {id : id, _token:_token},
+	})
+	.done(function(response) {
+		informacionPerfil();
+	});			
+});
+
+$('#nuevo-idioma').click( function(){
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+	var language = $('#language').val();
+	var level = $('#level-language').val();
+	var _token = $("input[name='_token']").val();
+	$.ajax({
+		url: 'cambiar-idioma',
+		type: 'post',
+		data: {language : language, level:level , _token:_token},
+	})
+	.done(function(response) {
+		informacionPerfil();
+		$('#modal-idioma').modal('hide');
+		$("#form-idioma")[0].reset();
+	});
+});
+
+$('#boton-actualizar-experiencia').click(function(e){
+	e.preventDefault();
+	var dataString = $('#form-actualizar-experiencia').serialize();
+	$.ajax({
+		url: '/actualizar-experiencia',
+		type: 'get',
+		data: dataString,
+		contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+		processData: false // NEEDED, DON'T OMIT THIS
+	})
+	.done(function(response) {	
+		$('#modal-edit-experiencia').modal('hide');
+		
+		informacionPerfil();
+		//$('html, body').animate({scrollTop:0}, 1250);
+	});
+});
+
+
+$('#mi-perfil-info').on('click', '#no-editar', function(e){
+	e.preventDefault();
+	informacionPerfil();
+});
+
+function cambiarFoto(){
+	var formData = new FormData();
+	formData.append('avatar', $('#avatar')[0].files[0]);
+	formData.append('_token', $("input[name='_token']").val());
+	formData.append('id', id_user);
+	$.ajax({
+		url: '/cambiar-foto',
+		type: 'post',
+		data: formData,
+		contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+		processData: false // NEEDED, DON'T OMIT THIS
+	})
+	.done(function(response) {
+		$('#div-imagen').html(response);
+			//$('#ll').fadeTo(2000, 500).slideUp(500, function(){
+			$("#ll").html('<div class="alert alert-success" role="alert">La foto del perfil ha sido actualizada</div>');
+			/*$('#ll').slideUp(1000);
+		});*/
+	})
+	.fail(function() {
+		$("#ll").html('<div class="alert alert-danger" role="alert">El formato del archivo debe ser de imagen (jpg, jpeg, png)</div>');
+	});
+}
+/*=========================================         Fin de seccion de PERFIL*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*=========================================== SECCION DE TALENTOS  */
+$('#talentos').on('click', '.editar-talento', function(e){
+	e.preventDefault();
+	resetForm();
+	$('#nuevo-talento').hide();
+	$('#actualizar-talento').show();
+	var id = $(this).data("value");
+	var title = $(this).data("title");
+	var category = $(this).data("category");
+	var description = $(this).data("description");
+	var level = $(this).data("level");
+	var _token = $("input[name='_token']").val();
+
+	$("input[name='id_talent']").val(id);
+	$("input[name='title']").val(title);
+	$("#categories").val(category);
+	$("input[name='level-talent']").val(level);
+	$("input[name='description']").val(description);
+	$(".result-talent b").html(level);
+	$('#categories').change();
+});
+$('#talentos').on('click', '#agregar-talento', function(event){
+	event.preventDefault();
+	$('#nuevo-talento').show();
+	$('#actualizar-talento').hide();		
+	resetForm();
+});
+$('#talentos').on('click', '.eliminar-talento', function(event){
+	event.preventDefault();
+	var id = $(this).data('value');
+	var title = $(this).data('title');
+
+	$('#m-eliminar-talento').val(id);
+	$('#t-talento').text(title);
+
+});
+$('#talentos').on('click', '.abrir-archivos', function(e){
+	e.preventDefault();
+	var talent_id = $(this).data('value');
+	cargarArchivos(talent_id);
+});
+
+function cargarArchivos(talent_id)
+{
+	var _token = $("input[name='_token']").val();
+
+	$.ajax({
+		url: '/archivos-talento',
+		type: 'post',
+		dataType: 'html',
+		data: {talent_id: talent_id, _token:_token},
+	})
+	.done(function(data) {
+		$('#talentos').html(data);
+		
+		$('#talento_id_image').val(talent_id);
+		$('#talento_id_video').val(talent_id);
+		$('#talento_id_pdf').val(talent_id);
+		cargaInicial(talent_id);
+	})
+	.fail(function() {
+		console.log("error");
+	});
+}
+
+
+$('#eliminar-talento').on('click', function(e){
+	e.preventDefault();
+	var id = $('#m-eliminar-talento').val();
+	var _token = $("input[name='_token']").val();
+	$.ajax({
+		url: '/eliminar-talento',
+		type: 'post',
+		data: {id : id, _token:_token},
+	})
+	.done(function(response) {
+		$('#modal-eliminar-talento').modal('toggle');
+		talentosPerfil();
+	});	
+});
+
+
+$('#nuevo-talento').click(function(e){
+	e.preventDefault();
+	var _token = $("input[name='_token']").val();
+	var title = $("input[name='title']").val();
+	var category = $("#categories").val();
+	var level = $("input[name='level-talent']").val();
+	var description = $("input[name='description']").val();
+
+	if(title == "" || category == "" || description ==""){
+		if(title == "") $('#e_title').removeAttr('hidden'); else $('#e_title').attr({hidden: 'hidden'});
+		if(category == "") $('#e_category').removeAttr('hidden'); else $('#e_category').attr({hidden: 'hidden'});
+		if(description == "") $('#e_description').removeAttr('hidden'); else $('#e_description').attr({hidden: 'hidden'});
+	}
+	else
+	{
+		$.ajax({
+			type:'POST',
+			url:'guardar_talento',
+			data:{
+				id_user: id_user,
+				title:title,
+				category:category,
+				level:level,
+				description:description,
+				_token:_token
+			},
+		})
+		.done(function(data) {
+			if($.isEmptyObject(data.error)){
+				verificarTalentos(id_user);
+				talentosPerfil();
+				$('#modal-talento').modal('hide');
+				resetForm();
+			}else{
+				printErrorMsg(data.error);
+			}
+		})
+		.fail(function(data) {
+			printErrorMsg(data.error);
+		});
+	}
+});
+
+$('#actualizar-talento').click(function(e){
+	e.preventDefault();
+	var _token = $("input[name='_token']").val();
+	var title = $("input[name='title']").val();
+	var category = $("#categories").val();
+	var level = $("input[name='level-talent']").val();
+	var description = $("input[name='description']").val();
+	var id_talent = $("input[name='id_talent']").val();
+
+	if(title == "" || category == "" || description ==""){
+		if(title == "") $('#e_title').removeAttr('hidden'); else $('#e_title').attr({hidden: 'hidden'});
+		if(category == "") $('#e_category').removeAttr('hidden'); else $('#e_category').attr({hidden: 'hidden'});
+		if(description == "") $('#e_description').removeAttr('hidden'); else $('#e_description').attr({hidden: 'hidden'});
+	}
+	else
+	{
+		$.ajax({
+			type:'POST',
+			url:'actualizar_talento',
+			data:{
+				id_user: id_user,
+				id: id_talent,
+				title:title,
+				category:category,
+				level:level,
+				description:description,
+				_token:_token
+			},
+		})
+		.done(function(data) {
+			if($.isEmptyObject(data.error)){
+				verificarTalentos(id_user);
+				talentosPerfil();
+				$('#modal-talento').modal('hide');
+				resetForm();
+			}else{
+				printErrorMsg(data.error);
+			}
+		})
+		.fail(function(data) {
+			printErrorMsg(data.error);
+		});
+	}
+});
+
+function verificarTalentos(id_user){
+	var _token = $("input[name='_token']").val();
+	$.ajax({
+		type: 'POST',
+		url:'verificar_talentos',
+		data:{user_id : id_user, _token:_token},
+		success:function(data){
+			if(data.disponibles == null){
+				$('#disponibles').html('(ilimitados)');
+			}else if(data.disponibles > 0){
+				$('#disponibles').html('('+data.disponibles+' disponibles)');
+			}else{
+				$('#agregar-talento').hide();
+				$('#disponibles').html('(Para agregar mas talentos puede cambiar su plan)');
+			}
+		}
+	});
+}
+
+function printErrorMsg (msg) {
+	$(".print-error-msg").find("ul").html('');
+	$(".print-error-msg").css('display','block');
+	$.each( msg, function( key, value ) {
+		console.log(value);
+	});
+}
+/*===========================================  FIN : SECCION DE TALENTOS  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//=========================================== ARCHIVOS
+$('#talentos').on('click', '#no-editar-archivos-talento', function(e){
+	e.preventDefault();
+	talentosPerfil();
+});
+function cargaInicial(talent_id){
+	verificarArchivos('image', talent_id);
+	//actualizarArchivos('image', talent_id);
+	verificarArchivos('video', talent_id);
+	//actualizarArchivos('video', talent_id);
+	verificarArchivos('pdf', talent_id);
+	//actualizarArchivos('pdf', talent_id);
+}
+function verificarArchivos(tipo, talent_id){
+	var _token = $("input[name='_token']").val();
+	$.ajax({
+		type: 'POST',
+		url:'/verificar-archivos',
+		data:{user_id : id_user, talent_id: talent_id, _token:_token, type: tipo},
+		success:function(data){
+			if(data.disponibles == null){
+				$('#titulo-'+tipo+' span').html('(sin limite)');
+			}else if(data.disponibles > 0){
+				if(tipo == 'pdf'){
+					$('#titulo-'+tipo+' span').html('('+data.disponibles+' disponibles de '+data.pdfmax+'Mb máximo)');
+				}else{
+					$('#titulo-'+tipo+' span').html('('+data.disponibles+' disponibles)');
+				}
+			}else{
+				$('#titulo-'+tipo+' span').html('(limite alcanzado, si desea agregar mas archivos puede <a href="cambiar-plan"><strong>Cambiar Plan</strong></a>)');
+
+				$('#agregar-'+tipo).hide();				}
+		}
+	});
+}
+
+/*Dropzone Image*/
+Dropzone.options.dropimage =
+{
+	autoProcessQueue: false,
+	maxFilesize: 1,
+	maxFiles: 1,
+	acceptedFiles: ".jpeg,.jpg,.png",
+	timeout: 5000,
+	init: function(formData) {
+		var submitBtnImage = document.querySelector("#enviar-imagen");
+		myDropzoneImage = this;
+		
+		submitBtnImage.addEventListener("click", function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			myDropzoneImage.processQueue();
+		});
+		this.on("addedfile", function(file) {
+			//alert("file uploaded");
+		});
+		this.on("sending", function(file, xhr, formData) {
+		  formData.append("description", $('#description-image').val());
+		  formData.append("talent_id", $('#talento_id_image').val());
+		});
+
+		this.on("complete", function(file) {
+			myDropzoneImage.removeFile(file);
+			$('#modal-nueva-image').modal('toggle');
+			$('#information-image')[0].reset();
+		});
+		this.on("success", function(file, response){
+			myDropzoneImage.processQueue.bind(myDropzoneImage);
+			cargarArchivos(response);
+		}
+		);
+	}
+};
+/*Dropzone Video*/
+Dropzone.options.dropvideo =
+{
+	autoProcessQueue: false,
+	maxFilesize: 20,
+	maxFiles: 1,
+	acceptedFiles: ".mp4",
+	timeout: 5000,
+	init: function(formData) {
+		var submitBtnVideo = document.querySelector("#enviar-video");
+		myDropzoneVideo = this;
+		
+		submitBtnVideo.addEventListener("click", function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			myDropzoneVideo.processQueue();
+		});
+		this.on("addedfile", function(file) {
+			//alert("file uploaded");
+		});
+		this.on("sending", function(file, xhr, formData) {
+		  formData.append("description", $('#description-video').val());
+		  formData.append("talent_id", $('#talento_id_video').val());
+		});
+
+		this.on("complete", function(file) {
+			myDropzoneVideo.removeFile(file);
+			$('#modal-nuevo-video').modal('toggle');
+			$('#information-video')[0].reset();
+		});
+		this.on("success", function(file, response){
+			myDropzoneVideo.processQueue.bind(myDropzoneVideo);
+			cargarArchivos(response);
+		}
+		);
+	}
+};
+/*Dropzone Video*/
+Dropzone.options.droppdf =
+{
+	autoProcessQueue: false,
+	maxFilesize: $('#input_pdf_size').val(),
+	maxFiles: 1,
+	acceptedFiles: ".pdf",
+	timeout: 5000,
+	init: function(formData) {
+		var submitBtnPdf = document.querySelector("#enviar-pdf");
+		myDropzonePdf = this;
+		
+		submitBtnPdf.addEventListener("click", function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			myDropzonePdf.processQueue();
+		});
+		this.on("addedfile", function(file) {
+			//alert("file uploaded");
+		});
+		this.on("sending", function(file, xhr, formData) {
+		  formData.append("description", $('#description-pdf').val());
+		  formData.append("name", $('#name_pdf').val());
+		  formData.append("talent_id", $('#talento_id_pdf').val());
+		});
+
+		this.on("complete", function(file) {
+			myDropzonePdf.removeFile(file);
+			$('#modal-nuevo-pdf').modal('toggle');
+			$('#information-pdf')[0].reset();
+		});
+		this.on("success", function(file, response){
+			myDropzonePdf.processQueue.bind(myDropzonePdf);
+			cargarArchivos(response);
+		}
+		);
+	}
+};
+/*Dropzone*/
+
+$('#input-new-image').change(function(){
+	verificarImagen();
+});
+
+$("#button-input-new-image").click(function () {
+	$("#input-new-image").trigger('click');
+	$('.alert').alert('close')
+});
+
+
+function verificarImagen(){
+	alert('verificando');
+}
+
+$("#button-input-new-video").click(function () {
+	$("#input-new-video").trigger('click');
+	$('.alert').alert('close')
+});
+
+$('#input-new-video').change(function(){
+	verificarVideo();
+});
+
+function verificarVideo(){
+	var formData = new FormData();
+	formData.append('video_file', $('#input-new-video')[0].files[0]);
+	formData.append('_token', $("input[name='_token']").val());
+	$.ajax({
+		url: '/es-video',
+		type: 'post',
+		data: formData,
+		contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+		processData: false // NEEDED, DON'T OMIT THIS
+	})
+	.done(function(response) {
+		if(response.success){
+			$("#mensaje-nuevo-video").html('<div class="alert alert-success" role="alert">Video aceptado</div>');
+		}else{
+			$("#mensaje-nuevo-video").html('<div class="alert alert-warning" role="alert">Formato invalido, intente de nuevo</div>');
+		}
+	});	
+}
+
+$('#talentos').on('click', '.editar_inf_image', function (e) {
+	e.preventDefault()
+	$('#talento_id_image_edit').val($(this).data('value'));
+	$("#description-image-edit").val($(this).data('description'));
+});
+
+$('#talentos').on('click', '.eliminar_imagen_talento', function (e) {
+	e.preventDefault()
+	archivo = $(this).data('value');
+	canje = $(this).data('canje');
+	eliminarArchivo(archivo);
+});
+
+
+
+$('#talentos').on('click', '.editar_inf_pdf', function (e) {
+	e.preventDefault()
+	$('#talento_id_pdf_edit').val($(this).data('value'));
+	$("#description-pdf-edit").val($(this).data('description'));
+	$("#name_pdf_edit").val($(this).data('name'));
+});
+
+$('#b-editar-imagen').click(function (e) {
+	e.preventDefault();
+	var canje = $('#talento_id_image_edit').val();
+	actualizarArchivo(canje);
+});
+
+$('#b-editar-pdf').click(function (e) {
+	e.preventDefault();
+	var canje = $('#talento_id_pdf_edit').val();
+	actualizarArchivoPDF(canje);
+});
+
+function eliminarArchivo(id)
+{
+	var _token = $("input[name='_token']").val();
+	$.ajax({
+		url: '/eliminar-archivo',
+		type: 'post',
+		data: {id: id, _token: _token},
+	})
+	.done(function(response) {
+		cargarArchivos(response);
+/*		$('#canjes').html(response);*/
+	});
+}
+
+function actualizarArchivo(id)
+{
+	var _token = $("input[name='_token']").val();
+	var description = $("#description-image-edit").val();
+	$.ajax({
+		url: '/editar-archivo',
+		type: 'post',
+		data: {id: id, description:description, _token: _token},
+	})
+	.done(function(response) {
+		$('#modal-edit-image').modal('hide');
+		$('#form-information-image-edit')[0].reset();		
+		cargarArchivos(response);
+/*		$('#canjes').html(response);*/
+	});
+}
+
+function actualizarArchivoPDF(id)
+{
+	var _token = $("input[name='_token']").val();
+	var name = $("#name_pdf_edit").val();
+	var description = $("#description-pdf-edit").val();
+	$.ajax({
+		url: '/editar-archivo',
+		type: 'post',
+		data: {id: id, description:description, name: name, _token: _token},
+	})
+	.done(function(response) {
+		$('#modal-edit-pdf').modal('hide');
+		$('#form-information-pdf-edit')[0].reset();		
+		cargarArchivos(response);
+/*		$('#canjes').html(response);*/
+	});
+}
+
+//================================== MANIPULACION DE ARCHIVOS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*=========================================== SECCION DE CANJES  */
+$('#nuevo-canje').click(function(e){
+	e.preventDefault();
+	var _token = $("input[name='_token']").val();
+	var title = $("input[name='title-exchange']").val();
+	var price = $("input[name='price-exchange']").val();
+	var talent_id = $("#talent-exchange").val();
+	var description = $("#description-exchange").val();
+
+	if(title == "" || price == "" || description =="" || talent_id ==""){
+		if(title == "") $('#e_title_exchange').removeAttr('hidden'); else $('#e_title_exchange').attr({hidden: 'hidden'});
+		if(price == "") $('#e_price_exchange').removeAttr('hidden'); else $('#e_price_exchange').attr({hidden: 'hidden'});
+		if(talent_id == "") $('#e_talent_exchange').removeAttr('hidden'); else $('#e_talent_exchange').attr({hidden: 'hidden'});
+		if(description == "") $('#e_description_exchange').removeAttr('hidden'); else $('#e_description_exchange').attr({hidden: 'hidden'});
+	}
+	else
+	{
+		$.ajax({
+			type:'get',
+			url:'/guardar-canje',
+			data:{
+				id_user: id_user,
+				title:title,
+				talent_id:talent_id,
+				price:price,
+				description:description,
+				_token:_token
+			}
+		})
+		.done(function(data) {
+			editarCanje(data);
+			/*$('#canjes').html(data);*/
+			$('#modal-canje').modal('hide');
+			verificarTalentos(id_user);
+		});
+	}
+});
+
+$('#canjes').on('click', '.editar-canje', function(e){
+	e.preventDefault();
+	canje_id = $(this).data('value');
+	editarCanje(canje_id);
+	
+});
+
+
+
+$('#canjes').on('click', '.eliminar-canje', function(e){
+	e.preventDefault();
+	var id = $(this).attr("value");
+	var _token = $("input[name='_token']").val();
+	$.ajax({
+		url: '/eliminar-canje',
+		type: 'post',
+		data: {id : id, _token:_token},
+	})
+	.done(function(response) {
+		canjesPerfil();
+	});	
+});
+
+/*imagen de canje*/
+$('#canjes').on('change','#img-canje-file',function(){
+	canje_id = $('#input-image-canje').val();
+	cambiarImagenCanje(canje_id);
+});
+
+$("#canjes").on('click', '#img-canje', function () {
+	$("#img-canje-file").trigger('click');
+	$('.alert').alert('close')
+});
+$("#canjes").on('click', '#button-image-canje', function () {
+	$("#img-canje-file").trigger('click');
+	$('.alert').alert('close')
+});
+/*fin imagen de canje*/
+
+$('#canjes').on('click', '#agregar-canje', function(event){
+	event.preventDefault();
+	resetForm();
+});
+
 function editarCanje(id){
 	$.ajax({
 		url: '/form-canje',
@@ -527,13 +912,46 @@ function editarCanje(id){
 	})
 	.done(function(data) {
 		$('#canjes').html(data);
-		$('#canje_id_image').val(id);
-		$('#canje_id_video').val(id);
-		$('#canje_id_pdf').val(id);
-		cargaInicial(id);
 	});
 }
-/* ================================== MENU MENU */
+
+$('#actualizar-canje').click(function(e){
+	e.preventDefault();
+	var _token = $("input[name='_token']").val();
+	var exchange_id = $("input[name='id_exchange']").val();
+	var title = $("input[name='title-exchange']").val();
+	var price = $("input[name='price-exchange']").val();
+	var description = $("#description-exchange").val();
+	var talent_id = $("#talent-exchange").val();
+
+	if(title == "" || price == "" || description =="" || talent_id ==""){
+		if(title == "") $('#e_title_exchange').removeAttr('hidden'); else $('#e_title_exchange').attr({hidden: 'hidden'});
+		if(price == "") $('#e_price_exchange').removeAttr('hidden'); else $('#e_price_exchange').attr({hidden: 'hidden'});
+		if(description == "") $('#e_description_description').removeAttr('hidden'); else $('#e_description_description').attr({hidden: 'hidden'});
+		if(talent_id == "") $('#e_talent_exchange').removeAttr('hidden'); else $('#e_talent_exchange').attr({hidden: 'hidden'});
+	}
+	else
+	{
+		$.ajax({
+			type:'POST',
+			url:'actualizar_canje',
+			data:{
+				id: exchange_id,
+				title:title,
+				price:price,
+				talent_id:talent_id,
+				description:description,
+				_token:_token
+			},
+		})
+		.done(function(data) {
+			canjesPerfil();
+			$('#modal-canje').modal('hide');
+			resetForm();
+		});
+	}
+});
+
 
 function resetForm() {
 	$('form .form-error').attr({hidden: 'hidden'});
@@ -541,9 +959,8 @@ function resetForm() {
 	$("form input[type=text], form input[type=number] , form textarea").each(function() { this.value = '' });
 }
 
-
 /* ================ CANJES  */
-/*Canje Formulario*/
+/*Canje Formulario ???????????????????????????????????????????????????????????????????*/
 $('#canjes').on('click', '#actualizar-canje', function(e){
 	e.preventDefault();
 	var _token = $("input[name='_token']").val();
@@ -591,306 +1008,17 @@ function cambiarImagenCanje(id){
 	});
 	
 }
-/* ================ CANJES  */
+/*===========================================  FIN : SECCION DE CANJES  */
 
 
 
 
-//================================== MANIPULACION DE ARCHIVOS
-	function cargaInicial(canje_id){
-		verificarArchivos('image', canje_id);
-		//actualizarArchivos('image', canje_id);
-		verificarArchivos('video', canje_id);
-		//actualizarArchivos('video', canje_id);
-		verificarArchivos('pdf', canje_id);
-		//actualizarArchivos('pdf', canje_id);
-	}
-
-	function verificarArchivos(tipo, canje_id){
-		var _token = $("input[name='_token']").val();
-		$.ajax({
-			type: 'POST',
-			url:'/verificar-archivos',
-			data:{user_id : id_user, exchange_id: canje_id, _token:_token, type: tipo},
-			success:function(data){
-				if(data.disponibles == null){
-					$('#titulo-'+tipo+' span').html('(sin limite)');
-				}else if(data.disponibles > 0){
-					if(tipo == 'pdf'){
-						$('#titulo-'+tipo+' span').html('('+data.disponibles+' disponibles de '+data.pdfmax+'Mb máximo)');
-					}else{
-						$('#titulo-'+tipo+' span').html('('+data.disponibles+' disponibles)');
-					}
-				}else{
-					$('#agregar-'+tipo).hide();				}
-			}
-		});
-	}
-
-	$('#input-new-image').change(function(){
-		verificarImagen();
-	});
-
-	$("#button-input-new-image").click(function () {
-		$("#input-new-image").trigger('click');
-		$('.alert').alert('close')
-	});
 
 
-	function verificarImagen(){
-		alert('verificando');
-	}
 
-	$("#button-input-new-video").click(function () {
-		$("#input-new-video").trigger('click');
-		$('.alert').alert('close')
-	});
 
-	$('#input-new-video').change(function(){
-		verificarVideo();
-	});
 
-	function verificarVideo(){
-		var formData = new FormData();
-		formData.append('video_file', $('#input-new-video')[0].files[0]);
-		formData.append('_token', $("input[name='_token']").val());
-		$.ajax({
-			url: '/es-video',
-			type: 'post',
-			data: formData,
-			contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
-			processData: false // NEEDED, DON'T OMIT THIS
-		})
-		.done(function(response) {
-			if(response.success){
-				$("#mensaje-nuevo-video").html('<div class="alert alert-success" role="alert">Video aceptado</div>');
-			}else{
-				$("#mensaje-nuevo-video").html('<div class="alert alert-warning" role="alert">Formato invalido, intente de nuevo</div>');
-			}
-		});	
-	}
 
-/*Dropzone Image*/
-    Dropzone.options.dropimage =
-    {
-    	autoProcessQueue: false,
-        maxFilesize: 1,
-        maxFiles: 1,
-        acceptedFiles: ".jpeg,.jpg,.png",
-        timeout: 5000,
-       	init: function(formData) {
-            var submitBtnImage = document.querySelector("#enviar-imagen");
-            myDropzoneImage = this;
-            
-            submitBtnImage.addEventListener("click", function(e){
-                e.preventDefault();
-                e.stopPropagation();
-                myDropzoneImage.processQueue();
-            });
-            this.on("addedfile", function(file) {
-                //alert("file uploaded");
-            });
-		    this.on("sending", function(file, xhr, formData) {
-		      formData.append("description", $('#description-image').val());
-		      formData.append("canje_id", $('#canje_id_image').val());
-		    });
-
-            this.on("complete", function(file) {
-                myDropzoneImage.removeFile(file);
-	            $('#modal-nueva-image').modal('toggle');
-	            $('#information-image')[0].reset();
-            });
-            this.on("success", function(file, response){
-                myDropzoneImage.processQueue.bind(myDropzoneImage);
-	            editarCanje(response);
-            }
-            );
-        }
-    };
-/*Dropzone Image*/
-    Dropzone.options.dropvideo =
-    {
-    	autoProcessQueue: false,
-        maxFilesize: 20,
-        maxFiles: 1,
-        acceptedFiles: ".mp4",
-        timeout: 5000,
-       	init: function(formData) {
-            var submitBtnVideo = document.querySelector("#enviar-video");
-            myDropzoneVideo = this;
-            
-            submitBtnVideo.addEventListener("click", function(e){
-                e.preventDefault();
-                e.stopPropagation();
-                myDropzoneVideo.processQueue();
-            });
-            this.on("addedfile", function(file) {
-                //alert("file uploaded");
-            });
-		    this.on("sending", function(file, xhr, formData) {
-		      formData.append("description", $('#description-video').val());
-		      formData.append("canje_id", $('#canje_id_video').val());
-		    });
-
-            this.on("complete", function(file) {
-                myDropzoneVideo.removeFile(file);
-	            $('#modal-nuevo-video').modal('toggle');
-	            $('#information-video')[0].reset();
-            });
-            this.on("success", function(file, response){
-                myDropzoneVideo.processQueue.bind(myDropzoneVideo);
-	            editarCanje(response);
-            }
-            );
-        }
-    };
-
-    Dropzone.options.droppdf =
-    {
-    	autoProcessQueue: false,
-        maxFilesize: $('#input_pdf_size').val(),
-        maxFiles: 1,
-        acceptedFiles: ".pdf",
-        timeout: 5000,
-       	init: function(formData) {
-            var submitBtnPdf = document.querySelector("#enviar-pdf");
-            myDropzonePdf = this;
-            
-            submitBtnPdf.addEventListener("click", function(e){
-                e.preventDefault();
-                e.stopPropagation();
-                myDropzonePdf.processQueue();
-            });
-            this.on("addedfile", function(file) {
-                //alert("file uploaded");
-            });
-		    this.on("sending", function(file, xhr, formData) {
-		      formData.append("description", $('#description-pdf').val());
-		      formData.append("name", $('#name_pdf').val());
-		      formData.append("canje_id", $('#canje_id_pdf').val());
-		    });
-
-            this.on("complete", function(file) {
-                myDropzonePdf.removeFile(file);
-	            $('#modal-nuevo-pdf').modal('toggle');
-	            $('#information-pdf')[0].reset();
-            });
-            this.on("success", function(file, response){
-                myDropzonePdf.processQueue.bind(myDropzonePdf);
-	            editarCanje(response);
-            }
-            );
-        }
-    };
-
-/*Dropzone*/
-
-$('#canjes').on('click', '.eliminar_imagen_canje', function (e) {
-	e.preventDefault()
-	archivo = $(this).data('value');
-	canje = $(this).data('canje');
-	eliminarArchivo(archivo);
-});
-
-$('#canjes').on('click', '.editar_inf_image', function (e) {
-	e.preventDefault()
-	$('#canje_id_image_edit').val($(this).data('value'));
-	$("#description-image-edit").val($(this).data('description'));
-});
-
-$('#canjes').on('click', '.editar_inf_pdf', function (e) {
-	e.preventDefault()
-	$('#canje_id_pdf_edit').val($(this).data('value'));
-	$("#description-pdf-edit").val($(this).data('description'));
-	$("#name_pdf_edit").val($(this).data('name'));
-});
-
-$('#b-editar-imagen').click(function (e) {
-	e.preventDefault();
-	var canje = $('#canje_id_image_edit').val();
-	actualizarArchivo(canje);
-});
-
-$('#b-editar-pdf').click(function (e) {
-	e.preventDefault();
-	var canje = $('#canje_id_pdf_edit').val();
-	actualizarArchivoPDF(canje);
-});
-
-function eliminarArchivo(id)
-{
-	var _token = $("input[name='_token']").val();
-	$.ajax({
-		url: '/eliminar-archivo',
-		type: 'post',
-		data: {id: id, _token: _token},
-	})
-	.done(function(response) {
-		editarCanje(response);
-/*		$('#canjes').html(response);*/
-	});
-}
-
-function actualizarArchivo(id)
-{
-	var _token = $("input[name='_token']").val();
-	var description = $("#description-image-edit").val();
-	$.ajax({
-		url: '/editar-archivo',
-		type: 'post',
-		data: {id: id, description:description, _token: _token},
-	})
-	.done(function(response) {
-		$('#modal-edit-image').modal('hide');
-		$('#form-information-image-edit')[0].reset();		
-		editarCanje(response);
-/*		$('#canjes').html(response);*/
-	});
-}
-
-function actualizarArchivoPDF(id)
-{
-	var _token = $("input[name='_token']").val();
-	var name = $("#name_pdf_edit").val();
-	var description = $("#description-pdf-edit").val();
-	$.ajax({
-		url: '/editar-archivo',
-		type: 'post',
-		data: {id: id, description:description, name: name, _token: _token},
-	})
-	.done(function(response) {
-		$('#modal-edit-pdf').modal('hide');
-		$('#form-information-pdf-edit')[0].reset();		
-		editarCanje(response);
-/*		$('#canjes').html(response);*/
-	});
-}
-
-//================================== MANIPULACION DE ARCHIVOS
-
-/*================================== RATING ==========================*/
-
-var $star_rating = $('.star-rating .la');
-
-var SetRatingStar = function() {
-  return $star_rating.each(function() {
-    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
-      return $(this).removeClass('la-star-o').addClass('la-star');
-    } else {
-      return $(this).removeClass('la-star').addClass('la-star-o');
-    }
-  });
-};
-
-/*$('#valoracion').on('click', '.star-rating .la', function() {*/
-$star_rating.on('click', function() {
-  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
-  return SetRatingStar();
-});
-
-SetRatingStar();
-
-/*================================== RATING ==========================*/
 
 
 
@@ -927,7 +1055,13 @@ $('#modal-trato').on('show.bs.modal', function (event) {
 	var received 			 = button.data('received');
 	var created              = button.data('created');
 	var acceptid             = button.data('acceptid');
+	var acceptname           = button.data('acc-name');
+	var acceptemail          = button.data('acc-email');
+	var acceptphone          = button.data('acc-phone');
 	var proposeid            = button.data('proposeid');
+	var proposename           = button.data('prop-name');
+	var proposeemail          = button.data('prop-email');
+	var proposephone          = button.data('prop-phone');
 	var imagen_solicitado    = button.data('imagensolicitado');
 	var imagen_propuesto     = button.data('imagenpropuesto');
 	var link_solicitado      = 'canjes/'+id_exchange;
@@ -1027,6 +1161,12 @@ $('#modal-trato').on('show.bs.modal', function (event) {
 				modal.find('#b-recibido').attr('data-proposeid', proposeid)
 				modal.find('#b-recibido').attr('data-id_exchange', id_exchange)
 				modal.find('#b-recibido').attr('data-id_proposal', id_proposal)
+				modal.find('#datos-usuario').html(
+					'<h3>Datos de contacto</h3>'+
+					'<span>Nombre: '+proposename+'</span>'+
+					'<span>Correo: '+proposeemail+'</span>'+
+					'<span>Teléfono: '+proposephone+'</span>'
+				)
 			}
 			if(proposalready == 1){//el solicitado reciribio el trato
 			modal.find('.ya-aprobado').hide()
@@ -1051,6 +1191,12 @@ $('#modal-trato').on('show.bs.modal', function (event) {
 				modal.find('#b-recibido').attr('data-proposeid',proposeid)
 				modal.find('#b-recibido').attr('data-id_exchange',id_exchange)
 				modal.find('#b-recibido').attr('data-id_proposal',id_proposal)
+				modal.find('#datos-usuario').html(
+					'<h3>Datos de contacto</h3>'+
+					'<span>Nombre: '+acceptname+'</span>'+
+					'<span>Correo: '+acceptemail+'</span>'+
+					'<span>Teléfono: '+acceptphone+'</span>'
+				)				
 			}
 			if(dealingready == 1){
 				modal.find('.ya-aprobado').hide()
@@ -1119,8 +1265,8 @@ function aprobar(trato, tipo){
 		if (tipo == 0){
 			modal.find('#div-omitido').show();
 			modal.find("#alert-trato-rechazado").fadeTo(2000, 500).slideUp(500, function(){
-			    modal.find("#alert-trato-rechazado").slideUp(1000);
-	    		modal.modal('toggle');
+				modal.find("#alert-trato-rechazado").slideUp(1000);
+				modal.modal('toggle');
 			});
 		} 
 		if (tipo == 1){
@@ -1131,8 +1277,8 @@ function aprobar(trato, tipo){
 			modal.find('#b-recibido').attr('data-type', 'solicitado')*/
 
 			modal.find("#alert-trato-aceptado").fadeTo(2000, 500).slideUp(500, function(){
-			    modal.find("#alert-trato-aceptado").slideUp(1000);
-	    		modal.modal('toggle');	    
+				modal.find("#alert-trato-aceptado").slideUp(1000);
+				modal.modal('toggle');	    
 			});
 		}
 	})
@@ -1162,7 +1308,7 @@ function recibido(trato_id, type, acceptid, proposeid, id_exchange, id_proposal)
 			modal.find('#boton-valorar').attr('data-canje', id_proposal)
 
 			modal.find("#alert-trato-s-recibido").fadeTo(2000, 500).slideUp(500, function(){
-			    modal.find("#alert-trato-s-recibido").slideUp(1000);
+				modal.find("#alert-trato-s-recibido").slideUp(1000);
 			});
 		}
 		if(type === 'propuesto'){
@@ -1171,7 +1317,7 @@ function recibido(trato_id, type, acceptid, proposeid, id_exchange, id_proposal)
 			modal.find('#boton-valorar').attr('data-type', type)
 			modal.find('#boton-valorar').attr('data-canje', id_exchange)
 			modal.find("#alert-trato-p-recibido").fadeTo(2000, 500).slideUp(500, function(){
-			    modal.find("#alert-trato-p-recibido").slideUp(1000);
+				modal.find("#alert-trato-p-recibido").slideUp(1000);
 			});
 		}
 	})
@@ -1196,8 +1342,8 @@ function valorar(exchange_id, trato_id, comment, rating, type, evaluado){
 		modal.find('#div-aprobado').hide()
 		modal.find('#div-evaluado').show()		
 		modal.find("#alert-comentario").fadeTo(2000, 500).slideUp(500, function(){
-		    modal.find("#alert-comentario").slideUp(1000)
-		    modal.modal('toggle')
+			modal.find("#alert-comentario").slideUp(1000)
+			modal.modal('toggle')
 		});
 	})
 	.fail(function() {
@@ -1229,6 +1375,43 @@ function tratoVisto(trato_id){
 /*================================== TRATOS ==========================*/
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+/*================================== RATING ==========================*/
+
+var $star_rating = $('.star-rating .la');
+
+var SetRatingStar = function() {
+  return $star_rating.each(function() {
+	if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+	  return $(this).removeClass('la-star-o').addClass('la-star');
+	} else {
+	  return $(this).removeClass('la-star').addClass('la-star-o');
+	}
+  });
+};
+
+/*$('#valoracion').on('click', '.star-rating .la', function() {*/
+$star_rating.on('click', function() {
+  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+  return SetRatingStar();
+});
+
+SetRatingStar();
+
+/*================================== RATING ==========================*/
+
+
 function parametroURL(_par){
 	var _p = null;
 	if(location.search) location.search.substr(1).split("&").forEach(function (pllv){
@@ -1245,17 +1428,17 @@ function parametroURL(_par){
 			}
 		}
 	});
-	return _p;
+		return _p;
 }
 
 function formatDate(date) {
-     var d = new Date(date),
-         month = '' + (d.getMonth() + 1),
-         day = '' + d.getDate(),
-         year = d.getFullYear();
+	var d = new Date(date),
+	month = '' + (d.getMonth() + 1),
+	day = '' + d.getDate(),
+	year = d.getFullYear();
 
-     if (month.length < 2) month = '0' + month;
-     if (day.length < 2) day = '0' + day;
+	if (month.length < 2) month = '0' + month;
+	if (day.length < 2) day = '0' + day;
 
-     return [day, month, year].join('-');
- }
+	return [day, month, year].join('-');
+}

@@ -89,8 +89,19 @@
 										data-pay="{{ $recibido->pay }}"
 										data-received="{{ $recibido->received }}"
 										data-created="{{ $recibido->created }}" 
-										data-acceptid="{{ $recibido->accept_id }}" 
+										data-acceptid="{{ $recibido->accept_id }}"
+
+										data-acc-name="{{ $recibido->user_accept->name }} {{ $recibido->user_accept->lastname }}"
+										data-acc-email="{{ $recibido->user_accept->email }}"
+										data-acc-phone="{{ $recibido->user_accept->phone }}"
+
+
 										data-proposeid="{{ $recibido->propose_id }}"
+
+										data-prop-name="{{ $recibido->user_propose->name }} {{ $recibido->user_propose->lastname }}"
+										data-prop-email="{{ $recibido->user_propose->email }}"
+										data-prop-phone="{{ $recibido->user_propose->phone }}"
+
 										data-imagensolicitado="{{ asset('images/exchanges/'.$imagen_solicitado) }}"
 										data-imagenpropuesto="{{ asset('images/exchanges/'.$imagen_propuesto)}}" >
 									<i class="la la-eye"></i>

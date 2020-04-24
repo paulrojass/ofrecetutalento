@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Exchange;
+use App\User;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,10 +10,10 @@ class Dealing extends Model
 {
     public function user_propose()
     {
-        return $this->belongsTo(Exchange::class, 'proposal_id');
+        return $this->belongsTo(User::class, 'propose_id');
     }
     public function user_accept()
     {
-        return $this->belongsTo(Exchange::class, 'accept_id');
+        return $this->belongsTo(User::class, 'accept_id');
     }
 }

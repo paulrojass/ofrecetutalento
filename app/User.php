@@ -191,6 +191,7 @@ class User extends Authenticatable implements MustVerifyEmail
 		}
 	}
 
+
 /*	public function scopeCategory($query, $industry)
 	{
 		$categorias = Category::where('industry_id', $industry)->get();

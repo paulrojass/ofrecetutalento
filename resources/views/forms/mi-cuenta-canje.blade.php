@@ -72,7 +72,7 @@
 		</form>
 	</div>
 
-	<div class="border-title"><h3 id="titulo-image">Imágenes <span class="message-file"></span></h3>
+{{--	<div class="border-title"><h3 id="titulo-image">Imágenes <span class="message-file"></span></h3>
 		<a id="agregar-image" data-value="{{ $canje->id }}" data-toggle="modal" data-target="#modal-nueva-image"><i class="la la-plus"></i> Agregar imagen</a>
 	</div>
 
@@ -198,5 +198,5 @@
 		 	</table>
  			@endif
  		</div>
-	</div>
+	</div>--}}
 </div>

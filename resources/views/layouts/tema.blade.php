@@ -192,7 +192,9 @@
 		<span><i>Talento {{auth()->user()->suscription->plan->name}}</i></span>
 		<p>{{ auth()->user()->email }}</p>
 		<p>Miembro desde, {{ \Carbon\Carbon::parse(auth()->user()->created_at)->format('Y')}} </p>
+		@if(auth()->user()->country)
 		<p><i class="la la-map-marker"></i>{{ auth()->user()->city }}, {{ auth()->user()->country }}</p>
+		@endif
 	</div>
 	<div class="tree_widget-sec">
 		<ul>
@@ -226,7 +228,7 @@
 			</div>
 
 			<div class="cfield">
-                <input type="password" id="password" placeholder="********" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" minlength="8">
+                <input type="password" id="password" placeholder="********" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 				<i class="la la-key"></i>
 			</div>
 			@error('password')

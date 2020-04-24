@@ -53,7 +53,7 @@
 			 				<a href="javascript:void(0)" data-toggle="modal" data-target="#modal-trato" title="" class="bbutton"></i>Ofrecer Trato</a>
 			 				@endif
 			 				@else
-			 				<a href="{{url('suscripcion')}}" title="" class="bbutton"></i>Registrate para ofrecer Trato</a>
+			 				<a href="{{route('register')}}" title="" class="bbutton"></i>Registrate para ofrecer Trato</a>
 							@endauth
 		 				</div>
 		 			</div>
@@ -130,6 +130,7 @@
 							    Pagar ${{$canje->price}}
 							  </label>
 							</div>
+							@auth
 							@if(auth()->user()->suscription->plan_id > 2)
 							<div class="form-check">
 							  <input class="form-check-input" type="radio" name="pay" id="tipo-canje" value="0">
@@ -144,6 +145,7 @@
 							  </label>
 							</div>
 							@endif
+							@endauth
 						</div>
 					</div>
 					<div class="row" id="div-canje" style="display: none">

@@ -90,9 +90,9 @@ class UserController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id)
+	public function update(Request $request)
 	{
-		$user = User::where('id', $id)->first();
+		$user = User::find(auth()->user()->id);
 		$user->name = $request->name;
 		$user->lastname = $request->lastname;
 		$user->nationality = $request->nationality;
@@ -102,13 +102,13 @@ class UserController extends Controller
 		$user->document = $request->document;
 		$user->phone = $request->phone;
 		$user->abilities = $request->abilities;
-		$user->email = $request->email;
 		$user->save();
+		return $user;
 	}
 
-	public function updateExperience(Request $request, $id)
+	public function updateExperience(Request $request)
 	{
-		$experience = Experience::where('user_id', $id)->first();
+		$experience = Experience::where('user_id', auth()->user()->id)->first();
 		$experience->company1 = $request->company1;
 		$experience->position1 = $request->position1;
 		$experience->start_date1 = $request->start_date1;
@@ -125,6 +125,7 @@ class UserController extends Controller
 		$experience->due_date3 = $request->due_date3;
 		$experience->achievements3 = $request->achievements3;
 		$experience->save();
+		return $experience;
 	}
 
 
@@ -194,8 +195,11 @@ class UserController extends Controller
 
         $exchanges = Auth()->User()->exchanges;
 
+        $paises_json = file_get_contents(base_path('resources/json/paises.json'));
+        $paises = json_decode($paises_json, true);        
+
 		$categories = Category::all();
-		return view('mi-cuenta', compact('categories', 'talents', 'exchanges'));
+		return view('mi-cuenta', compact('categories', 'talents', 'exchanges', 'paises'));
 	}
 
 	public function updateAvatar(Request $request){

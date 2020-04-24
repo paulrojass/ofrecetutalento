@@ -102,7 +102,13 @@
 										data-received="{{ $propuesto->received }}"
 										data-created="{{ $propuesto->created }}" 
 										data-acceptid="{{ $propuesto->accept_id }}" 
+										data-acc-name="{{ $propuesto->user_accept->name }} {{ $propuesto->user_accept->lastname }}"
+										data-acc-email="{{ $propuesto->user_accept->email }}"
+										data-acc-phone="{{ $propuesto->user_accept->phone }}"
 										data-proposeid="{{ $propuesto->propose_id }}"
+										data-prop-name="{{ $propuesto->user_propose->name }} {{ $propuesto->user_propose->lastname }}"
+										data-prop-email="{{ $propuesto->user_propose->email }}"
+										data-prop-phone="{{ $propuesto->user_propose->phone }}"
 										data-imagensolicitado="{{ asset('images/exchanges/'.$imagen_solicitado) }}"
 										data-imagenpropuesto="{{ asset('images/exchanges/'.$imagen_propuesto)}}" >
 									<i class="la la-eye"></i>

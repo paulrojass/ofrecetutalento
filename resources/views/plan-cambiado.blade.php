@@ -9,6 +9,7 @@
 @endsection
 
 @section('content')
+@php($fecha = new Date($suscription->expiration_date))
 <section>
 	<div class="block no-padding">
 		<div class="container fluid">
@@ -25,11 +26,15 @@
 								<span>Nuevo plan adquirido: Talento {{ $suscription->plan->name }}</span>
 								<span>Fecha de expiración:
 									@if($suscription->expiration_date)
-										{{ $suscription->expiration_date }}
+										{{ $fecha->format('d / m / Y') }}
 									@else
 										Indefinido
 									@endif
 								</span>
+								@if($request->order_number)
+								<span>Precio: ${{ $request->total }}</span>
+								<span>número de orden: {{ $request->order_number }}</span>
+								@endif
 							</div>
 							<div class="simple-text-block">
 								<a href="{{ url('mi-cuenta') }}" title="">Volver a Mi cuenta</a>

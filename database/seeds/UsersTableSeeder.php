@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
 	 */
 	public function run()
 	{
-		factory(User::class,12)->create()->each(function($user){
+		factory(User::class,4)->create()->each(function($user){
 			factory(Language::class,5)->create(['user_id'=>$user->id]);
 			factory(Experience::class,1)->create(['user_id'=>$user->id]);
 			factory(Suscription::class,1)->create(['user_id'=>$user->id]);

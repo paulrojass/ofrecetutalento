@@ -71,23 +71,37 @@ class SuscriptionController extends Controller
      */
     public function update(Request $request, Suscription $suscription)
     {
-        if($request->type){
-            if($request->type == 'Mensual') $suscription->expiration_date = Carbon::now()->addMonth(1);
-            if($request->type == 'Trimestral') $suscription->expiration_date = Carbon::now()->addMonth(3);
-            if($request->type == 'Anual') $suscription->expiration_date = Carbon::now()->addYear(1);
+        if($request->id_usuario) $usuario = $request->id_usuario;
+        else $usuario = $request->user_id;
+
+        if($request->id_producto) $producto = $request->id_producto;
+        else $producto = $request->plan_id;
+
+        
+        if($request->periodo) $periodo = $request->periodo;
+        elseif($request->type) $periodo = $request->type;
+        else $periodo = null;
+
+        if($periodo){
+            if($periodo == 'Mensual') $suscription->expiration_date = Carbon::now()->addMonth(1);
+            if($periodo == 'Trimestral') $suscription->expiration_date = Carbon::now()->addMonth(3);
+            if($periodo == 'Anual') $suscription->expiration_date = Carbon::now()->addYear(1);
         }
         else $suscription->expiration_date = null;
         
-        $suscription->user_id = $request->user_id;
-        $suscription->plan_id = $request->plan_id;
+        $suscription->user_id = $usuario;
+        $suscription->plan_id = $producto;
         $suscription->save();
 
-        return view('plan-cambiado',compact('suscription'));
+        return view('plan-cambiado',compact('suscription', 'request'));
     }
 
     public function change(Request $request)
     {
-        $suscription = Suscription::find($request->user_id);
+        if($request->id_usuario) $usuario = $request->id_usuario;
+        else $usuario = $request->user_id;
+
+        $suscription = Suscription::find($usuario);
         return $this->update($request, $suscription);
     }
 
@@ -101,4 +115,19 @@ class SuscriptionController extends Controller
     {
         //
     }
+
+    public function callback(Request $request)
+    {
+        //dd($request->all());
+
+        $hashSecretWord = 'MjM3NzExYTYtMmRmZi00YjlmLTliZGItZWY0NDc3ZGY5ZDYz'; //2Checkout Secret Word
+        $hashSid        = $request->sid; //2Checkout account number
+        $hashTotal      = $request->total; //Sale total to validate against
+        $hashOrder      = $request->order_number; //2Checkout Order Number
+        $StringToHash   = strtoupper(md5($hashSecretWord . $hashSid . $hashOrder . $hashTotal));
+
+        if ($StringToHash == $request->key) return $this->change($request);
+        return back();
+    }
+
 }

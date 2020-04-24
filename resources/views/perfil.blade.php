@@ -17,9 +17,13 @@
 									<div class="col-lg-6">
 									</div>
 									<div class="col-lg-6">
-										<div class="action-inner">
-											<!-- <a href="#" title=""><i class="la la-envelope-o"></i>Contact David</a> -->
+										@auth
+										@if(auth()->user()->id != $user->id && auth()->user()->suscription->plan_id > 2)
+										<div class="action-inner" id="div-recommended">
+
 										</div>
+										@endif
+										@endauth
 									</div>
 								</div>
 							</div>
@@ -56,9 +60,8 @@
 				 				<!-- <p>{{ $user->email }}</p> -->
 				 				<p>Miembro desde, {{ \Carbon\Carbon::parse($user->created_at)->format('Y')}} </p>
 				 				<p><i class="la la-map-marker"></i>{{ $user->city }}, {{ $user->country }}</p>
-				 				<p>
+				 				
 				 			</div>
-
 
 				 			<div class="download-cv estrellas">
 							@if($user->suscription->plan_id > 2)
@@ -73,18 +76,18 @@
 							</div>
 							@endif
 				 			</div> 
-
-
 				 		</div>
-				 		<div class="job-single-head style2 mt-5 pb-0">
+				 		<div class="job-single-head style2 mt-3 pb-0">
 			 				@auth
 							@if(auth()->user()->id != $user->id)
 			 				<a href="javascript:void(0)" data-toggle="modal" data-target="#modal-trato" title="" class="apply-job-btn"></i>Ofrecer trato</a>
 			 				@endif
 			 				@else
-			 				<a href="{{url('suscripcion')}}" title="" class="apply-job-btn"></i>Registrate para ofrecer trato</a>
+			 				<a href="{{route('register')}}" title="" class="apply-job-btn"></i>Registrate para ofrecer trato</a>
 			 				@endauth
+
 			 			</div>
+
 
 				 		<ul class="cand-extralink">
 				 			<li><a href="#abilities" title="">habilidades</a></li>
@@ -92,14 +95,7 @@
 				 			@if($user->talents->count() > 0)
 				 			<li><a href="#talentos" title="">Talentos</a></li>
 				 			@endif
-
-				 			@auth
-
-							@if((auth()->user()->suscription->plan_id > 2)&&($user->suscription->plan_id > 2))
-
-				 				<li><a href="#canjes" title="">Canjes</a></li>
-				 			@endif
-				 			@endauth				 			
+			 			
 				 			
 				 			@if($user->talents->count() > 0)
 				 			<li><a href="#comentarios" title="">Comentarios</a></li>
@@ -217,14 +213,6 @@
 								</section>
 								@endif
 								
-								@auth
-								@if((auth()->user()->suscription->plan_id > 2)&&($user->suscription->plan_id > 2))
-			 					<div class="col-lg-12 mt-5" id="canjes">
-
-		 						</div>
-					 			@endif
-								@endauth
-
 			 					<div class="col-lg-12 mt-5" id="comentarios">
 			 						<div class="cand-details">
 								 		<div class="comment-sec estrellas" id="div-comentarios">
@@ -452,181 +440,194 @@
 
 @section('scripts')
 <script>
-	$(function(){
-		var user_id = '{{ $user->id }}';
-		actualizarComentarios(user_id);
-		actualizarCanjes(user_id);
+$(function(){
+	var user_id = '{{ $user->id }}';
+	var auth_user = '@auth {{ auth()->user()->id }} @endauth';
+	actualizarComentarios(user_id);
 
-		$(".alert").hide();
-
-/*  Enviar Mensjes */		
-		$('#button-enviar').click(function(e){
-			e.preventDefault();
-			var datos = $('#form-message').serialize();
-			$.ajax({
-				url: '/enviar-mensaje-perfil',
-				type: 'GET',
-				data: datos,
-				contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
-				processData: false // NEEDED, DON'T OMIT THIS
-			})
-			.done(function() {
-				$("#alert-message").fadeTo(2000, 500).slideUp(500, function(){
-				    $("#alert-message").slideUp(1000);
-				    $('#modal-message').modal('hide');
-					$("#form-message")[0].reset();
-				});
-			})
-			.fail(function() {
-				console.log("error");
-			})
-			.always(function() {
-
-			});
-		});
-/*  Enviar Mensjes */
-
-		$('#boton-nuevo-trato-talento').click(function(event) {
-			event.preventDefault();
-			var dataString = $('#form-trato-talento').serialize();
-			$.ajax({
-				url: '/nuevo-trato-talento',
-				type: 'get',
-				data: dataString,
-				contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
-				processData: false // NEEDED, DON'T OMIT THIS
-			})
-			.done(function(response) {
-				if(response.errors){
-					$("#alert-error").fadeTo(2000, 500).slideUp(500, function(){
-					    $("#alert-error").slideUp(1000);
-					});
-          		}else{
-          			$('.alert-danger').hide();
-
-					$("#alert-trato").fadeTo(2000, 500).slideUp(500, function(){
-					    $("#alert-trato").slideUp(1000);
-					    $('#modal-trato').modal('hide');
-						$("#form-trato-talento")[0].reset();
-					});
-
-          		}
-			});
-		});
-
-		/*================================== RATING ==========================*/
+	if(auth_user)actualizarRecomendacion(user_id, 0);
 
 
-		var $star_rating = $('div.estrellas .star-rating .la');
+	$(".alert").hide();
 
-		var SetRatingStar = function() {		
-		  return $star_rating.each(function() {
-		    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
-		      return $(this).removeClass('la-star-o').addClass('la-star');
-		    } else {
-		      return $(this).removeClass('la-star').addClass('la-star-o');
+
+	function actualizarRecomendacion(user_id, cambiar){
+		$.ajaxSetup({
+		    headers: {
+		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		    }
-		  });
-		};
+		});
+		$.ajax({
+			url: '/actualizar-recomendado',
+			type: 'POST',
+			data: {cambiar: cambiar, user_id: user_id, _token: "{{ csrf_token() }}"},
+		})
+		.done(function(response) {
+			$('#div-recommended').html(response);
+		})
+		.fail(function() {
+			console.log("error");
+		});
+	}
 
-		/*$('#valoracion').on('click', '.star-rating .la', function() {*/
-		/*		
-		$star_rating.on('click', function() {
-		  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
-		  return SetRatingStar();
-		});*/
+	$('#div-recommended').on('click', '.a-recomendar', function(){
+		actualizarRecomendacion(user_id, 1)
+	} );
 
-		//$('div.estrellas').on('ready', $star_rating, SetRatingStar);
-		SetRatingStar();
 
-		/*================================== RATING ==========================*/
-		$('#div-comentarios').on('click', '.a-responder', function(e){
-			e.preventDefault();
-			var clickeado = $(this).data('responder');
-			$('#respuesta'+clickeado).slideDown('slow', function(){
-				$('#textarea-respuesta'+clickeado).focus();
+	/*  Enviar Mensjes */		
+	$('#button-enviar').click(function(e){
+		e.preventDefault();
+		var datos = $('#form-message').serialize();
+		$.ajax({
+			url: '/enviar-mensaje-perfil',
+			type: 'GET',
+			data: datos,
+			contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+			processData: false // NEEDED, DON'T OMIT THIS
+		})
+		.done(function() {
+			$("#alert-message").fadeTo(2000, 500).slideUp(500, function(){
+			    $("#alert-message").slideUp(1000);
+			    $('#modal-message').modal('hide');
+				$("#form-message")[0].reset();
 			});
-		});
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
 
-		$('#div-comentarios').on('click', '.b-publicar-respuesta', function(e){
-			e.preventDefault();
-			var comentario = $(this).data('value');
-			var responde = $(this).data('evaluado');
-			agregarRespuesta(comentario, responde);
 		});
+	});
 
-		function actualizarComentarios(user_id){
+	/*  Enviar Mensjes */
+
+	$('#boton-nuevo-trato-talento').click(function(event) {
+		event.preventDefault();
+		var dataString = $('#form-trato-talento').serialize();
+		$.ajax({
+			url: '/nuevo-trato-talento',
+			type: 'get',
+			data: dataString,
+			contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+			processData: false // NEEDED, DON'T OMIT THIS
+		})
+		.done(function(response) {
+			if(response.errors){
+				$("#alert-error").fadeTo(2000, 500).slideUp(500, function(){
+				    $("#alert-error").slideUp(1000);
+				});
+      		}else{
+      			$('.alert-danger').hide();
+
+				$("#alert-trato").fadeTo(2000, 500).slideUp(500, function(){
+				    $("#alert-trato").slideUp(1000);
+				    $('#modal-trato').modal('hide');
+					$("#form-trato-talento")[0].reset();
+				});
+
+      		}
+		});
+	});
+
+	/*================================== RATING ==========================*/
+
+
+	var $star_rating = $('div.estrellas .star-rating .la');
+
+	var SetRatingStar = function() {		
+	  return $star_rating.each(function() {
+	    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+	      return $(this).removeClass('la-star-o').addClass('la-star');
+	    } else {
+	      return $(this).removeClass('la-star').addClass('la-star-o');
+	    }
+	  });
+	};
+
+	/*$('#valoracion').on('click', '.star-rating .la', function() {*/
+	/*		
+	$star_rating.on('click', function() {
+	  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+	  return SetRatingStar();
+	});*/
+
+	//$('div.estrellas').on('ready', $star_rating, SetRatingStar);
+	SetRatingStar();
+
+	/*================================== RATING ==========================*/
+	$('#div-comentarios').on('click', '.a-responder', function(e){
+		e.preventDefault();
+		var clickeado = $(this).data('responder');
+		$('#respuesta'+clickeado).slideDown('slow', function(){
+			$('#textarea-respuesta'+clickeado).focus();
+		});
+	});
+
+	$('#div-comentarios').on('click', '.b-publicar-respuesta', function(e){
+		e.preventDefault();
+		var comentario = $(this).data('value');
+		var responde = $(this).data('evaluado');
+		agregarRespuesta(comentario, responde);
+	});
+
+	function actualizarComentarios(user_id){
+		$.ajax({
+			url: '/actualizar-comentarios-perfil',
+			type: 'get',
+			data: {user_id : user_id},
+			dataType: 'html',
+		})
+		.done(function(data) {
+			$('#div-comentarios').html(data);
+		});
+	}
+
+	function agregarRespuesta(comentario_id, responde){
+		var comentario = $('#textarea-respuesta'+comentario_id).val();
+		if (comentario != ''){
 			$.ajax({
-				url: '/actualizar-comentarios-perfil',
+				url: '/agregar-respuesta',
 				type: 'get',
-				data: {user_id : user_id},
+				data: { comment:comentario, replyto:comentario_id, evaluated_id:responde, user_id:responde},
 				dataType: 'html',
 			})
 			.done(function(data) {
 				$('#div-comentarios').html(data);
-			});
+			});		
 		}
+	}
 
-		function agregarRespuesta(comentario_id, responde){
-			var comentario = $('#textarea-respuesta'+comentario_id).val();
-			if (comentario != ''){
-				$.ajax({
-					url: '/agregar-respuesta',
-					type: 'get',
-					data: { comment:comentario, replyto:comentario_id, evaluated_id:responde, user_id:responde},
-					dataType: 'html',
-				})
-				.done(function(data) {
-					$('#div-comentarios').html(data);
-				});		
-			}
-		}
-
-		function actualizarCanjes(user_id){
-			$.ajax({
-				url: '/actualizar-canjes-perfil',
-				type: 'post',
-				data: {user_id : user_id},
-				dataType: 'html',
-			})
-			.done(function(data) {
-				$('#canjes').html(data);
-			});
-		}
-
-		$('#modal-trato').on('show.bs.modal', function (e) {
-			$('#form-trato-talento')[0].reset();
-			$('#div-pago').show();
-			$('#div-canje').hide();
-			$('#div-propuesta').hide();
-			$('#div-tiempo').hide();
-		});
-
-		$('#tipo-pago').click(function () {
-			$('#div-pago').show();
-			$('#div-canje').hide();
-			$('#div-propuesta').hide();
-			$('#div-tiempo').hide();
-			$('#proposal_id').val('');
-		});
-		$('#tipo-canje').click(function () {
-			$('#div-pago').hide();
-			$('#div-canje').show();
-			$('#div-propuesta').hide();
-			$('#div-tiempo').show();
-		});
-		$('#tipo-propuesta').click(function(){
-			$('#div-pago').hide();
-			$('#div-canje').hide();
-			$('#div-propuesta').show();
-			$('#div-tiempo').show();
-			$('#proposal_id').val('');
-		});
-
-
-
-
+	$('#modal-trato').on('show.bs.modal', function (e) {
+		$('#form-trato-talento')[0].reset();
+		$('#div-pago').show();
+		$('#div-canje').hide();
+		$('#div-propuesta').hide();
+		$('#div-tiempo').hide();
 	});
+
+	$('#tipo-pago').click(function () {
+		$('#div-pago').show();
+		$('#div-canje').hide();
+		$('#div-propuesta').hide();
+		$('#div-tiempo').hide();
+		$('#proposal_id').val('');
+	});
+	$('#tipo-canje').click(function () {
+		$('#div-pago').hide();
+		$('#div-canje').show();
+		$('#div-propuesta').hide();
+		$('#div-tiempo').show();
+	});
+	$('#tipo-propuesta').click(function(){
+		$('#div-pago').hide();
+		$('#div-canje').hide();
+		$('#div-propuesta').show();
+		$('#div-tiempo').show();
+		$('#proposal_id').val('');
+	});
+});
 </script>
 @endsection
 

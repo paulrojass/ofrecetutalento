@@ -10,7 +10,7 @@ class File extends Model
 {
 
 	protected $fillable = [
-		'name', 'description', 'type', 'location', 'exchange_id'
+		'name', 'description', 'type', 'location', 'talent_id'
 	];
 
 

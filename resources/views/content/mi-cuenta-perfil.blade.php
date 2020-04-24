@@ -9,14 +9,19 @@
 </div> -->
 			<div class="row">
 				@php
-					$suscripcion = new Date(Auth::User()->suscription->updated_at);
-					$vencimiento = new Date(Auth::User()->suscription->expiration_date);
 					$hoy = new Date();
-					if($hoy > $vencimiento) $status = 'Vencido';
-					else $status = 'Activo';
+					$suscripcion = new Date(auth()->user()->suscription->updated_at);
+					if(auth()->user()->suscription->expiration_date){
+						$vencimiento = new Date(auth()->user()->suscription->expiration_date);
+						if($hoy > $vencimiento) $status = 'Vencido';
+						else $status = 'Activo';
+					}else {
+						$status = 'Activo';
+						$vencimiento = 'Indefinido';
+					}
 				@endphp
 				<div class="col-sm">
-					<p><strong> Nombre del Plan:</strong> @if(Auth::User()->suscription->plan_id > 1)Talento @endif{{Auth::User()->suscription->plan->name}}</p>
+					<p><strong> Nombre del Plan:</strong> @if(auth()->user()->suscription->plan_id > 1)Talento @endif{{auth()->user()->suscription->plan->name}}</p>
 				</div>
 				<div class="col-sm">
 					<p><strong> Fecha de suscripción: </strong> {{$suscripcion->format('d / m / Y')}}</p>
@@ -27,7 +32,12 @@
 					<p><strong> Estatus: </strong> {{ $status  }}</p>
 				</div>
 				<div class="col-sm">
-					<p><strong> Fecha de vencimiento: </strong> {{$vencimiento->format('d / m / Y')}}</p>
+					<p><strong> Fecha de vencimiento: </strong>
+					@if ($vencimiento == 'Indefinido')
+					 {{$vencimiento}}</p>
+					@else
+					 {{$vencimiento->format('d / m / Y')}}</p>
+					@endif
 				</div>
 			</div>
 		</div>
@@ -35,7 +45,7 @@
 </div>
 
 
-<div class="border-title"><h3>Mi perfil</h3><a id="editar-perfil" title=""><i class="la la-edit"></i> Editar Perfil</a></div>
+<div class="border-title"><h3>Mi perfil</h3><a id="editar-perfil" data-toggle="modal" data-target="#modal-edit-perfil" title=""><i class="la la-edit"></i> Editar Perfil</a></div>
 <div class="edu-history-sec">
 	<div class="job-details-m">
 		<div class="container">
@@ -46,83 +56,86 @@
 			</div>
 			<div class="row">
 				<div class="col-sm">
-					<p><strong> Nombres: </strong> {{Auth::User()->name}}</p>
+					<p><strong> Nombres: </strong> {{auth()->user()->name}}</p>
 				</div>
 				<div class="col-sm">
-					<p><strong> Apellidos: </strong>{{Auth::User()->lastname}}</p>
+					<p><strong> Apellidos: </strong>{{auth()->user()->lastname}}</p>
 				</div>
 				<div class="col-sm">
-					<p><strong> Documento: </strong>{{Auth::User()->document}}</p>
+					<p><strong> Documento: </strong>{{auth()->user()->document}}</p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm">
-					<p><i class="la la-envelope-o"></i><strong> Correo: </strong>{{Auth::User()->email}}</p>
+					<p><i class="la la-envelope-o"></i><strong> Correo: </strong>{{auth()->user()->email}}</p>
 				</div>
 				<div class="col-sm">
-					<p><i class="la la-phone"></i><strong> Teléfono: </strong>{{Auth::User()->phone}}</p>
+					<p><i class="la la-phone"></i><strong> Teléfono: </strong>{{auth()->user()->phone}}</p>
 				</div>
 				<div class="col-sm">
-					<p><i class="la la-globe"></i><strong> Nacionalidad: </strong>{{Auth::User()->nationality}}</p>
+					<p><i class="la la-globe"></i><strong> Nacionalidad: </strong>{{auth()->user()->nationality}}</p>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-sm">
-					<p><i class="la la-map-signs"></i><strong> Dirección: </strong>{{Auth::User()->address}}</p>
+					<p><i class="la la-map-signs"></i><strong> Dirección: </strong>{{auth()->user()->address}}</p>
 				</div>
 				<div class="col-sm">
-					<p><i class="la la-map-marker"></i><strong> Ciudad y País: </strong>{{Auth::User()->city}}, {{Auth::User()->country}}</p>
+					<p><i class="la la-map-marker"></i><strong> Ciudad y País: </strong>{{auth()->user()->city}}, {{auth()->user()->country}}</p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm">
-					<p><i class="la la-certificate"></i><strong> Descripción de habilidades: </strong>{{Auth::User()->abilities}}</p>
+					<p><i class="la la-certificate"></i><strong> Descripción de habilidades: </strong>{{auth()->user()->abilities}}</p>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+
+
 <div class="cand-details-sec">
 	<div class="row">
 		<div class="col-lg-8 column">
 			<div class="edu-history-sec">
 				<div class="border-title">
-					<h3>Experiencia Laboral</h3>
+					<h3>Experiencia Laboral</h3><a data-toggle="modal" data-target="#modal-edit-experiencia" title=""><i class="la la-edit"></i> Editar</a>
 				</div>
-				@if(Auth::User()->experiences->company1 || Auth::User()->experiences->company2 || Auth::User()->experiences->company3 )
-					@if(Auth::User()->experiences->company1)
+				@if(auth()->user()->experiences->company1 || auth()->user()->experiences->company2 || auth()->user()->experiences->company3 )
+					@if(auth()->user()->experiences->company1)
 					<div class="edu-history style2">
 						<i></i>
 						<div class="edu-hisinfo">
-							<h3>{{ Auth::User()->experiences->position1 }} <span>{{ Auth::User()->experiences->company1 }}</span></h3>
-							<i>{{ \Carbon\Carbon::parse(Auth::User()->experiences->start_date1)->format('Y')}} - 
-								{{ \Carbon\Carbon::parse(Auth::User()->experiences->due_date1)->format('Y')}} </i>
-							<p>{{ Auth::User()->experiences->achievements1 }} </p>
+							<h3>{{ auth()->user()->experiences->position1 }} <span>{{ auth()->user()->experiences->company1 }}</span></h3>
+							<i>{{ auth()->user()->experiences->start_date1}} - 
+								{{ auth()->user()->experiences->due_date1}} </i>
+							<p>{{ auth()->user()->experiences->achievements1 }} </p>
 						</div>
 					</div>
 					@endif
 
-					@if(Auth::User()->experiences->company2)
+					@if(auth()->user()->experiences->company2)
 					<div class="edu-history style2">
 						<i></i>
 						<div class="edu-hisinfo">
-							<h3>{{ Auth::User()->experiences->position2 }} <span>{{ Auth::User()->experiences->company2 }}</span></h3>
-							<i>{{ \Carbon\Carbon::parse(Auth::User()->experiences->start_date2)->format('Y')}} - 
-								{{ \Carbon\Carbon::parse(Auth::User()->experiences->due_date2)->format('Y')}} </i>
-							<p>{{ Auth::User()->experiences->achievements2 }} </p>
+							<h3>{{ auth()->user()->experiences->position2 }} <span>{{ auth()->user()->experiences->company2 }}</span></h3>
+							<i>{{ auth()->user()->experiences->start_date2}} - 
+								{{ auth()->user()->experiences->due_date2}} </i>
+							<p>{{ auth()->user()->experiences->achievements2 }} </p>
 						</div>
 					</div>
 					@endif
 
-					@if(Auth::User()->experiences->company3)
+					@if(auth()->user()->experiences->company3)
 					<div class="edu-history style2">
 						<i></i>
 						<div class="edu-hisinfo">
-							<h3>{{ Auth::User()->experiences->position3 }} <span>{{ Auth::User()->experiences->company3 }}</span></h3>
-							<i>{{ \Carbon\Carbon::parse(Auth::User()->experiences->start_date3)->format('Y')}} - 
-								{{ \Carbon\Carbon::parse(Auth::User()->experiences->due_date3)->format('Y')}} </i>
-							<p>{{ Auth::User()->experiences->achievements3 }} </p>
+							<h3>{{ auth()->user()->experiences->position3 }} <span>{{ auth()->user()->experiences->company3 }}</span></h3>
+							<i>{{ auth()->user()->experiences->start_date3}} - 
+								{{ auth()->user()->experiences->due_date3}} </i>
+							<p>{{ auth()->user()->experiences->achievements3 }} </p>
 						</div>
 					</div>
 					@endif
@@ -139,8 +152,8 @@
 					<i class="la la-plus"></i>
 				Agregar</a>
 			</div>
-			@if(Auth::User()->languages->count() > 0)
-				@foreach(Auth::User()->languages as $language)
+			@if(auth()->user()->languages->count() > 0)
+				@foreach(auth()->user()->languages as $language)
 					<div class="progress-sec">
 						<span class="mb-4">{{ $language->language }}<a class="pull-right elimina-idioma" value="{{$language->id}}" title=""><i class="la la-trash-o"></i></a></span>
 						@php($porcentaje = $language->level * 10)

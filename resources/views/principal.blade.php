@@ -49,7 +49,7 @@
 			<div id="enlaces">
 				<div class="row">
 					<div class="col-lg-4 amarillo">
-						<a href="{{ url('suscripcion') }}">
+						<a href="{{ route('register') }}">
 							<div class="mask">
 								<span><h2>Publica tu talento</h2>
 									<p>Crea tu perfil y cuentale al mundo tus habilidades</p></span>
@@ -128,7 +128,7 @@
 								<div class="simple-text-block">
 									<h3>¡Haz la diferencia con tus talentos en linea!</h3>
 									<span>¡Muestra tus talentos en linea en cuestion de minutos!</span>
-									<a href="{{url('suscripcion')}}" title="" class="rounded">Crear Cuenta</a>
+									<a href="{{route('register')}}" title="" class="rounded">Crear Cuenta</a>
 								</div>
 							</div>
 						</div>

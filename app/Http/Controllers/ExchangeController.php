@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Image;
 use App\Exchange;
-use App\File;
+/*use App\File;*/
 use App\Comment;
 
 use Jenssegers\Date\Date;
@@ -73,7 +73,8 @@ class ExchangeController extends Controller
     public function canje($id)
     {
         $canje = $this->show($id);
-/*        $imagenes = $this->archivosCanje($canje, 'image');
+        /*
+        $imagenes = $this->archivosCanje($canje, 'image');
         $videos = $this->archivosCanje($canje, 'video');
         $pdfs = $this->archivosCanje($canje, 'pdf');*/
         $comentarios = Comment::where('exchange_id', $id)->paginate(2);
@@ -81,10 +82,12 @@ class ExchangeController extends Controller
         return view('canje', compact('canje', 'comentarios'));
     }
 
+    /*
+
     public function archivosCanje(Exchange $exchange, $type)
     {
         return File::where('exchange_id', $exchange->id)->where('type',$type)->get();
-    }
+    }*/
 
     /**
      * Show the form for editing the specified resource.
@@ -164,18 +167,17 @@ class ExchangeController extends Controller
 
         $canje = Exchange::find($request->id);
 
-        return $this->vistaCanje($canje);
-
+        return view('forms.mi-cuenta-canje', compact('canje'));
     }
 
     public function vistaCanje(Exchange $canje){
-        $imagenes = $canje->files()->where('type', 'image')->get();
+/*        $imagenes = $canje->files()->where('type', 'image')->get();
 
         $videos = $canje->files()->where('type', 'video')->get();
 
-        $pdfs = $canje->files()->where('type', 'pdf')->get();
+        $pdfs = $canje->files()->where('type', 'pdf')->get();*/
 
-        return view('forms.mi-cuenta-canje', compact('canje', 'imagenes', 'videos', 'pdfs'));
+        return view('forms.mi-cuenta-canje', compact('canje'));
     }
 
     public function updateExchangesProfileView($user_id)

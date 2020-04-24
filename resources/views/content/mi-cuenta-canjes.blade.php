@@ -18,7 +18,14 @@
 	 		<div class="action-tags">
 	 			<a href="{{url('canjes/'.$exchange->id)}}" title=""><i class="la la-eye"></i>Ver</a>
 	 			<a class="editar-canje" data-value="{{ $exchange->id }}" title=""><i class="la la-pencil"></i> Editar</a>
+				@if ($exchange->dealings->count() > 0  || $exchange->proposals->count() > 0)
+					@php($tratos = true)
+				@else
+					@php($tratos = false)
+				@endif
+				@if (!$tratos)
 	 			<a class="eliminar-canje" value="{{$exchange->id}}" title=""><i class="la la-trash-o"></i>Eliminar</a>
+				@endif
 	 		</div>
 		</div>
 		@endforeach

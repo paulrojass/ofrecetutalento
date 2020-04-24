@@ -187,5 +187,17 @@ class TalentController extends Controller
 
     }
 
+    public function mostrarArchivos(Request $request)
+    {
 
+        $talento = Talent::find($request->talent_id);
+
+        $imagenes = $talento->files()->where('type', 'image')->get();
+
+        $videos = $talento->files()->where('type', 'video')->get();
+
+        $pdfs = $talento->files()->where('type', 'pdf')->get();
+
+        return view('content.mi-cuenta-talento-archivos', compact('talento', 'imagenes', 'videos', 'pdfs'));
+    }
 }

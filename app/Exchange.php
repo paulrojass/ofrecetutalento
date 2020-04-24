@@ -31,10 +31,16 @@ class Exchange extends Model
 		return $this->hasMany(Dealing::class);
 	}
 
+	public function proposals()
+	{
+		return $this->hasMany(Dealing::class, 'proposal_id');
+	}
+
+
 	//Cotratadores
     public function contractors()
     {
-        return $this->hasMany(Dealing::class, 'proposal_id');
+        return $this->hasMany(Dealing::class, 'propose_id');
     }
     //Contratados
     public function hired()

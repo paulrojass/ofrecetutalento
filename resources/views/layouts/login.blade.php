@@ -36,89 +36,15 @@
 	<div class="responsive-header three">
 		<div class="responsive-menubar">
 			<div class="res-logo"><a href="{{url('/')}}" title=""><img src="{{URL::asset('tema/images/logo.png')}}" alt="" /></a></div>
-			<div class="menu-resaction">
-				<div class="res-openmenu">
-					<img src="{{URL::asset('tema/images/icon5.png')}}" alt="" /> Menu
-				</div>
-				<div class="res-closemenu">
-					<img src="{{URL::asset('tema/images/icon6.png')}}" alt="" /> Close
-				</div>
-			</div>
+<!-- 			<div class="menu-resaction">
+	<div class="res-openmenu">
+		<img src="{{URL::asset('tema/images/icon5.png')}}" alt="" /> Menu
+	</div>
+	<div class="res-closemenu">
+		<img src="{{URL::asset('tema/images/icon6.png')}}" alt="" /> Close
+	</div>
+</div> -->
 		</div>
-		<div class="responsive-opensec">
-			@if(Auth::User())
-				<div class="my-profiles-sec">
-					<span><img src="http://placehold.it/50x50" alt="" /> Ali TUFAN <i class="la la-bars"></i></span>
-				</div>
-				<div class="wishlist-dropsec">
-					<span><i class="la la-heart"></i><strong>3</strong></span>
-					<div class="wishlist-dropdown">
-						<ul class="scrollbar">
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Web Designer / Developer</a></h3>
-										<span>Massimo Artemisis</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">C Developer (Senior) C .Net</a></h3>
-										<span>StarHealth</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Marketing Director</a></h3>
-										<span>Tix Dog</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Web Designer / Developer</a></h3>
-										<span>Massimo Artemisis</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-							<li>
-								<div class="job-listing">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Web Designer / Developer</a></h3>
-										<span>Massimo Artemisis</span>
-									</div>
-								</div><!-- Job -->
-							</li>
-						</ul>
-					</div>
-				</div>
-
-
-
-			@else
-			<div class="btn-extars">
-				<a href="#" title="" class="post-job-btn"><i class="la la-plus"></i>Ofrece Talento</a>
-				<ul class="account-btns">
-					<li><a href="{{url('suscripcion')}}" title=""><i class="la la-key"></i> Registrar</a></li>
-				</ul>
-			</div><!-- Btn Extras -->
-			@endif
-			<form class="res-search">
-				<input type="text" placeholder="Job title, keywords or company name" />
-				<button type="submit"><i class="la la-search"></i></button>
-			</form>
-		</div>
-
 	</div>
 	
 	<header class="@yield('header_type')">
@@ -128,24 +54,21 @@
 					<a href="{{url('/')}}" title=""><img src="{{URL::asset('tema/images/logo.png')}}" alt="" /></a>
 				</div><!-- Logo -->
 				@if(Auth::User())
-
-<!-- 				<div class="my-profiles-sec">
-	<span>
-		<img src="{{URL::asset('images/users/'.Auth::User()->avatar)}}" alt="" style="max-width: 50px; max-height: 50px;" />
-			{{Auth::User()->name}} {{Auth::User()->lastname}}
-		<i class="la la-bars"></i>
-	</span>
-</div>-->
-
-
-
-
 				@else
+				@if(Route::currentRouteName() != 'register')
 				<div class="btn-extars">
 					<ul class="account-btns">
-						<li class="signup-popup"><a href="{{url('suscripcion')}}" title=""><i class="la la-key"></i> Registrar</a></li>
+						<li class="signup-popup"><a href="{{url('register')}}" title=""><i class="la la-key"></i> Registrar</a></li>
 					</ul>
 				</div><!-- Btn Extras -->
+				@endif
+				@if(Route::currentRouteName() != 'login')
+				<div class="btn-extars">
+					<ul class="account-btns">
+						<li class="signup-popup"><a href="{{url('login')}}" title=""><i class="la la-key"></i> Login</a></li>
+					</ul>
+				</div><!-- Btn Extras -->
+				@endif
 				@endif
 				<nav>
 				</nav><!-- Menus -->

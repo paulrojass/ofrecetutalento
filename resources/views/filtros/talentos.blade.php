@@ -9,7 +9,7 @@
 					<img src="{{URL::asset('images/users/'.$user->avatar)}}" alt="" />
 				</div>
 				<div class="emply-resume-info">
-					<h3><a href="{{ url('perfil/'.$user->id) }}" title="">{{ $user->name}} {{ $user->lastname }} ({{ $user->email }})</a></h3>
+					<h3><a href="{{ url('perfil/'.$user->id) }}" title="">{{ $user->name}} {{ $user->lastname }}</a></h3>
 					<p><i class="la la-map-marker"></i>{{ $user->city }} / {{ $user->country }}</p>
 					<span>
 					<i>
@@ -28,7 +28,11 @@
 								</span>
 							</span>
 						</span>--}}
-						,  {{ $user->exchanges->count() }} Canjes</i><br>
+						,  {{ $user->exchanges->count() }} Canjes
+						,  {{ $user->recommended->count() }} Recomendaciones</i>
+
+
+						<br>
 					</span>
 				</div>
 				<div class="shortlists">

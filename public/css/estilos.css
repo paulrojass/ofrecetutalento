@@ -588,3 +588,20 @@ background: linear-gradient(45deg, rgba(251,35,106,1) 0%,rgba(251,35,106,1) 44%,
 .pricetable>button:hover{
   background: #ff9200;
 }
+
+
+.recommended > a > i {
+    transform: translate(0,-5px);
+    -webkit-transform: translate(0,-5px); /** Chrome & Safari **/
+    -o-transform: translate(0,-5px); /** Opera **/
+    -moz-transform: translate(0,-5px); /** Firefox **/
+
+    font-size: 30px;
+    /* color: #B8B8B8; */
+    color: #ff9200;
+    margin: 1px 0;
+}
+
+.iti__selected-flag {
+    height: 76%;
+}

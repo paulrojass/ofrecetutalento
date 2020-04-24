@@ -262,7 +262,7 @@ class FileController extends Controller
 			'talent_id' => $request->talent_id
 		]);
 
-		return $request->canje_id;
+		return $request->talent_id;
 	}
 	public function newVideo(Request $request)
 	{
