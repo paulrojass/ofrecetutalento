@@ -19,12 +19,12 @@
 							<div class="row">
 								<div class="col-lg-8">
 									<div class="find-cand">
-										<h3>La forma mas facil<br> de ofrecer tus talentos</h3>
-										<span>We have 2.567 resumes in our database</span>
+										<h3>Tú tienes un talento único que <br/> tiene valor para el Mundo</h3>
+										<span>Nosotros te ayudamos a exponer, reclutar y compartir tus talentos con aquellos quienes lo necesitan</span>
 										<form method="GET" action="{{ route('talentos_resultado') }}">
 											@csrf
 											<div class="job-field">
-												<input type="text" name="search" placeholder="Busca los talentos que solicitas" />
+												<input type="text" name="search" placeholder="Busca los talentos que necesitas" />
 											</div>
 											<div class="job-field">
 												<select name="industry" data-placeholder="para las categorias" class="chosen-city">
@@ -52,7 +52,7 @@
 						<a href="{{ route('register') }}">
 							<div class="mask">
 								<span><h2>Publica tu talento</h2>
-									<p>Crea tu perfil y cuentale al mundo tus habilidades</p></span>
+									<p>Crea tu perfil y comparte con el mundo tus talentos</p></span>
 									<img src="{{URL::asset('tema/images/publica.png')}}">
 								</div>
 							</a>
@@ -61,7 +61,7 @@
 						<div class="col-lg-4 naranja">
 							<a href="{{ url('talentos') }}">
 								<div class="mask">
-									<span><h2>Busca tu talento</h2> 
+									<span><h2>Busca Talentos</h2> 
 										<p>Busca los talentos ideales para tus proyectos</p></span>
 										<img src="{{URL::asset('tema/images/busca.png')}}">
 									</div>
@@ -72,7 +72,7 @@
 								<a href="{{ url('canjes') }}">
 									<div class="mask">
 										<span><h2>Canjea tu talento</h2>
-											<p>Intercambia tu talento y apoya a otros</p></span>
+											<p>Intercambia tu talento a través del trueque</p></span>
 											<img src="{{URL::asset('tema/images/canjea.png')}}">
 										</div>
 									</a>
@@ -81,9 +81,57 @@
 						</div>
 					</div>
 				</div>
-
 			</section>
 
+			<section id="pasos">
+				<div class="block remove-top">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="heading">
+									<h2>Como Funciona</h2>
+									<span>cada mes, más de 7 millones de Jobhunt recurren al sitio web en su búsqueda de trabajo, realizando más de <br />60,000 solicitudes cada día.
+									</span>
+								</div><!-- Heading -->
+								<div class="how-to-sec style2">
+									<div class="how-to">
+										<span class="how-icon"><i class="la la-user"></i></span>
+										<h3>Registra tu cuenta</h3>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim suscipit feugiat.</p>
+									</div>
+									<div class="how-to">
+										<span class="how-icon"><i class="la la-file-archive-o"></i></span>
+										<h3>Ofrece o busca tus talentos</h3>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim suscipit feugiat.</p>
+									</div>
+									<div class="how-to">
+										<span class="how-icon"><i class="la la-list"></i></span>
+										<h3>Aplica el talento</h3>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim suscipit feugiat.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="block double-gap-top double-gap-bottom">
+					<div data-velocity="-.1" style="background: url({{URL::asset('tema/images/foto-filtro.png')}}) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible layer color green"></div><!-- PARALLAX BACKGROUND IMAGE -->
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="simple-text-block">
+									<h3>¡Haz la diferencia con tus talentos en linea!</h3>
+									<span>¡Muestra tus talentos en linea en cuestion de minutos!</span>
+									<a href="{{route('register')}}" title="" class="rounded" style="font-size: 32px">Crear Cuenta</a>
+								</div>
+							</div>
+						</div>
+					</div>  
+				</div>
+			</section>
 
 			<section id="scroll-here">
 				<div class="block gray">
@@ -119,57 +167,11 @@
 
 
 
-			<section>
-				<div class="block double-gap-top double-gap-bottom">
-					<div data-velocity="-.1" style="background: url({{URL::asset('tema/images/foto-filtro.png')}}) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible layer color green"></div><!-- PARALLAX BACKGROUND IMAGE -->
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="simple-text-block">
-									<h3>¡Haz la diferencia con tus talentos en linea!</h3>
-									<span>¡Muestra tus talentos en linea en cuestion de minutos!</span>
-									<a href="{{route('register')}}" title="" class="rounded">Crear Cuenta</a>
-								</div>
-							</div>
-						</div>
-					</div>  
-				</div>
-			</section>
 
 
 
-			<section id="pasos">
-				<div class="block remove-top">
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="heading">
-									<h2>Como Funciona</h2>
-									<span>cada mes, más de 7 millones de Jobhunt recurren al sitio web en su búsqueda de trabajo, realizando más de <br />60,000 solicitudes cada día.
-									</span>
-								</div><!-- Heading -->
-								<div class="how-to-sec style2">
-									<div class="how-to">
-										<span class="how-icon"><i class="la la-user"></i></span>
-										<h3>Registra tu cuenta</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim suscipit feugiat.</p>
-									</div>
-									<div class="how-to">
-										<span class="how-icon"><i class="la la-file-archive-o"></i></span>
-										<h3>Ofrece o busca tus talentos</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim suscipit feugiat.</p>
-									</div>
-									<div class="how-to">
-										<span class="how-icon"><i class="la la-list"></i></span>
-										<h3>Aplica el talento</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim suscipit feugiat.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+
+
 
 <!--<section>
 <div class="block gray">

@@ -90,7 +90,7 @@
 
 
 				 		<ul class="cand-extralink">
-				 			<li><a href="#abilities" title="">habilidades</a></li>
+				 			<li><a href="#abilities" title="">Habilidades</a></li>
 
 				 			@if($user->talents->count() > 0)
 				 			<li><a href="#talentos" title="">Talentos</a></li>
@@ -104,14 +104,11 @@
 				 			@auth
 							@if((auth()->user()->suscription->plan_id > 2)&&(auth()->user()->id != $user->id)&&($user->suscription->plan_id > 2))
 
-				 				<li><a href="javascript:void(0)" data-toggle="modal" data-target="#modal-message" title="">Enviar Mensaje</a></li>
+				 				<li><a href="javascript:void(0)" data-toggle="modal" data-target="#modal-message" title=""><strong>Enviar Mensaje</strong></a></li>
 				 			@endif
 				 			
 				 			@endauth
 				 		</ul>
-
-
-
 
 				 		<div class="cand-details-sec" id="informacion-general">
 				 			<div class="row">
@@ -122,7 +119,7 @@
 
 				 				<div class="col-lg-9 column">
 			 						<div class="cand-details" id="experience">
-			 							<h2>Experiencia en trabajos</h2>
+			 							<h2>Experiencia Laboral</h2>
 
 			 							@if($user->experiences->position1)
 			 							<div class="edu-history style2">

@@ -1,5 +1,8 @@
-actualizarMensajes();
-actualizarTratos();
+setInterval(function(){
+	actualizarMensajes();
+	actualizarTratos();
+},10000);
+
 
 function actualizarMensajes(){
 	$.ajax({

@@ -153,8 +153,17 @@ class User extends Authenticatable implements MustVerifyEmail
 		return false;
 	}
 
+/*	public function suscribed(){
 
-
+		$fecha_vencimiento = $this->suscription;
+		$hoy = new Date();
+		if($fecha_vencimiento){
+			if($fecha_vencimiento > $hoy) return false;
+			return true;
+		}
+		return true;
+	}
+*/
 
 
 //Query Scopes

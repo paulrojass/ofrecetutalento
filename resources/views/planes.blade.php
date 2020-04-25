@@ -34,8 +34,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading">
-						<h2>Conoce nuestros planes y paquetes</h2>
-						<span>One of our jobs has some kind of flexibility option - such as telecommuting, a part-time schedule or a flexible or flextime schedule.</span>
+						<h2>Planes y Subscripción</h2>
+						<span>Este es el directorio de los TOP talentos de Latinoamérica. Los siguientes planes te permiten crear un perfil y cargar fotos o videos que puedan validar tus talentos. Escoge el plan que más se adapte a tú necesidad para empezar a exponer tus talentos a nuestra comunidad.</span>
 					</div><!-- Heading -->
 					<div class="tab-sec">
 						<ul class="nav nav-tabs">
@@ -61,13 +61,20 @@
 														<h2>
 															@if(is_null($plan->monthly_price))
 																Gratis
+															@elseif($plan->monthly_price == 0)
+																<i>{{ $plan->recommendations }} RECOMENDACIONES</i>
 															@else
-																	<i>$</i>{{$plan->monthly_price}}
+																<i>$</i>{{$plan->monthly_price}}
 															@endif
 														</h2>
+														@if($plan->monthly_price == 0)
+														<span>Indefinido</span>
+														@else
 														<span>1 mes</span>
+														@endif
 													</div>
 													<ul>
+														<li><strong>@if ( $plan->id > 1 )Te permite cargar a tu perfil lo siguiente:@endif</strong></li>
 														<li>
 															@if(is_null($plan->talents)) Talentos ilimitados
 															@else
@@ -96,6 +103,21 @@
 																@endif
 															@endif
 														</li>
+														@if ($plan->id == 1)
+														<li>Te permite navegar y hacer tratos con los talentos de nuestra comunidad</li>
+														<li></li>
+														<li></li>
+														@endif
+														@if ($plan->id == 2)
+														<li>Disponible por recomendación únicamente</li>
+														<li>Exclusivo para Talentos con 10 años mínimo de experiencia</li>
+														<li>Recomendamos mínimo 3 años de experiencia Gerencial</li>
+														@endif
+														@if ($plan->id > 2)
+														<li><strong>Acceso a base de datos Canjea tu Talento para realizar trueques entre usuarios</strong></li>
+														<li></li>
+														<li></li>
+														@endif
 													</ul>
 												</div>
 											</div>
@@ -122,13 +144,20 @@
 														<h2>
 															@if(is_null($plan->quarterly_price))
 																Gratis
+															@elseif($plan->quarterly_price == 0)
+																<i>{{ $plan->recommendations }} RECOMENDACIONES</i>
 															@else
 																<i>$</i>{{$plan->quarterly_price}}
 															@endif
 														</h2>
+														@if($plan->quarterly_price == 0)
+														<span>Indefinido</span>
+														@else
 														<span>3 meses</span>
+														@endif
 													</div>
 													<ul>
+														<li><strong>@if ( $plan->id > 1 )Te permite cargar a tu perfil lo siguiente:@endif</strong></li>
 														<li>
 															@if(is_null($plan->talents)) Talentos ilimitados
 															@else
@@ -157,6 +186,21 @@
 																@endif
 															@endif
 														</li>
+														@if ($plan->id == 1)
+														<li>Te permite navegar y hacer tratos con los talentos de nuestra comunidad</li>
+														<li></li>
+														<li></li>
+														@endif
+														@if ($plan->id == 2)
+														<li>Disponible por recomendación únicamente</li>
+														<li>Exclusivo para Talentos con 10 años mínimo de experiencia</li>
+														<li>Recomendamos mínimo 3 años de experiencia Gerencial</li>
+														@endif
+														@if ($plan->id > 2)
+														<li><strong>Acceso a base de datos Canjea tu Talento para realizar trueques entre usuarios</strong></li>
+														<li></li>
+														<li></li>
+														@endif
 													</ul>
 												</div>
 											</div>
@@ -183,13 +227,20 @@
 														<h2>
 															@if(is_null($plan->annual_price))
 																Gratis
+															@elseif($plan->annual_price == 0)
+																<i>{{ $plan->recommendations }} RECOMENDACIONES</i>
 															@else
-																	<i>$</i>{{$plan->annual_price}}
+																<i>$</i>{{$plan->annual_price}}
 															@endif
 														</h2>
+														@if($plan->annual_price == 0)
+														<span>Indefinido</span>
+														@else
 														<span>1 año</span>
+														@endif
 													</div>
 													<ul>
+														<li><strong>@if ( $plan->id > 1 )Te permite cargar a tu perfil lo siguiente:@endif</strong></li>
 														<li>
 															@if(is_null($plan->talents)) Talentos ilimitados
 															@else
@@ -218,6 +269,21 @@
 																@endif
 															@endif
 														</li>
+														@if ($plan->id == 1)
+														<li>Te permite navegar y hacer tratos con los talentos de nuestra comunidad</li>
+														<li></li>
+														<li></li>
+														@endif
+														@if ($plan->id == 2)
+														<li>Disponible por recomendación únicamente</li>
+														<li>Exclusivo para Talentos con 10 años mínimo de experiencia</li>
+														<li>Recomendamos mínimo 3 años de experiencia Gerencial</li>
+														@endif
+														@if ($plan->id > 2)
+														<li><strong>Acceso a base de datos Canjea tu Talento para realizar trueques entre usuarios</strong></li>
+														<li></li>
+														<li></li>
+														@endif
 													</ul>
 												</div>
 											</div>
@@ -232,6 +298,43 @@
 		</div>
 	</div>
 </section>
+{{-- 
+<section>
+	<div class="block">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 column">
+					<div class="job-single-sec">
+						<div class="job-details">
+							<h3>Caza Talentos</h3>
+							<ul>
+								<li>Te permite navegar y hacer tratos con los talentos de nuestra comunidad</li>
+							</ul>
+							<h3>Talento Novato</h3>
+							<ul>
+								<li>Disponible por recomendación únicamente</li>
+								<li>Exclusivo para Talentos con 10 años mínimo de experiencia</li>
+								<li>Recomendamos mínimo 3 años de experiencia Gerencial</li>
+							</ul>
+							<h3>Talento Pro</h3>
+							<ul>
+								<li>Disponible por recomendación únicamente</li>
+								<li>Exclusivo para Talentos con 10 años mínimo de experiencia</li>
+								<li>Recomendamos mínimo 3 años de experiencia Gerencial</li>
+							</ul>
+							<h3>Talento Novato</h3>
+							<ul>
+								<li>Disponible por recomendación únicamente</li>
+								<li>Exclusivo para Talentos con 10 años mínimo de experiencia</li>
+								<li>Recomendamos mínimo 3 años de experiencia Gerencial</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>--}}
 @endsection
 
 

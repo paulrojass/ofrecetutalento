@@ -14,7 +14,8 @@
 						<div class="inner-header wform">
 							<div class="job-search-sec">
 								<div class="job-search">
-									<h4>Explora todos lo canjes disponibles</h4>
+									<h4>Bienvenido al directorio de Canjea Tu Talento</h4>
+									<span>	Aquí encontrarás los mejores productos, servicios y creaciones que nuestros miembros quieren ofrecer como trueque. Siéntete libre de buscar la mejor oferta para ti. Una vez estés listo, aprieta "ofrecer trato" y podrás ofrecer un canje por el producto o servicio escogido.</span>
 								</div>
 							</div>
 						</div>

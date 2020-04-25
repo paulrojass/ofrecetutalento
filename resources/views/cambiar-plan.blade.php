@@ -54,6 +54,7 @@
 														@endif
 													</div>
 													<ul>
+														<li><strong>@if ( $plan->id > 1 )Te permite cargar a tu perfil lo siguiente:@endif</strong></li>
 														<li>
 															@if(is_null($plan->talents)) Talentos ilimitados
 															@else
@@ -82,6 +83,21 @@
 																@endif
 															@endif
 														</li>
+													@if ($plan->id == 1)
+														<li>Te permite navegar y hacer tratos con los talentos de nuestra comunidad</li>
+														<li></li>
+														<li></li>
+														@endif
+														@if ($plan->id == 2)
+														<li>Disponible por recomendación únicamente</li>
+														<li>Exclusivo para Talentos con 10 años mínimo de experiencia</li>
+														<li>Recomendamos mínimo 3 años de experiencia Gerencial</li>
+														@endif
+														@if ($plan->id > 2)
+														<li><strong>Acceso a base de datos Canjea tu Talento para realizar trueques entre usuarios</strong></li>
+														<li></li>
+														<li></li>
+														@endif
 													</ul>
 													@if ($plan->id == auth()->user()->suscription->plan_id)
 													<ul class="mb-4">
@@ -170,6 +186,7 @@
 														@endif
 													</div>
 													<ul>
+														<li><strong>@if ( $plan->id > 1 )Te permite cargar a tu perfil lo siguiente:@endif</strong></li>
 														<li>
 															@if(is_null($plan->talents)) Talentos ilimitados
 															@else
@@ -198,6 +215,21 @@
 																@endif
 															@endif
 														</li>
+													@if ($plan->id == 1)
+														<li>Te permite navegar y hacer tratos con los talentos de nuestra comunidad</li>
+														<li></li>
+														<li></li>
+														@endif
+														@if ($plan->id == 2)
+														<li>Disponible por recomendación únicamente</li>
+														<li>Exclusivo para Talentos con 10 años mínimo de experiencia</li>
+														<li>Recomendamos mínimo 3 años de experiencia Gerencial</li>
+														@endif
+														@if ($plan->id > 2)
+														<li><strong>Acceso a base de datos Canjea tu Talento para realizar trueques entre usuarios</strong></li>
+														<li></li>
+														<li></li>
+														@endif
 													</ul>
 													@if ($plan->id == auth()->user()->suscription->plan_id)
 													<ul class="mb-4">
@@ -286,6 +318,7 @@
 														@endif
 													</div>
 													<ul>
+														<li><strong>@if ( $plan->id > 1 )Te permite cargar a tu perfil lo siguiente:@endif</strong></li>
 														<li>
 															@if(is_null($plan->talents)) Talentos ilimitados
 															@else
@@ -314,6 +347,21 @@
 																@endif
 															@endif
 														</li>
+														@if ($plan->id == 1)
+														<li>Te permite navegar y hacer tratos con los talentos de nuestra comunidad</li>
+														<li></li>
+														<li></li>
+														@endif
+														@if ($plan->id == 2)
+														<li>Disponible por recomendación únicamente</li>
+														<li>Exclusivo para Talentos con 10 años mínimo de experiencia</li>
+														<li>Recomendamos mínimo 3 años de experiencia Gerencial</li>
+														@endif
+														@if ($plan->id > 2)
+														<li><strong>Acceso a base de datos Canjea tu Talento para realizar trueques entre usuarios</strong></li>
+														<li></li>
+														<li></li>
+														@endif
 													</ul>
 													@if ($plan->id == auth()->user()->suscription->plan_id)
 													<ul class="mb-4">

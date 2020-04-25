@@ -605,3 +605,75 @@ background: linear-gradient(45deg, rgba(251,35,106,1) 0%,rgba(251,35,106,1) 44%,
 .iti__selected-flag {
     height: 76%;
 }
+
+.name-link{
+  color: #ff9200;
+}
+
+
+.canje-imagen{
+  object-fit: cover;
+  width: 160px;
+  height: 80px;
+  cursor:pointer
+}
+
+
+
+/* estilo del select */
+select{
+    float: left;
+    width: 100%;
+    border: 2px solid #e8ecec;
+    margin-bottom: 20px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
+    padding: 14px 45px 14px 15px;
+    background: #ffffff;
+    font-family: 'Questrial' !important;
+    font-size: 13px;
+    color: #888888;
+    line-height: 24px;
+    height: 56px;
+}
+/* select {
+height: 25px;
+    position: relative;
+    display: block;
+    overflow: hidden;
+padding: 0 0 0 8px;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #888888;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 24px;
+    float: left;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+    padding: 14px 45px 14px 15px;
+    height: auto;
+} */
+
+
+
+
+.pf-field .chosen-container-single .chosen-drop {
+    margin-top: 5px;
+    border: 1px solid #e8ecec;
+}
+
+.pricetable ul li{
+  line-height: 18px;
+  margin-bottom: 24px;
+}
+
+.cand-extralink > li a {
+
+    color: #202020;
+
+}

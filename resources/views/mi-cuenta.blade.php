@@ -164,7 +164,7 @@
 		 					</div>
 
 		 					<div class="col-lg-12">
-		 						<span class="pf-title">Cuéntanos cómo tus habilidades y destrezas aportan una solución o beneficio real a tus clientes</span>
+		 						<span class="pf-title">¿Cuál es la solución o beneficio real que le ofreces a tus clientes?</span>
 		 						<div class="pf-field">
 		 							<textarea name="abilities" id="abilities">{{ auth()->user()->abilities }}</textarea>
 		 						</div>
@@ -517,49 +517,6 @@
 	  </div>
 	</div>	
 </section>
-
-
-
-
-
-<!-- ================================== MODAL ACTUALIZAR CANJE ============================================================= -->
-<section id="section-modal-acutalizar-canjes">
-	<div class="modal fade bd-example-modal-lg" id="modal-acutalizar-canje" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content pt-4">
-			<h3>Actualizar Canje</h3>
-			<button type="button" class="close-b" data-dismiss="modal" aria-label="Close">
-				<span class="close-popup"><i class="la la-close"></i></span>
-			</button>
-
-
-
-
-			{{-- en esta zona se agrega --}}
-
-
-
-
-		</div>
-	  </div>
-	</div>	
-</section>
-<!-- ================================== MODAL ACTUALIZAR CANJE ============================================================= -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!--=================================  MODALS PARA AGREGAR Y EDITAR INFORMACION DE IMAGENES -->

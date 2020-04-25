@@ -912,6 +912,7 @@ function editarCanje(id){
 	})
 	.done(function(data) {
 		$('#canjes').html(data);
+		$('#a-talent-exchange').addClass('chosen');
 	});
 }
 
@@ -1163,8 +1164,8 @@ $('#modal-trato').on('show.bs.modal', function (event) {
 				modal.find('#b-recibido').attr('data-id_proposal', id_proposal)
 				modal.find('#datos-usuario').html(
 					'<h3>Datos de contacto</h3>'+
-					'<span>Nombre: '+proposename+'</span>'+
-					'<span>Correo: '+proposeemail+'</span>'+
+					'<span>Nombre: <a class="name-link" href="perfil/'+proposeid+'">'+proposename+'</span>'+
+					'<span>'+proposeemail+'</span>'+
 					'<span>Teléfono: '+proposephone+'</span>'
 				)
 			}
@@ -1193,8 +1194,8 @@ $('#modal-trato').on('show.bs.modal', function (event) {
 				modal.find('#b-recibido').attr('data-id_proposal',id_proposal)
 				modal.find('#datos-usuario').html(
 					'<h3>Datos de contacto</h3>'+
-					'<span>Nombre: '+acceptname+'</span>'+
-					'<span>Correo: '+acceptemail+'</span>'+
+					'<span>Nombre: <a class="name-link" href="perfil/'+acceptid+'">'+acceptname+'</span>'+
+					'<span>'+acceptemail+'</span>'+
 					'<span>Teléfono: '+acceptphone+'</span>'
 				)				
 			}

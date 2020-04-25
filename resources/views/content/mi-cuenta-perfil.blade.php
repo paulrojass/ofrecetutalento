@@ -87,7 +87,7 @@
 			</div>
 			<div class="row">
 				<div class="col-sm">
-					<p><i class="la la-certificate"></i><strong> Descripción de habilidades: </strong>{{auth()->user()->abilities}}</p>
+					<p><i class="la la-certificate"></i><strong> Solución y beneficio que ofrezco a mis clientes: </strong>{{auth()->user()->abilities}}</p>
 				</div>
 			</div>
 		</div>

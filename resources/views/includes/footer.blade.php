@@ -4,12 +4,11 @@
 			<div class="row">
 				<div class="col-lg-4 column">
 					<div class="widget">
-						<div class="about_widget">
+						<div class="about_widget pl-5">
 							<div class="logo">
 								<a href="{{url('/')}}" title=""><img src="{{URL::asset('tema/images/logo-white.png')}}" style="max-width: 163px" alt="" /></a>
 							</div>
 							<span>Ciudad de Panamá, Calle 56 Este, República de Panamá.</span>
-							<span>+1 246-345-0695</span>
 							<span>ayuda@ofrecetutalento.com</span>
 						</div><!-- About Widget -->
 					</div>

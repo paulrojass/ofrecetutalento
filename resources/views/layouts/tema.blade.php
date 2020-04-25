@@ -80,22 +80,22 @@
 						<a href="{{url('/')}}" title="">Home</a>
 					</li>
 					<li class="menu-item">
-						<a href="{{url('talentos')}}" title="">Busca tu Talento</a>
+						<a href="{{url('quienes_somos')}}" title="">¿Quienes somos?</a>
 					</li>
 					<li class="menu-item">
-						<a href="{{url('canjes')}}" title="">Canjea tu talento</a>
+						<a href="{{url('para-que-funciona')}}" title="">¿Para qué existimos?</a>
 					</li>
 					<li class="menu-item">
 						<a href="{{url('como_funciona')}}" title="">Como funciona</a>
 					</li>
 					<li class="menu-item">
-						<a href="{{url('para-que-funciona')}}" title="">¿Para qué funciona?</a>
-					</li>
-					<li class="menu-item">
-						<a href="{{url('quienes_somos')}}" title="">¿Quienes somos?</a>
-					</li>
-					<li class="menu-item">
 						<a href="{{url('planes')}}" title="">Planes</a>
+					</li>
+					<li class="menu-item">
+						<a href="{{url('talentos')}}" title="">Busca el Mejor Talento</a>
+					</li>
+					<li class="menu-item">
+						<a href="{{url('canjes')}}" title="">Canjea tu talento</a>
 					</li>
 				</ul>
 			</div>
@@ -146,31 +146,30 @@
 					<ul>
 						<li class="menu-item">
 							<a href="{{url('/')}}" title="">Home</a>
-							
-						</li>
-						<li class="menu-item">
-							<a href="{{url('talentos')}}" title="">Busca tu talento</a>
-						</li>
-						<li class="menu-item">
-							<a href="{{url('canjes')}}" title="">Canjea tu talento</a>
 						</li>
 						<li class="menu-item-has-children">
 							<a href="javascript:void(0)" title="">Acerca de</a>
 							<ul>
 								<li>
-									<a href="{{url('como_funciona')}}"title="">Como funciona</a>
-								</li>
-								<li>
-									<a href="{{url('para_que_funciona')}}"title="">¿Para qué funciona?</a>
-								</li>
-								<li>
 									<a href="{{url('quienes_somos')}}" title="">¿Quienes somos?</a>
+								</li>
+								<li>
+									<a href="{{url('para_que_funciona')}}"title="">¿Para qué existimos?</a>
+								</li>
+								<li>
+									<a href="{{url('como_funciona')}}"title="">Como funciona</a>
 								</li>
 								<li>
 									<a href="{{url('planes')}}" title="">Planes</a>
 									
 								</li>
 							</ul>
+						</li>
+						<li class="menu-item">
+							<a href="{{url('talentos')}}" title="">Busca el Mejor Talento</a>
+						</li>
+						<li class="menu-item">
+							<a href="{{url('canjes')}}" title="">Canjea tu talento</a>
 						</li>
 					</ul>
 				</nav><!-- Menus -->
