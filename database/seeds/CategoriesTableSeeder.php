@@ -457,4 +457,4 @@ class CategoriesTableSeeder extends Seeder
         $category->industry_id = '43';
         $category->save();
     }
-}1
+}
