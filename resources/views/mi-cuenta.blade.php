@@ -1,6 +1,6 @@
 @extends('layouts.tema')
 
-@section('title', 'Mi cuenta')
+@section('title', 'Mi Perfil')
 
 @section('no-user-link', '')
 
@@ -24,9 +24,9 @@
 							<ul>
 								<li><a  href="javascript:void(0)" id="a-perfil" onclick="mostrar('#mi-perfil','#a-perfil')" title=""><i class="la la-user"></i>Mi perfil</a></li>
 								@if(auth()->user()->suscription->plan_id > 1)
-									<li><a href="javascript:void(0)" id="a-talentos" onclick="mostrar('#talentos','#a-talentos')" title=""><i class="la la-diamond"></i>Talentos</a></li>
+									<li><a href="javascript:void(0)" id="a-talentos" onclick="mostrar('#talentos','#a-talentos')" title=""><i class="la la-diamond"></i>Mis Talentos</a></li>
 									@if(auth()->user()->suscription->plan_id > 2)
-									<li><a href="javascript:void(0)" id="a-canjes" onclick="mostrar('#canjes', '#a-canjes')" title=""><i class="la la-lightbulb-o"></i>Canjes</a></li>
+									<li><a href="javascript:void(0)" id="a-canjes" onclick="mostrar('#canjes', '#a-canjes')" title=""><i class="la la-lightbulb-o"></i>Mis Canjes</a></li>
 									@endif
 									<li><a href="javascript:void(0)" id="a-tratos-r" onclick="mostrar('#tratos-r', '#a-tratos-r')" title=""><i class="la la-arrow-left"></i>Tratos Recibidos</a></li>
 								@endif
@@ -475,12 +475,11 @@
 								<span class="pf-title">Titulo</span>									
 								<div class="pf-field">
 									<input type="text" name="title-exchange" id="title-exchange" maxlength="60" required>
-									<span class="form-error" id="e_title_exchange" hidden> Debe agregar un titulo del talento</span>
-
+									<span class="form-error" id="e_title_exchange" hidden> Debe agregar un titulo del canje</span>
 								</div>
 							</div>
 							<div class="col-lg-6">
-								<span class="pf-title">Precio</span>									
+								<span class="pf-title">Oferta mínima en dolares o su equivalente en trueque</span>									
 								<div class="pf-field">
 									<input type="number" name="price-exchange" id="price-exchange" required>
 									<span class="form-error" id="e_price_exchange" hidden> Debe agregar una cantidad válida</span>

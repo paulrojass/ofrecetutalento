@@ -53,6 +53,17 @@ class User extends Authenticatable implements MustVerifyEmail
 		'email_verified_at' => 'datetime',
 	];
 
+    public function routeNotificationForMail($notification)
+    {
+        // Return email address only...
+        //return $this->email_address;
+
+        // Return name and email address...
+        return [$this->email => $this->name];
+    }
+
+
+
 	/* Roles */
 	public function roles()
 	{
@@ -153,17 +164,17 @@ class User extends Authenticatable implements MustVerifyEmail
 		return false;
 	}
 
-/*	public function suscribed(){
+	public function suscribed(){
 
-		$fecha_vencimiento = $this->suscription;
+		$fecha_vencimiento = $this->suscription->expiration_date;
 		$hoy = new Date();
-		if($fecha_vencimiento){
-			if($fecha_vencimiento > $hoy) return false;
-			return true;
+		if($fecha_vencimiento != null){
+			if($fecha_vencimiento > $hoy) return true;
+			return false;
 		}
 		return true;
 	}
-*/
+
 
 
 //Query Scopes

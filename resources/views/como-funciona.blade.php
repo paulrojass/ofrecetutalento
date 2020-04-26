@@ -5,37 +5,43 @@
 @section('header_type', 'gradient')
 
 @section('content')
-	<section>
-		<div class="block">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="heading">
-							<h2>Como funciona</h2>
-							<span>En Ofrece Tu Talento sentimos que nuestra principal intención con este espacio digital es poder compartir nuestras habilidades y destrezas con más clientes cada día. Aunque la palabra "compartir" parezca muy amplia, OTT nace con la mentalidad que todos necesitamos los unos de los otros, sin importar estatus económico, carrera, clase social, orientación sexual, raza, nacionalidad o partido político. Por ende, queremos que empieces tu camino pensando ¿qué puedes y quieres compartir con el Mundo?</span>
-						</div><!-- Heading -->
-<!-- 						<div class="how-to-sec style2 no-lines">
-	<div class="how-to">
-		<span class="how-icon"><i class="la la-user"></i></span>
-		<h3>Register an account</h3>
-		<p>Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
-	</div>
-	<div class="how-to">
-		<span class="how-icon"><i class="la la-file-archive-o"></i></span>
-		<h3>Specify & search your job</h3>
-		<p>Browse profiles, reviews, and proposals then interview top candidates. </p>
-	</div>
-	<div class="how-to">
-		<span class="how-icon"><i class="la la-list"></i></span>
-		<h3>Apply for job</h3>
-		<p>Use the Upwork platform to chat, share files, and collaborate from your desktop or on the go.</p>
-	</div>
-</div> -->
+<section>
+	<div class="block no-padding">
+		<div class="container fluid">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="main-featured-sec">
+						<div class="new-slide-3" style="top:-110px">
+							<img src="{{ url('tema/images/como-funciona.jpg') }}" style="height: 70%" alt="" />{{-- 600x500 --}}
+						</div>
+						<div class="job-search-sec">
+							<div class="job-search">
+								<h3 style="color: #202020; text-align: left;">Como funciona</h3>
+								<span style="color: #888888; text-align: left;">En Ofrece Tu Talento nuestra principal intención con este espacio digital es poder compartir nuestras habilidades y destrezas con más clientes cada día​. <br/><br/>Aunque la palabra "compartir" parece muy amplia, OTT nace con la mentalidad de que todos  necesitamos los unos de los otros, sin importar estatus económico, carrera, clase social, etnia, orientación sexual, raza, nacionalidad o afiliación política.</span>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
+
+<section>
+	<div class="block pt-0 pb-0">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading">
+						<span> Por ende, queremos que empieces tu camino pensando ¿qué puedes y quieres compartir con el Mundo?</span>
+						<span>Si vienes al sitio a buscar un proyecto u oportunidad te consideramos un ​<strong>Talento</strong></span>
+						<span>Si vienes al sitio a reclutar talento para tu proyecto u oportunidad entonces eres un ​<strong>Caza Talento​.</strong></span>
+					</div><!-- Heading -->
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
 	<section>
 		<div class="block ">
@@ -44,79 +50,105 @@
 					<div class="col-lg-12">
 						<div class="how-works">
 							{{--<div class="how-workimg"><img src="http://placehold.it/654x417" alt="" /></div>--}}
-							<div class="how-workimg"><img src="{{ URL::asset('images/como-1.png') }}" alt="" /></div>
+							<div class="how-workimg"><img src="{{ URL::asset('tema/images/talento.jpg') }}" alt="" /></div>
 							<div class="how-work-detail">
 								<div class="how-work-box">
 									<span>1</span>
-									<i class="la la-user"></i>
-									<h3>Registra una cuenta</h3>
-									<p>Si vienes al sitio a buscar un proyecto u oportunidad entonces te consideramos un Talento.  Si vienes al sitio a reclutar talento para tu proyecto u oportunidad entonces eres un Caza Talento.</p> 
+									<i class="la la-diamond"></i>
+									<h3>¿Cómo publicar un talento?</h3>
 								</div>
 							</div>
 						</div>
+					</div>
+
+					<div class="col-lg-12 pt-4 pb-4">
+						<p>Los Talentos tienen la oportunidad de registrarse en cualquiera de nuestros 3 planes: Talento Novato, Talento Pro y Talento Oro. Siéntete libre de escoger el que más se adapte a tus necesidades. Los planes determinan la cantidad de material que puedes cargar a tu perfil y a que servicios puedes acceder en nuestra plataforma.<p>
+
+						<p><strong>Al registrarte es ​muy importante listar tus talentos.</strong></p> 
+
+						<p>¿Qué es un talento? En OTT definimos un talento como​ una habilidad, destreza o capacidad para realizar un trabajo o servicio  que beneficie a otras personas, organizaciones o comunidades. <strong>OJO :​</strong> Tu carrera o tu trabajo actual ​<strong>NO necesariamente ​es tu único talento.</strong></p>
+
+						<p>Ejemplo: Manuel estudió finanzas. Trabaja en un banco. Pero tiene un talento con la cocina italiana. También le encanta escribir y editar poesía. Finalmente sus jefes y compañeros dicen que es un “crack” con hojas de Excel.</p>
+
+						<p>Manuel tiene 3 talentos: Cocinar, Escribir/Editar Literatura y Trabajar Hojas de Excel. En Ofrece Tu Talento, Manuel puede decidir listar todos o algunos de estos 3 talentos. Al llenar su perfil, Manuel tiene la habilidad de subir fotos, videos, documentos o testimonios que validen su destreza en estos talentos.</p>
+
+						<p>Una vez hayas completado tu perfil con tu información básica, datos personales, talentos y experiencia laboral, puedes empezar a gozar de los beneficios de nuestra plataforma. Tu perfil completado te permite enviar y recibir mensajes a otros talentos, así como exponerse a los Caza Talentos que están en búsqueda de tus servicios. Tanto otros Talentos como los Caza Talentos pueden enviarte “tratos” ​ ​que son ofertas de trabajo a cambio de tus servicios. Tú puedes aceptar o declinar los mismos así como también enviar tratos a otros talentos de acuerdo a tus necesidades.</p>
+
+						<p>Si es de tu interés, puedes acceder a nuestro servicio de Canjea Tu Talento (exclusivo para Caza Talentos Pro, Talento Pro y Talento Oro). Este servicio funciona como un mercado en línea donde puedes ofrecer en forma de canje tus servicios o productos a nuestra comunidad mundial. Al mismo tiempo tú también estás habilitado para enviar ofertas por los servicios de otros sin necesidad de usar pagos: es un trueque.</p>
+					</div>
+
+
+					<div class="col-lg-12 pt-5">
 						<div class="how-works flip">
 							<!-- <div class="how-workimg"><img src="http://placehold.it/654x417" alt="" /></div> -->
-							<div class="how-workimg"><img src="{{ URL::asset('images/como-1.png') }}" alt="" /></div>
+							<div class="how-workimg"><img src="{{ URL::asset('tema/images/trato.jpg') }}" alt="" /></div>
 
 							<div class="how-work-detail">
 								<div class="how-work-box">
 									<span>2</span>
-									<i class="la la-list"></i>
-									<h3>Selecciona un plan</h3>
-									<p>Los Talentos tienen la oportunidad de registrarse en cualquier de nuestras 3 planes: Talento Novato, Talento Pro y Talento Oro. Siéntete libre de escoger el que más se adapte a tus necesidades. La diferencia básica entre los 3 es que tanto material puedes cargar a tu perfil y que servicios puedes acceder en nuestra plataforma.</p>
+									<i class="la la-exchange"></i>
+									<h3>¿Cómo funciona un "trato"?</h3>
 								</div>
 							</div>
 						</div>
+					</div>
 
+
+					<div class="col-lg-12 pt-4 pb-4">
+						<p>¿Cómo funciona un “trato”? Cuando estás buscando talentos en nuestro directorio y llegas a uno que cumple con tus requisitos, dale click al botón "ofrecer trato". Esto te llevará a un formulario dónde podrás especificar los detalles de tu oferta.</p>
+						<p>En este formulario necesitas llenar los siguientes campos:</p>
+
+						<ul class="pl-5">
+							<ol>
+								<p>·	Nombre del proyecto: Es el título del proyecto que le estás requiriendo al talento.</p>
+							</ol>
+							<ol>
+								<p>·	Descripción: Cuéntanos en tus palabras el ​<strong>cómo</strong> ​está estructurado este producto, servicio o creación. Puedes detallar forma, fondo, cantidades, frecuencias, colores, dimensiones, perspectivas, versiones o materiales que necesitan ser utilizados en el proyecto ​<strong> como tú lo deseas.</strong></p>
+							</ol>
+							<ol>
+								<p>·	Resultado Final Ideal : ​¿Cómo se ve el producto, servicio o beneficio final que requieres de este talento en su ​ <strong>mejor versión</strong>?</p>
+							</ol>
+							<ol>
+								<p>·	¿Cuál es el factor crítico de calidad en este proyecto?: Descríbenos ese “ingrediente esencial” que necesita tener este proyecto para que tú digas ​“es un éxito” cuando lo recibas.</p>
+							</ol>
+							<ol>
+								<p>·	Días aproximados para recibir el proyecto: Esto le brinda al Talento un esquema de tiempo para completar los requisitos y entregar el proyecto.</p>
+							</ol>
+							<ol>
+								<p>·	Oferta Económica: ¿Cuánto es tu presupuesto por 1 cantidad de este proyecto? Si son varias cantidades favor detallar en el total.</p>
+							</ol>
+						</ul>
+
+						<p>Una vez completes este formulario, le enviaremos tu trato al Talento para su aprobación. De ser aprobado, te llegará una notificación a tu sección de ​<strong>“Tratos Propuestos”</strong>​ y a tu correo electrónico para que coordines la entrega del proyecto directamente con el Talento.</p>
+
+						<p>Es importante mencionar, que de acuerdo a los Términos y Condiciones de Ofrece Tu Talento versión X.X., nuestra empresa ni organización se hace responsable de la calidad, cantidad, pago o intercambio entre los Talentos y Caza Talentos. El formulario de “ofrecer trato” es únicamente informativo para que los usuarios se puedan poner de acuerdo entre ellos. La entrega del proyecto, negocio, comercio o pago es responsabilidad de las partes. Los reclamos, quejas o inconformidades comerciales y financieras necesitan ser resueltas entre las partes y no involucran a Ofrece Tu Talento. Si te gustaría reportar a algún usuario que se ha extralimitado en su uso de la plataforma, ya sea que ha incumplido un trato o que se ha comportado de manera inapropiada, favor usar el formulario ​<strong>“Reporta a un Talento”​</strong>. OTT se reserva el derecho de suspender, bloquear o cancelar la membresía de aquellos usuarios quienes han incumplido los Términos y Condiciones y no han seguido un comportamiento ético en el uso de la plataforma.</p>
+					</div>
+					<div class="col-lg-12 pt-5">
 						<div class="how-works">
-							<div class="how-workimg"><img src="http://placehold.it/654x417" alt="" /></div>
-							<div class="how-work-detail">
-								<div class="how-work-box">
-									<span>2</span>
-									<i class="la la-list"></i>
-									<h3>Identiifca tus talentos</h3>
-										
-									<p>Al registrarte es <strong>​muy importante listar tus talentos.</strong>¿Qué es un talento? ​Es una habilidad, destreza o capacidad para realizar un trabajo que beneficie a otras personas.  <strong>OJO:​</strong> tu carrera o tu trabajo actual ​NO necesariamente ​es tu único talento.  Ejemplo: Manuel estudió finanzas. Trabaja en un banco. Pero tiene un talento con la cocina italiana. También le encanta escribir y editar poesía. Finalmente sus jefes y compañeros dicen que es “crack” con hojas de Excel.</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="how-works flip">
-							<div class="how-workimg"><img src="http://placehold.it/654x417" alt="" /></div>
-							<div class="how-work-detail">
-								<div class="how-work-box">
-									<span>2</span>
-									<i class="la la-list"></i>
-									<h3>Registra Tus talentos</h3>
-									<p>Manuel tiene 3 talentos: Cocinar, Escribir/Editar Literatura, Trabajar Hojas de Excel. En Ofrece Tu Talento, Manuel puede decidir listar todos o algunos de estos 3 talentos. Al llenar su perfil, Manuel tiene la habilidad de subir fotos, videos, PDF’s o testimonios que validen su experiencia en estos talentos..</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="how-works">
-							<div class="how-workimg"><img src="http://placehold.it/654x417" alt="" /></div>
+							<div class="how-workimg"><img src="{{ URL::asset('tema/images/canje.jpg') }}" alt="" /></div>
 							<div class="how-work-detail">
 								<div class="how-work-box">
 									<span>3</span>
-									<i class="la la-pencil"></i>
-									<h3>Canjea tus Talentos</h3>
-									<p>Una vez hayas completado tu perfil con tu información básica, datos personales, talentos y experiencia laboral, puedes empezar a gozar de los beneficios de nuestra plataforma. Tu perfil completado te permite enviar y recibir mensajes a otros talentos, así como exponerte a los Caza Talentos que están buscando tus servicios.</p>
+									<i class="la la-lightbulb-o"></i>
+									<h3>¿Cómo funciona un "canje"?</h3>
 								</div>
 							</div>
 						</div>
+					</div>
+					<div class="col-lg-12 pt-4 pb-4">
+						<p>Cuando entras a la sección ​<strong>Canjea Tu Talento</strong> ​podrás ver un directorio de todos los productos, servicios y creaciones que los otros Talentos están dispuestos a intercambiar.</p>
 
-						<div class="how-works flip">
-							<div class="how-workimg"><img src="http://placehold.it/654x417" alt="" /></div>
-							<div class="how-work-detail">
-								<div class="how-work-box">
-									<span>3</span>
-									<i class="la la-pencil"></i>
-									<h3>Ofrece tratos</h3>
-									<p>Tanto otros Talentos como los Caza Talentos pueden enviarte “tratos” que son ofertas de trabajo a cambio de tus servicios. Tu puedes aceptar o declinar los mismos asi como también enviar tratos a otros talentos que tu requiera.</p>
-								</div>
-							</div>
-						</div>
+						<p>Tú puedes navegar y escoger la oferta que más te llame la atención. Al revisar los detalles, dimensiones, precio y complementos necesitas escoger la opción de ​<strong>“ofrecer un trato”</strong>.</p>
 
+						<p>Esto te va a abrir una ventana donde podrás llenar un formulario para ofrecerle a este Talento un trato por ese producto, servicio o creación. Tú puedes escoger entre pagar en moneda local o a través de un canje.</p>
+
+						<p>Si escoges pagar en moneda local, le puedes completar tu oferta al Talento y de ser aceptado necesitas ponerte de acuerdo con él/ella fuera de la plataforma mediante correo electrónico o teléfono tanto para la entrega e intercambio del producto, servicio o creación al igual que la transacción de pago.</p>
+
+						<p>Si escoges pagar a través de un canje, el formulario te da una opción para escoger cuál canje (de tu propio directorio de canjes) deseas ofrecerle a ese talento. Si no tienes ningún canje listado, entonces puedes crear un canje personalizado para esta oferta.</p>
+
+						<p>Al aceptar este formulario, estás enviándole esta propuesta al otro talento. Cuando tu contraparte acepte el trato, te llegará una notificación a tu correo para ponerte en contacto directamente con el Talento y hacer el intercambio.</p>
+
+						<p>Es importante mencionar, que de acuerdo a los Términos y Condiciones de Ofrece Tu Talento versión X.X., nuestra empresa ni organización se hace responsable de la calidad, cantidad, pago o intercambio del canje ni trato entre los Talentos y Caza Talentos. El formulario de “ofrecer trato” es únicamente informativo para que los usuarios se puedan poner de acuerdo entre ellos. La entrega del proyecto, negocio, comercio, pago o canje es responsabilidad de las partes. Los reclamos, quejas o inconformidades comerciales y financieras necesitan ser resueltas entre las partes y no involucran a Ofrece Tu Talento. Si te gustaría reportar a algún usuario que se ha extralimitado en su uso de la plataforma, ya sea que ha incumplido un trato o que se ha comportado de manera inapropiada, favor usar el formulario ​<strong>“Reporta a un Talento”​</strong>. OTT se reserva el derecho de suspender, bloquear o cancelar la membresía de aquellos usuarios quienes han incumplido los Términos y Condiciones y no han seguido un comportamiento ético en el uso de la plataforma.</p>  
 					</div>
 				</div>
 			</div>

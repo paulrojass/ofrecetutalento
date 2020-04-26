@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Dealing;
+use App\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\NewDealing;
+use App\Notifications\ResponseDealing;
 
 class DealingController extends Controller
 {
+
+    use Notifiable;
     /**
      * Display a listing of the resource.
      *
@@ -113,7 +119,10 @@ class DealingController extends Controller
         $trato->name_proposal = $request->name_proposal;
         $trato->description_proposal = $request->description_proposal;
 
+        $user = User::find($request->accept_id);
+        $user->notify(new NewDealing($trato));
         $trato->save();
+        return $trato;
     }
 
     /**
@@ -183,6 +192,9 @@ class DealingController extends Controller
         $trato = Dealing::find($request->dealing_id);
         $trato->approved = $request->aprobar;
         $trato->save();
+
+        /*$user = User::find($trato->propose_id);
+        $user->notify(new ResponseDealing($trato));*/
         return $trato;
     }
 
@@ -213,4 +225,10 @@ class DealingController extends Controller
         $trato->save();
         return $trato;
     }
+
+    public function sendMessage($user)
+    {
+        //S
+    }
+
 }

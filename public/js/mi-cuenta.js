@@ -10,7 +10,8 @@ $(function(){
 	propuestosPerfil();
 
 
-	if (parametroURL('acceso') == 'trato') mostrar('#tratos-r', '#a-tratos-r');
+	if (parametroURL('acceso') == 'trato-r') mostrar('#tratos-r', '#a-tratos-r');
+	if (parametroURL('acceso') == 'trato-p') mostrar('#tratos-p', '#a-tratos-p');
 	else mostrar('#mi-perfil', '#a-perfil');
 
 

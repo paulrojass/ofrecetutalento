@@ -33,7 +33,7 @@ Route::post('reporte-enviado', 'SiteController@reporteEnviado')->name('reporte-e
 //Accesos en principal
 Route::get('/', 'SiteController@principal')->name('principal');
 Route::get('como_funciona','SiteController@howItWorks');
-Route::get('para_que_funciona','SiteController@itWorksfor');
+Route::get('para-que-existimos','SiteController@itWorksfor');
 Route::get('quienes_somos','SiteController@quienesSomos');
 Route::get('planes','SiteController@planes');
 Route::get('talentos', 'SiteController@talentos')->name('talentos');
@@ -166,3 +166,5 @@ Route::get('/clear-cache', function() {
     Artisan::call('view:clear');
     return "Cache is cleared";
 });
+
+Route::get('plan-vencido', 'SuscriptionController@planVencido');

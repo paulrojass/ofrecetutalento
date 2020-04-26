@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\URL;
 
 use Illuminate\Http\Request;
 
+use App\Suscription;
+use App\User;
 
 
 class LoginController extends Controller
@@ -36,8 +38,14 @@ class LoginController extends Controller
 	/*protected function redirectTo()*/
 	protected function redirectPath()
 	{
-		if (auth()->user()->hasRole('user')) {
-			if((auth()->user()->suscription->plan_id > 1) && (!auth()->user()->hasAnyTalent())) return 'suscripcion-talentos';
+		$user = auth()->user();
+
+		if ($user->hasRole('user')) {
+			if($user->suscription->plan_id > 1){
+				if(!$user->suscribed()){return $this->changePlan($user);}
+				if(!$user->hasAnyTalent())return 'suscripcion-talentos';
+			}
+			
 			/*para redireccionar atras luego de login*/
 			return Session::get('backUrl') ? Session::get('backUrl') :   $this->redirectTo;
 		}
@@ -82,8 +90,12 @@ class LoginController extends Controller
         return $this->sendFailedLoginResponse($request);
     }
 
-    public function vencido(){
-
+    public function changePlan($user){
+    	$suscription = Suscription::where('user_id', $user->id)->first();
+    	$suscription->expiration_date = null; 
+    	$suscription->plan_id = 1;
+    	$suscription->save();
+    	return 'plan-vencido';
     }
 
 }

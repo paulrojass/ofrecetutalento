@@ -7,7 +7,7 @@
 @section('content')
 	<section class="overlape">
 		<div class="block no-padding">
-			<div data-velocity="-.1" style="background: url(https://placehold.it/1600x800) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
+			<div data-velocity="-.1" style="background: url({{ url('tema/images/como-funciona.jpg') }}) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE 1600x800-->
 			<div class="container fluid">
 				<div class="row">
 					<div class="col-lg-12">
@@ -269,7 +269,7 @@
 	<div class="modal fade bd-example-modal" id="modal-trato" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content pt-4">
-				<h3>Contratar este talento</h3>
+				<h3>Proponer un trato</h3>
 				<button type="button" class="close-b" data-dismiss="modal" aria-label="Close">
 					<span class="close-popup"><i class="la la-close"></i></span>
 				</button>
@@ -407,6 +407,10 @@
 								</div>
 							</div>
 
+							<div class="alert alert-success mt-4" role="alert" id="alert-espere">
+								Enviando propuesta, por favor espere...
+							</div>
+
 							<div class="alert alert-success mt-4" role="alert" id="alert-trato">
 								Propuesta enviada
 							</div>
@@ -502,6 +506,7 @@ $(function(){
 
 	$('#boton-nuevo-trato-talento').click(function(event) {
 		event.preventDefault();
+		$('#alert-espere').show();
 		var dataString = $('#form-trato-talento').serialize();
 		$.ajax({
 			url: '/nuevo-trato-talento',
@@ -512,11 +517,15 @@ $(function(){
 		})
 		.done(function(response) {
 			if(response.errors){
+				$('#alert-espere').hide();
+
 				$("#alert-error").fadeTo(2000, 500).slideUp(500, function(){
 				    $("#alert-error").slideUp(1000);
 				});
       		}else{
       			$('.alert-danger').hide();
+				$('#alert-espere').hide();
+
 
 				$("#alert-trato").fadeTo(2000, 500).slideUp(500, function(){
 				    $("#alert-trato").slideUp(1000);
@@ -598,6 +607,7 @@ $(function(){
 
 	$('#modal-trato').on('show.bs.modal', function (e) {
 		$('#form-trato-talento')[0].reset();
+		$('.alert').hide();
 		$('#div-pago').show();
 		$('#div-canje').hide();
 		$('#div-propuesta').hide();

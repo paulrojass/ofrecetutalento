@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Suscription;
+use App\User;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\ChangePlan;
 
 class SuscriptionController extends Controller
 {
@@ -93,6 +96,8 @@ class SuscriptionController extends Controller
         $suscription->plan_id = $producto;
         $suscription->save();
 
+        $user = User::find($usuario);
+        $user->notify(new ChangePlan($suscription));
         return view('plan-cambiado',compact('suscription', 'request'));
     }
 
@@ -129,5 +134,10 @@ class SuscriptionController extends Controller
         if ($StringToHash == $request->key) return $this->change($request);
         return back();
     }
+
+    public function planVencido(){
+        return view('plan-vencido');
+    }
+
 
 }

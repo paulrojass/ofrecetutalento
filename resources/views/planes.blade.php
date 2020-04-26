@@ -5,38 +5,36 @@
 @section('header_type', 'gradient')
 
 @section('content')
-<!-- <section>
-	<div class="block no-padding  gray">
-		<div class="container">
+<section>
+	<div class="block no-padding">
+		<div class="container fluid">
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="inner2">
-						<div class="inner-title2">
-							<h3>Plans</h3>
-							<span>Keep up to date with the latest news</span>
+					<div class="main-featured-sec">
+						<div class="new-slide-3" style="top:-110px">
+							<img src="{{ url('tema/images/menu-suscripcion.jpg') }}" style="height: 80%" alt="" />{{-- 600x500 --}}
 						</div>
-						<div class="page-breacrumbs">
-								<ul class="breadcrumbs">
-									<li><a href="{{url('/')}}" title="">Inicio</a></li>
-									<li><a title="">Como funciona</a></li>
-								</ul>
+						<div class="job-search-sec">
+							<div class="job-search">
+								<h3 style="color: #202020; text-align: left;">Planes y Suscripción</h3>
+								<span style="color: #888888; text-align: left;">Este es el directorio de los TOP talentos de Latinoamérica.<br/> Los siguientes planes te permiten crear un perfil y cargar fotos o videos que puedan validar tus talentos. Escoge el plan que más se adapte a tú necesidad para empezar a exponer tus talentos a nuestra comunidad.</span>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</section> -->
+</section>
 
 <section>
 	<div class="block">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="heading">
-						<h2>Planes y Subscripción</h2>
-						<span>Este es el directorio de los TOP talentos de Latinoamérica. Los siguientes planes te permiten crear un perfil y cargar fotos o videos que puedan validar tus talentos. Escoge el plan que más se adapte a tú necesidad para empezar a exponer tus talentos a nuestra comunidad.</span>
-					</div><!-- Heading -->
+<!-- 					<div class="heading">
+	
+</div> --><!-- Heading -->
 					<div class="tab-sec">
 						<ul class="nav nav-tabs">
 						  <li><a class="bbutton current" data-tab="mensual">Mensual</a></li>

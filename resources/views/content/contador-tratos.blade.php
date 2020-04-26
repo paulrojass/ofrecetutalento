@@ -3,7 +3,7 @@
 
 <div class="wishlist-dropsec">
 	<span>
-		<a href="{{ url('mi-cuenta?acceso=trato') }}" title="">
+		<a href="{{ url('mi-cuenta?acceso=trato-r') }}" title="">
 		<i class="la la-exchange"></i>
 		@if($nuevos_tratos->count() > 0)
 			<strong>{!!$nuevos_tratos->count()!!}</strong>

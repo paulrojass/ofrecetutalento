@@ -677,3 +677,15 @@ padding: 0 0 0 8px;
     color: #202020;
 
 }
+
+.stats-sec.style2 .stats span {
+    color: #ff9200;
+}
+
+.new-slide-3 {
+    height: 600px;
+}
+
+.job-search > span{
+  padding-right: 50%;
+}

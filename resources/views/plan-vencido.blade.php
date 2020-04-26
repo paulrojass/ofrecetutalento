@@ -1,6 +1,6 @@
 @extends('layouts.tema')
 
-@section('title', 'Cambio de plan')
+@section('title', 'Cambio de plan por vencimiento')
 
 @section('header_type', 'stick-top forsticky')
 
@@ -9,7 +9,6 @@
 @endsection
 
 @section('content')
-@php($fecha = new Date($suscription->expiration_date))
 <section>
 	<div class="block no-padding">
 		<div class="container fluid">
@@ -22,22 +21,15 @@
 						</div>
 						<div class="job-search-sec">
 							<div class="job-search">
-								<h3>Se ha realizado un cambio de plan exitosamente</h3>
-								<span>Nuevo plan adquirido: Talento {{ $suscription->plan->name }}</span>
-								<span>Fecha de expiración:
-									@if($suscription->expiration_date)
-										{{ $fecha->format('d / m / Y') }}
-									@else
-										Indefinido
-									@endif
+								<h3>¡Tu Plan ha expirado!</h3>
+								<span class="pr-0">La suscripción a tu plan anterior sobrepaso el tiempo fijado, por lo tanto has retornado a Caza Talento</span>
+								<span class="pr-0">Fecha de expiración de plan Caza Talento: Indefinido</span>
+								<span class="pr-0">Puedes seguir disfrutando de tu plan anterior a través de una nueva sucripción, haciendo clic en Cambio de plan, de lo contrario sigues disfrutando de los servicios disponibles para Caza Talento.
 								</span>
-								@if($request->order_number)
-								<span>Precio: ${{ $request->total }}</span>
-								<span>número de orden: {{ $request->order_number }}</span>
-								@endif
 							</div>
 							<div class="simple-text-block">
-								<a href="{{ url('mi-cuenta') }}" title="">Volver a Mi cuenta</a>
+								<a class="ml-2 mr-2" href="{{ url('cambiar-plan') }}" title="">Cambio de plan</a>
+								<a class="ml-2 mr-2" href="{{ url('mi-cuenta') }}" title="">Volver a Mi cuenta</a>
 							</div>
 						</div>
 					</div>

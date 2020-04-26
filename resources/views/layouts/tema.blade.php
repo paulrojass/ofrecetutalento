@@ -83,7 +83,7 @@
 						<a href="{{url('quienes_somos')}}" title="">¿Quienes somos?</a>
 					</li>
 					<li class="menu-item">
-						<a href="{{url('para-que-funciona')}}" title="">¿Para qué existimos?</a>
+						<a href="{{url('para-que-existimos')}}" title="">¿Para qué existimos?</a>
 					</li>
 					<li class="menu-item">
 						<a href="{{url('como_funciona')}}" title="">Como funciona</a>
@@ -154,7 +154,7 @@
 									<a href="{{url('quienes_somos')}}" title="">¿Quienes somos?</a>
 								</li>
 								<li>
-									<a href="{{url('para_que_funciona')}}"title="">¿Para qué existimos?</a>
+									<a href="{{url('para-que-existimos')}}"title="">¿Para qué existimos?</a>
 								</li>
 								<li>
 									<a href="{{url('como_funciona')}}"title="">Como funciona</a>
@@ -188,7 +188,7 @@
 	<div class="can-detail-s">
 		<div class="cst"><img src="{{URL::asset('images/users/'.Auth::User()->avatar)}}" alt="" style="max-width: 145px; max-height:145px;" /></div>
 		<h3>{{auth()->user()->name}} {{auth()->user()->lastname}}</h3>
-		<span><i>Talento {{auth()->user()->suscription->plan->name}}</i></span>
+		<span><i>@if(auth()->user()->suscription->plan_id > 1)Talento @endif{{auth()->user()->suscription->plan->name}}</i></span>
 		<p>{{ auth()->user()->email }}</p>
 		<p>Miembro desde, {{ \Carbon\Carbon::parse(auth()->user()->created_at)->format('Y')}} </p>
 		@if(auth()->user()->country)
@@ -197,7 +197,7 @@
 	</div>
 	<div class="tree_widget-sec">
 		<ul>
-			<li><a href="{{url('mi-cuenta')}}" title=""><i class="la la-user"></i>Mi cuenta</a></li>
+			<li><a href="{{url('mi-cuenta')}}" title=""><i class="la la-user"></i>Mi Perfil</a></li>
 			<!-- <li><a href="{{url('mi-cuenta')}}" title=""><i class="la la-briefcase"></i>My Resume</a></li>
 			<li><a href="candidates_shortlist.html" title=""><i class="la la-money"></i>Shorlisted Job</a></li>
 			<li><a href="candidates_applied_jobs.html" title=""><i class="la la-paper-plane"></i>Applied Job</a></li>

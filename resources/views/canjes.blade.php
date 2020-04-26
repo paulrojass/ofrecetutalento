@@ -7,7 +7,7 @@
 @section('content')
 	<section class="overlape">
 		<div class="block no-padding">
-			<div data-velocity="-.1" style="background: url(http://placehold.it/1600x800) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
+			<div data-velocity="-.1" style="background: url({{ url('tema/images/canjea-e.jpg') }}) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE 1600x800-->
 			<div class="container fluid">
 				<div class="row">
 					<div class="col-lg-12">
@@ -15,7 +15,7 @@
 							<div class="job-search-sec">
 								<div class="job-search">
 									<h4>Bienvenido al directorio de Canjea Tu Talento</h4>
-									<span>	Aquí encontrarás los mejores productos, servicios y creaciones que nuestros miembros quieren ofrecer como trueque. Siéntete libre de buscar la mejor oferta para ti. Una vez estés listo, aprieta "ofrecer trato" y podrás ofrecer un canje por el producto o servicio escogido.</span>
+									<span class="pr-0">	Aquí encontrarás los mejores productos, servicios y creaciones que nuestros miembros quieren ofrecer como trueque. Siéntete libre de buscar la mejor oferta para ti. Una vez estés listo, aprieta "ofrecer trato" y podrás ofrecer un canje por el producto o servicio escogido.</span>
 								</div>
 							</div>
 						</div>

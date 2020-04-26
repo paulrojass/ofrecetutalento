@@ -11,7 +11,7 @@
 @endauth
 <section class="overlape">
 	<div class="block no-padding">
-		<div data-velocity="-.1" style="background: url(http://placehold.it/1600x800) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
+		<div data-velocity="-.1" style="background: url({{ url('tema/images/busca-talento.jpg') }}) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE 1600x800-->
 		<div class="container fluid">
 			<div class="row">
 				<div class="col-lg-12">

@@ -18,4 +18,5 @@ class Suscription extends Model
     {
         return $this->belongsTo(User::class);
     }
+
 }

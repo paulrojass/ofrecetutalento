@@ -19,13 +19,13 @@
 	 			<tbody>
 	 				@foreach ($imagenes as $imagen)
 		 				<tr>
-		 					<td class="col-2">
+		 					<td style="width: 20%">
 		 						<img src="{{ 'files/image/'.$imagen->location }}" style=" object-fit: cover; max-width: 100px; max-height: 50px"alt="">
 		 					</td>
-		 					<td class="col-9">
+		 					<td style="width: 60%">
 		 						<span>{{ $imagen->description }}</span>
 		 					</td>
-		 					<td class="col-1">
+		 					<td style="width: 20%">
 		 						<ul class="action_job pull-right">
 		 							<li><span>editar información</span><a class="editar_inf_image" data-value="{{ $imagen->id }}" data-description="{{ $imagen->description }}" data-toggle="modal" data-target="#modal-edit-image" href="#" title=""><i class="la la-pencil"></i></a></li>
 		 							<li><span>eliminar</span><a class="eliminar_imagen_talento" data-value="{{ $imagen->id }}" data-talento="{{ $talento->id }}" href="javascript:void(0)" title=""><i class="la la-trash-o"></i></a></li>
@@ -57,7 +57,7 @@
 	 			<tbody>
 	 				@foreach ($videos as $video)
 		 				<tr>
-		 					<td class="col-2 pr-4">
+		 					<td style="width: 20%" class="pr-4">
 								<div class="embed-responsive embed-responsive-16by9">
 									@if (Str::contains($video->location, 'https://'))
 									 {!!$video->location!!}
@@ -70,10 +70,10 @@
 									@endif
 								</div>
 		 					</td>
-		 					<td class="col-9">
+		 					<td style="width: 60%">
 		 						<span>{{ $video->description }}</span>
 		 					</td>
-		 					<td class="col-1">
+		 					<td style="width: 20%">
 		 						<ul class="action_job pull-right">
 		 							<li><span>editar información</span><a class="editar_inf_image" data-value="{{ $video->id }}" data-description="{{ $video->description }}" data-toggle="modal" data-target="#modal-edit-image" href="#" title=""><i class="la la-pencil"></i></a></li>
 		 							<li><span>eliminar</span><a class="eliminar_imagen_talento" data-value="{{ $video->id }}" data-talento="{{ $talento->id }}" href="javascript:void(0)" title=""><i class="la la-trash-o"></i></a></li>
@@ -106,15 +106,15 @@
 	 			<tbody>
 	 				@foreach ($pdfs as $pdf)
 		 				<tr>
-		 					<td class="col-3 pr-4">
+		 					<td style="width: 20%">
 								<div class="table-list-title">
 									<h3><a href="{{ URL::asset('files/pdf/'.$pdf->location) }}" download="{{ $pdf->name.'.pdf' }}" title="">{{ $pdf->name }}</a></h3>
 								</div>
-		 					</td>
+		 					</td style="width: 20%" >
 		 					<td class="col-7">
 		 						<span>{{ $pdf->description }}</span>
 		 					</td>
-		 					<td class="col-1">
+		 					<td style="width: 20%">
 		 						<ul class="action_job pull-right">
 		 							<li><span>editar información</span><a class="editar_inf_pdf" data-value="{{ $pdf->id }}" data-name="{{ $pdf->name }}" data-description="{{ $pdf->description }}" data-toggle="modal" data-target="#modal-edit-pdf" href="#" title=""><i class="la la-pencil"></i></a></li>
 		 							<li><span>eliminar</span><a class="eliminar_imagen_talento" data-value="{{ $pdf->id }}" data-talento="{{ $talento->id }}" href="javascript:void(0)" title=""><i class="la la-trash-o"></i></a></li>

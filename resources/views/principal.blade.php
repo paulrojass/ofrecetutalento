@@ -19,7 +19,7 @@
 							<div class="row">
 								<div class="col-lg-8">
 									<div class="find-cand">
-										<h3>Tú tienes un talento único que <br/> tiene valor para el Mundo</h3>
+										<h3>Tú tienes un talento único que <br/> tiene valor para el mundo</h3>
 										<span>Nosotros te ayudamos a exponer, reclutar y compartir tus talentos con aquellos quienes lo necesitan</span>
 										<form method="GET" action="{{ route('talentos_resultado') }}">
 											@csrf
