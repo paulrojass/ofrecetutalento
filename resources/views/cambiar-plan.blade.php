@@ -39,10 +39,8 @@
 														{{$plan->name}}
 														</h3>
 														<h2>
-															@if(is_null($plan->monthly_price))
+															@if(is_null($plan->monthly_price) or $plan->monthly_price == 0)
 																Gratis
-															@elseif($plan->monthly_price == 0)
-																<i>{{ $plan->recommendations }} RECOMENDACIONES</i>
 															@else
 																<i>$</i>{{$plan->monthly_price}}
 															@endif
@@ -83,13 +81,13 @@
 																@endif
 															@endif
 														</li>
-													@if ($plan->id == 1)
+														@if ($plan->id == 1)
 														<li>Te permite navegar y hacer tratos con los talentos de nuestra comunidad</li>
 														<li></li>
 														<li></li>
 														@endif
-														@if ($plan->id == 2)
-														<li>Disponible por recomendación únicamente</li>
+														@if ($plan->id == 4)
+														<li>Disponible por {{ $plan->recommendations }} recomendaciones únicamente</li>
 														<li>Exclusivo para Talentos con 10 años mínimo de experiencia</li>
 														<li>Recomendamos mínimo 3 años de experiencia Gerencial</li>
 														@endif
@@ -107,18 +105,17 @@
 													</ul>
 													@else
 														@if($plan->id == 2)
-															@if(auth()->user()->recommended->count() < $plan->recommendations)
-																<ul class="mb-4">
-																	<li>
-																		<strong>TIENES {{ auth()->user()->recommended->count() }} RECOMENDACIONES</strong>
-																	</li>
-																</ul>
-															@else
-																<button type=button data-value="{{$plan->id}}" data-toggle="modal" data-target="#modal-plan-novato" name='button-novato' class="btn-submit-plan">
-																	Talento {{$plan->name}}
-																</button>
-															@endif
+															<button type=button data-value="{{$plan->id}}" data-toggle="modal" data-target="#modal-plan-novato" name='button-novato' class="btn-submit-plan">
+																Talento {{$plan->name}}
+															</button>
 														@else
+															@if($plan->id == 4 && auth()->user()->recommended->count() < $plan->recommendations)
+															<ul class="mb-4">
+																<li>
+																	<strong>TIENES {{ auth()->user()->recommended->count() }} RECOMENDACIONES</strong>
+																</li>
+															</ul>
+															@else
 															<input type='hidden' name='sid' value='901422522' >
 															<input type='hidden' name='mode' value='2CO' >
 															<input type='hidden' name='li_0_type' value='product' >
@@ -142,6 +139,7 @@
 															<button type=submit data-value="{{$plan->id}}" name='submit' data-plan="mensual" class="btn-submit-plan">
 																Talento {{$plan->name}}
 															</button>
+															@endif
 														@endif
 													@endif									
 												</div>
@@ -171,12 +169,10 @@
 														{{$plan->name}}
 														</h3>
 														<h2>
-															@if(is_null($plan->quarterly_price))
+															@if(is_null($plan->quarterly_price ) or $plan->quarterly_price  == 0)
 																Gratis
-															@elseif($plan->quarterly_price == 0)
-																<i>{{ $plan->recommendations }} RECOMENDACIONES</i>
 															@else
-																<i>$</i>{{$plan->quarterly_price}}
+																<i>$</i>{{$plan->quarterly_price }}
 															@endif
 														</h2>
 														@if($plan->quarterly_price == 0)
@@ -215,13 +211,13 @@
 																@endif
 															@endif
 														</li>
-													@if ($plan->id == 1)
+														@if ($plan->id == 1)
 														<li>Te permite navegar y hacer tratos con los talentos de nuestra comunidad</li>
 														<li></li>
 														<li></li>
 														@endif
-														@if ($plan->id == 2)
-														<li>Disponible por recomendación únicamente</li>
+														@if ($plan->id == 4)
+														<li>Disponible por {{ $plan->recommendations }} recomendaciones únicamente</li>
 														<li>Exclusivo para Talentos con 10 años mínimo de experiencia</li>
 														<li>Recomendamos mínimo 3 años de experiencia Gerencial</li>
 														@endif
@@ -239,18 +235,17 @@
 													</ul>
 													@else
 														@if($plan->id == 2)
-															@if(auth()->user()->recommended->count() < $plan->recommendations)
-																<ul class="mb-4">
-																	<li>
-																		<strong>TIENES {{ auth()->user()->recommended->count() }} RECOMENDACIONES</strong>
-																	</li>
-																</ul>
-															@else
-																<button type=button data-value="{{$plan->id}}" data-toggle="modal" data-target="#modal-plan-novato" name='button-novato' class="btn-submit-plan">
-																	Talento {{$plan->name}}
-																</button>
-															@endif
+															<button type=button data-value="{{$plan->id}}" data-toggle="modal" data-target="#modal-plan-novato" name='button-novato' class="btn-submit-plan">
+																Talento {{$plan->name}}
+															</button>
 														@else
+															@if($plan->id == 4 && auth()->user()->recommended->count() < $plan->recommendations)
+															<ul class="mb-4">
+																<li>
+																	<strong>TIENES {{ auth()->user()->recommended->count() }} RECOMENDACIONES</strong>
+																</li>
+															</ul>
+															@else
 															<input type='hidden' name='sid' value='901422522' >
 															<input type='hidden' name='mode' value='2CO' >
 															<input type='hidden' name='li_0_type' value='product' >
@@ -274,6 +269,7 @@
 															<button type=submit data-value="{{$plan->id}}" name='submit' data-plan="mensual" class="btn-submit-plan">
 																Talento {{$plan->name}}
 															</button>
+															@endif
 														@endif
 													@endif	
 												</div>
@@ -303,12 +299,10 @@
 														{{$plan->name}}
 														</h3>
 														<h2>
-															@if(is_null($plan->annual_price))
+															@if(is_null($plan->annual_price ) or $plan->annual_price  == 0)
 																Gratis
-															@elseif($plan->annual_price == 0)
-																<i>{{ $plan->recommendations }} RECOMENDACIONES</i>
 															@else
-																<i>$</i>{{$plan->annual_price}}
+																<i>$</i>{{$plan->annual_price }}
 															@endif
 														</h2>
 														@if($plan->annual_price == 0)
@@ -352,8 +346,8 @@
 														<li></li>
 														<li></li>
 														@endif
-														@if ($plan->id == 2)
-														<li>Disponible por recomendación únicamente</li>
+														@if ($plan->id == 4)
+														<li>Disponible por {{ $plan->recommendations }} recomendaciones únicamente</li>
 														<li>Exclusivo para Talentos con 10 años mínimo de experiencia</li>
 														<li>Recomendamos mínimo 3 años de experiencia Gerencial</li>
 														@endif
@@ -371,18 +365,17 @@
 													</ul>
 													@else
 														@if($plan->id == 2)
-															@if(auth()->user()->recommended->count() < $plan->recommendations)
-																<ul class="mb-4">
-																	<li>
-																		<strong>TIENES {{ auth()->user()->recommended->count() }} RECOMENDACIONES</strong>
-																	</li>
-																</ul>
-															@else
-																<button type=button data-value="{{$plan->id}}" data-toggle="modal" data-target="#modal-plan-novato" name='button-novato' class="btn-submit-plan">
-																	Talento {{$plan->name}}
-																</button>
-															@endif
+															<button type=button data-value="{{$plan->id}}" data-toggle="modal" data-target="#modal-plan-novato" name='button-novato' class="btn-submit-plan">
+																Talento {{$plan->name}}
+															</button>
 														@else
+															@if($plan->id == 4 && auth()->user()->recommended->count() < $plan->recommendations)
+															<ul class="mb-4">
+																<li>
+																	<strong>TIENES {{ auth()->user()->recommended->count() }} RECOMENDACIONES</strong>
+																</li>
+															</ul>
+															@else
 															<input type='hidden' name='sid' value='901422522' >
 															<input type='hidden' name='mode' value='2CO' >
 															<input type='hidden' name='li_0_type' value='product' >
@@ -406,6 +399,7 @@
 															<button type=submit data-value="{{$plan->id}}" name='submit' data-plan="mensual" class="btn-submit-plan">
 																Talento {{$plan->name}}
 															</button>
+															@endif
 														@endif	
 													@endif
 												</div>

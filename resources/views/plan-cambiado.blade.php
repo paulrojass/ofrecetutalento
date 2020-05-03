@@ -23,8 +23,8 @@
 						<div class="job-search-sec">
 							<div class="job-search">
 								<h3>Se ha realizado un cambio de plan exitosamente</h3>
-								<span>Nuevo plan adquirido: Talento {{ $suscription->plan->name }}</span>
-								<span>Fecha de expiración:
+								<span class="pr-0">Nuevo plan adquirido: Talento {{ $suscription->plan->name }}</span>
+								<span class="pr-0">Fecha de expiración:
 									@if($suscription->expiration_date)
 										{{ $fecha->format('d / m / Y') }}
 									@else
@@ -32,8 +32,8 @@
 									@endif
 								</span>
 								@if($request->order_number)
-								<span>Precio: ${{ $request->total }}</span>
-								<span>número de orden: {{ $request->order_number }}</span>
+								<span class="pr-0">Precio: ${{ $request->total }}</span>
+								<span class="pr-0">número de orden: {{ $request->order_number }}</span>
 								@endif
 							</div>
 							<div class="simple-text-block">

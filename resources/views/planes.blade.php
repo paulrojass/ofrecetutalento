@@ -57,10 +57,8 @@
 														{{$plan->name}}
 														</h3>
 														<h2>
-															@if(is_null($plan->monthly_price))
+															@if(is_null($plan->monthly_price) or $plan->monthly_price == 0)
 																Gratis
-															@elseif($plan->monthly_price == 0)
-																<i>{{ $plan->recommendations }} RECOMENDACIONES</i>
 															@else
 																<i>$</i>{{$plan->monthly_price}}
 															@endif
@@ -106,8 +104,8 @@
 														<li></li>
 														<li></li>
 														@endif
-														@if ($plan->id == 2)
-														<li>Disponible por recomendación únicamente</li>
+														@if ($plan->id == 4)
+														<li>Disponible por {{ $plan->recommendations }} recomendaciones únicamente</li>
 														<li>Exclusivo para Talentos con 10 años mínimo de experiencia</li>
 														<li>Recomendamos mínimo 3 años de experiencia Gerencial</li>
 														@endif
@@ -140,10 +138,8 @@
 														{{$plan->name}}
 														</h3>
 														<h2>
-															@if(is_null($plan->quarterly_price))
+															@if(is_null($plan->quarterly_price) or $plan->quarterly_price == 0)
 																Gratis
-															@elseif($plan->quarterly_price == 0)
-																<i>{{ $plan->recommendations }} RECOMENDACIONES</i>
 															@else
 																<i>$</i>{{$plan->quarterly_price}}
 															@endif
@@ -189,8 +185,8 @@
 														<li></li>
 														<li></li>
 														@endif
-														@if ($plan->id == 2)
-														<li>Disponible por recomendación únicamente</li>
+														@if ($plan->id == 4)
+														<li>Disponible por {{ $plan->recommendations }} recomendaciones únicamente</li>
 														<li>Exclusivo para Talentos con 10 años mínimo de experiencia</li>
 														<li>Recomendamos mínimo 3 años de experiencia Gerencial</li>
 														@endif
@@ -223,10 +219,8 @@
 														{{$plan->name}}
 														</h3>
 														<h2>
-															@if(is_null($plan->annual_price))
+															@if(is_null($plan->annual_price) or $plan->annual_price == 0)
 																Gratis
-															@elseif($plan->annual_price == 0)
-																<i>{{ $plan->recommendations }} RECOMENDACIONES</i>
 															@else
 																<i>$</i>{{$plan->annual_price}}
 															@endif
@@ -272,8 +266,8 @@
 														<li></li>
 														<li></li>
 														@endif
-														@if ($plan->id == 2)
-														<li>Disponible por recomendación únicamente</li>
+														@if ($plan->id == 4)
+														<li>Disponible por {{ $plan->recommendations }} recomendaciones únicamente</li>
 														<li>Exclusivo para Talentos con 10 años mínimo de experiencia</li>
 														<li>Recomendamos mínimo 3 años de experiencia Gerencial</li>
 														@endif

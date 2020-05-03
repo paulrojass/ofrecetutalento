@@ -15,7 +15,7 @@
 					 <strong> Talento:</strong>  {{$exchange->talent->title}} - <i class="la la-heart-o"></i> {{ $exchange->likes->count() }} 
 				</span>
 			</div>
-	 		<div class="action-tags">
+	 		<div class="action-tags d-flex justify-content-center">
 	 			<a href="{{url('canjes/'.$exchange->id)}}" title=""><i class="la la-eye"></i>Ver</a>
 	 			<a class="editar-canje" data-value="{{ $exchange->id }}" data-toggle="modal" data-target="#modal-actualizar-canje" title=""><i class="la la-pencil"></i> Editar</a>
 				@if ($exchange->dealings->count() > 0  || $exchange->proposals->count() > 0)

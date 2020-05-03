@@ -76,7 +76,7 @@
 	</div>
 </section>
 
-
+@if($talent->exchanges->count()>0)
 <section>
 	<div class="block">
 		<div class="container">
@@ -110,6 +110,7 @@
 		</div>
 	</div>
 </section>
+@endif
 
 
 <section>
@@ -221,6 +222,7 @@
 										Realizar Pago
 									</label>
 								</div>
+								@auth
 								@if(auth()->user()->suscription->plan_id > 2)
 								<div class="form-check">
 									<input class="form-check-input" type="radio" name="pay" id="tipo-canje" value="0">
@@ -235,6 +237,7 @@
 									</label>
 								</div>
 								@endif
+								@endauth
 							</div>
 
 

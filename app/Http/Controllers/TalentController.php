@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Talent;
 use App\User;
 use App\Suscription;
-use App\plan;
+use App\Plan;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;

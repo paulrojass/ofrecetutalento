@@ -27,7 +27,6 @@ class PlansTableSeeder extends Seeder
         $plan->monthly_price = 0;
         $plan->quarterly_price = 0;
         $plan->annual_price = 0;
-        $plan->recommendations = 3;       
         $plan->talents = 3;
         $plan->photos = 1;
         $plan->videos = 1;
@@ -52,6 +51,7 @@ class PlansTableSeeder extends Seeder
         $plan->monthly_price = 26;
         $plan->quarterly_price = 72;
         $plan->annual_price = 290;
+        $plan->recommendations = 3;       
         $plan->pdf_size = 500;
         $plan->save();        
     }

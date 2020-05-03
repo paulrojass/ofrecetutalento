@@ -11,6 +11,7 @@ use App\Plan;
 use App\Experience;
 use App\Suscription;
 use Carbon\Carbon;
+use Jenssegers\Date\Date;
 
 class SocialController extends Controller
 {

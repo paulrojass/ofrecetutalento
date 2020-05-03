@@ -260,7 +260,7 @@
 <div class="account-popup-area signup-popup-box">
 	<div class="account-popup">
 		<span class="close-popup"><i class="la la-close"></i></span>
-		<h3>Registro Caza Talentos</h3>
+		<h3>Registro</h3>
 		@error('email')
 			<span id="email-error"><strong>{{ $message }}</strong></span>
 		@enderror

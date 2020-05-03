@@ -12,7 +12,7 @@
                 <div class="col-lg-12">
                     <div class="account-popup-area signin-popup-box static">
                         <div class="account-popup">
-                            <h3> Registrate Gratis como <br/> Caza Talentos </h3>
+                            <h3> Registrate Gratis </h3>
                             <!-- <span>Lorem ipsum dolor sit amet consectetur adipiscing elit odio duis risus at lobortis ullamcorper</span> -->
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf

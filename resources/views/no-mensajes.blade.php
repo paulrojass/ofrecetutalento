@@ -16,12 +16,12 @@
 				<div class="col-lg-12">
 					<div class="main-featured-sec">
 						<div class="new-slide">
-							<img src="http://placehold.it/1920x800" alt="" />
+							<img src="{{ url('tema/images/menu-suscripcion.jpg') }}" style="max-width: 100%" alt="" />
 						</div>
 						<div class="job-search-sec">
 							<div class="job-search">
 								<h3>Todavia no tienes mensajes</h3>
-								<span>Accede a los perfiles de Talentos Pro y Oro para intercambiar mensajes.</span>
+								<span class="pr-0">Accede a los perfiles de Talentos Pro y Oro para intercambiar mensajes.</span>
 							</div>
 							<div class="simple-text-block">
 								<a href="{{ url('talentos') }}" title="">Explora Talentos</a>
