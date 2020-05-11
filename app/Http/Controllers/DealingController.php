@@ -231,4 +231,11 @@ class DealingController extends Controller
         //S
     }
 
+    public function tratosNuevos()
+    {
+        $mensajes = Dealing::where('accept_id', auth()->user()->id)->where('received', 0)->get();
+        return $mensajes->count();
+    }
+
+
 }

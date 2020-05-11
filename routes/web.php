@@ -18,9 +18,9 @@ use App\Notifications\NewMessage;Route::get('/test-mail', function (){
 });
 
 
-Route::group(['middleware' => ['guest']], function () {
+/*Route::group(['middleware' => ['guest']], function () {
 Route::get('suscripcion', 'SiteController@suscripcion')->name('suscripcion');
-});
+});*/
 
 
 
@@ -67,11 +67,18 @@ Auth::routes(['verify' => true]);
 //Cambios de Plan
 Route::get('cambiar-plan', 'PlanController@index')->name('cambiar-plan');
 Route::post('activar-plan', 'SuscriptionController@change')->name('activar-plan');
+Route::post('datos-pago', 'SuscriptionController@datosPago')->name('datos-pago');
+Route::post('generar-form', 'SuscriptionController@generarForm')->name('generar-form');
+Route::get('cambio-plan-pago', 'SuscriptionController@cambioPlanPago')->name('datos-plan-pago');
+
+//ESto ya no va
 Route::get('suscription-callback', 'SuscriptionController@callback')->name('suscription-callback');
 
 //Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
+Route::get('mensajes-nuevos', 'MessageController@mensajesNuevos');
 Route::get('actualizar-mensajes', 'MessageController@contadorMensajes');
+Route::get('tratos-nuevos', 'DealingController@tratosNuevos');
 Route::get('actualizar-contador-tratos', 'DealingController@contadorTratos');
 Route::get('trato-visto', 'DealingController@visto');
 

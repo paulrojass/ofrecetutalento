@@ -8,6 +8,7 @@
 			<tr>
 				<td>Canje o Trato deseado</td>
 				<td>Descripción</td>
+				<td>Solicitante</td>
 				<td></td>
 			</tr>
 		</thead>
@@ -18,46 +19,58 @@
 				<td class="pl-2 pr-2" style="width: 30%">
 					<span class="applied-field">
 					@if($recibido->exchange_id == null)
-						{{ $recibido->name }}
+						<p class="mb-0">{{ $recibido->name }}</p>
 					@else
 						<a href="{{ url('canjes/'.$recibido->exchange_id) }}" title="">
-								{{ App\Exchange::find($recibido->exchange_id)->title }}
+							<p>{{ App\Exchange::find($recibido->exchange_id)->title }}</p>
 						</a>
 					@endif
 					</span>
 				</td>
-				<td style="width: 60%">
+				<td style="width: 40%">
 					<div class="table-list-title">
 						<p>{{ $recibido->description }}</p>
 					</div>
 				</td>
-			@if($recibido->exchange_id != null)
-				@php
-				$canje_solicitado  = App\Exchange::find($recibido->exchange_id);
-				$titulo_solicitado   = $canje_solicitado->title;
-				$precio            = $canje_solicitado->price;
-				$imagen_solicitado = $canje_solicitado->image;
-				@endphp
-			@else
-				@php
-				$titulo_solicitado = null;
-				$imagen_solicitado = null;
-				$precio = null;
-				@endphp
-			@endif
+				<td style="width: 20%">
+					<div class="table-list-title">
+						@if($recibido->user_propose->suscription->plan_id > 1)
 
-			@if($recibido->proposal_id != null)
-				@php
-				$canje_propuesto = App\Exchange::find($recibido->proposal_id);
-				$imagen_propuesto = $canje_propuesto->image;
-				$titulo_propuesto = $canje_propuesto->title;
-				@endphp
-			@else
-				@php 
-					$titulo_propuesto = null;
-					$imagen_propuesto = null;
-				@endphp
-			@endif
+						<a href="{{ url('perfil/'.$recibido->propose_id) }}">
+						<p class="mb-0">{{ $recibido->user_propose->name}} {{ $recibido->user_propose->lastname}}</p>
+						</a>
+						@else
+						<p>Caza Talentos (anonimo)</p>
+						@endif
+					</div>
+				</td>
+				@if($recibido->exchange_id != null)
+					@php
+					$canje_solicitado  = App\Exchange::find($recibido->exchange_id);
+					$titulo_solicitado   = $canje_solicitado->title;
+					$precio            = $canje_solicitado->price;
+					$imagen_solicitado = $canje_solicitado->image;
+					@endphp
+				@else
+					@php
+					$titulo_solicitado = null;
+					$imagen_solicitado = null;
+					$precio = null;
+					@endphp
+				@endif
+
+				@if($recibido->proposal_id != null)
+					@php
+					$canje_propuesto = App\Exchange::find($recibido->proposal_id);
+					$imagen_propuesto = $canje_propuesto->image;
+					$titulo_propuesto = $canje_propuesto->title;
+					@endphp
+				@else
+					@php 
+						$titulo_propuesto = null;
+						$imagen_propuesto = null;
+					@endphp
+				@endif
 				<td style="width: 10%">
 				<ul class="action_job pull-right">
 					<li><span>Ver Trato</span>
@@ -104,7 +117,7 @@
 
 							data-imagensolicitado="{{ asset('images/exchanges/'.$imagen_solicitado) }}"
 							data-imagenpropuesto="{{ asset('images/exchanges/'.$imagen_propuesto)}}" >
-						<i class="la la-eye"></i>
+						<i class="la la-eye"></i> Ver trato
 						</a>
 					</li>
 				</ul>

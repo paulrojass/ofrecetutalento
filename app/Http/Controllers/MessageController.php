@@ -182,4 +182,11 @@ class MessageController extends Controller
     {
         return view('content.contador-mensajes');
     }
+
+    public function mensajesNuevos()
+    {
+        $mensajes = Message::where('to_id', auth()->user()->id)->where('received', 0)->get();
+        return $mensajes->count();
+    }
+
 }

@@ -316,7 +316,9 @@
 <script src="{{URL::asset('tema/js/select-chosen.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/counter.js')}}" type="text/javascript"></script>
 <script src="{{URL::asset('tema/js/mouse.js')}}" type="text/javascript"></script>
+@auth
 <script src="{{URL::asset('js/scripts.js')}}" type="text/javascript"></script>
+@endauth
 
 @yield('scripts')
 

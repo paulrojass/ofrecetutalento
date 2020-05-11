@@ -90,7 +90,7 @@
 
 
 				 		<ul class="cand-extralink">
-				 			<li><a href="#abilities" title="">Habilidades</a></li>
+				 			<li><a href="#informacion" title="">Información personal</a></li>
 
 				 			@if($user->talents->count() > 0)
 				 			<li><a href="#talentos" title="">Talentos</a></li>
@@ -112,9 +112,9 @@
 
 				 		<div class="cand-details-sec" id="informacion-general">
 				 			<div class="row">
-			 					<div class="cand-details mr-5 ml-5" id="abilities">
-			 						<h2 class="text-center pb-4">Descripción de habilidades</h2>
-			 						<p>{{ $user->abilities }}</p>
+			 					<div class="cand-details mr-5 ml-5" id="informacion">
+			 						<h2 class="text-center pb-4">Solución y beneficio que ofrezco a mis clientes</h2>
+			 						<p class="text-center">{{ $user->abilities }}</p>
 			 					</div>
 
 				 				<div class="col-lg-9 column">
@@ -297,13 +297,13 @@
 								</div>
 							</div>
 							<div class="col-lg-12">
-								<span class="pf-title">¿Cuál es el producto, servicio o beneficio final en su ​ mejor versión ​ que requieres de este talento?</span>									
+								<span class="pf-title">Descripción: Cuentanos en tus palabras el cómo esta estructurado este producto, servicio o beneficio</span>									
 								<div class="pf-field">
 									<textarea id="description" name="description" placeholder="" required></textarea>
 								</div>
 							</div>
 							<div class="col-lg-12">
-								<span class="pf-title">Resultado Final Ideal: ¿Cuál es el producto, servicio o beneficio final en su ​ mejor versión ​ que requieres de este talento?”​ cuando lo recibas. (opcional)</span>									
+								<span class="pf-title">Resultado Final Ideal: ¿Cuál es el producto, servicio o beneficio final en su ​<srong>mejor versión</srong> ​ que requieres de este talento? (opcional)</span>									
 								<div class="pf-field">
 									<input type="text" name="ideal" id="ideal" maxlength="100" placeholder="" required>
 								</div>
